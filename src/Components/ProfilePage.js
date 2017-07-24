@@ -64,13 +64,15 @@ class ProfilePage extends Component {
 
   render(){
     const client    = this.state.client
-    const accounts  = this.state.accounts
+    const accounts  = client.accounts
     const active    = this.state.activeAcc
+
+    console.log(accounts[active]);
     return(
     <div className="container-fluid">
       <PersonalInfo client={client}/>
       <FinancialInfo client={client}/>
-       <Account client={this.state.account[active]}/>
+      <Account account={accounts} />
     </div>
   )}
 }

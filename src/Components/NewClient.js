@@ -39,9 +39,9 @@ class NewClient extends Component {
   }
 
   saveAccount(data){
-    console.log(data);
     data.accNum = numAccounts
     accounts.push(data)
+    console.log(accounts);
     this.setState({step : 3,
                     save : true})
   }
@@ -54,7 +54,7 @@ class NewClient extends Component {
   componentWillUnmount(){
     if (this.state.save) {
       financial.accounts = accounts
-      var client = Object.assign(personal, financial, accounts)
+      var client = Object.assign(personal, financial)
       console.log(client);
       ClientAPI.addClient(client)
     }

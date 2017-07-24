@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import AddPerformance from './AddPerformance'
 
-
-
 class AddAccount extends Component {
 
   onSave(e){
@@ -16,7 +14,7 @@ class AddAccount extends Component {
           tax: this.refs.tax.value,
           horizon: this.refs.horizon.value,
           bias: this.refs.bias.value,
-          // performanceHist : [{ props.account.performanceHist }]
+          performanceHist : []
         }
     this.props.save(account)
   }
@@ -35,8 +33,9 @@ class AddAccount extends Component {
           tax: this.refs.tax.value,
           horizon: this.refs.horizon.value,
           bias: this.refs.bias.value,
-          performanceHist : [{ performanceRecord }]
+          performanceHist : []
         }
+    account.performanceHist.push(performanceRecord)
     this.props.save(account)
   }
 
@@ -65,8 +64,15 @@ class AddAccount extends Component {
             }]
           }
     }
-    const visible = {
-      visibility: this.props.btn
+    var profile
+    var form
+    if(this.props.btn){
+      profile = {visibility: this.props.btn}
+      form = {visibility : 'visible'}
+    }
+    else{
+      profile = {visibility : 'visible'}
+      form = {visibility : 'hidden'}
     }
     return(
 
@@ -133,11 +139,12 @@ class AddAccount extends Component {
                 </div>
               </div>
 
-              <button style={visible} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
-              <button style={visible} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
+              <button style={profile} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+              <button style={profile} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
 
             </form>
-            < AddPerformance save={this.addAccount.bind(this)}/>
+            <hr/>
+            < AddPerformance style={form} save={this.addAccount.bind(this)}/>
           </div>
         </div>
       </div>
