@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AddPersonalInfo  from './Form/AddPersonalInfo'
 import AddFinancialInfo  from './Form/AddFinancialInfo'
 // import AddAccount     from './Form/AddAccount'
-// import Continue       from './Form/Continue'
+import Continue       from './Form/Continue'
 
 import ClientAPI  from '../Data/ClientAPI'
 
@@ -59,7 +59,7 @@ class NewClient extends Component {
     this.setState({step : 3})
   }
 
-  AddAccount(){
+  addAccount(){
     this.setState({step : 2})
   }
 
@@ -74,13 +74,13 @@ class NewClient extends Component {
     var step = this.state.step
     switch (step) {
       case 0:
-        return < AddPersonalInfo client={null} save={this.savePersonal.bind(this)}/>
+        return < AddPersonalInfo client={this.personal} save={this.savePersonal.bind(this)}/>
       case 1:
         return < AddFinancialInfo client={this.financial} save={this.saveFinancial.bind(this)}/>
       // case 2:
       //   return < AddAccount account={this.accounts} save={this.saveAccount.bind(this)}/>
-      // case 3:
-      //   return < Continue />
+      case 3:
+        return < Continue addAcc={this.addAccount.bind(this)}/>
       default:
         return null
     }

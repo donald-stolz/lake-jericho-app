@@ -9,7 +9,7 @@ class Home extends Component {
 
   constructor(){
     super()
-    ClientAPI.clearDB()
+
     this.state = {clients : null}
   }
 
