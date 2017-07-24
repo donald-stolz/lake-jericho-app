@@ -30,7 +30,7 @@ class AddAccount extends Component {
 
 
     return(
-      <div className="row">
+      <div className="container-fluid">
         <div className="panel panel-primary" id="financialInformation">
           <div className="panel-heading">
             <h2 className="panel-title">Performance History</h2>

@@ -62,7 +62,7 @@ class ProfilePage extends Component {
 
   render(){
     return(
-    <div className="container-fluid" role="main">
+    <div className="container-fluid">
       <PersonalInfo client={this.state.client}/>
       <FinancialInfo client={this.state.client}/>
     </div>

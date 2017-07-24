@@ -135,6 +135,7 @@ class AddAccount extends Component {
 
               <button style={visible} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
               <button style={visible} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
+
             </form>
             < AddPerformance save={this.addAccount.bind(this)}/>
           </div>
