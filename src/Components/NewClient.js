@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 
-import AddClientInfo  from './Form/AddClientInfo'
+import AddPersonalInfo  from './Form/AddPersonalInfo'
+import AddFinancialInfo  from './Form/AddFinancialInfo'
 import AddAccount     from './Form/AddAccount'
 import Continue       from './Form/Continue'
 
 import ClientAPI  from '../Data/ClientAPI'
 
-var Client = {
   // Personal Information
+var personal = {
     name: null,
     dob: null,
-    mailingAddress: null,
-    phoneNumber: null,
+    address: null,
+    phone: null,
     email: null,
-
+}
   // Financial Information
+var financial ={
     annualIncome: null,
     totalAssets: null,
     liquidAssets: null,
@@ -54,24 +56,30 @@ class NewClient extends Component {
                   save : false }
   }
 
-  saveInfoFields(data){
-    client = data
+  savePersonal(data){
+    personal = data
     this.setState({step : 1})
   }
 
-  saveAccountFields(data){
-    accounts.push(data)
-    client.accounts = accounts
+  saveFinancial(data){
+    financial = data
     this.setState({step : 2})
   }
 
+  saveAccount(data){
+    data.accNum = numAccounts
+    accounts.push(data)
+    numAccounts++
+    this.setState({step : 3})
+  }
+
   AddAccount(){
-    this.setState({step : 1})
+    this.setState({step : 2})
   }
 
   componentWillUnmount(){
     if (this.state.save) {
-      var new client
+      var client = Object.assign(personal, financial)
       clientAPI.addClient()
     }
   }
@@ -79,10 +87,12 @@ class NewClient extends Component {
   formStep(step){
     switch (step) {
       case 0:
-        return < AddClientInfo />
+        return < AddClientInfo client={this.personal} onSave={this.savePersonal.bind(this)}/>
       case 1:
-        return < AddAccount />
+        return < AddFinancialInfo client={this.financial} onSave={this.saveFinancial.bind(this)}/>
       case 2:
+        return < AddAccount account={this.accounts} onSave={this.saveAccount.bind(this)}/>
+      case 3:
         return < Continue />
 
     }
@@ -90,7 +100,9 @@ class NewClient extends Component {
 
   render(){
     return(
-
+      <div className="container-fluid">
+        {formStep(this.state.step)}
+      <div>
     )
   }
 }
