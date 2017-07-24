@@ -19,9 +19,9 @@ exports.updateClient = function(client) {
   });
 }
 
-exports.setClient = function(clientID, set) {
+exports.getClient = function(clientID, set) {
   clients.findOne({ _id: clientID }, function (err, doc) {
-    console.log('Found user:', doc.name);
+    console.log('Found user:', doc);
     set(doc)
   });
 }

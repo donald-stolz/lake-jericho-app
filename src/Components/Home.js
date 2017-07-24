@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
+
 import HomeListItem from './List/HomeListItem'
 import ClientAPI from '../Data/ClientAPI'
 
@@ -7,7 +9,7 @@ class Home extends Component {
 
   constructor(){
     super()
-
+    ClientAPI.clearDB()
     this.state = {clients : null}
   }
 
@@ -30,26 +32,21 @@ class Home extends Component {
         });
       }
     return(
-      <div className="container-fluid">
-        <h1> Clients </h1>
       <div className="row">
-        <div className="col-lg-12">
-          <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th> Name
+        <div className="container-fluid">
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <h2 className="panel-title">Name
+              <Link to="/NewClient" className="button pull-right">
+                <span className="glyphicon glyphicon-plus"/>
+              </Link>
+              </h2>
+            </div>
 
-                    <button type="button" className="btn btn-info btn-xs pull-right">
-                      <span className="glyphicon glyphicon-plus"/>
-                    </button>
-
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
+              <ul className="list-group">
                 {HomeList}
-              </tbody>
-            </table>
+              </ul>
+
           </div>
         </div>
       </div>

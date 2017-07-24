@@ -5,7 +5,7 @@ import AddFinancialInfo  from './Form/AddFinancialInfo'
 // import AddAccount     from './Form/AddAccount'
 // import Continue       from './Form/Continue'
 
-// import ClientAPI  from '../Data/ClientAPI'
+import ClientAPI  from '../Data/ClientAPI'
 
   // Personal Information
 var personal
@@ -64,10 +64,10 @@ class NewClient extends Component {
   }
 
   componentWillUnmount(){
-    // if (this.state.save) {
-    //   var client = Object.assign(personal, financial)
-    //   clientAPI.addClient()
-    // }
+    if (this.state.save) {
+      var client = Object.assign(personal, financial)
+      ClientAPI.addClient(client)
+    }
   }
 
   formStep(){

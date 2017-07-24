@@ -19,7 +19,7 @@ class FinancialInfo extends Component {
 
   renderItemOrEdit(){
     var editing = this.state.editing
-    var client = this.props.client
+    const client = this.props.client
 
     if (editing) {
      return <AddFinancialInfo client={this.state.client} save={this.updateInfo.bind(this)}/>
@@ -47,10 +47,11 @@ class FinancialInfo extends Component {
   }
 
   render(){
-    <div className="row">
+    return(
+      <div className="row">
       {this.renderItemOrEdit()}
     </div>
-  }
+  )}
 }
 
 export default FinancialInfo

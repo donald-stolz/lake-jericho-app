@@ -26,30 +26,31 @@ class PersonalInfo extends Component {
     } else {
       return (
         <div className="row">
-        <div className="panel panel-primary" id="personalInformation">
-          <div className="panel-heading">
-            <h2 className="panel-title">Personal Information</h2>
-          </div>
-          <div className="panel-body">
-            <ul className="list-group" id="listPersonal">
-              <li className="list-group-item"><label>Name:</label>{client.name}</li>
-              <li className="list-group-item"><label>Date of Birth:</label>{client.dob}</li>
-              <li className="list-group-item"><label>Address</label>{client.address}</li>
-              <li className="list-group-item"><label>Phone Number:</label>{client.phone}</li>
-              <li className="list-group-item"><label>Email:</label>{client.email}</li>
-            </ul>
+          <div className="panel panel-primary" id="personalInformation">
+            <div className="panel-heading">
+              <h2 className="panel-title">Personal Information</h2>
+            </div>
+            <div className="panel-body">
+              <ul className="list-group" id="listPersonal">
+                <li className="list-group-item"><label>Name:</label>{client.name}</li>
+                <li className="list-group-item"><label>Date of Birth:</label>{client.dob}</li>
+                <li className="list-group-item"><label>Address</label>{client.address}</li>
+                <li className="list-group-item"><label>Phone Number:</label>{client.phone}</li>
+                <li className="list-group-item"><label>Email:</label>{client.email}</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
       )
     }
   }
 
   render(){
-    <div className="row">
-      {this.renderItemOrEdit()}
-    </div>
-  }
+    return(
+      <div className="row">
+        {this.renderItemOrEdit()}
+      </div>
+    )}
 }
 
 export default PersonalInfo

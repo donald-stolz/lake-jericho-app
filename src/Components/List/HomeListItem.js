@@ -8,13 +8,12 @@ class HomeListItem extends Component {
 //Format client item and bind event listeners
   render() {
     const name = this.props.client.name
-    const id = this.props._id
+    const id = this.props.client._id
     const path = "/Profile/" + id
 
     return (
-        <tr>
-          <Link className="pull-left" to={path} >{name}</Link>
-        </tr>
+          <Link className="list-group-item" to={path} >{name}</Link>
+
       );
   }
 }
