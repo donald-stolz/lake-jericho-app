@@ -8,15 +8,6 @@ class AddAccount extends Component {
 
   onSave(e){
     e.preventDefault()
-
-  }
-
-  onCancel(e){
-    e.preventDefault()
-
-  }
-
-  addAccount(performanceRecord){
     var account = {
           accNum: null,
           accName: this.refs.accName.value,
@@ -25,10 +16,29 @@ class AddAccount extends Component {
           tax: this.refs.tax.value,
           horizon: this.refs.horizon.value,
           bias: this.refs.bias.value,
-          performanceHist : [{ performanceRecord }]
+          // performanceHist : [{ props.account.performanceHist }]
         }
     this.props.save(account)
   }
+
+  onCancel(e){
+    e.preventDefault()
+
+  }
+
+  // addAccount(performanceRecord){
+  //   var account = {
+  //         accNum: null,
+  //         accName: this.refs.accName.value,
+  //         startBal: this.refs.startBal.value,
+  //         startDate: this.refs.startDate.value,
+  //         tax: this.refs.tax.value,
+  //         horizon: this.refs.horizon.value,
+  //         bias: this.refs.bias.value,
+  //         performanceHist : [{ performanceRecord }]
+  //       }
+  //   this.props.save(account)
+  // }
 
   render(){
 
@@ -55,7 +65,9 @@ class AddAccount extends Component {
             }]
           }
     }
-
+    const visible = {
+      visibility: this.props.btn
+    }
     return(
 
       <div className="row">
@@ -121,8 +133,8 @@ class AddAccount extends Component {
                 </div>
               </div>
 
-              <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
-              <button onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
+              <button style={visible} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+              <button style={visible} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
             </form>
           </div>
         </div>
