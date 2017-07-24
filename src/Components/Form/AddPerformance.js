@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// NOTE: No need to load props for values since it won't be edited; Only added to
 class AddAccount extends Component {
 
   onSave(e){

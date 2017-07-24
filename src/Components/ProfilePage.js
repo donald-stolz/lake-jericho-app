@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import PersonalInfo   from './Profile/PersonalInfo'
 import FinancialInfo  from './Profile/FinancialInfo'
-// import Account        from './Profile/Account'
-//       <Account client={this.state.client}/>
+import Account        from './Profile/Account'
+
+//       <Account client={this.state.account[active]}/>
 import ClientAPI  from '../Data/ClientAPI'
 
 class ProfilePage extends Component {
@@ -46,7 +47,8 @@ class ProfilePage extends Component {
             }]
           }]
 
-      }
+      },
+      activeAcc : 0
     }
   }
 
@@ -61,10 +63,14 @@ class ProfilePage extends Component {
   }
 
   render(){
+    const client    = this.state.client
+    const accounts  = this.state.accounts
+    const active    = this.state.activeAcc
     return(
     <div className="container-fluid">
-      <PersonalInfo client={this.state.client}/>
-      <FinancialInfo client={this.state.client}/>
+      <PersonalInfo client={client}/>
+      <FinancialInfo client={client}/>
+       <Account client={this.state.account[active]}/>
     </div>
   )}
 }

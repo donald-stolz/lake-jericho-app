@@ -12,6 +12,7 @@ class FinancialInfo extends Component {
     this.setState({editing : true})
   }
 
+// TODO: Connect to API
   updateInfo(data){
 
     this.setState({editing : false})
