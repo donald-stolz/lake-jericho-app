@@ -40,12 +40,12 @@ class AddAccount extends Component {
   }
 
   render(){
-
+    var account
     if (this.props.account) {
-      const account = this.props.account
+      account = this.props.account
     }
     else{
-      var account = {
+      account = {
             accNum: "",
             accName: "",
             startBal: "",
@@ -64,6 +64,8 @@ class AddAccount extends Component {
             }]
           }
     }
+
+    //Conditional visibility for Form or Profile Update
     var profile
     var form
     if(this.props.btn){

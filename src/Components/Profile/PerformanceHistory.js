@@ -22,8 +22,8 @@ class PerformanceHistory extends Component {
 
   renderItemOrEdit(){
     const editing = this.state.editing
-    const active =this.state.active
-    const performance = this.props.performance[active]
+    // const active =this.state.active
+    // const performance = this.props.performance[active]
 
     if (editing) {
      return <AddPerformance save={this.updateInfo.bind(this)}/>

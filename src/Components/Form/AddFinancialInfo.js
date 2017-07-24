@@ -13,17 +13,19 @@ class AddFinancialInfo extends Component {
         investmentAssets: this.refs.investmentAssets.value,
         investmentExperience: this.refs.investmentExperience.value,
         overallObjectives: this.refs.overallObjectives.value,
+        accounts:[]
       }
 
     this.props.save(financial)
   }
 
   render(){
+    var client
     if (this.props.client) {
-      const client = this.props.client
+      client = this.props.client
     }
     else {
-      var client = {
+      client = {
         annualIncome: "",
         totalAssets: "",
         liquidAssets: "",

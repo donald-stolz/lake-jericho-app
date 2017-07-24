@@ -17,11 +17,12 @@ class AddPersonalInfo extends Component {
   }
 
   render(){
+    var client
     if (this.props.client) {
-      const client = this.props.client
+      client = this.props.client
     }
     else {
-      var client = {
+      client = {
           name: "",
           dob: "",
           address: "",

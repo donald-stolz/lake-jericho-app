@@ -54,7 +54,7 @@ class ProfilePage extends Component {
 
   componentWillMount(){
     const id = this.props.match.params.id
-    console.log(id);
+    // console.log(id);
     ClientAPI.getClient(id, this.setProfile.bind(this))
   }
 
@@ -67,7 +67,7 @@ class ProfilePage extends Component {
     const accounts  = client.accounts
     const active    = this.state.activeAcc
 
-    console.log(accounts[active]);
+    // console.log(accounts[active]);
     return(
     <div className="container-fluid">
       <PersonalInfo client={client}/>

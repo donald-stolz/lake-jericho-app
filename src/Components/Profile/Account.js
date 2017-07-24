@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddAccount from '../Form/AddAccount'
-import PerformanceHistory from './PerformanceHistory'
+// import PerformanceHistory from './PerformanceHistory'
 
 
 class Account extends Component {
@@ -21,11 +21,12 @@ class Account extends Component {
     this.setState({editing : false})
   }
 
+  //               <PerformanceHistory record={account.performanceHist}/>
   renderItemOrEdit(){
     const editing = this.state.editing
     const active =this.state.active
     const account = this.props.account[active]
-
+    
     if (editing) {
      return <AddAccount account={account} save={this.updateInfo.bind(this)}/>
     }
@@ -46,7 +47,7 @@ class Account extends Component {
                 <li className="list-group-item"><label>Bias:</label> {account.bias}</li>
               </ul>
               <hr/>
-              <PerformanceHistory record={account.performanceHist}/>
+
             </div>
           </div>
         </div>

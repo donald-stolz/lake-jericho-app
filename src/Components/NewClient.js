@@ -42,11 +42,12 @@ class NewClient extends Component {
     data.accNum = numAccounts
     accounts.push(data)
     console.log(accounts);
-    this.setState({step : 3,
-                    save : true})
+    this.setState({step : 3, save : true})
   }
 
   addAccount(){
+    financial.accounts = accounts
+    console.log(financial);
     numAccounts++
     this.setState({step : 2})
   }
