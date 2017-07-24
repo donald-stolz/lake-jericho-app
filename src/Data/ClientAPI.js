@@ -4,7 +4,7 @@ var clients = new Datastore({ filename: 'src/Data/clients.db', autoload: true })
 var exports = module.exports = {};
 
 exports.addClient = function(client) {
-  clients.insert(client,function (err, newDoc) {
+  clients.insert(client,function (err, doc) {
     console.log('Inserted', doc.name, 'with ID', doc._id);
   });
 }
@@ -20,7 +20,7 @@ exports.updateClient = function(client) {
 }
 
 exports.setClient = function(clientID, set) {
-  clients.db.findOne({ _id: clientID }, function (err, doc) {
+  clients.findOne({ _id: clientID }, function (err, doc) {
     console.log('Found user:', doc.name);
     set(doc)
   });
@@ -33,13 +33,13 @@ exports.getClients = function() {
 }
 
 exports.removeClient = function() {
-  db.remove({ _id: 'id2' }, {}, function (err, numRemoved) {
+  clients.remove({ _id: 'id2' }, {}, function (err, numRemoved) {
     console.log("Removed " + numRemoved + " client");
   });
 }
 
 exports.clearDB = function() {
-  db.remove({}, { multi: true }, function (err, numRemoved) {
+  clients.remove({}, { multi: true }, function (err, numRemoved) {
     console.log("Removed " + numRemoved + " client(s)");
   });
 }

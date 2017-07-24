@@ -1,0 +1,36 @@
+Client = {
+// Personal Information
+  name: null,
+  dob: null,
+  mailingAddress: null,
+  phoneNumber: null,
+  email: null,
+
+// Financial Information
+  annualIncome: null,
+  totalAssets: null,
+  liquidAssets: null,
+  investmentAssets: null,
+  investmentExperience: null,
+  investmentObjectives: null,
+  numAccounts: null,
+
+  accounts : [{
+    accName: null,
+    startBal: null,
+    startDate: null,
+    tax: null,
+    horizon: null,
+    bias: null,
+    performance : [{
+      date: null,
+      tax: null,
+      horizon: null,
+      bias: null,
+      beginBal: null,
+      endBal: null,
+      netReturn: null
+    }]
+  }]
+
+}
