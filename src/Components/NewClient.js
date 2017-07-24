@@ -2,29 +2,15 @@ import React, { Component } from 'react';
 
 import AddPersonalInfo  from './Form/AddPersonalInfo'
 import AddFinancialInfo  from './Form/AddFinancialInfo'
-import AddAccount     from './Form/AddAccount'
-import Continue       from './Form/Continue'
+// import AddAccount     from './Form/AddAccount'
+// import Continue       from './Form/Continue'
 
-import ClientAPI  from '../Data/ClientAPI'
+// import ClientAPI  from '../Data/ClientAPI'
 
   // Personal Information
-var personal = {
-    name: null,
-    dob: null,
-    address: null,
-    phone: null,
-    email: null,
-}
+var personal
   // Financial Information
-var financial ={
-    annualIncome: null,
-    totalAssets: null,
-    liquidAssets: null,
-    investmentAssets: null,
-    investmentExperience: null,
-    investmentObjectives: null,
-    accounts : null
-  }
+var financial
 
 var accounts : [{
       accNum: null,
@@ -44,7 +30,7 @@ var accounts : [{
         netReturn: null
       }]
     }]
-}
+
 
 var numAccounts
 
@@ -78,31 +64,35 @@ class NewClient extends Component {
   }
 
   componentWillUnmount(){
-    if (this.state.save) {
-      var client = Object.assign(personal, financial)
-      clientAPI.addClient()
-    }
+    // if (this.state.save) {
+    //   var client = Object.assign(personal, financial)
+    //   clientAPI.addClient()
+    // }
   }
 
-  formStep(step){
+  formStep(){
+    var step = this.state.step
     switch (step) {
       case 0:
-        return < AddClientInfo client={this.personal} onSave={this.savePersonal.bind(this)}/>
+        return < AddPersonalInfo client={null} save={this.savePersonal.bind(this)}/>
       case 1:
-        return < AddFinancialInfo client={this.financial} onSave={this.saveFinancial.bind(this)}/>
-      case 2:
-        return < AddAccount account={this.accounts} onSave={this.saveAccount.bind(this)}/>
-      case 3:
-        return < Continue />
-
+        return < AddFinancialInfo client={this.financial} save={this.saveFinancial.bind(this)}/>
+      // case 2:
+      //   return < AddAccount account={this.accounts} save={this.saveAccount.bind(this)}/>
+      // case 3:
+      //   return < Continue />
+      default:
+        return null
     }
   }
 
   render(){
     return(
       <div className="container-fluid">
-        {formStep(this.state.step)}
-      <div>
+        {this.formStep()}
+      </div>
     )
   }
 }
+
+export default NewClient

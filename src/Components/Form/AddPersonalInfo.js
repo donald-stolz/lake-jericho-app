@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class AddPersonalInfo {
+class AddPersonalInfo extends Component {
 
   onSave(e){
     e.preventDefault()
@@ -13,11 +13,23 @@ class AddPersonalInfo {
         phone: this.refs.phone.value,
         email: this.refs.email.value,
     }
-    this.props.onSave(personal)
+    this.props.save(personal)
   }
 
   render(){
-    const client = this.props.client
+    if (this.props.client) {
+      const client = this.props.client
+    }
+    else {
+      var client = {
+          name: "",
+          dob: "",
+          address: "",
+          phone: "",
+          email: "",
+      }
+    }
+
 
     return(
       <div className="row">
@@ -27,38 +39,40 @@ class AddPersonalInfo {
               <h2 className="panel-title">Personal Information</h2>
             </div>
             <div className="panel-body">
-              <ul className="list-group" >
-                <li className="list-group-item"><label>Name:</label>
-                  <div className="col-sm-10">
-                    <input type="text" className="form-control" defaultValue={client.name} placeholder="Full Name" ref="clientName">
-                  </div>
-                </li>
+              <form className="form-horizontal">
+                <div className="form-group"><label className="col-sm-2 control-label">Name:</label>
 
-                <li className="list-group-item"><label>Date of Birth:</label>
                   <div className="col-sm-10">
-                    <input type="date" className="form-control" defaultValue={client.dob} placeholder="Date of Birth" ref="dob">
+                    <input type="text" className="form-control" defaultValue={client.name} placeholder="Full Name" ref="name"/>
                   </div>
-                </li>
+                </div>
 
-                <li className="list-group-item"><label>Address:</label>
+                <div className="form-group"><label className="col-sm-2 control-label">Date of Birth:</label>
                   <div className="col-sm-10">
-                    <input type="text" className="form-control" defaultValue={client.address} placeholder="Address" ref="address">
+                    <input type="date" className="form-control" defaultValue={client.dob} placeholder="Date of Birth" ref="dob"/>
                   </div>
-                </li>
+                </div>
 
-                <li className="list-group-item"><label>Phone Number:</label>
+                <div className="form-group"><label className="col-sm-2 control-label">Address:</label>
                   <div className="col-sm-10">
-                    <input type="number" className="form-control" defaultValue={client.phone} placeholder="Phone Number" ref="phone">
+                    <input type="text" className="form-control" defaultValue={client.address} placeholder="Address" ref="address"/>
                   </div>
-                </li>
+                </div>
 
-                <li className="list-group-item"><label>Email:</label>
+                <div className="form-group"><label className="col-sm-2 control-label">Phone Number:</label>
                   <div className="col-sm-10">
-                    <input type="email" className="form-control" defaultValue={client.email} placeholder="Email" ref="email">
+                    <input type="number" className="form-control" defaultValue={client.phone} placeholder="Phone Number" ref="phone"/>
                   </div>
-                </li>
-              </ul>
-              <button onClick={this.onSave.bind(this)} className="btn btn-primary"> Continue </button>
+                </div>
+
+                <div className="form-group"><label className="col-sm-2 control-label">Email:</label>
+                  <div className="col-sm-10">
+                    <input type="email" className="form-control" defaultValue={client.email} placeholder="Email" ref="email"/>
+                  </div>
+                </div>
+
+              <button onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Continue </button>
+              </form>
             </div>
           </div>
         </div>
@@ -66,3 +80,5 @@ class AddPersonalInfo {
     )
   }
 }
+
+export default AddPersonalInfo
