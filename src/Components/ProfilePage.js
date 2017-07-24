@@ -9,14 +9,50 @@ import ClientAPI  from '../Data/ClientAPI'
 class ProfilePage extends Component {
   constructor(props) {
     super()
-    console.log(props.match.params.id);
-    const id = props.match.params.id
-    ClientAPI.getClient(id, this.setProfile.bind(this))
-    this.state = {client : null}
+
+    this.state = {client : {
+        // Personal Information
+          name: '',
+          dob: '',
+          address: '',
+          phone: '',
+          email: '',
+
+        // Financial Information
+          annualIncome: 0,
+          totalAssets: '',
+          liquidAssets: '',
+          investmentAssets: '',
+          investmentExperience: '',
+          investmentObjectives: '',
+          numAccounts: 0,
+
+          accounts : [{
+            accNum: 0,
+            accName: '',
+            startBal: '',
+            startDate: '',
+            tax: '',
+            horizon: '',
+            bias: '',
+            performanceHist : [{
+              date: '',
+              tax: '',
+              horizon: '',
+              bias: '',
+              beginBal: 0,
+              endBal: 0,
+              netReturn: 0
+            }]
+          }]
+
+      }
+    }
   }
 
   componentWillMount(){
     const id = this.props.match.params.id
+    console.log(id);
     ClientAPI.getClient(id, this.setProfile.bind(this))
   }
 
@@ -26,7 +62,7 @@ class ProfilePage extends Component {
 
   render(){
     return(
-    <div className="container-fluid">
+    <div className="container-fluid" role="main">
       <PersonalInfo client={this.state.client}/>
       <FinancialInfo client={this.state.client}/>
     </div>

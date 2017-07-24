@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import AddPerformance from './AddPerformance'
+import AddPerformance from './AddPerformance'
 
 
 
@@ -26,19 +26,19 @@ class AddAccount extends Component {
 
   }
 
-  // addAccount(performanceRecord){
-  //   var account = {
-  //         accNum: null,
-  //         accName: this.refs.accName.value,
-  //         startBal: this.refs.startBal.value,
-  //         startDate: this.refs.startDate.value,
-  //         tax: this.refs.tax.value,
-  //         horizon: this.refs.horizon.value,
-  //         bias: this.refs.bias.value,
-  //         performanceHist : [{ performanceRecord }]
-  //       }
-  //   this.props.save(account)
-  // }
+  addAccount(performanceRecord){
+    var account = {
+          accNum: null,
+          accName: this.refs.accName.value,
+          startBal: this.refs.startBal.value,
+          startDate: this.refs.startDate.value,
+          tax: this.refs.tax.value,
+          horizon: this.refs.horizon.value,
+          bias: this.refs.bias.value,
+          performanceHist : [{ performanceRecord }]
+        }
+    this.props.save(account)
+  }
 
   render(){
 
@@ -81,7 +81,7 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Account Name:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={account.accName}
+                  <input type="text" className="form-control" defaultValue={account.accName}
                       placeholder="Account Name" ref="accName"/>
                 </div>
               </div>
@@ -93,7 +93,7 @@ class AddAccount extends Component {
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">Start Balance:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Start Balance: $</label>
                 <div className="col-sm-10">
                   <input type="number" className="form-control" defaultValue={account.startBal}
                       placeholder="Start Balance" ref="startBal"/>
@@ -136,6 +136,7 @@ class AddAccount extends Component {
               <button style={visible} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
               <button style={visible} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
             </form>
+            < AddPerformance save={this.addAccount.bind(this)}/>
           </div>
         </div>
       </div>

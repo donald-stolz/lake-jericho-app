@@ -13,7 +13,6 @@ class AddFinancialInfo extends Component {
         investmentAssets: this.refs.investmentAssets.value,
         investmentExperience: this.refs.investmentExperience.value,
         overallObjectives: this.refs.overallObjectives.value,
-        accounts : null
       }
 
     this.props.save(financial)

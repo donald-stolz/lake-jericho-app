@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 
-import AddPerformance from './AddPerformance'
-
-
 class AddAccount extends Component {
 
   onSave(e){
     e.preventDefault()
-    var begin = this.refs.beginBal.value
+    var begin = this.refs.startBal.value
     var end = this.refs.endBal.value
 
     var net = (end - begin) / begin
-    var performanceHist : {
+    var performanceHist = {
             date: this.refs.date.value,
             tax: this.refs.tax.value,
             horizon: this.refs.horizon.value,
@@ -26,7 +23,7 @@ class AddAccount extends Component {
 
   onCancel(e){
     e.preventDefault();
-    this.props.cancel()
+    // this.props.cancel()
   }
 
   render(){
@@ -43,14 +40,14 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Date:</label>
                 <div className="col-sm-10">
-                  <input type="month" className="form-control" defaultValue={account.date}
+                  <input type="month" className="form-control"
                       placeholder="Date" ref="date"/>
                 </div>
               </div>
 
               <div className="form-group"><label className="col-sm-2 control-label">Tax:</label>
                 <div className="col-sm-10">
-                  <select className="custom-select form-control" id="inputTax">
+                  <select className="custom-select form-control" ref="tax">
                     <option ></option>
                     <option value="Taxable">Taxable</option>
                     <option value="Tax-free">Tax-free</option>
@@ -61,8 +58,8 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Horizon:</label>
                 <div className="col-sm-10">
-                  <select className="custom-select form-control" id="inputHorizon">
-                    <option selected></option>
+                  <select className="custom-select form-control" ref="horizon">
+                    <option ></option>
                     <option value="Short">Short</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Long">Long</option>
@@ -72,8 +69,8 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Bias:</label>
                 <div className="col-sm-10">
-                  <select className="custom-select form-control" id="inputBias">
-                     <option selected></option>
+                  <select className="custom-select form-control" ref="bias">
+                     <option ></option>
                      <option value="Growth">Growth</option>
                      <option value="Aggregation">Aggregation</option>
                      <option value="Distribution">Distribution</option>
@@ -83,14 +80,14 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Start Balance:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={account.startBal}
+                  <input type="number" className="form-control"
                       placeholder="Start Balance" ref="startBal"/>
                 </div>
               </div>
 
               <div className="form-group"><label className="col-sm-2 control-label">End Balance:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={account.startBal}
+                  <input type="number" className="form-control"
                       placeholder="End Balance" ref="endBal"/>
                 </div>
               </div>

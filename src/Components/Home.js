@@ -13,7 +13,7 @@ class Home extends Component {
     this.state = {clients : null}
   }
 
-  componentWillMount(){
+  componentDidMount(){
     ClientAPI.setIndex(this.setList.bind(this))
   }
 

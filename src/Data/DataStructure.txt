@@ -1,35 +1,36 @@
 Client = {
 // Personal Information
-  name: null,
-  dob: null,
-  mailingAddress: null,
-  phoneNumber: null,
-  email: null,
+  name: '',
+  dob: '',
+  address: '',
+  phone: '',
+  email: '',
 
 // Financial Information
-  annualIncome: null,
-  totalAssets: null,
-  liquidAssets: null,
-  investmentAssets: null,
-  investmentExperience: null,
-  investmentObjectives: null,
-  numAccounts: null,
+  annualIncome: 0,
+  totalAssets: '',
+  liquidAssets: '',
+  investmentAssets: '',
+  investmentExperience: '',
+  investmentObjectives: '',
+  numAccounts: 0,
 
   accounts : [{
-    accName: null,
-    startBal: null,
-    startDate: null,
-    tax: null,
-    horizon: null,
-    bias: null,
+    accNum: 0,
+    accName: '',
+    startBal: '',
+    startDate: '',
+    tax: '',
+    horizon: '',
+    bias: '',
     performanceHist : [{
-      date: null,
-      tax: null,
-      horizon: null,
-      bias: null,
-      beginBal: null,
-      endBal: null,
-      netReturn: null
+      date: '',
+      tax: '',
+      horizon: '',
+      bias: '',
+      beginBal: 0,
+      endBal: 0,
+      netReturn: 0
     }]
   }]
 

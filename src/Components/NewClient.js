@@ -8,28 +8,12 @@ import Continue       from './Form/Continue'
 import ClientAPI  from '../Data/ClientAPI'
 
   // Personal Information
-var personal
-  // Financial Information
-var financial
+var personal = {}
 
-var accounts : [{
-      accNum: null,
-      accName: null,
-      startBal: null,
-      startDate: null,
-      tax: null,
-      horizon: null,
-      bias: null,
-      performanceHist : [{
-        date: null,
-        tax: null,
-        horizon: null,
-        bias: null,
-        beginBal: null,
-        endBal: null,
-        netReturn: null
-      }]
-    }]
+  // Financial Information
+var financial = {}
+
+var accounts = []
 
 
 var numAccounts
@@ -58,17 +42,20 @@ class NewClient extends Component {
     console.log(data);
     data.accNum = numAccounts
     accounts.push(data)
-    numAccounts++
-    this.setState({step : 3})
+    this.setState({step : 3,
+                    save : true})
   }
 
   addAccount(){
+    numAccounts++
     this.setState({step : 2})
   }
 
   componentWillUnmount(){
     if (this.state.save) {
-      var client = Object.assign(personal, financial)
+      financial.accounts = accounts
+      var client = Object.assign(personal, financial, accounts)
+      console.log(client);
       ClientAPI.addClient(client)
     }
   }
@@ -81,7 +68,7 @@ class NewClient extends Component {
       case 1:
         return < AddFinancialInfo client={this.financial} save={this.saveFinancial.bind(this)}/>
       case 2:
-        return < AddAccount btn={'hidden'} account={this.accounts} save={this.saveAccount.bind(this)}/>
+        return < AddAccount btn={'hidden'} account={null} save={this.saveAccount.bind(this)}/>
       case 3:
         return < Continue addAcc={this.addAccount.bind(this)}/>
       default:
