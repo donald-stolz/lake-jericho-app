@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
 import HomeListItem from './List/HomeListItem'
-// import ClientAPI from '../Data/ClientAPI'
+import ClientAPI from '../Data/ClientAPI'
+
 
 class Home extends Component {
 
   constructor(){
     super()
 
+    this.state = {clients : null}
+  }
+
+  componentWillMount(){
+    ClientAPI.setIndex(this.setList.bind(this))
+  }
+
+  setList(list){
+    this.setState({clients : list})
   }
 
   render() {
-    let clientListItems;
+    let HomeList;
     if (this.state.clients) {
 
-      HomeList = this.props.clients.map(client => {
+      HomeList = this.state.clients.map(client => {
          return(
-           <HomeListItem onView={this.viewClient.bind(this)} key={client._id} client={client} />
+           <HomeListItem key={client._id} client={client} />
           )
         });
       }
     return(
-      <div className="Clients">
+      <div className="container-fluid">
         <h1> Clients </h1>
       <div className="row">
-        <div className="col-lg-12 col-sm-4">
+        <div className="col-lg-12">
           <table className="table table-striped">
               <thead>
                 <tr>
                   <th> Name
 
-                    <button type="button" className="btn btn-info btn-xs">
+                    <button type="button" className="btn btn-info btn-xs pull-right">
                       <span className="glyphicon glyphicon-plus"/>
                     </button>
 

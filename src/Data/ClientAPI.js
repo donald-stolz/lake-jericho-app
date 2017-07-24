@@ -26,9 +26,10 @@ exports.setClient = function(clientID, set) {
   });
 }
 
-exports.getClients = function() {
+exports.setIndex = function(set) {
   clients.find({}, function (err, docs) {
     console.log(docs);
+    set(docs)
   });
 }
 

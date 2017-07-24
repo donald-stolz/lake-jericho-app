@@ -7,11 +7,17 @@ import Home       from './Components/Home'
 //
 
 // <Route path="/about" component={About}/>
-// <Route path="/topics" component={Topics}/>
+// <Route path="/Profile" component={Profile}/>
 
 import './App.css';
 
 class App extends Component {
+
+  // constructor(){
+  //   super()
+  //   this.state = { active : null }
+  // }
+
   render() {
 
     return (
