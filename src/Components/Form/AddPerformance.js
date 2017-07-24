@@ -2,21 +2,31 @@ import React, { Component } from 'react';
 
 import AddPerformance from './AddPerformance'
 
-var performanceHist : [{
-        date: null,
-        tax: null,
-        horizon: null,
-        bias: null,
-        beginBal: null,
-        endBal: null,
-        netReturn: null
-      }]
 
 class AddAccount extends Component {
 
   onSave(e){
     e.preventDefault()
+    var begin = this.refs.beginBal.value
+    var end = this.refs.endBal.value
 
+    var net = (end - begin) / begin
+    var performanceHist : {
+            date: this.refs.date.value,
+            tax: this.refs.tax.value,
+            horizon: this.refs.horizon.value,
+            bias: this.refs.bias.value,
+            beginBal: begin,
+            endBal: end,
+            netReturn: net
+          }
+
+    this.props.save(performanceHist)
+  }
+
+  onCancel(e){
+    e.preventDefault();
+    this.props.cancel()
   }
 
   render(){
@@ -34,7 +44,7 @@ class AddAccount extends Component {
               <div className="form-group"><label className="col-sm-2 control-label">Date:</label>
                 <div className="col-sm-10">
                   <input type="month" className="form-control" defaultValue={account.date}
-                      placeholder="Start Date" ref="startDate"/>
+                      placeholder="Date" ref="date"/>
                 </div>
               </div>
 
@@ -85,7 +95,8 @@ class AddAccount extends Component {
                 </div>
               </div>
 
-              <button onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Continue </button>
+              <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+              <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
             </form>
           </div>
         </div>
@@ -95,15 +106,3 @@ class AddAccount extends Component {
 }
 
 export default AddAccount
-
-//<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
-
-or Link???
-
-
-//onCancel(e){
-// e.preventDefault();
-// this.props.cancel()
-//}
-
-//cancelForm()

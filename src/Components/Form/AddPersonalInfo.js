@@ -71,7 +71,7 @@ class AddPersonalInfo extends Component {
                   </div>
                 </div>
 
-              <button onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Continue </button>
+              <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Continue </button>
               </form>
             </div>
           </div>

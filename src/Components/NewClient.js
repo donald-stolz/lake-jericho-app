@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import AddPersonalInfo  from './Form/AddPersonalInfo'
 import AddFinancialInfo  from './Form/AddFinancialInfo'
-// import AddAccount     from './Form/AddAccount'
+import AddAccount     from './Form/AddAccount'
 import Continue       from './Form/Continue'
 
 import ClientAPI  from '../Data/ClientAPI'
@@ -43,16 +43,19 @@ class NewClient extends Component {
   }
 
   savePersonal(data){
+    console.log(data);
     personal = data
     this.setState({step : 1})
   }
 
   saveFinancial(data){
+    console.log(data);
     financial = data
     this.setState({step : 2})
   }
 
   saveAccount(data){
+    console.log(data);
     data.accNum = numAccounts
     accounts.push(data)
     numAccounts++
@@ -77,8 +80,8 @@ class NewClient extends Component {
         return < AddPersonalInfo client={this.personal} save={this.savePersonal.bind(this)}/>
       case 1:
         return < AddFinancialInfo client={this.financial} save={this.saveFinancial.bind(this)}/>
-      // case 2:
-      //   return < AddAccount account={this.accounts} save={this.saveAccount.bind(this)}/>
+      case 2:
+        return < AddAccount account={this.accounts} save={this.saveAccount.bind(this)}/>
       case 3:
         return < Continue addAcc={this.addAccount.bind(this)}/>
       default:

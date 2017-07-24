@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
 
-import AddPerformance from './AddPerformance'
+// import AddPerformance from './AddPerformance'
 
-var accounts : [{
-      accNum: null,
-      accName: null,
-      startBal: null,
-      startDate: null,
-      tax: null,
-      horizon: null,
-      bias: null,
-      performanceHist : [{
-        date: null,
-        tax: null,
-        horizon: null,
-        bias: null,
-        beginBal: null,
-        endBal: null,
-        netReturn: null
-      }]
-    }]
+
 
 class AddAccount extends Component {
 
@@ -28,10 +11,53 @@ class AddAccount extends Component {
 
   }
 
+  onCancel(e){
+    e.preventDefault()
+
+  }
+
+  addAccount(performanceRecord){
+    var account = {
+          accNum: null,
+          accName: this.refs.accName.value,
+          startBal: this.refs.startBal.value,
+          startDate: this.refs.startDate.value,
+          tax: this.refs.tax.value,
+          horizon: this.refs.horizon.value,
+          bias: this.refs.bias.value,
+          performanceHist : [{ performanceRecord }]
+        }
+    this.props.save(account)
+  }
+
   render(){
 
+    if (this.props.account) {
+      const account = this.props.account
+    }
+    else{
+      var account = {
+            accNum: "",
+            accName: "",
+            startBal: "",
+            startDate: "",
+            tax: "",
+            horizon: "",
+            bias: "",
+            performanceHist : [{
+              date: "",
+              tax: "",
+              horizon: "",
+              bias: "",
+              beginBal: "",
+              endBal: "",
+              netReturn: ""
+            }]
+          }
+    }
 
     return(
+
       <div className="row">
         <div className="panel panel-primary" id="financialInformation">
           <div className="panel-heading">
@@ -64,7 +90,7 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Tax:</label>
                 <div className="col-sm-10">
-                  <select className="custom-select form-control" id="inputTax">
+                  <select className="custom-select form-control" defaultValue={account.tax} ref="tax">
                     <option ></option>
                     <option value="Taxable">Taxable</option>
                     <option value="Tax-free">Tax-free</option>
@@ -75,8 +101,8 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Horizon:</label>
                 <div className="col-sm-10">
-                  <select className="custom-select form-control" id="inputHorizon">
-                    <option selected></option>
+                  <select className="custom-select form-control" defaultValue={account.horizon} ref="horizon">
+                    <option ></option>
                     <option value="Short">Short</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Long">Long</option>
@@ -86,8 +112,8 @@ class AddAccount extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Bias:</label>
                 <div className="col-sm-10">
-                  <select className="custom-select form-control" id="inputBias">
-                     <option selected></option>
+                  <select className="custom-select form-control" defaultValue={account.bias} ref="bias">
+                     <option ></option>
                      <option value="Growth">Growth</option>
                      <option value="Aggregation">Aggregation</option>
                      <option value="Distribution">Distribution</option>
@@ -95,7 +121,8 @@ class AddAccount extends Component {
                 </div>
               </div>
 
-              <button onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Continue </button>
+              <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+              <button onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
             </form>
           </div>
         </div>

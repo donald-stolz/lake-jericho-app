@@ -10,7 +10,6 @@ class HomeListItem extends Component {
 
     return (
           <Link className="list-group-item" to={path} >{name}</Link>
-
       );
   }
 }

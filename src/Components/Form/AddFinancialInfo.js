@@ -51,41 +51,41 @@ class AddFinancialInfo extends Component {
 
               <div className="form-group"><label className="col-sm-2 control-label">Total Assets:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={client.totalAssets}
+                  <input type="text" className="form-control" defaultValue={client.totalAssets}
                       placeholder="Total Assets" ref="totalAssets"/>
                 </div>
               </div>
 
               <div className="form-group"><label className="col-sm-2 control-label">Liquid Assets:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={client.liquidAssets}
-                      placeholder="Phone Number" ref="liquidAssets"/>
+                  <input type="text" className="form-control" defaultValue={client.liquidAssets}
+                      placeholder="Liquid Assets" ref="liquidAssets"/>
                 </div>
               </div>
 
               <div className="form-group"><label className="col-sm-2 control-label">Investment Assets:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={client.investmentAssets}
-                      placeholder="Phone Number" ref="investmentAssets"/>
+                  <input type="text" className="form-control" defaultValue={client.investmentAssets}
+                      placeholder="Investment Assets" ref="investmentAssets"/>
                 </div>
               </div>
 
               <div className="form-group"><label className="col-sm-2 control-label">Investment Experience:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={client.investmentExperience}
+                  <input type="text" className="form-control" defaultValue={client.investmentExperience}
                       placeholder="Investment Experience" ref="investmentExperience"/>
                 </div>
               </div>
 
               <div className="form-group"><label className="col-sm-2 control-label">Overall Objectives:</label>
                 <div className="col-sm-10">
-                  <input type="number" className="form-control" defaultValue={client.overallObjectives}
+                  <input type="text" className="form-control" defaultValue={client.overallObjectives}
                       placeholder="Overall Objectives" ref="overallObjectives"/>
                 </div>
               </div>
 
 
-            <button onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Continue </button>
+            <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
             </form>
           </div>
         </div>
