@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class AddPersonalInfo extends Component {
-
+// TODO: Add Cancel button
   onSave(e){
     e.preventDefault()
 

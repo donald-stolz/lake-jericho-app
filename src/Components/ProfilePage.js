@@ -13,7 +13,11 @@ class ProfilePage extends Component {
   }
 
   render(){
-
+    <div className="container-fluid">
+      <PersonalInfo client={this.state.client}/>
+      <FinancialInfo client={this.state.client}/>
+      <Account client={this.state.client}/>
+    </div>
   }
 }
 
