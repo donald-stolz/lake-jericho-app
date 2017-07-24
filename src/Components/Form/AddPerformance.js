@@ -95,3 +95,15 @@ class AddAccount extends Component {
 }
 
 export default AddAccount
+
+//<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+
+or Link???
+
+
+//onCancel(e){
+// e.preventDefault();
+// this.props.cancel()
+//}
+
+//cancelForm()
