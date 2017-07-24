@@ -7,7 +7,7 @@ import Home       from './Components/Home'
 //
 
 // <Route path="/about" component={About}/>
-// <Route path="/Profile" component={Profile}/>
+
 
 import './App.css';
 
@@ -27,6 +27,7 @@ class App extends Component {
             <Link to="/"><h1> Lake Jericho </h1></Link>
           </div>
           <Route exact path="/" component={Home}/>
+          <Route path="/Profile/:id" component={Profile}/>
         </div>
       </Router>
     );

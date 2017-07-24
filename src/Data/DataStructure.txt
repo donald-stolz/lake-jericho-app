@@ -22,7 +22,7 @@ Client = {
     tax: null,
     horizon: null,
     bias: null,
-    performance : [{
+    performanceHist : [{
       date: null,
       tax: null,
       horizon: null,
