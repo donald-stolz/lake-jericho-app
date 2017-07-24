@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import PersonalInfo   from './Profile/PersonalInfo'
 import FinancialInfo  from './Profile/FinancialInfo'
-import Account        from './Profile/Account'
-
+// import Account        from './Profile/Account'
+//       <Account client={this.state.client}/>
 
 
 class ProfilePage extends Component {
@@ -16,7 +16,6 @@ class ProfilePage extends Component {
     <div className="container-fluid">
       <PersonalInfo client={this.state.client}/>
       <FinancialInfo client={this.state.client}/>
-      <Account client={this.state.client}/>
     </div>
   }
 }
