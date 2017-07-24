@@ -5,7 +5,7 @@ var exports = module.exports = {};
 
 exports.addClient = function(client) {
   clients.insert(client,function (err, newDoc) {
-
+    console.log('Inserted', doc.name, 'with ID', doc._id);
   });
 }
 
@@ -13,22 +13,33 @@ exports.recordPerformance = function() {
 
 }
 
-exports.updateClient = function() {
-
+exports.updateClient = function(client) {
+  clients.update({_id: client._id}, {client}, {}, function (err, numReplaced) {
+    console.log("Updated Client");
+  });
 }
 
-exports.findClient = function() {
-
+exports.setClient = function(clientID, set) {
+  clients.db.findOne({ _id: clientID }, function (err, doc) {
+    console.log('Found user:', doc.name);
+    set(doc)
+  });
 }
 
 exports.getClients = function() {
-
+  clients.find({}, function (err, docs) {
+    console.log(docs);
+  });
 }
 
 exports.removeClient = function() {
-
+  db.remove({ _id: 'id2' }, {}, function (err, numRemoved) {
+    console.log("Removed " + numRemoved + " client");
+  });
 }
 
 exports.clearDB = function() {
-
+  db.remove({}, { multi: true }, function (err, numRemoved) {
+    console.log("Removed " + numRemoved + " client(s)");
+  });
 }
