@@ -8,7 +8,7 @@ class AddAccount extends Component {
     var begin = this.refs.startBal.value
     var end = this.refs.endBal.value
 
-    var net = (end - begin) / begin
+    var net = ((end - begin) / begin) * 100
     var performanceHist = {
             date: this.refs.date.value,
             tax: this.refs.tax.value,

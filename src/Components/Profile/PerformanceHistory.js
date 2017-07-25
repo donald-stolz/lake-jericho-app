@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddPerformance from '../Form/AddPerformance'
+import ClientAPI from '../../Data/ClientAPI'
 import PerformanceDropdownList from '../List/PerformanceDropdownList'
-
 
 class PerformanceHistory extends Component {
   constructor() {
@@ -11,7 +11,7 @@ class PerformanceHistory extends Component {
                   active: 0}
   }
 
-  setEdit(){
+  setEditing(){
     this.setState({editing : true})
   }
 
@@ -20,16 +20,24 @@ class PerformanceHistory extends Component {
   }
 
 // TODO: Connect to API
-  recordPerformance(data){}
-  //   ClientAPI.recordPerformance(data)
-  //   this.setState({editing : false})
-  // }
+  recordPerformance(data){
+    const id = this.props.id
+    const accNum = this.props.accNum
+    ClientAPI.recordPerformance(id, accNum, data)
+    this.setState({editing : false})
+  }
+
+  selectRecord(record){
+    console.log(record);
+
+  }
 
   renderItemOrEdit(){
+    console.log(this.props);
     const editing = this.state.editing
     const active =this.state.active
-    const performance = this.props.performance[active]
-
+    const performance = this.props.history[active]
+    console.log(performance);
     if (editing) {
      return <AddPerformance save={this.recordPerformance.bind(this)}
                             cancel={this.cancelEdit.bind(this)}/>
@@ -37,15 +45,30 @@ class PerformanceHistory extends Component {
     else {
       return (
         <div className="container-fluid">
-        <PerformanceDropdownList/>
           <div className="panel panel-primary" >
             <div className="panel-heading">
-              <h2 className="panel-title">Performance History</h2>
+              <h2 className="panel-title">Performance History
+              <button type="button" onClick={this.setEditing.bind(this)} className="btn btn-default btn-xs pull-right">
+                <span className="glyphicon glyphicon-plus primary"/>
+              </button>
+              </h2>
             </div>
             <div className="panel-body">
-              <ul className="list-group" id="listPersonal">
-                <li className="list-group-item"><label>Account Name:</label> </li>
 
+
+            <PerformanceDropdownList history={performance}
+                                    selected={active}
+                                    select={this.selectRecord.bind(this)}/>
+
+            <hr/>
+
+              <ul className="list-group" id="listPersonal">
+                <li className="list-group-item"><label>Tax:</label> {performance.tax}</li>
+                <li className="list-group-item"><label>Horizon:</label> {performance.horizon}</li>
+                <li className="list-group-item"><label>Bias:</label> {performance.bias}</li>
+                <li className="list-group-item"><label>Begining Balance:</label> ${performance.beginBal}</li>
+                <li className="list-group-item"><label>End Balance:</label> ${performance.endBal}</li>
+                <li className="list-group-item"><label>Net Return:</label> %{performance.netReturn}</li>
               </ul>
 
             </div>
@@ -54,6 +77,14 @@ class PerformanceHistory extends Component {
       )
     }
   }
+
+  render(){
+    console.log(this.props);
+    return(
+      <div className="row">
+        {this.renderItemOrEdit(this.props.accounts)}
+      </div>
+  )}
 }
 
 export default PerformanceHistory

@@ -9,8 +9,11 @@ exports.addClient = function(client) {
   });
 }
 
-exports.recordPerformance = function(performance) {
-
+exports.recordPerformance = function(clientID, accNum, performance) {
+  var account = "accounts." + accNum +".performanceHist"
+  clients.update({ _id: clientID }, { $push: { account: performance } }, {}, function (err, num, docs) {
+    console.log(docs);
+  });
 }
 
 exports.updateClient = function(client) {

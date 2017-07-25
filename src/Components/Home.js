@@ -37,8 +37,8 @@ class Home extends Component {
           <div className="panel panel-primary">
             <div className="panel-heading">
               <h2 className="panel-title">Name
-              <Link to="/NewClient" className="button pull-right">
-                <span className="glyphicon glyphicon-plus"/>
+              <Link to="/NewClient" className="btn btn-default btn-xs pull-right">
+                <span className="glyphicon glyphicon-plus primary"/>
               </Link>
               </h2>
             </div>

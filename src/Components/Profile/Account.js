@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import AddAccount from '../Form/AddAccount'
 import AccountNavList from '../List/AccountNavList'
-// import PerformanceHistory from './PerformanceHistory'
-// <PerformanceHistory history={account.performanceHist} id={id}/>
+import PerformanceHistory from './PerformanceHistory'
 
 
 class Account extends Component {
@@ -23,15 +22,16 @@ class Account extends Component {
   }
 
   setActive(accNum){
-    console.log(accNum);
     this.setState({active: accNum})
   }
 
   //               <PerformanceHistory record={account.performanceHist}/>
   renderItemOrEdit(accounts){
     const editing = this.state.editing
-    const active =this.state.active
+    const active =  this.state.active
+    const id = this.props.id
     var account = accounts[active]
+
 
     if (editing) {
      return <AddAccount account={account} save={this.updateInfo.bind(this)}/>
@@ -59,6 +59,8 @@ class Account extends Component {
               </ul>
               <hr/>
 
+              <PerformanceHistory history={account.performanceHist} accNum={active} id={id}/>
+
             </div>
           </div>
         </div>
@@ -67,7 +69,7 @@ class Account extends Component {
   }
 
   render(){
-    console.log(this.props);
+    // console.log(this.props);
     return(
       <div className="row">
         {this.renderItemOrEdit(this.props.accounts)}

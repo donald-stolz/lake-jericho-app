@@ -27,13 +27,15 @@ class AccountNavList extends Component {
     }
 
     return (
-      <nav className="navbar navbar-default">
+
+      <nav className="navbar navbar-default primary">
         <div className="container-fluid">
           <ul className="nav navbar-nav">
             {AccountList}
           </ul>
         </div>
       </nav>
+
       );
   }
 }
