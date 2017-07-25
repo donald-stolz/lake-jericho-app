@@ -24,7 +24,7 @@ class AddAccount extends Component {
 
   onCancel(e){
     e.preventDefault();
-    // this.props.cancel()
+    this.props.cancel()
   }
 
   render(){

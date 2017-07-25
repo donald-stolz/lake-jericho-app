@@ -9,7 +9,7 @@ exports.addClient = function(client) {
   });
 }
 
-exports.recordPerformance = function() {
+exports.recordPerformance = function(performance) {
 
 }
 

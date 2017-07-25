@@ -15,7 +15,7 @@ class AccountNavList extends Component {
   render() {
     let AccountList = []
     const active = this.props.active
-    console.log(this.props.accounts);
+    // console.log(this.props.accounts);
     if (this.props.accounts) {
       AccountList = this.props.accounts.map(account => {
         return(

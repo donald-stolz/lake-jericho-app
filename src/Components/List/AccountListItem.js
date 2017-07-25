@@ -20,7 +20,7 @@ class AccountListItem extends Component {
     else {
       navClass = ""
     }
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <li className={navClass}>
         <a onClick={this.setAccount.bind(this)}> {name}</a>

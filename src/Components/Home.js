@@ -42,11 +42,9 @@ class Home extends Component {
               </Link>
               </h2>
             </div>
-
               <ul className="list-group">
                 {HomeList}
               </ul>
-
           </div>
         </div>
       </div>

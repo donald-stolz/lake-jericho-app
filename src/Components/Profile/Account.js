@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AddAccount from '../Form/AddAccount'
 import AccountNavList from '../List/AccountNavList'
+// import PerformanceHistory from './PerformanceHistory'
+// <PerformanceHistory history={account.performanceHist} id={id}/>
 
 
 class Account extends Component {
@@ -65,6 +67,7 @@ class Account extends Component {
   }
 
   render(){
+    console.log(this.props);
     return(
       <div className="row">
         {this.renderItemOrEdit(this.props.accounts)}

@@ -101,7 +101,7 @@ class ProfilePage extends Component {
     <div className="container-fluid">
       <PersonalInfo client={client} update={this.updatePersonal.bind(this)}/>
       <FinancialInfo client={client} update={this.updateFinacial.bind(this)}/>
-      <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
+      <Account id={client._id} accounts={accounts} update={this.updateAccount.bind(this)}/>
     </div>
   )}
 }
