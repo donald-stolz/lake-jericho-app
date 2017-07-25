@@ -69,7 +69,7 @@ class ProfilePage extends Component {
       client.email   =  data.email
     console.log(client);
 
-    // ClientAPI.updateClient(client)
+    ClientAPI.updateClient(client)
     this.setProfile(client)
   }
 
@@ -81,10 +81,9 @@ class ProfilePage extends Component {
       client.investmentAssets     = data.investmentAssets
       client.investmentExperience = data.investmentExperience
       client.overallObjectives    = data.overallObjectives
-      client.performanceHist      = data.performanceHist
     console.log(client);
 
-    // ClientAPI.updateClient(client)
+    ClientAPI.updateClient(client)
     this.setProfile(client)
   }
 
@@ -93,9 +92,9 @@ class ProfilePage extends Component {
     account.push(data)
     const client = this.state.client
       client.accounts = data
-      console.log(client);
-    // ClientAPI.updateClient(client)
-    // this.setProfile(client)
+    // console.log(client);
+    ClientAPI.updateClient(client)
+    this.setProfile(client)
   }
 
 

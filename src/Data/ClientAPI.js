@@ -4,7 +4,7 @@ var clients = new Datastore({ filename: 'src/Data/clients.db', autoload: true })
 var exports = module.exports = {};
 
 exports.addClient = function(client) {
-  clients.insert(client,function (err, doc) {
+  clients.insert(client, function (err, doc) {
     console.log('Inserted', doc.name, 'with ID', doc._id);
   });
 }
@@ -19,8 +19,9 @@ exports.addClient = function(client) {
 // }
 
 exports.updateClient = function(client) {
-  clients.update({_id: client._id}, {client}, {}, function (err, numReplaced) {
-    console.log("Updated Client");
+  console.log(client);
+  clients.update({_id: client._id}, client, {}, function (err, numReplaced) {
+    console.log("Updated " + numReplaced + " Client");
   });
 }
 

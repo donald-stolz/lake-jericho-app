@@ -18,7 +18,6 @@ class Account extends Component {
 
   updateInfo(data){
     // console.log(data);
-
     const active = this.state.active
     var accounts = []
     accounts = this.props.accounts
@@ -36,10 +35,13 @@ class Account extends Component {
   }
 
   addPerformance(data){
-    var accounts = this.props.accounts[this.state.active]
-    accounts.performanceHist = data
+    const active = this.state.active
+    var accounts = []
+    accounts = this.props.accounts
+    accounts[active].performanceHist = data
     // console.log(accounts);
     this.props.update(accounts)
+    this.setState({editing : false})
   }
 
   setActive(accNum){
