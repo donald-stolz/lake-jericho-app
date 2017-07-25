@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddAccount from '../Form/AddAccount'
-// import PerformanceHistory from './PerformanceHistory'
+import AccountNavList from '../List/AccountNavList'
 
 
 class Account extends Component {
@@ -15,18 +15,22 @@ class Account extends Component {
     this.setState({editing : true})
   }
 
-// TODO: Connect to API
   updateInfo(data){
 
     this.setState({editing : false})
   }
 
+  setActive(accNum){
+    console.log(accNum);
+    this.setState({active: accNum})
+  }
+
   //               <PerformanceHistory record={account.performanceHist}/>
-  renderItemOrEdit(){
+  renderItemOrEdit(accounts){
     const editing = this.state.editing
     const active =this.state.active
-    const account = this.props.account[active]
-    
+    var account = accounts[active]
+
     if (editing) {
      return <AddAccount account={account} save={this.updateInfo.bind(this)}/>
     }
@@ -37,6 +41,9 @@ class Account extends Component {
             <div className="panel-heading">
               <h2 className="panel-title">Account(s)</h2>
             </div>
+
+            <AccountNavList accounts={accounts} set={this.setActive.bind(this)}/>
+
             <div className="panel-body">
               <ul className="list-group" id="listPersonal">
                 <li className="list-group-item"><label>Account Name:</label> {account.accName}</li>
@@ -58,7 +65,7 @@ class Account extends Component {
   render(){
     return(
       <div className="row">
-        {this.renderItemOrEdit()}
+        {this.renderItemOrEdit(this.props.accounts)}
       </div>
     )}
 }

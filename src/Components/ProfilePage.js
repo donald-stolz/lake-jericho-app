@@ -7,7 +7,7 @@ import Account        from './Profile/Account'
 import ClientAPI  from '../Data/ClientAPI'
 
 class ProfilePage extends Component {
-  constructor(props) {
+  constructor() {
     super()
 
     this.state = {client : {
@@ -101,7 +101,7 @@ class ProfilePage extends Component {
     <div className="container-fluid">
       <PersonalInfo client={client} update={this.updatePersonal.bind(this)}/>
       <FinancialInfo client={client} update={this.updateFinacial.bind(this)}/>
-      <Account account={accounts} update={this.updateAccount.bind(this)}/>
+      <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
     </div>
   )}
 }

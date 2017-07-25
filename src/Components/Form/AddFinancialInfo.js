@@ -19,6 +19,11 @@ class AddFinancialInfo extends Component {
     this.props.save(financial)
   }
 
+  onCancel(e){
+    e.preventDefault()
+    this.props.cancel()
+  }
+
   render(){
     var client
     if (this.props.client) {
