@@ -12,34 +12,34 @@ class ProfilePage extends Component {
 
     this.state = {client : {
         // Personal Information
-          name: '',
-          dob: '',
-          address: '',
-          phone: '',
-          email: '',
+          name: null,
+          dob: null,
+          address: null,
+          phone: null,
+          email: null,
 
         // Financial Information
           annualIncome: 0,
-          totalAssets: '',
-          liquidAssets: '',
-          investmentAssets: '',
-          investmentExperience: '',
-          investmentObjectives: '',
+          totalAssets: null,
+          liquidAssets: null,
+          investmentAssets: null,
+          investmentExperience: null,
+          investmentObjectives: null,
           numAccounts: 0,
 
           accounts : [{
             accNum: 0,
-            accName: '',
-            startBal: '',
-            startDate: '',
-            tax: '',
-            horizon: '',
-            bias: '',
+            accName: null,
+            startBal: null,
+            startDate: null,
+            tax: null,
+            horizon: null,
+            bias: null,
             performanceHist : [{
-              date: '',
-              tax: '',
-              horizon: '',
-              bias: '',
+              date: null,
+              tax: null,
+              horizon: null,
+              bias: null,
               beginBal: 0,
               endBal: 0,
               netReturn: 0
@@ -56,7 +56,9 @@ class ProfilePage extends Component {
     ClientAPI.getClient(id, this.setProfile.bind(this))
   }
 
-  setProfile(data){this.setState({client : data})}
+  setProfile(data){
+    console.log("Set Profile");
+    this.setState({client : data})}
 
   updatePersonal(data){
     const client = this.state.client
@@ -67,7 +69,7 @@ class ProfilePage extends Component {
       client.email   =  data.email
     console.log(client);
 
-    ClientAPI.updateClient(client)
+    // ClientAPI.updateClient(client)
     this.setProfile(client)
   }
 
@@ -79,29 +81,33 @@ class ProfilePage extends Component {
       client.investmentAssets     = data.investmentAssets
       client.investmentExperience = data.investmentExperience
       client.overallObjectives    = data.overallObjectives
+      client.performanceHist      = data.performanceHist
     console.log(client);
 
-    ClientAPI.updateClient(client)
+    // ClientAPI.updateClient(client)
     this.setProfile(client)
   }
 
   updateAccount(data){
+    var account = []
+    account.push(data)
     const client = this.state.client
       client.accounts = data
-    ClientAPI.updateClient(client)
-    this.setProfile(client)
+      console.log(client);
+    // ClientAPI.updateClient(client)
+    // this.setProfile(client)
   }
 
 
   render(){
     const client    = this.state.client
     const accounts  = client.accounts
-
+    // console.log(accounts);
     return(
     <div className="container-fluid">
       <PersonalInfo client={client} update={this.updatePersonal.bind(this)}/>
       <FinancialInfo client={client} update={this.updateFinacial.bind(this)}/>
-      <Account id={client._id} accounts={accounts} update={this.updateAccount.bind(this)}/>
+      <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
     </div>
   )}
 }

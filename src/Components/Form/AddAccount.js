@@ -21,7 +21,7 @@ class AddAccount extends Component {
 
   onCancel(e){
     e.preventDefault()
-
+    this.props.cancel()
   }
 
   addAccount(performanceRecord){
@@ -141,13 +141,13 @@ class AddAccount extends Component {
                    </select>
                 </div>
               </div>
-              <div className="form-group">
+              <div className="container-fluid">
                 <button style={profile} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
                 <button style={profile} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
               </div>
             </form>
             <hr/>
-            < AddPerformance style={form} save={this.addAccount.bind(this)}/>
+            <div style={form}>< AddPerformance  save={this.addAccount.bind(this)}/></div>
           </div>
         </div>
         </div>

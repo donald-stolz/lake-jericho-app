@@ -17,36 +17,56 @@ class Account extends Component {
   }
 
   updateInfo(data){
-    this.props.update(data)
+    // console.log(data);
+
+    const active = this.state.active
+    var accounts = []
+    accounts = this.props.accounts
+    data.accNum = accounts[active].accNum
+    data.performanceHist = accounts[active].performanceHist
+    accounts[active] = data
+
+    // console.log(accounts);
+    this.props.update(accounts)
+    this.setState({editing : false})
+  }
+
+  cancelEdit(){
     this.setState({editing : false})
   }
 
   addPerformance(data){
     var accounts = this.props.accounts[this.state.active]
+    accounts.performanceHist = data
+    // console.log(accounts);
+    this.props.update(accounts)
   }
 
   setActive(accNum){
     this.setState({active: accNum})
   }
 
-  //               <PerformanceHistory record={account.performanceHist}/>
-  renderItemOrEdit(accounts){
+  renderItemOrEdit(){
+    const accounts = this.props.accounts
     const editing = this.state.editing
     const active =  this.state.active
-
+    // console.log(accounts);
     var account = accounts[active]
 
 
     if (editing) {
      return(
        <div className="container-fluid">
-        <AddAccount account={account} save={this.updateInfo.bind(this)}/>
+        <AddAccount account={account}
+                    cancel={this.cancelEdit.bind(this)}
+                    save={this.updateInfo.bind(this)}/>
       </div>
     )}
     else {
+      // console.log(account);
       return (
         <div className="container-fluid">
-          <div className="panel panel-primary" id="personalInformation">
+          <div className="panel panel-primary" >
             <div className="panel-heading">
               <h2 className="panel-title">Account(s)</h2>
             </div>
@@ -70,7 +90,8 @@ class Account extends Component {
               </ul>
               <hr/>
 
-              <PerformanceHistory history={account.performanceHist}/>
+              <PerformanceHistory history={account.performanceHist}
+                                  save={this.addPerformance.bind(this)}/>
 
             </div>
           </div>
@@ -83,7 +104,7 @@ class Account extends Component {
     // console.log(this.props);
     return(
       <div className="row">
-        {this.renderItemOrEdit(this.props.accounts)}
+        {this.renderItemOrEdit()}
       </div>
     )}
 }

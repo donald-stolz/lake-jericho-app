@@ -18,24 +18,38 @@ class PerformanceHistory extends Component {
     this.setState({editing : false})
   }
 
-// TODO: Connect to API
   recordPerformance(data){
-    // const id = this.props.id
-    // const accNum = this.props.accNum
-
+    var history = []
+    history = this.props.history
+    // TODO: Check for Duplicates
+    history.push(data)
+    // console.log(history);
+    this.props.save(history)
     this.setState({editing : false})
   }
 
-  selectRecord(record){
-    console.log("Selected " + record);
+  selectPerformance(selected){
 
+    const history = this.props.history
+
+    console.log("Selected " + selected);
+    var newActive
+    for (var i = 0; i < history.length; i++) {
+      if (history[i].date === selected) {
+        newActive = i
+        break;
+      }
+    }
+
+    this.setState({active : newActive})
   }
 
   renderItemOrEdit(){
     const editing = this.state.editing
     const active = this.state.active
     const history = this.props.history
-    const performance = history[active]
+    var performance = history[active]
+    // console.log(active);
 
     if (editing) {
      return <AddPerformance save={this.recordPerformance.bind(this)}
@@ -56,7 +70,8 @@ class PerformanceHistory extends Component {
 
 
             <PerformanceDropdownList history={history}
-                                    select={this.selectRecord.bind(this)}/>
+                                    selectDate={this.selectPerformance.bind(this)}
+                                    active={active}/>
 
             <hr/>
 
@@ -77,7 +92,7 @@ class PerformanceHistory extends Component {
   }
 
   render(){
-    console.log(this.props);
+    // console.log(this.props);
     return(
       <div className="row">
         {this.renderItemOrEdit(this.props.accounts)}
