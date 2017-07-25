@@ -85,7 +85,7 @@ class AddFinancialInfo extends Component {
                 </div>
               </div>
 
-
+            <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
             <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
             </form>
           </div>

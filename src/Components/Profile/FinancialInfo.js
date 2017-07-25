@@ -8,13 +8,16 @@ class FinancialInfo extends Component {
     this.state = {editing : false}
   }
 
-  setEdit(){
+  setEditing(){
     this.setState({editing : true})
   }
 
-// TODO: Connect to API
   updateInfo(data){
+    this.props.update(data)
+    this.setState({editing : false})
+  }
 
+  cancelUpdate(){
     this.setState({editing : false})
   }
 
@@ -23,7 +26,14 @@ class FinancialInfo extends Component {
     const client = this.props.client
 
     if (editing) {
-     return <AddFinancialInfo client={this.state.client} save={this.updateInfo.bind(this)}/>
+     return(
+       <div className="container-fluid">
+         <AddFinancialInfo client={client}
+            save={this.updateInfo.bind(this)}
+            cancel={this.cancelUpdate.bind(this)}
+          />
+        </div>
+      )
     } else {
       return (
         <div className="container-fluid">
@@ -33,7 +43,11 @@ class FinancialInfo extends Component {
             </div>
             <div className="panel-body">
               <ul className="list-group" id="listFinancial">
-                <li className="list-group-item"><label>Annual Income:</label> ${client.annualIncome}</li>
+                <li className="list-group-item"><label>Annual Income:</label> ${client.annualIncome}
+                  <button type="button" onClick={this.setEditing.bind(this)}
+                    className="btn btn-primary btn-xs pull-right">Edit
+                  </button>
+                </li>
                 <li className="list-group-item"><label>Total Assets:</label> {client.totalAssets}</li>
                 <li className="list-group-item"><label>Liquid Assets</label> {client.liquidAssets}</li>
                 <li className="list-group-item"><label>Investment Assets:</label> {client.investmentAssets}</li>

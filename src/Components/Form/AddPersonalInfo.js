@@ -16,8 +16,14 @@ class AddPersonalInfo extends Component {
     this.props.save(personal)
   }
 
+  onCancel(e){
+    e.preventDefault()
+    this.props.cancel()
+  }
+
   render(){
     var client
+    console.log(this.props.client);
     if (this.props.client) {
       client = this.props.client
     }
@@ -71,8 +77,8 @@ class AddPersonalInfo extends Component {
                     <input type="email" className="form-control" defaultValue={client.email} placeholder="Email" ref="email"/>
                   </div>
                 </div>
-
-              <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Continue </button>
+              <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+              <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
               </form>
             </div>
           </div>

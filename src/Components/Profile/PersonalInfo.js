@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddPersonalInfo from '../Form/AddPersonalInfo'
 
+
 class PersonalInfo extends Component {
   constructor() {
     super()
@@ -8,13 +9,16 @@ class PersonalInfo extends Component {
     this.state = {editing : false}
   }
 
-  setEdit(){
+  setEditing(){
     this.setState({editing : true})
   }
 
-// TODO: Connect to API
-  updateInfo(data){
+  cancelUpdate(){
+    this.setState({editing : false})
+  }
 
+  updateInfo(data){
+    this.props.update(data)
     this.setState({editing : false})
   }
 
@@ -23,8 +27,16 @@ class PersonalInfo extends Component {
     var client = this.props.client
 
     if (editing) {
-     return <AddPersonalInfo client={this.state.client} save={this.updateInfo.bind(this)}/>
-    } else {
+     return (
+        <div className="container-fluid">
+          <AddPersonalInfo client={client}
+              save={this.updateInfo.bind(this)}
+              cancel={this.cancelUpdate.bind(this)}
+          />
+        </div>
+      )
+    }
+    else {
       return (
         <div className="container-fluid">
           <div className="panel panel-primary" id="personalInformation">
@@ -33,7 +45,11 @@ class PersonalInfo extends Component {
             </div>
             <div className="panel-body">
               <ul className="list-group" id="listPersonal">
-                <li className="list-group-item"><label>Name:</label> {client.name}</li>
+                <li className="list-group-item"><label>Name:</label> {client.name}
+                  <button type="button" onClick={this.setEditing.bind(this)}
+                    className="btn btn-primary btn-xs pull-right">Edit
+                  </button>
+                </li>
                 <li className="list-group-item"><label>Date of Birth:</label> {client.dob}</li>
                 <li className="list-group-item"><label>Address:</label> {client.address}</li>
                 <li className="list-group-item"><label>Phone Number:</label> {client.phone}</li>
