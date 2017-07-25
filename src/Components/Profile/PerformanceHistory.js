@@ -33,11 +33,11 @@ class PerformanceHistory extends Component {
   }
 
   renderItemOrEdit(){
-    console.log(this.props);
     const editing = this.state.editing
-    const active =this.state.active
-    const performance = this.props.history[active]
-    console.log(performance);
+    const active = this.state.active
+    const history = this.props.history
+    const performance = history[active]
+
     if (editing) {
      return <AddPerformance save={this.recordPerformance.bind(this)}
                             cancel={this.cancelEdit.bind(this)}/>
@@ -56,8 +56,7 @@ class PerformanceHistory extends Component {
             <div className="panel-body">
 
 
-            <PerformanceDropdownList history={performance}
-                                    selected={active}
+            <PerformanceDropdownList history={history}
                                     select={this.selectRecord.bind(this)}/>
 
             <hr/>
