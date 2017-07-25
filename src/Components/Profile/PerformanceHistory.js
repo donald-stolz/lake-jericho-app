@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AddPerformance from '../Form/AddPerformance'
-import ClientAPI from '../../Data/ClientAPI'
 import PerformanceDropdownList from '../List/PerformanceDropdownList'
 
 class PerformanceHistory extends Component {
@@ -21,14 +20,14 @@ class PerformanceHistory extends Component {
 
 // TODO: Connect to API
   recordPerformance(data){
-    const id = this.props.id
-    const accNum = this.props.accNum
-    ClientAPI.recordPerformance(id, accNum, data)
+    // const id = this.props.id
+    // const accNum = this.props.accNum
+
     this.setState({editing : false})
   }
 
   selectRecord(record){
-    console.log(record);
+    console.log("Selected " + record);
 
   }
 

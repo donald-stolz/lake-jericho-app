@@ -9,12 +9,14 @@ exports.addClient = function(client) {
   });
 }
 
-exports.recordPerformance = function(clientID, accNum, performance) {
-  var account = "accounts." + accNum +".performanceHist"
-  clients.update({ _id: clientID }, { $push: { account: performance } }, {}, function (err, num, docs) {
-    console.log(docs);
-  });
-}
+// TODO: Use push to record performance
+// exports.pushPerformance = function(clientID, accNum, performance) {
+//   var account = "accounts." + accNum +".performanceHist"
+//   console.log(account);
+//   clients.update({ _id: clientID }, { $push: { account: performance } }, {}, function (err, num, docs) {
+//     console.log(docs);
+//   });
+// }
 
 exports.updateClient = function(client) {
   clients.update({_id: client._id}, {client}, {}, function (err, numReplaced) {

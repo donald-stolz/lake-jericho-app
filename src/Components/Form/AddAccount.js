@@ -79,6 +79,7 @@ class AddAccount extends Component {
     return(
 
       <div className="row">
+      <div className="container-fluid">
         <div className="panel panel-primary" id="financialInformation">
           <div className="panel-heading">
             <h2 className="panel-title">Account Information</h2>
@@ -140,14 +141,15 @@ class AddAccount extends Component {
                    </select>
                 </div>
               </div>
-
-              <button style={profile} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
-              <button style={profile} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
-
+              <div className="form-group">
+                <button style={profile} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+                <button style={profile} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
+              </div>
             </form>
             <hr/>
             < AddPerformance style={form} save={this.addAccount.bind(this)}/>
           </div>
+        </div>
         </div>
       </div>
     )

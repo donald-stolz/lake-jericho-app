@@ -12,13 +12,17 @@ class Account extends Component {
                   active: 0}
   }
 
-  setEdit(){
+  setEditing(){
     this.setState({editing : true})
   }
 
   updateInfo(data){
-
+    this.props.update(data)
     this.setState({editing : false})
+  }
+
+  addPerformance(data){
+    var accounts = this.props.accounts[this.state.active]
   }
 
   setActive(accNum){
@@ -29,13 +33,16 @@ class Account extends Component {
   renderItemOrEdit(accounts){
     const editing = this.state.editing
     const active =  this.state.active
-    const id = this.props.id
+
     var account = accounts[active]
 
 
     if (editing) {
-     return <AddAccount account={account} save={this.updateInfo.bind(this)}/>
-    }
+     return(
+       <div className="container-fluid">
+        <AddAccount account={account} save={this.updateInfo.bind(this)}/>
+      </div>
+    )}
     else {
       return (
         <div className="container-fluid">
@@ -50,7 +57,11 @@ class Account extends Component {
 
             <div className="panel-body">
               <ul className="list-group" id="listPersonal">
-                <li className="list-group-item"><label>Account Name:</label> {account.accName}</li>
+                <li className="list-group-item"><label>Account Name:</label> {account.accName}
+                  <button type="button" onClick={this.setEditing.bind(this)}
+                    className="btn btn-primary btn-xs pull-right">Edit
+                  </button>
+                </li>
                 <li className="list-group-item"><label>Start Date:</label> {account.startDate}</li>
                 <li className="list-group-item"><label>Start Balance:</label> {account.startBal}</li>
                 <li className="list-group-item"><label>Tax:</label> {account.tax}</li>
@@ -59,7 +70,7 @@ class Account extends Component {
               </ul>
               <hr/>
 
-              <PerformanceHistory history={account.performanceHist} accNum={active} id={id}/>
+              <PerformanceHistory history={account.performanceHist}/>
 
             </div>
           </div>
