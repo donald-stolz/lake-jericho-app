@@ -42,7 +42,9 @@ class Account extends Component {
               <h2 className="panel-title">Account(s)</h2>
             </div>
 
-            <AccountNavList accounts={accounts} set={this.setActive.bind(this)}/>
+            <AccountNavList accounts={accounts}
+                            set={this.setActive.bind(this)}
+                            active={active}/>
 
             <div className="panel-body">
               <ul className="list-group" id="listPersonal">

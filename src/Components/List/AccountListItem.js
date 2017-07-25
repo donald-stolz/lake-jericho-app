@@ -10,10 +10,20 @@ class AccountListItem extends Component {
 
   render(){
     const name = this.props.account.accName
+    const active = this.props.active
+    const accNum = this.props.account.accNum
+    var navClass
+
+    if (active === accNum) {
+      navClass = "active"
+    }
+    else {
+      navClass = ""
+    }
     console.log(this.props);
     return (
-      <li>
-        <a className="btn" onClick={this.setAccount.bind(this)}> {name}</a>
+      <li className={navClass}>
+        <a onClick={this.setAccount.bind(this)}> {name}</a>
       </li>
       );
   }
