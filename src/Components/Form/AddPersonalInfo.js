@@ -21,6 +21,17 @@ class AddPersonalInfo extends Component {
     this.props.cancel()
   }
 
+  cancelButton(){
+    //if new client === true
+    if () {
+      return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
+    }
+    //else new client
+    else {
+      return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
+    }
+  }
+
   render(){
     var client
     console.log(this.props.client);
@@ -77,7 +88,8 @@ class AddPersonalInfo extends Component {
                     <input type="email" className="form-control" defaultValue={client.email} placeholder="Email" ref="email"/>
                   </div>
                 </div>
-              <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+                {this.cancelButton()}
+
               <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
               </form>
             </div>

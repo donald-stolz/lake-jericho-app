@@ -55,6 +55,7 @@ class NewClient extends Component {
   componentWillUnmount(){
     if (this.state.save) {
       financial.accounts = accounts
+      // TODO: Update data structure client.personal; client.financial; client.accounts
       var client = Object.assign(personal, financial)
       console.log(client);
       ClientAPI.addClient(client)

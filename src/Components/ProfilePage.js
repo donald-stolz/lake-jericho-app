@@ -57,7 +57,7 @@ class ProfilePage extends Component {
   }
 
   setProfile(data){
-    console.log("Set Profile");
+    //console.log("Set Profile");
     this.setState({client : data})}
 
   updatePersonal(data){
@@ -67,7 +67,7 @@ class ProfilePage extends Component {
       client.address =  data.address
       client.phone   =  data.phone
       client.email   =  data.email
-    console.log(client);
+    //console.log(client);
 
     ClientAPI.updateClient(client)
     this.setProfile(client)
@@ -81,7 +81,7 @@ class ProfilePage extends Component {
       client.investmentAssets     = data.investmentAssets
       client.investmentExperience = data.investmentExperience
       client.overallObjectives    = data.overallObjectives
-    console.log(client);
+    //console.log(client);
 
     ClientAPI.updateClient(client)
     this.setProfile(client)
@@ -91,7 +91,7 @@ class ProfilePage extends Component {
     var account = []
     account.push(data)
     const client = this.state.client
-      client.accounts = data
+    client.accounts = data
     // console.log(client);
     ClientAPI.updateClient(client)
     this.setProfile(client)
@@ -101,7 +101,9 @@ class ProfilePage extends Component {
   render(){
     const client    = this.state.client
     const accounts  = client.accounts
-    // console.log(accounts);
+
+// TODO: update data structure client.personal; client.financial; client.accounts
+
     return(
     <div className="container-fluid">
       <PersonalInfo client={client} update={this.updatePersonal.bind(this)}/>

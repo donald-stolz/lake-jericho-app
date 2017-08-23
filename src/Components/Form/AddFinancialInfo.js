@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 
+// TODO: Add sections
+/*
+“Time Horizon”
+“Tax Considerations”
+“Liquidity Considerations”
+“Legal/Regulatory Issues”
+“Unique Circumstances”
+“Return Objective”
+“Risk Objective” - This section will have three sub-sections; (1) Ability, (2) Willingness, and (3) Overall.
+All text inputs
+*/
 
 class AddFinancialInfo extends Component {
 

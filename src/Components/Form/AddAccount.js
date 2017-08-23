@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import AddPerformance from './AddPerformance'
+
+// TODO: Create comment/log section for changes
 
 class AddAccount extends Component {
 
