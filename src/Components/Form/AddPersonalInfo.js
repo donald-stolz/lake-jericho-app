@@ -16,11 +16,6 @@ class AddPersonalInfo extends Component {
     this.props.save(personal)
   }
 
-  onCancel(e){
-    e.preventDefault()
-    this.props.cancel()
-  }
-
   cancelButton(){
     //if new client === true
     if () {
@@ -30,6 +25,11 @@ class AddPersonalInfo extends Component {
     else {
       return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
     }
+  }
+  
+  onCancel(e){
+    e.preventDefault()
+    this.props.cancel()
   }
 
   render(){
