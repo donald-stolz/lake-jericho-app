@@ -66,7 +66,7 @@ class NewClient extends Component {
     var step = this.state.step
     switch (step) {
       case 0:
-        return < AddPersonalInfo client={this.personal} save={this.savePersonal.bind(this)}/>
+        return < AddPersonalInfo client={this.personal} newClient={true} save={this.savePersonal.bind(this)}/>
       case 1:
         return < AddFinancialInfo client={this.financial} save={this.saveFinancial.bind(this)}/>
       case 2:

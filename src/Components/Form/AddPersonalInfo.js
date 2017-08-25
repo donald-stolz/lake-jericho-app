@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom'
 
 class AddPersonalInfo extends Component {
 // TODO: Add Cancel button
@@ -16,20 +16,20 @@ class AddPersonalInfo extends Component {
     this.props.save(personal)
   }
 
+  onCancel(e){
+    e.preventDefault()
+    this.props.cancel()
+  }
+
   cancelButton(){
     //if new client === true
-    if () {
+    if (this.props.newClient) {
       return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
     }
     //else new client
     else {
       return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
     }
-  }
-  
-  onCancel(e){
-    e.preventDefault()
-    this.props.cancel()
   }
 
   render(){
