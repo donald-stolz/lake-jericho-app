@@ -70,7 +70,7 @@ class Account extends Component {
         <div className="container-fluid">
           <div className="panel panel-primary" >
             <div className="panel-heading">
-              <h2 className="panel-title">Account(s)</h2>
+              <h1 className="panel-title">Account Information</h1>
             </div>
 
             <AccountNavList accounts={accounts}

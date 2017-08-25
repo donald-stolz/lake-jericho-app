@@ -38,9 +38,9 @@ class FinancialInfo extends Component {
     } else {
       return (
         <div className="container-fluid">
-          <div className="panel panel-primary" id="FinancialInformation">
+          <div className="panel panel-primary">
             <div className="panel-heading">
-              <h2 className="panel-title">Financial Information</h2>
+              <h1 className="panel-title">Financial Information</h1>
             </div>
             <div className="panel-body">
               <ul className="list-group" id="listFinancial">

@@ -66,10 +66,10 @@ class AddFinancialInfo extends Component {
     }
 
     return(
-      <div className="row">
-        <div className="panel panel-primary" id="financialInformation">
+      <div className="container-fluid">
+        <div className="panel panel-primary">
           <div className="panel-heading">
-            <h2 className="panel-title">Financial Information</h2>
+            <h1 className="panel-title">Financial Information</h1>
           </div>
           <div className="panel-body">
             <form className="form-horizontal">

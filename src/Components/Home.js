@@ -86,7 +86,7 @@ class Home extends Component {
         });
       }
     return(
-      <div className="row">
+      
         <div className="container-fluid">
           <div className="panel panel-primary">
             <div className="panel-heading">
@@ -101,7 +101,7 @@ class Home extends Component {
               </ul>
           </div>
         </div>
-      </div>
+      
     )
   }
 }
