@@ -49,9 +49,9 @@ class FinancialInfo extends Component {
                     className="btn btn-primary btn-xs pull-right">Edit
                   </button>
                 </li>
-                <li className="list-group-item"><label>Total Assets:</label> {client.totalAssets}</li>
-                <li className="list-group-item"><label>Liquid Assets</label> {client.liquidAssets}</li>
-                <li className="list-group-item"><label>Investment Assets:</label> {client.investmentAssets}</li>
+                <li className="list-group-item"><label>Total Assets: $</label> {client.totalAssets}</li>
+                <li className="list-group-item"><label>Liquid Assets: $</label> {client.liquidAssets}</li>
+                <li className="list-group-item"><label>Investment Assets: $</label> {client.investmentAssets}</li>
                 <li className="list-group-item"><label>Investment Experience:</label> {client.investmentExperience}</li>
                 <li className="list-group-item"><label>Overall Objectives:</label> {client.overallObjectives}</li>
               </ul>

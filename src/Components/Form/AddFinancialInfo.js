@@ -80,23 +80,23 @@ class AddFinancialInfo extends Component {
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">Total Assets:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Total Assets: $</label>
                 <div className="col-sm-10">
-                  <input type="text" className="form-control" defaultValue={client.totalAssets}
+                  <input type="number" className="form-control" defaultValue={client.totalAssets}
                       placeholder="Total Assets" ref="totalAssets"/>
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">Liquid Assets:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Liquid Assets: $</label>
                 <div className="col-sm-10">
-                  <input type="text" className="form-control" defaultValue={client.liquidAssets}
+                  <input type="number" className="form-control" defaultValue={client.liquidAssets}
                       placeholder="Liquid Assets" ref="liquidAssets"/>
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">Investment Assets:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Investment Assets: $</label>
                 <div className="col-sm-10">
-                  <input type="text" className="form-control" defaultValue={client.investmentAssets}
+                  <input type="number" className="form-control" defaultValue={client.investmentAssets}
                       placeholder="Investment Assets" ref="investmentAssets"/>
                 </div>
               </div>
