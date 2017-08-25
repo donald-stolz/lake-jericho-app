@@ -29,7 +29,8 @@ class PersonalInfo extends Component {
     if (editing) {
      return (
         <div className="container-fluid">
-          <AddPersonalInfo client={client} newClient={false}
+          <AddPersonalInfo client={client}
+              newClient={false}
               save={this.updateInfo.bind(this)}
               cancel={this.cancelUpdate.bind(this)}
           />

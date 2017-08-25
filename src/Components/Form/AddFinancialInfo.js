@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 // TODO: Add sections
 /*
@@ -11,6 +12,8 @@ import React, { Component } from 'react';
 “Risk Objective” - This section will have three sub-sections; (1) Ability, (2) Willingness, and (3) Overall.
 All text inputs
 */
+
+// TODO: cancel button fix
 
 class AddFinancialInfo extends Component {
 
@@ -33,6 +36,17 @@ class AddFinancialInfo extends Component {
   onCancel(e){
     e.preventDefault()
     this.props.cancel()
+  }
+
+  cancelButton(){
+    //if new client === true
+    if (this.props.newClient) {
+      return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
+    }
+    //else new client
+    else {
+      return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
+    }
   }
 
   render(){
@@ -101,7 +115,7 @@ class AddFinancialInfo extends Component {
                 </div>
               </div>
 
-            <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+            {this.cancelButton()}
             <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
             </form>
           </div>

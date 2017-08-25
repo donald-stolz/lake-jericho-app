@@ -53,6 +53,7 @@ class PerformanceHistory extends Component {
 
     if (editing) {
      return <AddPerformance save={this.recordPerformance.bind(this)}
+                            newClient={false}
                             cancel={this.cancelEdit.bind(this)}/>
     }
     else {

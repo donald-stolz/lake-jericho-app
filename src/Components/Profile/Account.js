@@ -93,6 +93,7 @@ class Account extends Component {
               <hr/>
 
               <PerformanceHistory history={account.performanceHist}
+                                  newClient={false}
                                   save={this.addPerformance.bind(this)}/>
 
             </div>

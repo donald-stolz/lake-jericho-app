@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import AddPerformance from './AddPerformance'
 
 // TODO: Create comment/log section for changes
+// TODO: add cancel button fix
 
 class AddAccount extends Component {
 
@@ -18,6 +20,17 @@ class AddAccount extends Component {
           performanceHist : []
         }
     this.props.save(account)
+  }
+
+  cancelButton(){
+    //if new client === true
+    if (this.props.newClient) {
+      return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
+    }
+    //else new client
+    else {
+      return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
+    }
   }
 
   onCancel(e){
@@ -143,12 +156,12 @@ class AddAccount extends Component {
                 </div>
               </div>
               <div className="container-fluid">
-                <button style={profile} onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+                {this.cancelButton()}
                 <button style={profile} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
               </div>
             </form>
             <hr/>
-            <div style={form}>< AddPerformance  save={this.addAccount.bind(this)}/></div>
+            <div style={form}>< AddPerformance newClient={true} save={this.addAccount.bind(this)}/></div>
           </div>
         </div>
         </div>

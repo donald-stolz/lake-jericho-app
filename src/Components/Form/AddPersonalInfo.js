@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 class AddPersonalInfo extends Component {
 // TODO: Add Cancel button
@@ -88,8 +88,8 @@ class AddPersonalInfo extends Component {
                     <input type="email" className="form-control" defaultValue={client.email} placeholder="Email" ref="email"/>
                   </div>
                 </div>
-                {this.cancelButton()}
 
+              {this.cancelButton()}
               <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
               </form>
             </div>

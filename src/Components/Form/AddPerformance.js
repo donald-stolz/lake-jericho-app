@@ -21,6 +21,17 @@ class AddAccount extends Component {
 
     this.props.save(performanceHist)
   }
+// TODO: Add cancel button fix; return Null if new client
+  cancelButton(){
+    //if new client === true
+    if (this.props.newClient) {
+      return null;
+    }
+    //else new client
+    else {
+      return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
+    }
+  }
 
   onCancel(e){
     e.preventDefault();
@@ -93,7 +104,7 @@ class AddAccount extends Component {
                 </div>
               </div>
 
-              <button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>
+              {this.cancelButton()}
               <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
             </form>
           </div>

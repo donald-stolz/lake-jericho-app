@@ -29,6 +29,7 @@ class FinancialInfo extends Component {
      return(
        <div className="container-fluid">
          <AddFinancialInfo client={client}
+            newClient={false}
             save={this.updateInfo.bind(this)}
             cancel={this.cancelUpdate.bind(this)}
           />

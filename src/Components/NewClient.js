@@ -68,9 +68,9 @@ class NewClient extends Component {
       case 0:
         return < AddPersonalInfo client={this.personal} newClient={true} save={this.savePersonal.bind(this)}/>
       case 1:
-        return < AddFinancialInfo client={this.financial} save={this.saveFinancial.bind(this)}/>
+        return < AddFinancialInfo client={this.financial} newClient={true} save={this.saveFinancial.bind(this)}/>
       case 2:
-        return < AddAccount btn={'hidden'} account={null} save={this.saveAccount.bind(this)}/>
+        return < AddAccount btn={'hidden'} account={null} newClient={true} save={this.saveAccount.bind(this)}/>
       case 3:
         return < Continue addAcc={this.addAccount.bind(this)}/>
       default:
