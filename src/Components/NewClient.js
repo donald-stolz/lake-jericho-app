@@ -7,14 +7,11 @@ import Continue       from './Form/Continue'
 
 import ClientAPI  from '../Data/ClientAPI'
 
-  // Personal Information
 var personal = {}
 
-  // Financial Information
 var financial = {}
 
 var accounts = []
-
 
 var numAccounts
 
@@ -28,7 +25,8 @@ class NewClient extends Component {
 
 // Steps for saving form from GUI & adding to DB
 
-  // Step 1: Saves personal data
+  // Step 1: Saves personal data to local variable
+  //            and changes page to save financial
   savePersonal(data){
 
     personal = data
@@ -36,13 +34,15 @@ class NewClient extends Component {
     this.setState({step : 1})
   }
 
-  // Step 2: Saves general financial fields
+  // Step 2: Saves financial data to local variable
+  //            and changes page to save an account
   saveFinancial(data){
     financial = data
 
     this.setState({step : 2})
   }
-
+  // Step 3: Saves account data to local variable
+  //            and changes page to option page
   saveAccount(data){
     data.accNum = numAccounts
     accounts.push(data)
@@ -50,13 +50,15 @@ class NewClient extends Component {
     this.setState({step : 3, save : true})
   }
 
+  // Optional Step: Increments number of accounts
+  //            and sets page to add another account
   addAccount(){
 
     numAccounts++
     this.setState({step : 2})
   }
 
-// Saves new client to DB on unmount
+// Final Step: Routes to home; Saves new client to DB on unmount
   componentWillUnmount(){
     if (this.state.save) {
       // financial.accounts = accounts

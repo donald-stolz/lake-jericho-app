@@ -14,9 +14,6 @@ class PerformanceDropdownList extends Component {
   render() {
     var history = []
 
-
-    // console.log(this.props);
-
       history = this.props.history.map(performance =>{
         return (
           <option key={performance.date} value={performance.date}>{performance.date}</option>

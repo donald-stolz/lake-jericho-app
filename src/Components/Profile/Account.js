@@ -17,7 +17,6 @@ class Account extends Component {
   }
 
   updateInfo(data){
-    // console.log(data);
     const active = this.state.active
     var accounts = []
     accounts = this.props.accounts
@@ -25,7 +24,6 @@ class Account extends Component {
     data.performanceHist = accounts[active].performanceHist
     accounts[active] = data
 
-    // console.log(accounts);
     this.props.update(accounts)
     this.setState({editing : false})
   }
@@ -39,7 +37,7 @@ class Account extends Component {
     var accounts = []
     accounts = this.props.accounts
     accounts[active].performanceHist = data
-    // console.log(accounts);
+
     this.props.update(accounts)
     this.setState({editing : false})
   }
@@ -52,7 +50,7 @@ class Account extends Component {
     const accounts = this.props.accounts
     const editing = this.state.editing
     const active =  this.state.active
-    // console.log(accounts);
+
     var account = accounts[active]
 
 
@@ -65,7 +63,7 @@ class Account extends Component {
       </div>
     )}
     else {
-      // console.log(account);
+
       return (
         <div className="container-fluid">
           <div className="panel panel-primary" >

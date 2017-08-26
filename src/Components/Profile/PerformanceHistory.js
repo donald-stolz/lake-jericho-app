@@ -21,9 +21,10 @@ class PerformanceHistory extends Component {
   recordPerformance(data){
     var history = []
     history = this.props.history
-    // TODO: Check for Duplicates
+    // TODO: Check for Duplicate method
+    // TODO: Index records by date
     history.push(data)
-    // console.log(history);
+
     this.props.save(history)
     this.setState({editing : false})
   }
