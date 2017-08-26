@@ -78,7 +78,7 @@ class AddAccount extends Component {
           }
     }
 
-    //Conditional visibility for Form or Profile Update
+    //Conditional visibility for performance history when updating
     var profile
     var form
     if(this.props.btn){

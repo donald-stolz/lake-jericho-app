@@ -39,27 +39,27 @@ class ProfilePage extends Component {
           riskOverall: null
         },
 
-          accounts : [{
-            accNum: 0,
-            accName: null,
-            startBal: null,
-            startDate: null,
+        // Account(s) Information
+        accounts : [{
+          accNum: 0,
+          accName: null,
+          startBal: null,
+          startDate: null,
+          tax: null,
+          horizon: null,
+          bias: null,
+          performanceHist : [{
+            date: null,
             tax: null,
             horizon: null,
             bias: null,
-            performanceHist : [{
-              date: null,
-              tax: null,
-              horizon: null,
-              bias: null,
-              beginBal: 0,
-              endBal: 0,
-              netReturn: 0
-            }]
+            beginBal: 0,
+            endBal: 0,
+            netReturn: 0
           }]
-
+        }]
       },
-      activeAcc : 0
+
     }
   }
 

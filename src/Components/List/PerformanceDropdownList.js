@@ -9,7 +9,6 @@ class PerformanceDropdownList extends Component {
     this.props.selectDate(selected)
   }
 
-  // TODO: addAccount() button
 
   render() {
     var history = []

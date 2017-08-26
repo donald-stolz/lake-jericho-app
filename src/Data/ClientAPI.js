@@ -39,8 +39,8 @@ exports.setIndex = function(set) {
   });
 }
 
-exports.removeClient = function() {
-  clients.remove({ _id: 'id2' }, {}, function (err, numRemoved) {
+exports.removeClient = function(clientID) {
+  clients.remove({ _id: clientID }, {}, function (err, numRemoved) {
     console.log("Removed " + numRemoved + " client");
   });
 }

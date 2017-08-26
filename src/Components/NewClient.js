@@ -61,11 +61,7 @@ class NewClient extends Component {
 // Final Step: Routes to home; Saves new client to DB on unmount
   componentWillUnmount(){
     if (this.state.save) {
-      // financial.accounts = accounts
-      // TODO: Update data structure client.personal; client.financial; client.accounts
-      console.log(personal);
-      console.log(financial);
-      console.log(accounts);
+
       var client = {personal: personal,
                     financial: financial,
                     accounts: accounts
