@@ -26,52 +26,71 @@ class NewClient extends Component {
                   save : false }
   }
 
+// Steps for saving form from GUI & adding to DB
+
+  // Step 1: Saves personal data
   savePersonal(data){
-    console.log(data);
+
     personal = data
+
     this.setState({step : 1})
   }
 
+  // Step 2: Saves general financial fields
   saveFinancial(data){
-    console.log(data);
     financial = data
+
     this.setState({step : 2})
   }
 
   saveAccount(data){
     data.accNum = numAccounts
     accounts.push(data)
-    console.log(accounts);
+
     this.setState({step : 3, save : true})
   }
 
   addAccount(){
-    financial.accounts = accounts
-    console.log(financial);
+
     numAccounts++
     this.setState({step : 2})
   }
 
+// Saves new client to DB on unmount
   componentWillUnmount(){
     if (this.state.save) {
-      financial.accounts = accounts
+      // financial.accounts = accounts
       // TODO: Update data structure client.personal; client.financial; client.accounts
-      var client = Object.assign(personal, financial)
+      console.log(personal);
+      console.log(financial);
+      console.log(accounts);
+      var client = {personal: personal,
+                    financial: financial,
+                    accounts: accounts
+                    }
+
       console.log(client);
+
       ClientAPI.addClient(client)
     }
   }
 
   formStep(){
+  //Steps for dispalying form
     var step = this.state.step
     switch (step) {
       case 0:
+        // Step 1: Displays personal fields
         return < AddPersonalInfo client={this.personal} newClient={true} save={this.savePersonal.bind(this)}/>
       case 1:
+        // Step 2: Displays general financial fields
         return < AddFinancialInfo client={this.financial} newClient={true} save={this.saveFinancial.bind(this)}/>
       case 2:
+        // Step 3: Displays the add account fields; Final mandatory step
         return < AddAccount btn={'hidden'} account={null} newClient={true} save={this.saveAccount.bind(this)}/>
       case 3:
+        // Step 4: Allows user to choose between adding another account or finishing
+        // Client will be saved to DB if user cancels on additional account(s)
         return < Continue addAcc={this.addAccount.bind(this)}/>
       default:
         return null

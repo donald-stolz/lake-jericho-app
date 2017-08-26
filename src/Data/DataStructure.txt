@@ -1,19 +1,37 @@
 Client = {
+  _id: ''
+
 // Personal Information
-  name: '',
-  dob: '',
-  address: '',
-  phone: '',
-  email: '',
+  personal: {
+    name: '',
+    dob: '',
+    address: '',
+    phone: '',
+    email: '',
+  },
 
 // Financial Information
-  annualIncome: 0,
-  totalAssets: '',
-  liquidAssets: '',
-  investmentAssets: '',
-  investmentExperience: '',
-  investmentObjectives: '',
-  numAccounts: 0,
+  financial: {
+    annualIncome: 0,
+    totalAssets: 0,
+    liquidAssets: 0,
+    investmentAssets: 0,
+    investmentExperience: '',
+    investmentObjectives: '',
+
+TODO New Sections
+    timeHorizon: '',
+    taxConsids: '',
+    liquidConsids: '',
+    regulatoryIssues: '',
+    unique: '',
+    returnObjective: '',
+    riskAbility: '',
+    riskWillingness: '',
+    riskOverall: '',
+
+    //numAccounts: 0
+  },
 
   accounts : [{
     accNum: 0,

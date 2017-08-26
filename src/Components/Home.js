@@ -4,60 +4,6 @@ import { Link } from 'react-router-dom'
 import HomeListItem from './List/HomeListItem'
 import ClientAPI from '../Data/ClientAPI'
 
-// var testClient = {
-//     // Personal Information
-//       name: 'Test',
-//       dob: '',
-//       address: 'Lorem Ipsum',
-//       phone: 'Lorem Ipsum',
-//       email: 'Lorem Ipsum',
-//
-//     // Financial Information
-//       annualIncome: 0,
-//       totalAssets: 'Lorem Ipsum',
-//       liquidAssets: 'Lorem Ipsum',
-//       investmentAssets: 'Lorem Ipsum',
-//       investmentExperience: 'Lorem Ipsum',
-//       investmentObjectives: 'Lorem Ipsum',
-//       numAccounts: 0,
-//
-//       accounts : [{
-//         accNum: 0,
-//         accName: 'Name 1',
-//         startBal: '123',
-//         startDate: '2017-07',
-//         tax: 'Taxable',
-//         horizon: 'Taxable',
-//         bias: 'Growth',
-//         performanceHist : [{
-//           beginBal: "100",
-//           bias : "Growth",
-//           date : "2017-06",
-//           endBal : "123",
-//           horizon : "Short",
-//           netReturn : 23,
-//           tax : "Taxable"
-//         },{
-//           beginBal: "200",
-//           bias : "Aggregation",
-//           date : "2017-09",
-//           endBal : "123",
-//           horizon : "Intermediate",
-//           netReturn : 23,
-//           tax : "Taxable"
-//         },{
-//           beginBal: "400",
-//           bias : "Aggregation",
-//           date : "2017-10",
-//           endBal : "123",
-//           horizon : "Short",
-//           netReturn : 23,
-//           tax : "Taxable"
-//         }]
-//     }]
-//   }
-
-
 class Home extends Component {
 
   constructor(){
@@ -86,7 +32,7 @@ class Home extends Component {
         });
       }
     return(
-      
+
         <div className="container-fluid">
           <div className="panel panel-primary">
             <div className="panel-heading">
@@ -101,7 +47,7 @@ class Home extends Component {
               </ul>
           </div>
         </div>
-      
+
     )
   }
 }

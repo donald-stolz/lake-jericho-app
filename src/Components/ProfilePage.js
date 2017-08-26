@@ -12,20 +12,24 @@ class ProfilePage extends Component {
 
     this.state = {client : {
         // Personal Information
+        personal: {
           name: null,
           dob: null,
           address: null,
           phone: null,
           email: null,
+        },
 
         // Financial Information
+        financial:{
           annualIncome: 0,
-          totalAssets: null,
-          liquidAssets: null,
-          investmentAssets: null,
+          totalAssets: 0,
+          liquidAssets: 0,
+          investmentAssets: 0,
           investmentExperience: null,
-          investmentObjectives: null,
-          numAccounts: 0,
+          investmentObjectives: null
+        },
+          // numAccounts: 0,
 
           accounts : [{
             accNum: 0,
@@ -100,14 +104,16 @@ class ProfilePage extends Component {
 
   render(){
     const client    = this.state.client
+    const personal  = client.personal
+    const financial = client.financial
     const accounts  = client.accounts
 
 // TODO: update data structure client.personal; client.financial; client.accounts
 
     return(
     <div className="container-fluid">
-      <PersonalInfo client={client} update={this.updatePersonal.bind(this)}/>
-      <FinancialInfo client={client} update={this.updateFinacial.bind(this)}/>
+      <PersonalInfo client={personal} update={this.updatePersonal.bind(this)}/>
+      <FinancialInfo client={financial} update={this.updateFinacial.bind(this)}/>
       <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
     </div>
   )}
