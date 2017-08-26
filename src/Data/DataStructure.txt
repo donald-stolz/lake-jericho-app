@@ -18,8 +18,6 @@ Client = {
     investmentAssets: 0,
     investmentExperience: '',
     investmentObjectives: '',
-
-TODO New Sections
     timeHorizon: '',
     taxConsids: '',
     liquidConsids: '',
@@ -28,9 +26,7 @@ TODO New Sections
     returnObjective: '',
     riskAbility: '',
     riskWillingness: '',
-    riskOverall: '',
-
-    //numAccounts: 0
+    riskOverall: ''
   },
 
   accounts : [{

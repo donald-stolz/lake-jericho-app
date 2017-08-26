@@ -27,9 +27,17 @@ class ProfilePage extends Component {
           liquidAssets: 0,
           investmentAssets: 0,
           investmentExperience: null,
-          investmentObjectives: null
+          investmentObjectives: null,
+          timeHorizon: null,
+          taxConsids: null,
+          liquidConsids: null,
+          regulatoryIssues: null,
+          unique: null,
+          returnObjective: null,
+          riskAbility: null,
+          riskWillingness: null,
+          riskOverall: null
         },
-          // numAccounts: 0,
 
           accounts : [{
             accNum: 0,
@@ -66,11 +74,7 @@ class ProfilePage extends Component {
 
   updatePersonal(data){
     const client = this.state.client
-      client.name    =  data.name
-      client.dob     =  data.dob
-      client.address =  data.address
-      client.phone   =  data.phone
-      client.email   =  data.email
+      client.personal = data
     //console.log(client);
 
     ClientAPI.updateClient(client)
@@ -79,12 +83,7 @@ class ProfilePage extends Component {
 
   updateFinacial(data){
     const client = this.state.client
-      client.annualIncome         = data.annualIncome
-      client.totalAssets          = data.totalAssets
-      client.liquidAssets         = data.liquidAssets
-      client.investmentAssets     = data.investmentAssets
-      client.investmentExperience = data.investmentExperience
-      client.overallObjectives    = data.overallObjectives
+      client.financial = data
     //console.log(client);
 
     ClientAPI.updateClient(client)
@@ -107,8 +106,6 @@ class ProfilePage extends Component {
     const personal  = client.personal
     const financial = client.financial
     const accounts  = client.accounts
-
-// TODO: update data structure client.personal; client.financial; client.accounts
 
     return(
     <div className="container-fluid">

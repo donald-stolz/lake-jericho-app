@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-// TODO: Add sections
-/*
-“Time Horizon”
-“Tax Considerations”
-“Liquidity Considerations”
-“Legal/Regulatory Issues”
-“Unique Circumstances”
-“Return Objective”
-“Risk Objective” - This section will have three sub-sections; (1) Ability, (2) Willingness, and (3) Overall.
-All text inputs
-*/
-
 class AddFinancialInfo extends Component {
 
   onSave(e){
@@ -24,7 +12,16 @@ class AddFinancialInfo extends Component {
         liquidAssets: this.refs.liquidAssets.value,
         investmentAssets: this.refs.investmentAssets.value,
         investmentExperience: this.refs.investmentExperience.value,
-        overallObjectives: this.refs.overallObjectives.value
+        overallObjectives: this.refs.overallObjectives.value,
+        timeHorizon: this.refs.timeHorizon.value,
+        taxConsids: this.refs.taxConsids.value,
+        liquidConsids: this.refs.liquidConsids.value,
+        regulatoryIssues: this.refs.regulatoryIssues.value,
+        unique: this.refs.unique.value,
+        returnObjectives: this.refs.returnObjectives.value,
+        riskAbility: this.refs.riskAbility.value,
+        riskWillingness: this.refs.riskWillingness.value,
+        riskOverallAbility: this.refs.riskOverallAbility.value
       }
 
     this.props.save(financial)
@@ -109,6 +106,73 @@ class AddFinancialInfo extends Component {
                 <div className="col-sm-10">
                   <input type="text" className="form-control" defaultValue={client.overallObjectives}
                       placeholder="Overall Objectives" ref="overallObjectives"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">Time Horizon:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.timeHorizon}
+                      placeholder="Time Horizon" ref="timeHorizon"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">Tax Considerations:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.taxConsids}
+                      placeholder="Tax Considerations" ref="taxConsids"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">Liquidity Concerns:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.liquidConsids}
+                      placeholder="Liquidity Concerns" ref="liquidConsids"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">Legal/Regulatry Issues:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.regulatoryIssues}
+                      placeholder="Legal/Regulatry Issues" ref="regulatoryIssues"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">Unique Circumstances:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.unique}
+                      placeholder="Unique Circumstances" ref="unique"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">Return Objective:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.returnObjectives}
+                      placeholder="Return Objective" ref="returnObjectives"/>
+                </div>
+              </div>
+
+              <div className= "row">
+              <label className="col-sm-2 control-label">Risk Objective:</label>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">(1)Ability:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.riskAbility}
+                      placeholder="Ability" ref="riskAbility"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">(2) Willingness:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.riskWillingness}
+                      placeholder="Willingnes" ref="riskWillingness"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">(3) Overall:</label>
+                <div className="col-sm-10">
+                  <input type="text" className="form-control" defaultValue={client.riskOverallAbility}
+                      placeholder="Overall" ref="riskOverallAbility"/>
                 </div>
               </div>
 

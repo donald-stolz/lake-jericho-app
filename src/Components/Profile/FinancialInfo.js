@@ -36,6 +36,7 @@ class FinancialInfo extends Component {
         </div>
       )
     } else {
+
       return (
         <div className="container-fluid">
           <div className="panel panel-primary">
@@ -54,6 +55,16 @@ class FinancialInfo extends Component {
                 <li className="list-group-item"><label>Investment Assets: $</label> {client.investmentAssets}</li>
                 <li className="list-group-item"><label>Investment Experience:</label> {client.investmentExperience}</li>
                 <li className="list-group-item"><label>Overall Objectives:</label> {client.overallObjectives}</li>
+                <li className="list-group-item"><label>Time horizon:</label> {client.timeHorizon}</li>
+                <li className="list-group-item"><label>Tax Considerations:</label> {client.taxConsids}</li>
+                <li className="list-group-item"><label>Liquid Considerations:</label> {client.liquidConsids}</li>
+                <li className="list-group-item"><label>Legal/Regulatry Issues:</label> {client.regulatoryIssues}</li>
+                <li className="list-group-item"><label>Unique Circumstances:</label> {client.unique}</li>
+                <li className="list-group-item"><label>Return Objective:</label> {client.returnObjectives}</li>
+                <li className="list-group-item"><label>Risk Objective:</label> </li>
+                <li className="list-group-item"><label className="col-sm-1 control-label">Ability:</label> {client.riskAbility}</li>
+                <li className="list-group-item"><label className="col-sm-1 control-label">Willingness:</label> {client.riskWillingness}</li>
+                <li className="list-group-item"><label className="col-sm-1 control-label">Overall:</label> {client.riskOverallAbility}</li>
               </ul>
             </div>
           </div>
@@ -61,6 +72,8 @@ class FinancialInfo extends Component {
       )
     }
   }
+
+// NOTE: Consider using CSS to change font size and styling for Risk Objectives
 
   render(){
     return(
