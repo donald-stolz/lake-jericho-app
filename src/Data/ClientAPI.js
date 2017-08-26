@@ -9,7 +9,7 @@ exports.addClient = function(client) {
   });
 }
 
-// TODO: Use push to record performance
+// TODO: Use push to record performance (Optional)
 // exports.pushPerformance = function(clientID, accNum, performance) {
 //   var account = "accounts." + accNum +".performanceHist"
 //   console.log(account);

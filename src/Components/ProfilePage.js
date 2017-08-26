@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PersonalInfo   from './Profile/PersonalInfo'
 import FinancialInfo  from './Profile/FinancialInfo'
 import Account        from './Profile/Account'
+import RemoveClient        from './Profile/RemoveClient'
 
 import ClientAPI  from '../Data/ClientAPI'
 
@@ -59,7 +60,7 @@ class ProfilePage extends Component {
           }]
         }]
       },
-
+      remove : false
     }
   }
 
@@ -100,19 +101,53 @@ class ProfilePage extends Component {
     this.setProfile(client)
   }
 
+  removeClient(){
+    this.setState({remove : true})
+  }
 
-  render(){
+  cancelRemove(){
+    this.setState({remove : false})
+  }
+
+  renderPageOrRemove(){
     const client    = this.state.client
+    const clientID  = client._id
     const personal  = client.personal
     const financial = client.financial
     const accounts  = client.accounts
+    const remove    = this.state.remove
+    console.log(clientID);
+
+    if (!remove) {
+      return(
+        <div className="container-fluid">
+          <PersonalInfo client={personal} update={this.updatePersonal.bind(this)}/>
+          <FinancialInfo client={financial} update={this.updateFinacial.bind(this)}/>
+          <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
+          <RemoveClient confirm={remove}
+                        cancel={this.cancelRemove.bind(this)}
+                        removeClient={this.removeClient.bind(this)}/>
+        </div>
+      )
+    }
+    else {
+      return(
+        <div className="container-fluid">
+          <RemoveClient confirm={remove}
+                        cancel={this.cancelRemove.bind(this)}
+                        removeClient={this.removeClient.bind(this)}
+                        id={clientID}/>
+        </div>)
+    }
+  }
+
+  render(){
+
 
     return(
-    <div className="container-fluid">
-      <PersonalInfo client={personal} update={this.updatePersonal.bind(this)}/>
-      <FinancialInfo client={financial} update={this.updateFinacial.bind(this)}/>
-      <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
-    </div>
+      <div>
+        {this.renderPageOrRemove()}
+      </div>
   )}
 }
 

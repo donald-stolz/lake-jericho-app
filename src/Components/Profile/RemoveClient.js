@@ -10,17 +10,17 @@ Confirm bool
 Confirmation button will be contidonally rendeced on profile,
  so that when it is clicked confirmation box is the only thing rendered
 */
-class removeClient extends Component {
-  constructor(){
-    super()
+class RemoveClient extends Component {
+  constructor(props){
+    super(props)
 
-    this.state = {remove : false}
+    this.state = {remove : props.confirm}
   }
 
   confirm(e){
     e.preventDefault()
 
-    this.props.remove()
+    this.props.removeClient()
   }
 
   cancel(e){
@@ -32,20 +32,21 @@ class removeClient extends Component {
 
   // If clicked set to confirm
   removeButton(){
-    const confirm = this.props.confirm
-    this.setState(remove : confirm)
+    const remove = this.state.remove
+    // this.setState({remove : confirm})
+    console.log(this.state);
     if (!remove) {
       return(
         <button onClick={this.confirm.bind(this)}
                 type="button"
-                className="btn btn-primary btn-block">Remove Client</button>
+                className="btn btn-danger btn-block">Remove Client</button>
       )
     }
     else {
       return(
         <div className="container-fluid">
           <button onClick={this.cancel.bind(this)}type="button" className="btn btn-primary btn-block">Cancel</button>
-          <Link to="/" type="button" className="btn btn-success btn-block">Remove from Database</Link>
+          <Link to="/" type="button" className="btn btn-danger btn-block">Remove from Database</Link>
         </div>)
     }
   }
@@ -59,7 +60,9 @@ class removeClient extends Component {
   render() {
 
     return (
+      <div>
         {this.removeButton()}
+      </div>
       );
   }
 }
