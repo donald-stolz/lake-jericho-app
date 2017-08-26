@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class AddPersonalInfo extends Component {
-// TODO: Add Cancel button
+
   onSave(e){
     e.preventDefault()
 

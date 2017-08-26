@@ -21,7 +21,7 @@ class AddAccount extends Component {
 
     this.props.save(performanceHist)
   }
-// TODO: Add cancel button fix; return Null if new client
+  
   cancelButton(){
     //if new client === true
     if (this.props.newClient) {

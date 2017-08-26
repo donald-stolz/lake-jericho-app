@@ -13,8 +13,6 @@ import { Link } from 'react-router-dom';
 All text inputs
 */
 
-// TODO: cancel button fix
-
 class AddFinancialInfo extends Component {
 
   onSave(e){
@@ -26,8 +24,7 @@ class AddFinancialInfo extends Component {
         liquidAssets: this.refs.liquidAssets.value,
         investmentAssets: this.refs.investmentAssets.value,
         investmentExperience: this.refs.investmentExperience.value,
-        overallObjectives: this.refs.overallObjectives.value,
-        accounts:[]
+        overallObjectives: this.refs.overallObjectives.value
       }
 
     this.props.save(financial)

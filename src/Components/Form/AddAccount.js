@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import AddPerformance from './AddPerformance'
 
 // TODO: Create comment/log section for changes
-// TODO: add cancel button fix
 
 class AddAccount extends Component {
 
