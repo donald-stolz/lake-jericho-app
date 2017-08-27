@@ -155,21 +155,21 @@ class AddFinancialInfo extends Component {
               <label className="col-sm-2 control-label">Risk Objective:</label>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">(1)Ability:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Ability:</label>
                 <div className="col-sm-10">
                   <input type="text" className="form-control" defaultValue={client.riskAbility}
                       placeholder="Ability" ref="riskAbility"/>
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">(2) Willingness:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Willingness:</label>
                 <div className="col-sm-10">
                   <input type="text" className="form-control" defaultValue={client.riskWillingness}
                       placeholder="Willingnes" ref="riskWillingness"/>
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">(3) Overall:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Overall:</label>
                 <div className="col-sm-10">
                   <input type="text" className="form-control" defaultValue={client.riskOverallAbility}
                       placeholder="Overall" ref="riskOverallAbility"/>

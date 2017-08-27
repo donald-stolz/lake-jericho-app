@@ -54,6 +54,8 @@ class AddAccount extends Component {
 
   render(){
     var account
+    // If new account is from Form account prop is undefined
+    // If account prop is false - new account is being added from profile page
     if (this.props.account) {
       account = this.props.account
     }

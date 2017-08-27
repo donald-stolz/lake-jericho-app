@@ -3,6 +3,7 @@ import AddAccount from '../Form/AddAccount'
 import AccountNavList from '../List/AccountNavList'
 import PerformanceHistory from './PerformanceHistory'
 
+// TODO: Add account from profile feature
 
 class Account extends Component {
   constructor() {
@@ -26,6 +27,10 @@ class Account extends Component {
 
     this.props.update(accounts)
     this.setState({editing : false})
+  }
+
+  addAccount(){
+
   }
 
   cancelEdit(){
