@@ -4,18 +4,15 @@ class AddAccount extends Component {
 
   onSave(e){
     e.preventDefault()
-    var begin = this.refs.startBal.value
-    var end = this.refs.endBal.value
 
-    var net = ((end - begin) / begin) * 100
     var performanceHist = {
             date: this.refs.date.value,
             tax: this.refs.tax.value,
             horizon: this.refs.horizon.value,
             bias: this.refs.bias.value,
-            beginBal: begin,
-            endBal: end,
-            netReturn: net
+            beginBal: this.refs.startBal.value,
+            endBal: this.refs.endBal.value,
+            netReturn: this.refs.netReturn.value
           }
 
     this.props.save(performanceHist)
@@ -89,17 +86,24 @@ class AddAccount extends Component {
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">Start Balance:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">Start Balance: $</label>
                 <div className="col-sm-10">
                   <input type="number" className="form-control"
                       placeholder="Start Balance" ref="startBal"/>
                 </div>
               </div>
 
-              <div className="form-group"><label className="col-sm-2 control-label">End Balance:</label>
+              <div className="form-group"><label className="col-sm-2 control-label">End Balance: $</label>
                 <div className="col-sm-10">
                   <input type="number" className="form-control"
                       placeholder="End Balance" ref="endBal"/>
+                </div>
+              </div>
+
+              <div className="form-group"><label className="col-sm-2 control-label">Net Return: %</label>
+                <div className="col-sm-10">
+                  <input type="number" className="form-control"
+                      placeholder="Net Return" ref="netReturn"/>
                 </div>
               </div>
 
