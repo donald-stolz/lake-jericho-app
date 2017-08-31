@@ -33,8 +33,7 @@ class RemoveClient extends Component {
   // If clicked set to confirm
   removeButton(){
     const remove = this.state.remove
-    // this.setState({remove : confirm})
-    console.log(this.state);
+    // this.setState({remove : confirm})this.setState({newAcc : true})
     if (!remove) {
       return(
         <button onClick={this.confirm.bind(this)}

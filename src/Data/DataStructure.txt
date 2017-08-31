@@ -1,3 +1,5 @@
+A model of the client data structure
+
 Client = {
   _id: ''
 
@@ -29,6 +31,7 @@ Client = {
     riskOverall: ''
   },
 
+// Account Information
   accounts : [{
     accNum: 0,
     accName: '',
