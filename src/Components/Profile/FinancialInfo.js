@@ -4,20 +4,15 @@ import AddFinancialInfo from '../Form/AddFinancialInfo'
 class FinancialInfo extends Component {
   constructor() {
     super()
-
     this.state = {editing : false}
   }
+  // Methods for changing edit state
+  setEditing(){this.setState({editing : true})}
+  cancelUpdate(){this.setState({editing : false})}
 
-  setEditing(){
-    this.setState({editing : true})
-  }
-
+  // Sends updated info to parent class and changes editing to false
   updateInfo(data){
     this.props.update(data)
-    this.setState({editing : false})
-  }
-
-  cancelUpdate(){
     this.setState({editing : false})
   }
 
@@ -73,8 +68,6 @@ class FinancialInfo extends Component {
     }
   }
 
-// NOTE: Consider using CSS to change font size and styling for Risk Objectives
-
   render(){
     return(
       <div className="row">
@@ -84,3 +77,4 @@ class FinancialInfo extends Component {
 }
 
 export default FinancialInfo
+//NOTE: Consider using CSS to change font size and styling for Risk Objectives

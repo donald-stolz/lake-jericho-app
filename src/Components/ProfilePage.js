@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
 import PersonalInfo   from './Profile/PersonalInfo'
 import FinancialInfo  from './Profile/FinancialInfo'
 import Account        from './Profile/Account'
 import RemoveClient        from './Profile/RemoveClient'
-
 import ClientAPI  from '../Data/ClientAPI'
 
 class ProfilePage extends Component {
@@ -12,7 +10,7 @@ class ProfilePage extends Component {
     super()
 
     this.state = {client : {
-        // Personal Information
+        // Empty Personal Information
         personal: {
           name: null,
           dob: null,
@@ -21,7 +19,7 @@ class ProfilePage extends Component {
           email: null,
         },
 
-        // Financial Information
+        // Empty Financial Information
         financial:{
           annualIncome: 0,
           totalAssets: 0,
@@ -40,7 +38,7 @@ class ProfilePage extends Component {
           riskOverall: null
         },
 
-        // Account(s) Information
+        // Empty Account(s) Information
         accounts : [{
           accNum: 0,
           accName: null,
@@ -70,13 +68,13 @@ class ProfilePage extends Component {
   }
 
   setProfile(data){
-    //console.log("Set Profile");
-    this.setState({client : data})}
+    // Recieves data object from ClientAPI call
+    this.setState({client : data})
+  }
 
   updatePersonal(data){
     const client = this.state.client
-      client.personal = data
-    //console.log(client);
+    client.personal = data
 
     ClientAPI.updateClient(client)
     this.setProfile(client)
@@ -84,8 +82,7 @@ class ProfilePage extends Component {
 
   updateFinacial(data){
     const client = this.state.client
-      client.financial = data
-    //console.log(client);
+    client.financial = data
 
     ClientAPI.updateClient(client)
     this.setProfile(client)
@@ -93,21 +90,17 @@ class ProfilePage extends Component {
 
   updateAccount(data){
     var account = []
-    account.push(data)
     const client = this.state.client
+    account.push(data)
     client.accounts = data
-    // console.log(client);
+
     ClientAPI.updateClient(client)
     this.setProfile(client)
   }
 
-  removeClient(){
-    this.setState({remove : true})
-  }
-
-  cancelRemove(){
-    this.setState({remove : false})
-  }
+  // Methods for changing states in order to remove a client
+  removeClient(){this.setState({remove : true})}
+  cancelRemove(){this.setState({remove : false})}
 
   renderPageOrRemove(){
     const client    = this.state.client
@@ -116,7 +109,6 @@ class ProfilePage extends Component {
     const financial = client.financial
     const accounts  = client.accounts
     const remove    = this.state.remove
-    console.log(clientID);
 
     if (!remove) {
       return(
@@ -142,8 +134,6 @@ class ProfilePage extends Component {
   }
 
   render(){
-
-
     return(
       <div>
         {this.renderPageOrRemove()}

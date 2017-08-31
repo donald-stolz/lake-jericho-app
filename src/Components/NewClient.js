@@ -64,8 +64,6 @@ class NewClient extends Component {
                     accounts: accounts
                     }
 
-      console.log(client);
-
       ClientAPI.addClient(client)
     }
   }

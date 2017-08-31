@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import AddPersonalInfo from '../Form/AddPersonalInfo'
 
-
 class PersonalInfo extends Component {
   constructor() {
     super()
-
     this.state = {editing : false}
   }
 
-  setEditing(){
-    this.setState({editing : true})
-  }
-
-  cancelUpdate(){
-    this.setState({editing : false})
-  }
+  // Methods for changing edit state
+  setEditing(){this.setState({editing : true})}
+  cancelUpdate(){this.setState({editing : false})}
 
   updateInfo(data){
+    // Sends updated info to parent class and changes editing to false
     this.props.update(data)
     this.setState({editing : false})
   }

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import AddPerformance from '../Form/AddPerformance'
 import PerformanceDropdownList from '../List/PerformanceDropdownList'
 
+// TODO: Check for Duplicate method
+// TODO: Index records by date
+
 class PerformanceHistory extends Component {
   constructor() {
     super()
@@ -21,8 +24,6 @@ class PerformanceHistory extends Component {
   recordPerformance(data){
     var history = []
     history = this.props.history
-    // TODO: Check for Duplicate method
-    // TODO: Index records by date
     history.push(data)
 
     this.props.save(history)
@@ -50,7 +51,6 @@ class PerformanceHistory extends Component {
     const active = this.state.active
     const history = this.props.history
     var performance = history[active]
-    // console.log(active);
 
     if (editing) {
      return <AddPerformance save={this.recordPerformance.bind(this)}
@@ -94,7 +94,6 @@ class PerformanceHistory extends Component {
   }
 
   render(){
-    // console.log(this.props);
     return(
       <div className="row">
         {this.renderItemOrEdit(this.props.accounts)}

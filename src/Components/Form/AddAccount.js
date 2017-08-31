@@ -25,34 +25,34 @@ class AddAccount extends Component {
     this.props.save(account)
   }
 
-// NOTE: 2 Gases: 1) Parent is ProfilePage 2) Parent is NewClient
   cancelButtons(){
+  /* NOTE: 2 Cases: 1) Parent is ProfilePage 2) Parent is NewClient
+    Case 1 Cancel button is a Link
+    Case 2 Cancel button is a method
+   */
     const newClient = this.props.newClient
 
-  // Case 1 New Account from form - Cancel button is a Link
-
-    //if new client === true
     if (newClient) {
       return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
     }
-    //else new client
+
     else {
       return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
     }
   }
 
-  // onCancel method for ProfilePage cancel button.
   onCancel(e){
+    // onCancel method for ProfilePage cancel button.
     e.preventDefault()
     this.props.cancel()
   }
 
-  /* Retrieves data values from input refs and saves it as a new account object
-      the performanceRecord is the performance history data which is pushed to
-      the performanceHist array in the new account object. The object is then
-      sent to the parent save method
-  */
   addAccount(performanceRecord){
+    /* Retrieves data values from input refs and saves it as a new account object
+        the performanceRecord is the performance history data which is pushed to
+        the performanceHist array in the new account object. The object is then
+        sent to the parent save method
+    */
     var account = {
           accNum: null,
           accName: this.refs.accName.value,
@@ -69,8 +69,9 @@ class AddAccount extends Component {
 
   render(){
     var account
-    // If new account is from Form account prop is undefined
-    // If account prop is false - new account is being added from profile page
+    /* If new account is from Form account prop is undefined
+        If account prop is false - new account is being added from profile page
+    */
     if (this.props.account) {
       account = this.props.account
     }

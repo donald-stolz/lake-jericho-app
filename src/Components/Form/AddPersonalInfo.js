@@ -34,7 +34,7 @@ class AddPersonalInfo extends Component {
 
   render(){
     var client
-    console.log(this.props.client);
+
     if (this.props.client) {
       client = this.props.client
     }

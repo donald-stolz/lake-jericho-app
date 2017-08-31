@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import ClientAPI  from '../../Data/ClientAPI'
 
-/*Requires:
-Cancel call
-Remove call
-Confirm bool
 
-Confirmation button will be contidonally rendeced on profile,
- so that when it is clicked confirmation box is the only thing rendered
-*/
 class RemoveClient extends Component {
+  /* Required props:
+      Cancel call
+      Remove call
+      Confirm bool
+
+    Confirmation button will be contidonally rendeced on profile,
+     so that when it is clicked confirmation box is the only thing rendered
+  */
   constructor(props){
     super(props)
 
@@ -30,10 +31,10 @@ class RemoveClient extends Component {
     this.props.cancel()
   }
 
-  // If clicked set to confirm
   removeButton(){
+    // If clicked set to confirm
     const remove = this.state.remove
-    // this.setState({remove : confirm})this.setState({newAcc : true})
+
     if (!remove) {
       return(
         <button onClick={this.confirm.bind(this)}

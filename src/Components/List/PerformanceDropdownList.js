@@ -5,7 +5,6 @@ class PerformanceDropdownList extends Component {
 
   selectPerformance(e){
     var selected = e.target.value
-    // console.log(selected);
     this.props.selectDate(selected)
   }
 

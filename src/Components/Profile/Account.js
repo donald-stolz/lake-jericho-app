@@ -35,6 +35,9 @@ class Account extends Component {
   }
 
   addAccount(){
+    // TODO: Write method for adding a new account
+    // Note Easy enough to call from this component or
+    //  call from parent?
     console.log("Add Account new account from profile page");
   }
 
