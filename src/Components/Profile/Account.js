@@ -31,20 +31,29 @@ class Account extends Component {
     accounts[active] = data
 
     this.props.update(accounts)
+    // Returns to state to read-only
     this.setState({editing : false})
   }
 
   addAccount(newAcc){
+    // Recieves new account data from child
+    // New temporary accounts array
     var accounts = []
+    // Stores previous accounts
     accounts = this.props.accounts
+    // Assigns account number
     newAcc.accNum = accounts.length;
+    // Pushs account to array with previous data
     accounts.push(newAcc)
+    // Sends update to parent
     this.props.update(accounts)
+    // Returns to state to read-only
     this.setState({editing : false})
     this.setState({newAcc : false})
   }
 
   cancelEdit(){
+    // Returns to state to read-only
     this.setState({editing : false})
     this.setState({newAcc : false})
   }
