@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-
 import AddPersonalInfo  from './Form/AddPersonalInfo'
 import AddFinancialInfo  from './Form/AddFinancialInfo'
 import AddAccount     from './Form/AddAccount'
 import Continue       from './Form/Continue'
-
 import ClientAPI  from '../Data/ClientAPI'
 
 var personal = {}
-
 var financial = {}
-
 var accounts = []
-
 var numAccounts
 
 class NewClient extends Component {
@@ -23,43 +18,45 @@ class NewClient extends Component {
                   save : false }
   }
 
-// Steps for saving form from GUI & adding to DB
-
-  // Step 1: Saves personal data to local variable
-  //            and changes page to save financial
+// Steps are for saving form from GUI & adding to DB
   savePersonal(data){
-
+    /* Step 1: Saves personal data to local variable
+        and changes page to save financial
+    */
     personal = data
 
     this.setState({step : 1})
   }
 
-  // Step 2: Saves financial data to local variable
-  //            and changes page to save an account
   saveFinancial(data){
+    /* Step 2: Saves financial data to local variable
+        and changes page to save an account
+    */
     financial = data
 
     this.setState({step : 2})
   }
-  // Step 3: Saves account data to local variable
-  //            and changes page to option page
+
   saveAccount(data){
+    /* Step 3: Saves account data to local variable
+        and changes page to option page
+    */
     data.accNum = numAccounts
     accounts.push(data)
 
     this.setState({step : 3, save : true})
   }
 
-  // Optional Step: Increments number of accounts
-  //            and sets page to add another account
   addAccount(){
-
+    /* Optional Step: Increments number of accounts
+        and sets page to add another account
+    */
     numAccounts++
     this.setState({step : 2})
   }
 
-// Final Step: Routes to home; Saves new client to DB on unmount
   componentWillUnmount(){
+    // Final Step: Routes to home; Saves new client to DB on unmount
     if (this.state.save) {
 
       var client = {personal: personal,

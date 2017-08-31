@@ -3,8 +3,6 @@ import AddAccount from '../Form/AddAccount'
 import AccountNavList from '../List/AccountNavList'
 import PerformanceHistory from './PerformanceHistory'
 
-// TODO: Add account from profile feature
-
 class Account extends Component {
   constructor() {
     super()
@@ -37,7 +35,7 @@ class Account extends Component {
   }
 
   addAccount(){
-    console.log("Add Account");
+    console.log("Add Account new account from profile page");
   }
 
   cancelEdit(){
@@ -51,13 +49,13 @@ class Account extends Component {
 
     accounts = this.props.accounts
     accounts[active].performanceHist = data
-    console.log(accounts[active].performanceHist);
+
     this.props.update(accounts)
     this.setState({editing : false})
   }
 
-  // Recieves accNum to set as active from AccountNavList
   setActive(accNum){
+    //Recieves accNum to set as active from AccountNavList
     this.setState({active: accNum})
   }
 
@@ -69,7 +67,11 @@ class Account extends Component {
 
     var account = accounts[active]
 
-
+    /* Display cases:
+        1) Display saved values of selected account
+        2) Create a brand new account
+        3) Edit the data of an existing account
+    */
     if (!editing) {
       return (
         <div className="container-fluid">
@@ -109,22 +111,21 @@ class Account extends Component {
           </div>
         </div>
       )}
-    // TODO: Set up canecel button for method and !Link
     else if (newAcc) {
-      console.log("In new account");
+      //New Account from profile page
       return(
         <div className="container-fluid">
-          < AddAccount btn={'hidden'} account={null} newClient={true}
+          < AddAccount btn={'hidden'} account={null} newClient={false}
                       cancel={this.cancelEdit.bind(this)}
                       save={this.addAccount.bind(this)}/>
         </div>
       )}
-
     else {
+      //Edit existing account from profile page
       return(
         <div className="container-fluid">
          <AddAccount account={account} submitBtn={'visible'}
-                     showPerform={'hidden'}
+                     showPerform={'hidden'} newClient={false}
                      cancel={this.cancelEdit.bind(this)}
                      save={this.updateInfo.bind(this)}/>
        </div>
@@ -132,7 +133,7 @@ class Account extends Component {
   }
 
   render(){
-    // console.log(this.props);
+
     return(
       <div className="row">
         {this.renderItemEditNew()}

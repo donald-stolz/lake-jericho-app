@@ -25,12 +25,14 @@ class AddAccount extends Component {
     this.props.save(account)
   }
 
-// TODO: Toggle cancel button functionality based on 3 cases
-// NOTE: Cases: !) New Acc Form 2) Edit Acc 3) New Acc Profile Page
+// NOTE: 2 Gases: 1) Parent is ProfilePage 2) Parent is NewClient
   cancelButtons(){
-  // NOTE: Just Cancel Button toggle between New Acc Form & Pro page
+    const newClient = this.props.newClient
+
+  // Case 1 New Account from form - Cancel button is a Link
+
     //if new client === true
-    if (this.props.newClient) {
+    if (newClient) {
       return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
     }
     //else new client
