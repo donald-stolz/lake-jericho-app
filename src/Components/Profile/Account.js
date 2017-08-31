@@ -10,10 +10,17 @@ class Account extends Component {
     super()
 
     this.state = {editing : false,
+                  newAcc  :false,
                   active: 0}
   }
 
   setEditing(){
+    this.setState({editing : true})
+    this.setState({newAcc : false})
+  }
+
+  setAddAccount(){
+    this.setState({newAcc : true})
     this.setState({editing : true})
   }
 
@@ -30,50 +37,49 @@ class Account extends Component {
   }
 
   addAccount(){
-
+    console.log("Add Account");
   }
 
   cancelEdit(){
     this.setState({editing : false})
+    this.setState({newAcc : false})
   }
 
   addPerformance(data){
     const active = this.state.active
     var accounts = []
+
     accounts = this.props.accounts
     accounts[active].performanceHist = data
-
+    console.log(accounts[active].performanceHist);
     this.props.update(accounts)
     this.setState({editing : false})
   }
 
+  // Recieves accNum to set as active from AccountNavList
   setActive(accNum){
     this.setState({active: accNum})
   }
 
-  renderItemOrEdit(){
-    const accounts = this.props.accounts
-    const editing = this.state.editing
-    const active =  this.state.active
+  renderItemEditNew(){
+    const accounts  = this.props.accounts
+    const editing   = this.state.editing
+    const newAcc    = this.state.newAcc
+    const active    = this.state.active
 
     var account = accounts[active]
 
 
-    if (editing) {
-     return(
-       <div className="container-fluid">
-        <AddAccount account={account}
-                    cancel={this.cancelEdit.bind(this)}
-                    save={this.updateInfo.bind(this)}/>
-      </div>
-    )}
-    else {
-
+    if (!editing) {
       return (
         <div className="container-fluid">
           <div className="panel panel-primary" >
             <div className="panel-heading">
-              <h1 className="panel-title">Account Information</h1>
+              <h1 className="panel-title">Account Information
+                <button type="button" onClick={this.setAddAccount.bind(this)} className="btn btn-default btn-xs pull-right">
+                  <span className="glyphicon glyphicon-plus primary"/>
+                </button>
+              </h1>
             </div>
 
             <AccountNavList accounts={accounts}
@@ -102,15 +108,34 @@ class Account extends Component {
             </div>
           </div>
         </div>
-      )
-    }
+      )}
+    // TODO: Set up canecel button for method and !Link
+    else if (newAcc) {
+      console.log("In new account");
+      return(
+        <div className="container-fluid">
+          < AddAccount btn={'hidden'} account={null} newClient={true}
+                      cancel={this.cancelEdit.bind(this)}
+                      save={this.addAccount.bind(this)}/>
+        </div>
+      )}
+
+    else {
+      return(
+        <div className="container-fluid">
+         <AddAccount account={account} submitBtn={'visible'}
+                     showPerform={'hidden'}
+                     cancel={this.cancelEdit.bind(this)}
+                     save={this.updateInfo.bind(this)}/>
+       </div>
+     )}
   }
 
   render(){
     // console.log(this.props);
     return(
       <div className="row">
-        {this.renderItemOrEdit()}
+        {this.renderItemEditNew()}
       </div>
     )}
 }

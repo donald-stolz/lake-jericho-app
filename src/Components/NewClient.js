@@ -79,13 +79,19 @@ class NewClient extends Component {
     switch (step) {
       case 0:
         // Step 1: Displays personal fields
-        return < AddPersonalInfo client={this.personal} newClient={true} save={this.savePersonal.bind(this)}/>
+        return < AddPersonalInfo client={this.personal}
+                  newClient={true}
+                  save={this.savePersonal.bind(this)}/>
       case 1:
         // Step 2: Displays general financial fields
-        return < AddFinancialInfo client={this.financial} newClient={true} save={this.saveFinancial.bind(this)}/>
+        return < AddFinancialInfo client={this.financial}
+                  newClient={true}
+                  save={this.saveFinancial.bind(this)}/>
       case 2:
         // Step 3: Displays the add account fields; Final mandatory step
-        return < AddAccount btn={'hidden'} account={null} newClient={true} save={this.saveAccount.bind(this)}/>
+        return < AddAccount submitBtn={'hidden'} account={null}
+                  newClient={true} save={this.saveAccount.bind(this)}
+                  showPerform={'visible'}/>
       case 3:
         // Step 4: Allows user to choose between adding another account or finishing
         // Client will be saved to DB if user cancels on additional account(s)

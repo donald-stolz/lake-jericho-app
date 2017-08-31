@@ -6,6 +6,10 @@ import AddPerformance from './AddPerformance'
 
 class AddAccount extends Component {
 
+  /* The onSave method is called when editing the account values from the
+      ProfilePage component. The performanceHist value is stored and added
+      by the parent class.
+  */
   onSave(e){
     e.preventDefault()
     var account = {
@@ -21,7 +25,10 @@ class AddAccount extends Component {
     this.props.save(account)
   }
 
-  cancelButton(){
+// TODO: Toggle cancel button functionality based on 3 cases
+// NOTE: Cases: !) New Acc Form 2) Edit Acc 3) New Acc Profile Page
+  cancelButtons(){
+  // NOTE: Just Cancel Button toggle between New Acc Form & Pro page
     //if new client === true
     if (this.props.newClient) {
       return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
@@ -32,11 +39,17 @@ class AddAccount extends Component {
     }
   }
 
+  // onCancel method for ProfilePage cancel button.
   onCancel(e){
     e.preventDefault()
     this.props.cancel()
   }
 
+  /* Retrieves data values from input refs and saves it as a new account object
+      the performanceRecord is the performance history data which is pushed to
+      the performanceHist array in the new account object. The object is then
+      sent to the parent save method
+  */
   addAccount(performanceRecord){
     var account = {
           accNum: null,
@@ -80,17 +93,12 @@ class AddAccount extends Component {
           }
     }
 
-    //Conditional visibility for performance history when updating
-    var profile
-    var form
-    if(this.props.btn){
-      profile = {visibility: this.props.btn}
-      form = {visibility : 'visible'}
-    }
-    else{
-      profile = {visibility : 'visible'}
-      form = {visibility : 'hidden'}
-    }
+    /* showPerform & submitBtn toggle the desired visibilities based on
+        where the component is called from
+    */
+    var showPerform = {visibility : this.props.showPerform}
+    var submitBtn = {visibility : this.props.submitBtn}
+
     return(
 
       <div className="row">
@@ -157,12 +165,13 @@ class AddAccount extends Component {
                 </div>
               </div>
               <div className="container-fluid">
-                {this.cancelButton()}
-                <button style={profile} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
+
+                {this.cancelButtons()}
+                <button style={submitBtn} onClick={this.onSave.bind(this)} className="btn btn-primary pull-right"> Save </button>
               </div>
             </form>
             <hr/>
-            <div style={form}>< AddPerformance newClient={true} save={this.addAccount.bind(this)}/></div>
+            <div style={showPerform}>< AddPerformance newClient={true} save={this.addAccount.bind(this)}/></div>
           </div>
         </div>
         </div>
