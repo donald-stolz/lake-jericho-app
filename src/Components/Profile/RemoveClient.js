@@ -9,8 +9,10 @@ class RemoveClient extends Component {
       Remove call
       Confirm bool
 
-    Confirmation button will be contidonally rendeced on profile,
-     so that when it is clicked confirmation box is the only thing rendered
+    The remove button is rendered at the bottom of the profile page,
+      until it is clicked and changes to the confrimation button.
+      The confirmation button will be contidonally rendered on profile.
+      When it is clicked, the confirmation box is the only component rendered.
   */
   constructor(props){
     super(props)
