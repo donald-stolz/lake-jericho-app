@@ -89,9 +89,8 @@ class ProfilePage extends Component {
   }
 
   updateAccount(data){
-    var account = []
+    console.log(data);
     const client = this.state.client
-    account.push(data)
     client.accounts = data
 
     ClientAPI.updateClient(client)

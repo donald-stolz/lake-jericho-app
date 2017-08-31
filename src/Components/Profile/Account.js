@@ -34,11 +34,14 @@ class Account extends Component {
     this.setState({editing : false})
   }
 
-  addAccount(){
-    // TODO: Write method for adding a new account
-    // Note Easy enough to call from this component or
-    //  call from parent?
-    console.log("Add Account new account from profile page");
+  addAccount(newAcc){
+    var accounts = []
+    accounts = this.props.accounts
+    newAcc.accNum = accounts.length;
+    accounts.push(newAcc)
+    this.props.update(accounts)
+    this.setState({editing : false})
+    this.setState({newAcc : false})
   }
 
   cancelEdit(){
@@ -118,7 +121,7 @@ class Account extends Component {
       //New Account from profile page
       return(
         <div className="container-fluid">
-          < AddAccount btn={'hidden'} account={null} newClient={false}
+          < AddAccount submitBtn={'hidden'} account={null} newClient={false}
                       cancel={this.cancelEdit.bind(this)}
                       save={this.addAccount.bind(this)}/>
         </div>
