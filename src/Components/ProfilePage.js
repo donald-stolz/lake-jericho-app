@@ -89,7 +89,6 @@ class ProfilePage extends Component {
   }
 
   updateAccount(data){
-    console.log(data);
     const client = this.state.client
     client.accounts = data
 

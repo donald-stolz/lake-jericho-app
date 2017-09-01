@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import AddAccount from '../Form/AddAccount'
 import AccountNavList from '../List/AccountNavList'
 import PerformanceHistory from './PerformanceHistory'
+import RemoveAccount from './RemoveAccount'
 
 class Account extends Component {
   constructor() {
     super()
 
     this.state = {editing : false,
-                  newAcc  :false,
-                  active: 0}
+                  newAcc  : false,
+                  remove  : false,
+                  active  : 0}
   }
 
   setEditing(){
@@ -23,16 +25,20 @@ class Account extends Component {
   }
 
   updateInfo(data){
+    // Recieves new account data
     const active = this.state.active
     var accounts = []
     accounts = this.props.accounts
+
+    // Assigns values not recorded
     data.accNum = accounts[active].accNum
     data.performanceHist = accounts[active].performanceHist
+    // Assigns data to active account
     accounts[active] = data
 
     this.props.update(accounts)
     // Returns to state to read-only
-    this.setState({editing : false})
+    this.cancelEdit()
   }
 
   addAccount(newAcc){
@@ -48,14 +54,36 @@ class Account extends Component {
     // Sends update to parent
     this.props.update(accounts)
     // Returns to state to read-only
-    this.setState({editing : false})
+    this.cancelEdit()
+  }
+
+  confirmRemove(){
+    this.setState({editing : true})
     this.setState({newAcc : false})
+    this.setState({remove  : true})
+  }
+
+  removeAccount(accNum){
+    // Recieves accNum of account to remove. Copies accounts
+    var accounts = [];
+        accounts = this.props.accounts;
+    // Remove accounts[annNum]
+    accounts.splice(accNum, 1);
+    // Iterates through accounts array and reassigns accNums
+    for (var i = 0; i < accounts.length; i++) {
+      accounts[i].accNum = i;
+    }
+    // send updated accounts to ProfilePage
+    this.props.update(accounts)
+    this.cancelEdit()
+    this.setActive(0)
   }
 
   cancelEdit(){
     // Returns to state to read-only
     this.setState({editing : false})
     this.setState({newAcc : false})
+    this.setState({remove : false})
   }
 
   addPerformance(data){
@@ -66,7 +94,6 @@ class Account extends Component {
     accounts[active].performanceHist = data
 
     this.props.update(accounts)
-    this.setState({editing : false})
   }
 
   setActive(accNum){
@@ -79,6 +106,7 @@ class Account extends Component {
     const editing   = this.state.editing
     const newAcc    = this.state.newAcc
     const active    = this.state.active
+    const remove    = this.state.remove
 
     var account = accounts[active]
 
@@ -87,6 +115,7 @@ class Account extends Component {
         2) Create a brand new account
         3) Edit the data of an existing account
     */
+    // TODO: Place RemoveButton below performance history
     if (!editing) {
       return (
         <div className="container-fluid">
@@ -122,6 +151,10 @@ class Account extends Component {
                                   newClient={false}
                                   save={this.addPerformance.bind(this)}/>
 
+              <RemoveAccount display={remove} account={account}
+                            cancel={this.cancelEdit.bind(this)}
+                            confirm={this.confirmRemove.bind(this)}
+                            removeAccount={this.removeAccount.bind(this)}/>
             </div>
           </div>
         </div>
@@ -135,7 +168,17 @@ class Account extends Component {
                       save={this.addAccount.bind(this)}/>
         </div>
       )}
-    else {
+    else if (remove) {
+      // TODO: Finish remove button
+      return(
+        <div className="container-fluid">
+          <RemoveAccount display={remove} account={account}
+                        cancel={this.cancelEdit.bind(this)}
+                        confirm={this.confirmRemove.bind(this)}
+                        removeAccount={this.removeAccount.bind(this)}/>
+        </div>)
+    }
+    else{
       //Edit existing account from profile page
       return(
         <div className="container-fluid">
