@@ -1,5 +1,5 @@
 var Datastore = require('nedb');
-var clients = new Datastore({ filename: 'src/Data/clients.db', autoload: true });
+var clients = new Datastore({ filename: 'clients', autoload: true });
 
 var exports = module.exports = {};
 
