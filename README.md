@@ -2,3 +2,5 @@
 
 Code repo for post on freeCodeCamp.
 https://medium.freecodecamp.com/building-an-electron-application-with-create-react-app-97945861647c#.ze6c9qin1
+
+Currently setup with a use of NeDB.
