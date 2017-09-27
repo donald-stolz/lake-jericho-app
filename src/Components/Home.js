@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-
 import HomeListItem from './List/HomeListItem'
 import ClientAPI from '../Data/ClientAPI'
 

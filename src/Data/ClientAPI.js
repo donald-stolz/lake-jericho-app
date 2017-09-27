@@ -1,11 +1,11 @@
 var Datastore = require('nedb');
-var clients = new Datastore({ filename: 'src/Data/clients.db', autoload: true });
+var clients = new Datastore({ filename: 'clients', autoload: true });
 
 var exports = module.exports = {};
 
 exports.addClient = function(client) {
   clients.insert(client, function (err, doc) {
-    console.log('Inserted', doc.name, 'with ID', doc._id);
+    console.log('Inserted', doc.personal.name, 'with ID', doc._id);
   });
 }
 

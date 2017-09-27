@@ -151,7 +151,7 @@ class AddFinancialInfo extends Component {
                 </div>
               </div>
 
-              <div className= "row">
+              <div className="row">
               <label className="col-sm-2 control-label">Risk Objective:</label>
               </div>
 
