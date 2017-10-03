@@ -14,7 +14,7 @@ class App extends Component {
 
     return (
       <Router>
-        <div className="App" role="main">
+        <div className="App">
           <div className="App-header">
             <Link to="/"><h1> Lake Jericho </h1></Link>
           </div>

@@ -19,7 +19,7 @@ exports.addClient = function(client) {
 // }
 
 exports.updateClient = function(client) {
-  console.log(client);
+  //console.log(client);
   clients.update({_id: client._id}, client, {}, function (err, numReplaced) {
     console.log("Updated " + numReplaced + " Client");
   });

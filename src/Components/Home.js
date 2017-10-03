@@ -8,7 +8,6 @@ class Home extends Component {
   constructor(){
     super()
     // ClientAPI.clearDB()
-
     this.state = {clients : null}
   }
 
@@ -23,7 +22,6 @@ class Home extends Component {
   render() {
     let HomeList;
     if (this.state.clients) {
-
       HomeList = this.state.clients.map(client => {
          return(
            <HomeListItem key={client._id} client={client} />
