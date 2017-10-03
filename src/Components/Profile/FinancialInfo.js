@@ -56,10 +56,10 @@ class FinancialInfo extends Component {
                 <li className="list-group-item"><label>Legal/Regulatry Issues:</label> {client.regulatoryIssues}</li>
                 <li className="list-group-item"><label>Unique Circumstances:</label> {client.unique}</li>
                 <li className="list-group-item"><label>Return Objective:</label> {client.returnObjectives}</li>
-                <li className="list-group-item"><label>Risk Objective:</label> </li>
-                <li className="list-group-item"><label className="col-sm-1 control-label">Ability:</label> {client.riskAbility}</li>
-                <li className="list-group-item"><label className="col-sm-1 control-label">Willingness:</label> {client.riskWillingness}</li>
-                <li className="list-group-item"><label className="col-sm-1 control-label">Overall:</label> {client.riskOverallAbility}</li>
+                <li className="list-group-item"><em><h4 className="text-center">Risk Objectives</h4></em> </li>
+                <li className="list-group-item"><label> (1) Ability: </label> {client.riskAbility}</li>
+                <li className="list-group-item"><label> (2) Willingness: </label>{client.riskWillingness}</li>
+                <li className="list-group-item"><label> (3) Overall: </label> {client.riskOverallAbility}</li>
               </ul>
             </div>
           </div>
