@@ -109,13 +109,14 @@ class Account extends Component {
     const remove    = this.state.remove
 
     var account = accounts[active]
+		var plusStyle = {color: '#337ab7', fontSize: '110%'};
 
     /* Display cases:
         1) Display saved values of selected account
         2) Create a brand new account
         3) Edit the data of an existing account
     */
-    // TODO: Place RemoveButton below performance history
+
     if (!editing) {
       return (
         <div className="container-fluid">
@@ -123,7 +124,7 @@ class Account extends Component {
             <div className="panel-heading">
               <h1 className="panel-title">Account Information
                 <button type="button" onClick={this.setAddAccount.bind(this)} className="btn btn-default btn-xs pull-right">
-                  <span className="glyphicon glyphicon-plus primary"/>
+                  <strong style={plusStyle}>+</strong>
                 </button>
               </h1>
             </div>

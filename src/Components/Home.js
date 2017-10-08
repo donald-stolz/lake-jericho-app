@@ -21,6 +21,7 @@ class Home extends Component {
 
   render() {
     let HomeList;
+		var plusStyle = {color: '#337ab7', fontSize: '110%'};
     if (this.state.clients) {
       HomeList = this.state.clients.map(client => {
          return(
@@ -35,7 +36,7 @@ class Home extends Component {
             <div className="panel-heading">
               <h2 className="panel-title">Name
               <Link to="/NewClient" className="btn btn-default btn-xs pull-right">
-                <span className="glyphicon glyphicon-plus primary"/>
+                <strong style={plusStyle}>+</strong>
               </Link>
               </h2>
             </div>

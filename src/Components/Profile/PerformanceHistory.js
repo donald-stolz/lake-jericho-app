@@ -25,7 +25,7 @@ class PerformanceHistory extends Component {
     var history = []
     history = this.props.history
     history.push(data)
-
+		// TODO Sort performance here
     this.props.save(history)
     this.setState({editing : false})
   }
@@ -51,6 +51,7 @@ class PerformanceHistory extends Component {
     const active = this.state.active
     const history = this.props.history
     var performance = history[active]
+		var plusStyle = {color: '#337ab7', fontSize: '110%'};
 
     if (editing) {
      return <AddPerformance save={this.recordPerformance.bind(this)}
@@ -64,7 +65,7 @@ class PerformanceHistory extends Component {
             <div className="panel-heading">
               <h2 className="panel-title">Performance History
               <button type="button" onClick={this.setEditing.bind(this)} className="btn btn-default btn-xs pull-right">
-                <span className="glyphicon glyphicon-plus primary"/>
+                <strong style={plusStyle}>+</strong>
               </button>
               </h2>
             </div>
