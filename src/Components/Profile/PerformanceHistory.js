@@ -25,7 +25,12 @@ class PerformanceHistory extends Component {
     var history = []
     history = this.props.history
     history.push(data)
-		// TODO Sort performance here
+		history.sort(function(a,b){
+			// "Sort Javascript Object Array By Date" - StackOverflow
+		  // Turn your strings into dates, and then subtract them
+		  // to get a value that is either negative, positive, or zero.
+		  return new Date(b.date) - new Date(a.date);
+		});
     this.props.save(history)
     this.setState({editing : false})
   }

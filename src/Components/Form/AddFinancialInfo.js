@@ -152,7 +152,7 @@ class AddFinancialInfo extends Component {
               </div>
 
               <div className="row">
-              <label className="col-sm-2 control-label">Risk Objective:</label>
+	              <em><h4 className="text-center">Risk Objectives</h4></em>
               </div>
 
               <div className="form-group"><label className="col-sm-2 control-label">Ability:</label>
