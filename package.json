@@ -14,7 +14,9 @@
     "nedb": "^1.8.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-router-dom": "^4.1.2"
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2"
   },
   "homepage": "./",
   "main": "src/electron-starter.js",
@@ -36,6 +38,7 @@
     },
     "directories": {
       "buildResources": "public"
-    }
+    },
+		"extraFiles": "public/fonts"
   }
 }

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
+// TODO: import containers
 import Home       from './Components/Home'
 import NewClient  from './Components/NewClient'
 import ProfilePage    from './Components/ProfilePage'
+// TODO: Create header component
 
+// TODO: Add history to Router
+// TODO: Add redux store (pre: Finish reducers & actions)
 
 import './App.css';
 
