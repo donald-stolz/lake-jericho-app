@@ -59,11 +59,12 @@ class NewClient extends Component {
     // Final Step: Routes to home; Saves new client to DB on unmount
     if (this.state.save) {
 
-      var client = {personal: personal,
-                    financial: financial,
-                    accounts: accounts
-                    }
-
+      var client = {
+				personal: personal,
+        financial: financial,
+        accounts: accounts
+      }
+		// TODO: Redux
       ClientAPI.addClient(client)
     }
   }

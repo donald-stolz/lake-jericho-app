@@ -4,22 +4,26 @@ import HomeListItem from './List/HomeListItem'
 import ClientAPI from '../Data/ClientAPI'
 
 class Home extends Component {
-
+// TODO: Implement Redux
   constructor(){
     super()
-    // ClientAPI.clearDB()
+		// TODO:
     this.state = {clients : null}
   }
 
   componentDidMount(){
+	// TODO:
     ClientAPI.setIndex(this.setList.bind(this))
   }
 
   setList(list){
+		// TODO: Remove when implementing Redux
     this.setState({clients : list})
   }
 
   render() {
+		// TODO: Add conditional loading spinner
+
     let HomeList;
 		var plusStyle = {color: '#337ab7', fontSize: '110%'};
     if (this.state.clients) {

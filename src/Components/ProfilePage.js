@@ -8,7 +8,7 @@ import ClientAPI  from '../Data/ClientAPI'
 class ProfilePage extends Component {
   constructor() {
     super()
-
+// TODO: Implement Redux
     this.state = {client : {
         // Empty Personal Information
         personal: {
@@ -64,10 +64,12 @@ class ProfilePage extends Component {
 
   componentWillMount(){
     const id = this.props.match.params.id
+	// TODO: Redux
     ClientAPI.getClient(id, this.setProfile.bind(this))
   }
 
   setProfile(data){
+		// TODO: Remove in Redux
     // Recieves data object from ClientAPI call
     this.setState({client : data})
   }
@@ -75,7 +77,7 @@ class ProfilePage extends Component {
   updatePersonal(data){
     const client = this.state.client
     client.personal = data
-
+// TODO: Redux
     ClientAPI.updateClient(client)
     this.setProfile(client)
   }
@@ -83,7 +85,7 @@ class ProfilePage extends Component {
   updateFinacial(data){
     const client = this.state.client
     client.financial = data
-
+// TODO: Redux
     ClientAPI.updateClient(client)
     this.setProfile(client)
   }
@@ -91,7 +93,7 @@ class ProfilePage extends Component {
   updateAccount(data){
     const client = this.state.client
     client.accounts = data
-
+// TODO: Redux
     ClientAPI.updateClient(client)
     this.setProfile(client)
   }
@@ -132,6 +134,7 @@ class ProfilePage extends Component {
   }
 
   render(){
+		// TODO: Add loading spinner
     return(
       <div>
         {this.renderPageOrRemove()}
