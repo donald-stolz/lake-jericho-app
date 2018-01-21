@@ -1,4 +1,12 @@
-A model of the client data structure
+A model of the data structure
+
+State = {
+	error: null,
+	loading: true,
+	clientsNameID: [{namd, _id}],
+	client: Client
+}
+
 
 Client = {
   _id: ''

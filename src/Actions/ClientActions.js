@@ -14,6 +14,7 @@ var clients = new Datastore({ filename: 'clients', autoload: true });
 export const fetchAll = () =>{
 	return (dispatch) => {
 		dispatch({ type: FETCH_ALL })
+		// TODO: Update to only return Names & ID
 		clients.find({}, function (err, docs) {
 	    console.log(docs);
 	    dispatch({ type: RETURN_ALL, payload: docs})
@@ -21,7 +22,6 @@ export const fetchAll = () =>{
 	}
 }
 
-// NOTE: redundant since entire client is saved to array?
 export const fetchClient = ( clientID ) =>{
 	return (dispatch) => {
 		dispatch( {type: FETCH_CLIENT} )

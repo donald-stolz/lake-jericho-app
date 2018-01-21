@@ -10,10 +10,13 @@ import{
 
 const INITIAL_STATE = {
 	loading: true,
-	activeClient: {},
-	clients: []
+	error: null,
+	clientsNameID: [],
+	client: {},
 };
 
+// TODO: Update since state setup has been changed
+// NOTE: NameIDs array instead of all clients
 export default ( state = INITIAL_STATE, action ) => {
 	switch (action.type) {
 		case FETCH_ALL:
