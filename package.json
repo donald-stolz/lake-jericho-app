@@ -16,7 +16,8 @@
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.1.2",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "homepage": "./",
   "main": "src/electron-starter.js",
@@ -39,6 +40,6 @@
     "directories": {
       "buildResources": "public"
     },
-		"extraFiles": "public/fonts"
+    "extraFiles": "public/fonts"
   }
 }

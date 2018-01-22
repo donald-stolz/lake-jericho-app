@@ -1,25 +1,20 @@
 import{
 	RETURN_LIST,
-	FETCH_CLIENT,
-	RETURN_CLIENT,
-	UPDATE_CLIENT,
 	UPDATE_LIST
 } from '../Constants/constants';
 
 const INITIAL_STATE = {
 	loading: true,
 	error: null,
-	client: {},
+	clientList: [],
 };
 
 export default ( state = INITIAL_STATE, action ) => {
 	switch (action.type) {
-		case FETCH_CLIENT:
+		case RETURN_LIST:
+			return { ...state, loading: false, clientList: action.payload };
+		case UPDATE_LIST:
 			return { ...state, loading: true};
-		case RETURN_CLIENT:
-			return { ...state, loading: false, client: action.payload };
-		case UPDATE_CLIENT:
-			return { ...state, client: action.payload };
 		default:
 			return state;
 	}

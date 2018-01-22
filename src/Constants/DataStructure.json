@@ -1,10 +1,16 @@
-A model of the data structure
+/* A model of the data structure */
 
 State = {
-	error: null,
-	loading: true,
-	clientsNameID: [{namd, _id}],
-	client: Client
+	list: {
+		error: null,
+		loading: true,
+		clientList: [{namd, _id}],
+	}
+	selected: {
+		error: null,
+		loarding: true,
+		client:
+	}
 }
 
 
