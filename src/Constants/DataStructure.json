@@ -11,7 +11,7 @@ State = {
 Client = {
   _id: ''
 
-// Personal Information
+/* Personal Information */
   personal: {
     name: '',
     dob: '',
@@ -20,7 +20,7 @@ Client = {
     email: '',
   },
 
-// Financial Information
+/* Financial Information */
   financial: {
     annualIncome: 0,
     totalAssets: 0,
@@ -39,7 +39,7 @@ Client = {
     riskOverall: ''
   },
 
-// Account Information
+/* Account Information */
   accounts : [{
     accNum: 0,
     accName: '',

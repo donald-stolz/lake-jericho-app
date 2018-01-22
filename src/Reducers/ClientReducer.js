@@ -6,7 +6,7 @@ import{
 	ADD_CLIENT,
 	UPDATE_CLIENT,
 	REMOVE_CLIENT,
-} from '../constants/constants';
+} from '../Constants/constants';
 
 const INITIAL_STATE = {
 	loading: true,
