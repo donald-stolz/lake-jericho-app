@@ -1,9 +1,7 @@
 import{
-	RETURN_LIST,
 	FETCH_CLIENT,
 	RETURN_CLIENT,
 	UPDATE_CLIENT,
-	UPDATE_LIST
 } from '../Constants/constants';
 
 const INITIAL_STATE = {

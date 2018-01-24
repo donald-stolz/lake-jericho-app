@@ -1,7 +1,7 @@
 import{
 	RETURN_LIST,
 	UPDATE_LIST
-} from '../Constants/constant';
+} from '../Constants/constants';
 
 import {clients} from '../Constants/clientDB'
 
@@ -10,7 +10,7 @@ export const fetchList = () =>{
 		dispatch({ type: UPDATE_LIST })
 		// 2nd object specifies which field(s) to return
 		// _id is include with every doc unless specified
-		clients.find({}, { personal.name: 1 }, function (err, docs) {
+		clients.find({}, { "personal.name": 1 }, function (err, docs) {
 	    console.log(docs);
 	    dispatch({ type: RETURN_LIST, payload: docs})
 	  });

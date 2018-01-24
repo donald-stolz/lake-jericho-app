@@ -1,9 +1,9 @@
 import{
-	RETURN_LIST,
 	FETCH_CLIENT,
 	RETURN_CLIENT,
 	UPDATE_CLIENT,
 } from '../Constants/constants';
+import {fetchList} from './ListActions'
 
 import {clients} from '../Constants/clientDB'
 // var Datastore = require('nedb');
@@ -11,6 +11,7 @@ import {clients} from '../Constants/clientDB'
 
 export const fetchClient = ( clientID ) =>{
 	return (dispatch) => {
+		console.log("fetching: " + clientID);
 		dispatch( {type: FETCH_CLIENT} )
 		clients.findOne({ _id: clientID }, function (err, doc) {
 	    console.log('Found user:', doc);
@@ -20,13 +21,11 @@ export const fetchClient = ( clientID ) =>{
 }
 
 export const updateClient = ( client ) =>{
-	clients.update({_id: client._id}, client, {}, function (err, numReplaced) {
-    console.log("Updated " + numReplaced + " Client");
-		dispatch(fetchList());
-  });
-	// NOTE: Not copying straight from DB
-	return {
-		type: UPDATE_CLIENT,
-		payload: client
-	};
+	return(dispatch) => {
+		dispatch({type: UPDATE_CLIENT, payload: client})
+		clients.update({_id: client._id}, client, {}, function (err, numReplaced) {
+	    console.log("Updated " + numReplaced + " Client");
+			dispatch(fetchList());
+	  });
+	}
 }

@@ -1,10 +1,11 @@
 // NOTE:
 // Actions Needed
 // 	- addClient
-import React from 'react'
+//
+// No Data Used
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-import { updateClient, removeClient } from '../actions'
+import { addClient } from '../Actions'
 
 import NewClient from '../Components/NewClient'
 
@@ -13,8 +14,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	update: bindActionCreators(updateList, dispatch)
 	add: bindActionCreators(addClient, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(NewClient);

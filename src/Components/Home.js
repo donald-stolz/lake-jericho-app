@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import HomeListItem from './List/HomeListItem'
-import ClientAPI from '../Data/ClientAPI'
+// import ClientAPI from '../Data/ClientAPI'
+import PropTypes from 'prop-types'
 
 class Home extends Component {
 // TODO: Implement Redux
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
+
+		this.props.getList()
 		// TODO:
-    this.state = {clients : null}
+    this.state = {clients : this.props.clients}
   }
 
-  componentDidMount(){
+  componentMount(){
 	// TODO:
-    ClientAPI.setIndex(this.setList.bind(this))
+    // ClientAPI.setIndex(this.setList.bind(this))
   }
 
   setList(list){
@@ -23,13 +26,15 @@ class Home extends Component {
 
   render() {
 		// TODO: Add conditional loading spinner
-
     let HomeList;
 		var plusStyle = {color: '#337ab7', fontSize: '110%'};
     if (this.state.clients) {
-      HomeList = this.state.clients.map(client => {
+      HomeList = this.props.clients.map(client => {
          return(
-           <HomeListItem key={client._id} client={client} />
+           <HomeListItem key={client._id}
+					 name={client.personal.name}
+					 	id={client._id}
+					 />
           )
         });
       }
@@ -52,6 +57,20 @@ class Home extends Component {
 
     )
   }
+}
+
+Home.propTypes = {
+	clients: PropTypes.arrayOf(PropTypes.shape({
+		_id: PropTypes.string,
+		"personal.name": PropTypes.string
+	})).isRequired,
+}
+
+Home.defaultProps = {
+	clients: [{
+		_id: '0',
+		"personal.name": 'No clients'
+	}]
 }
 
 export default Home;

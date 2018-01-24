@@ -3,12 +3,16 @@ import AddPersonalInfo  from './Form/AddPersonalInfo'
 import AddFinancialInfo  from './Form/AddFinancialInfo'
 import AddAccount     from './Form/AddAccount'
 import Continue       from './Form/Continue'
-import ClientAPI  from '../Data/ClientAPI'
+// import ClientAPI  from '../Data/ClientAPI'
 
 var personal = {}
 var financial = {}
 var accounts = []
 var numAccounts
+
+// TODO:
+// [] Refactor Parent
+// [] Refactor Child Components
 
 class NewClient extends Component {
   constructor() {
@@ -64,8 +68,7 @@ class NewClient extends Component {
         financial: financial,
         accounts: accounts
       }
-		// TODO: Redux
-      ClientAPI.addClient(client)
+      this.props.add(client)
     }
   }
 
