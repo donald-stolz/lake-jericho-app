@@ -10,7 +10,7 @@ class Continue extends Component {
   }
 
   render() {
-
+		// TODO: Have submit to DB trigger the action and navigate home
     return (
           <div className="container-fluid">
             <button onClick={this.addAccount.bind(this)}type="button" className="btn btn-primary btn-block">Add Account</button>

@@ -1,9 +1,23 @@
-A model of the client data structure
+/* A model of the data structure */
+
+State = {
+	list: {
+		error: null,
+		loading: true,
+		clientList: [{namd, _id}],
+	}
+	selected: {
+		error: null,
+		loarding: true,
+		client:
+	}
+}
+
 
 Client = {
   _id: ''
 
-// Personal Information
+/* Personal Information */
   personal: {
     name: '',
     dob: '',
@@ -12,7 +26,7 @@ Client = {
     email: '',
   },
 
-// Financial Information
+/* Financial Information */
   financial: {
     annualIncome: 0,
     totalAssets: 0,
@@ -31,7 +45,7 @@ Client = {
     riskOverall: ''
   },
 
-// Account Information
+/* Account Information */
   accounts : [{
     accNum: 0,
     accName: '',

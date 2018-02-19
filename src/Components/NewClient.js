@@ -3,12 +3,16 @@ import AddPersonalInfo  from './Form/AddPersonalInfo'
 import AddFinancialInfo  from './Form/AddFinancialInfo'
 import AddAccount     from './Form/AddAccount'
 import Continue       from './Form/Continue'
-import ClientAPI  from '../Data/ClientAPI'
+// import ClientAPI  from '../Data/ClientAPI'
 
 var personal = {}
 var financial = {}
 var accounts = []
 var numAccounts
+
+// TODO:
+// [] Refactor Parent
+// [] Refactor Child Components
 
 class NewClient extends Component {
   constructor() {
@@ -59,12 +63,12 @@ class NewClient extends Component {
     // Final Step: Routes to home; Saves new client to DB on unmount
     if (this.state.save) {
 
-      var client = {personal: personal,
-                    financial: financial,
-                    accounts: accounts
-                    }
-
-      ClientAPI.addClient(client)
+      var client = {
+				personal: personal,
+        financial: financial,
+        accounts: accounts
+      }
+      this.props.add(client)
     }
   }
 
