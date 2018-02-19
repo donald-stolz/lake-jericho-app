@@ -59,6 +59,8 @@ class PerformanceHistory extends Component {
 		var plusStyle = {color: '#337ab7', fontSize: '110%'};
 
     if (editing) {
+      // TODO: Add data from most recent to prepopulate field
+      // NOTE: Either top or bottom of performance array
      return <AddPerformance save={this.recordPerformance.bind(this)}
                             newClient={false}
                             cancel={this.cancelEdit.bind(this)}/>

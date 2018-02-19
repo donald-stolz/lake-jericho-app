@@ -36,7 +36,7 @@ class AddAccount extends Component {
 
   render(){
 
-
+// TODO: Double check "Net Return" is rendered fol manual input
     return(
       <div className="container-fluid">
         <div className="panel panel-primary" id="financialInformation">
