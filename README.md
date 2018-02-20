@@ -9,7 +9,7 @@
 - [ ] Create own css sheet/get better stylesheet
 - [ ] Update README.md
   - [ ] Screenshots
-  - [ ] Design pattern
+  - [ ] Design pattern & UML
   - [ ] Build Tools, Libraries, and Frameworks
   - [ ] Resources & Tutorials
 
