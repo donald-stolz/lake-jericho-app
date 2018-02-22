@@ -3,7 +3,6 @@ import PersonalInfo   from './Profile/PersonalInfo'
 import FinancialInfo  from './Profile/FinancialInfo'
 import Account        from './Profile/Account'
 import RemoveClient        from './Profile/RemoveClient'
-// import ClientAPI  from '../Data/ClientAPI'
 import PropTypes from 'prop-types'
 
 // TODO:

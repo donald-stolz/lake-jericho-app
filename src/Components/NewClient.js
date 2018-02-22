@@ -3,7 +3,6 @@ import AddPersonalInfo  from './Form/AddPersonalInfo'
 import AddFinancialInfo  from './Form/AddFinancialInfo'
 import AddAccount     from './Form/AddAccount'
 import Continue       from './Form/Continue'
-// import ClientAPI  from '../Data/ClientAPI'
 
 var personal = {}
 var financial = {}

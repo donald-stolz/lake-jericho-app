@@ -10,7 +10,7 @@ import { addClient } from '../Actions'
 import NewClient from '../Components/NewClient'
 
 const mapStateToProps = (state) => ({
-// NOTE: Do I need anything?
+// NOTE: No Props needed
 })
 
 const mapDispatchToProps = (dispatch) => ({

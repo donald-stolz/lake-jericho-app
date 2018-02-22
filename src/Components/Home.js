@@ -1,31 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import HomeListItem from './List/HomeListItem'
-// import ClientAPI from '../Data/ClientAPI'
 import PropTypes from 'prop-types'
 
+// TODO: Add conditional loading spinner
+
 class Home extends Component {
-// TODO: Implement Redux
   constructor(props){
     super(props)
 
 		this.props.getList()
-		// TODO:
     this.state = {clients : this.props.clients}
   }
 
-  componentMount(){
-	// TODO:
-    // ClientAPI.setIndex(this.setList.bind(this))
-  }
-
-  setList(list){
-		// TODO: Remove when implementing Redux
-    this.setState({clients : list})
-  }
-
   render() {
-		// TODO: Add conditional loading spinner
+
     let HomeList;
 		var plusStyle = {color: '#337ab7', fontSize: '110%'};
     if (this.state.clients) {

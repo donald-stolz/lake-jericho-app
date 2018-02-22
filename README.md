@@ -1,12 +1,13 @@
 # [Lake Jericho Financial](http://lakejericho.com/ "Lake Jericho Homepage") Custom CRM Tool
 
 ## TODOs:
-- [ ] Finish Redux implementation
+- [x] Finish Redux implementation
 - [x] Create dummy data for easier testing
 - [x] Verify manual input of monthly return
 - [x] Add Account button on Profile page
 - [ ] Pre-populated values for performance history
 - [ ] Create own css sheet/get better stylesheet
+- [ ] Add loading spinner
 - [ ] Update README.md
   - [ ] Screenshots
   - [ ] Design pattern & UML
