@@ -2,9 +2,9 @@
 
 ## TODOs:
 - [ ] Finish Redux implementation
-- [ ] Create dummy data for easier testing
-- [ ] Verify manual input of monthly return
-- [ ] Add Account button on Profile page
+- [x] Create dummy data for easier testing
+- [x] Verify manual input of monthly return
+- [x] Add Account button on Profile page
 - [ ] Pre-populated values for performance history
 - [ ] Create own css sheet/get better stylesheet
 - [ ] Update README.md

@@ -118,7 +118,7 @@ class Account extends Component {
     */
 
     if (!editing) {
-      // TODO: Add "AddAccount" button
+
       return (
         <div className="container-fluid">
           <div className="panel panel-primary" >
