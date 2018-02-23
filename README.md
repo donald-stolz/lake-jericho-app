@@ -6,13 +6,14 @@
 - [x] Verify manual input of monthly return
 - [x] Add Account button on Profile page
 - [ ] Pre-populated values for performance history
-- [ ] Create own css sheet/get better stylesheet
-- [ ] Add loading spinner
+- [ ] [Update styling](https://github.com/mui-org/material-ui)
+- [ ] [Add loading spinner](https://material-ui-next.com/demos/progress/)
 - [ ] Update README.md
   - [ ] Screenshots
   - [ ] Design pattern & UML
   - [ ] Build Tools, Libraries, and Frameworks
   - [ ] Resources & Tutorials
+- [ ] Code refactoring & complete inline comments
 
 
 ## Resources

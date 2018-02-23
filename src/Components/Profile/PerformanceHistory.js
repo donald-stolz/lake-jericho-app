@@ -63,6 +63,7 @@ class PerformanceHistory extends Component {
       // NOTE: Either top or bottom of performance array
      return <AddPerformance save={this.recordPerformance.bind(this)}
                             newClient={false}
+														pastPerform={history[0]}
                             cancel={this.cancelEdit.bind(this)}/>
     }
     else {
