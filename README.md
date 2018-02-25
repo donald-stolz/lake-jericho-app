@@ -14,6 +14,7 @@
   - [ ] Build Tools, Libraries, and Frameworks
   - [ ] Resources & Tutorials
 - [ ] Code refactoring & complete inline comments
+- [x] New boilerplate with DevTools
 
 ## Tools
 - #### [React.js](https://github.com/facebook/react)

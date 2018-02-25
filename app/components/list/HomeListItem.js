@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 class HomeListItem extends Component {
 
   render() {
-		console.log(this.props);
     const name = this.props.name
     const id = this.props.id
     const path = "/Profile/" + id

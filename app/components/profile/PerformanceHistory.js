@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import AddPerformance from '../form/AddPerformance'
 import PerformanceDropdownList from '../list/PerformanceDropdownList'
 
-// TODO: Check for Duplicate method
-// TODO: Index records by date
-
 class PerformanceHistory extends Component {
   constructor() {
     super()
@@ -22,6 +19,7 @@ class PerformanceHistory extends Component {
   }
 
   recordPerformance(data){
+    // TODO: Check for Duplicate date method
     var history = []
     history = this.props.history
     history.push(data)
@@ -39,7 +37,6 @@ class PerformanceHistory extends Component {
 
     const history = this.props.history
 
-    console.log("Selected " + selected);
     var newActive
     for (var i = 0; i < history.length; i++) {
       if (history[i].date === selected) {

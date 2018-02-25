@@ -11,7 +11,7 @@ export const fetchList = () =>{
 		// 2nd object specifies which field(s) to return
 		// _id is include with every doc unless specified
 		clients.find({}, { "personal.name": 1 }, function (err, docs) {
-	    console.log(docs);
+	    // console.log(docs);
 	    dispatch({ type: RETURN_LIST, payload: docs})
 	  });
 	}
@@ -22,7 +22,7 @@ export const addClient = ( client ) =>{
 		// Add client to DB
 		dispatch({ type: UPDATE_LIST })
 		clients.insert(client, function (err, doc) {
-	    console.log('Inserted', doc.personal.name, 'with ID', doc._id);
+	    // console.log('Inserted', doc.personal.name, 'with ID', doc._id);
 			//Refresh list data
 			dispatch(fetchList());
 	  });
@@ -34,7 +34,7 @@ export const removeClient = ( clientID ) =>{
 	return (dispatch) => {
 		dispatch({ type: UPDATE_LIST })
 		clients.remove({ _id: clientID }, {}, function (err, numRemoved) {
-			console.log("Removed " + numRemoved + " client");
+			// console.log("Removed " + numRemoved + " client");
 			//Refresh list data
 			dispatch(fetchList())
 		});

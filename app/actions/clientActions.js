@@ -11,10 +11,10 @@ import {clients} from '../constants/ClientDB'
 
 export const fetchClient = ( clientID ) =>{
 	return (dispatch) => {
-		console.log("fetching: " + clientID);
+		// console.log("fetching: " + clientID);
 		dispatch( {type: FETCH_CLIENT} )
 		clients.findOne({ _id: clientID }, function (err, doc) {
-	    console.log('Found user:', doc);
+	    // console.log('Found user:', doc);
 			dispatch({ type: RETURN_CLIENT, payload: doc });
 	  });
 	};
@@ -24,7 +24,7 @@ export const updateClient = ( client ) =>{
 	return(dispatch) => {
 		dispatch({type: UPDATE_CLIENT, payload: client})
 		clients.update({_id: client._id}, client, {}, function (err, numReplaced) {
-	    console.log("Updated " + numReplaced + " Client");
+	    // console.log("Updated " + numReplaced + " Client");
 			dispatch(fetchList());
 	  });
 	}

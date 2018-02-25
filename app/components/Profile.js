@@ -12,7 +12,7 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = { loading : true }
-		console.log(this.props);
+
 		this.props.get(this.props.match.params.id)
   }
 
@@ -40,7 +40,6 @@ class Profile extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		console.log(nextProps);
 		var newState = {
 			client: nextProps.client,
 			loading: false

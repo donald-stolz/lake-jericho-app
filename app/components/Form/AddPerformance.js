@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// TODO: Add default props or some blank object
+
 class AddAccount extends Component {
 	constructor(props){
 		super(props)
@@ -39,10 +41,9 @@ class AddAccount extends Component {
 
   render(){
 		const past = this.props.pastPerform;
+		// TODO: Add 1 to date
 		var nextDate = past.date;
-		console.log(past);
-// TODO: Double check "Net Return" is rendered fol manual input
-// NOTE +1 month
+
     return(
       <div className="container-fluid">
         <div className="panel panel-primary" id="financialInformation">
