@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 // TODO: Add default props or some blank object
 
-class AddAccount extends Component {
+class AddPerformance extends Component {
 	constructor(props){
 		super(props)
 	}
@@ -11,14 +12,14 @@ class AddAccount extends Component {
     e.preventDefault()
 
     var performanceHist = {
-            date: this.refs.date.value,
-            tax: this.refs.tax.value,
-            horizon: this.refs.horizon.value,
-            bias: this.refs.bias.value,
-            beginBal: this.refs.startBal.value,
-            endBal: this.refs.endBal.value,
-            netReturn: this.refs.netReturn.value
-          }
+      date: this.refs.date.value,
+      tax: this.refs.tax.value,
+      horizon: this.refs.horizon.value,
+      bias: this.refs.bias.value,
+      beginBal: this.refs.startBal.value,
+      endBal: this.refs.endBal.value,
+      netReturn: this.refs.netReturn.value
+    }
 
     this.props.save(performanceHist)
   }
@@ -42,7 +43,8 @@ class AddAccount extends Component {
   render(){
 		const past = this.props.pastPerform;
 		// TODO: Add 1 to date
-		var nextDate = past.date;
+		var nextDate = new Date(past.date);
+
 
     return(
       <div className="container-fluid">
@@ -101,7 +103,7 @@ class AddAccount extends Component {
                 <div className="col-sm-10">
                   <input type="number" className="form-control"
                       placeholder="Start Balance" ref="startBal"
-											value={past.start}/>
+											value={past.endBal}/>
                 </div>
               </div>
 
@@ -129,4 +131,24 @@ class AddAccount extends Component {
   }
 }
 
-export default AddAccount
+AddPerformance.propTypes = {
+	pastPerform	: PropTypes.shape({
+		date		: PropTypes.string,
+		tax			: PropTypes.string,
+		horizon	: PropTypes.string,
+		bias		: PropTypes.string,
+		endBal	: PropTypes.number
+	})
+}
+
+AddPerformance.defaultProps = {
+	pastPerform	: PropTypes.shape({
+		date		: '',
+		tax			: '',
+		horizon	: '',
+		bias		: '',
+		endBal	: 0
+	})
+}
+
+export default AddPerformance;

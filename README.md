@@ -15,6 +15,7 @@
   - [ ] Resources & Tutorials
 - [ ] Code refactoring & complete inline comments
 - [x] New boilerplate with DevTools
+- [ ] Add Travis CI
 
 ## Tools
 - #### [React.js](https://github.com/facebook/react)
