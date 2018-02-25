@@ -1,21 +1,65 @@
-// @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Home.css';
+import { Link } from 'react-router-dom'
+import HomeListItem from './list/HomeListItem'
+// import PropTypes from 'prop-types'
 
-type Props = {};
+// TODO: Add conditional loading spinner
 
-export default class Home extends Component<Props> {
-  props: Props;
+class Home extends Component {
+  constructor(props){
+    super(props)
+
+		this.props.getList()
+    this.state = {clients : this.props.clients}
+  }
 
   render() {
-    return (
-      <div>
-        <div className={styles.container} data-tid="container">
-          <h2>Home</h2>
-          <Link to="/counter">to Counter</Link>
+
+    let HomeList;
+		var plusStyle = {color: '#337ab7', fontSize: '110%'};
+    if (this.state.clients) {
+      HomeList = this.props.clients.map(client => {
+         return(
+           <HomeListItem key={client._id}
+					 name={client.personal.name}
+					 	id={client._id}
+					 />
+          )
+        });
+      }
+    return(
+
+        <div className="container-fluid">
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <h2 className="panel-title">Name
+              <Link to="/NewClient" className="btn btn-default btn-xs pull-right">
+                <strong style={plusStyle}>+</strong>
+              </Link>
+              </h2>
+            </div>
+              <ul className="list-group">
+                {HomeList}
+              </ul>
+          </div>
         </div>
-      </div>
-    );
+
+    )
   }
 }
+
+// Home.propTypes = {
+// 	clients: PropTypes.arrayOf(PropTypes.shape({
+// 		_id: PropTypes.string,
+// 		"personal.name": PropTypes.string
+// 	})).isRequired,
+// }
+//
+// Home.defaultProps = {
+// 	clients: [{
+// 		_id: '0',
+// 		"personal.name": 'No clients'
+// 	}]
+// }
+
+export default Home;

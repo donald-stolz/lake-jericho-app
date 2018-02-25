@@ -1,0 +1,68 @@
+/* A model of the data structure */
+
+State = {
+	list: {
+		error: null,
+		loading: true,
+		clientList: [{namd, _id}],
+	}
+	selected: {
+		error: null,
+		loarding: true,
+		client:
+	}
+}
+
+
+Client = {
+  _id: ''
+
+/* Personal Information */
+  personal: {
+    name: '',
+    dob: '',
+    address: '',
+    phone: '',
+    email: '',
+  },
+
+/* Financial Information */
+  financial: {
+    annualIncome: 0,
+    totalAssets: 0,
+    liquidAssets: 0,
+    investmentAssets: 0,
+    investmentExperience: '',
+    investmentObjectives: '',
+    timeHorizon: '',
+    taxConsids: '',
+    liquidConsids: '',
+    regulatoryIssues: '',
+    unique: '',
+    returnObjective: '',
+    riskAbility: '',
+    riskWillingness: '',
+    riskOverall: ''
+  },
+
+/* Account Information */
+  accounts : [{
+    accNum: 0,
+    accName: '',
+    startBal: '',
+    startDate: '',
+    tax: '',
+    horizon: '',
+    bias: '',
+    performanceHist : [{
+      date: '',
+      tax: '',
+      horizon: '',
+      bias: '',
+      beginBal: 0,
+      endBal: 0,
+      netReturn: 0
+    }]
+  }]
+
+}

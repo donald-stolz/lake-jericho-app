@@ -15,12 +15,6 @@
   - [ ] Resources & Tutorials
 - [ ] Code refactoring & complete inline comments
 
-
-## Resources
-- #### [electron-with-create-react-app](https://github.com/csepulv/electron-with-create-react-app "Github Repository")
-  - [Tutorial article on Medium](https://medium.freecodecamp.com/building-an-electron-application-with-create-react-app-97945861647c#.ze6c9qin1 "Medium Tutorial")
-
-
 ## Tools
 - #### [React.js](https://github.com/facebook/react)
 - #### [Electron](https://github.com/electron/electron)

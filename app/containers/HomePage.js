@@ -1,15 +1,23 @@
-// @flow
-import React, { Component } from 'react';
-import Home from '../components/Home';
+// NOTE:
+// Actions Needed
+// 	- fetchList
+//
+// Data Needed
+// 	- clientList
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { fetchList } from '../actions'
 
-type Props = {};
+import Home from '../components/Home'
 
-export default class HomePage extends Component<Props> {
-  props: Props;
+const mapStateToProps = (state) => ({
+	clients: state.list.clientList,
+	loading: state.list.loading,
+	error: state.list.error
+})
 
-  render() {
-    return (
-      <Home />
-    );
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+	getList: bindActionCreators(fetchList, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
