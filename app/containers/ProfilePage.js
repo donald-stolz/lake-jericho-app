@@ -17,9 +17,9 @@ import {
 import Profile from '../components/Profile'
 
 const mapStateToProps = (state) => ({
-	client: state.selected.client,
-	loading: state.selected.loading,
-	error: state.selected.error
+	client: state.client.client,
+	loading: state.client.loading,
+	error: state.client.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
