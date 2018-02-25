@@ -14,12 +14,8 @@
   - [ ] Build Tools, Libraries, and Frameworks
   - [ ] Resources & Tutorials
 - [ ] Code refactoring & complete inline comments
-
-
-## Resources
-- #### [electron-with-create-react-app](https://github.com/csepulv/electron-with-create-react-app "Github Repository")
-  - [Tutorial article on Medium](https://medium.freecodecamp.com/building-an-electron-application-with-create-react-app-97945861647c#.ze6c9qin1 "Medium Tutorial")
-
+- [x] New boilerplate with DevTools
+- [ ] Add Travis CI
 
 ## Tools
 - #### [React.js](https://github.com/facebook/react)
