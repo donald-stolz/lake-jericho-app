@@ -1,103 +1,65 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import LabeledInput from './LabeledInput';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
+
+
+const styles = theme => ({
+  root: {
+		flex: 1,
+    textAlign: 'center',
+    paddingTop: theme.spacing.unit * 20,
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+});
 
 class AddPersonalInfo extends Component {
+// TODO: Button Events
 
-  onSave(e){
-    e.preventDefault()
-
-    var personal = {
-        name: this.refs.name.value,
-        dob: this.refs.dob.value,
-        address: this.refs.address.value,
-        phone: this.refs.phone.value,
-        email: this.refs.email.value,
-    }
-    this.props.save(personal)
-  }
-
-  onCancel(e){
-    e.preventDefault()
-    this.props.cancel()
-  }
-
-  cancelButton(){
-    //if new client === true
-    if (this.props.newClient) {
-      return(<Link to="/" className="btn btn-danger pull-left"> Cancel </Link>)
-    }
-    //else new client
-    else {
-      return(<button onClick={this.onCancel.bind(this)} className="btn btn-danger pull-left"> Cancel </button>)
-    }
-  }
+	handleChange(event){
+		// TODO
+	}
 
   render(){
-    var client
-
-    if (this.props.client) {
-      client = this.props.client
-    }
-    else {
-      client = {
-          name: "",
-          dob: "",
-          address: "",
-          phone: "",
-          email: "",
-      }
-    }
-
+		const { classes } = this.props;
 
     return(
-      <div className="row">
-        <div className="container-fluid">
-          <div className="panel panel-primary">
-            <div className="panel-heading">
-              <h2 className="panel-title">Personal Information</h2>
-            </div>
-            <div className="panel-body">
-              <form className="form-horizontal">
-                <div className="form-group"><label className="col-sm-2 control-label">Name:</label>
-
-                  <div className="col-sm-10">
-                    <input type="text" className="form-control" defaultValue={client.name} placeholder="Full Name" ref="name"/>
-                  </div>
-                </div>
-
-                <div className="form-group"><label className="col-sm-2 control-label">Date of Birth:</label>
-                  <div className="col-sm-10">
-                    <input type="date" className="form-control" defaultValue={client.dob} placeholder="Date of Birth" ref="dob"/>
-                  </div>
-                </div>
-
-                <div className="form-group"><label className="col-sm-2 control-label">Address:</label>
-                  <div className="col-sm-10">
-                    <input type="text" className="form-control" defaultValue={client.address} placeholder="Address" ref="address"/>
-                  </div>
-                </div>
-
-                <div className="form-group"><label className="col-sm-2 control-label">Phone Number:</label>
-                  <div className="col-sm-10">
-                    <input type="number" className="form-control" defaultValue={client.phone} placeholder="Phone Number" ref="phone"/>
-                  </div>
-                </div>
-
-                <div className="form-group"><label className="col-sm-2 control-label">Email:</label>
-                  <div className="col-sm-10">
-                    <input type="email" className="form-control" defaultValue={client.email} placeholder="Email" ref="email"/>
-                  </div>
-                </div>
-
-              {this.cancelButton()}
-              <button onClick={this.onSave.bind(this)} className="btn btn-success pull-right"> Save </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+			<div className={classes.container}>
+			  <AppBar position="static" color="default">
+			    <Toolbar>
+			      <Typography variant="title" color="inherit">
+			        Personal Information
+			      </Typography>
+			    </Toolbar>
+			  </AppBar>
+				<Paper elevation={4}>
+					<LabeledInput label={"Name"} onChange={this.handleChange.bind(this)} />
+					<LabeledInput label={"ToDo Date"} onChange={this.handleChange.bind(this)} />
+					<LabeledInput label={"Address"} onChange={this.handleChange.bind(this)} />
+					<LabeledInput label={"Phone Number"} onChange={this.handleChange.bind(this)} />
+					<LabeledInput label={"Email"} onChange={this.handleChange.bind(this)} />
+					<Button variant="raised" color="secondary" className={classes.cancelButton}>
+						Cancel
+					</Button>
+					<Button variant="raised" color="primary" className={classes.nextButton} >
+			      Next
+			    </Button>
+				</Paper>
+			</div>
     )
   }
 }
 
-export default AddPersonalInfo
+// <DateInput label={"Date of Birth"} onChange={this.handleChange.bind(this)}/>
+
+
+export default withStyles(styles)(AddPersonalInfo)
