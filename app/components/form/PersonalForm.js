@@ -37,7 +37,7 @@ class PersonalForm extends Component {
 
   render(){
 		const { classes } = this.props;
-
+    const { client } = this.props;
     return(
 			<div className={classes.root}>
   			<Paper className={classes.container} elevation={6}>
@@ -48,11 +48,11 @@ class PersonalForm extends Component {
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
-					<LabeledInput label={"Name"} onChange={this.handleChange.bind(this)} />
-					<DatePicker onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"Address"} onChange={this.handleChange.bind(this)} />
-					<PhoneInput onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"Email"} onChange={this.handleChange.bind(this)} />
+					<LabeledInput label={"Name"} onChange={this.handleChange.bind(this)} value={client.name}/>
+					<DatePicker onChange={this.handleChange.bind(this)} value={client.dob}/>
+					<LabeledInput label={"Address"} onChange={this.handleChange.bind(this)} value={client.address}/>
+					<PhoneInput onChange={this.handleChange.bind(this)} value={client.phone}/>
+					<LabeledInput label={"Email"} onChange={this.handleChange.bind(this)} value={client.email}/>
           <Grid container className={classes.buttonBar} justify={'space-around'}>
             <Grid item>
               <Button size="large" variant="raised" color="secondary" className={classes.button}>
@@ -72,7 +72,24 @@ class PersonalForm extends Component {
   }
 }
 
-// <DateInput label={"Date of Birth"} onChange={this.handleChange.bind(this)}/>
+PersonalForm.defaultProps = {
+  client: PropTypes.shape({
+		name: PropTypes.string,
+		dob: PropTypes.string,
+		address: PropTypes.string,
+		phone: PropTypes.string,
+		email: PropTypes.string,
+	}).isRequired
+}
 
+PersonalForm.propTypes = {
+  client: {
+    name: '',
+    dob: '',
+    address: '',
+    phone: '(  )    -    ',
+    email: '',
+	}
+}
 
 export default withStyles(styles)(PersonalForm)

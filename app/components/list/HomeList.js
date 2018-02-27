@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+
+
+const styles = theme => ({
+
+});
 
 function HomeList(props) {
   const name = props.name
@@ -31,4 +35,4 @@ function HomeList(props) {
     );
 }
 
-export default (HomeList);
+export default withStyles(styles)(HomeList);
