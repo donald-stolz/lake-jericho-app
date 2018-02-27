@@ -9,8 +9,9 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-router-dom';
 import HomeList from './list/HomeList'
+import Paper from 'material-ui/Paper';
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
@@ -21,7 +22,11 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
-};
+  container: {
+    marginTop: theme.spacing.unit,
+    width: '100%',
+  },
+});
 
 class Home extends Component{
   constructor(props){
@@ -36,6 +41,7 @@ class Home extends Component{
 
     return (
       <div className={classes.root}>
+      <Paper className={classes.container} elevation={6}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
@@ -48,6 +54,7 @@ class Home extends Component{
           </Toolbar>
         </AppBar>
         <HomeList clients={this.props.clients}/>
+        </Paper>
       </div>
     );
   }

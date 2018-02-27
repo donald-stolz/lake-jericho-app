@@ -5,21 +5,10 @@ import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 
-
-const styles = theme => ({
-  root: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    // marginTop: theme.spacing.unit,
-    width: '100%',
-  },
-});
-
 function HomeList(props) {
   const name = props.name
   const id = props.id
   let HomeListItems;
-  const { classes } = props;
 
   const clients = props.clients;
   if (clients) {
@@ -35,12 +24,11 @@ function HomeList(props) {
     }
 
   return (
-    <Paper className={classes.root} elevation={4}>
     <List component="nav">
       {HomeListItems}
     </List>
-    </Paper>
+
     );
 }
 
-export default withStyles(styles)(HomeList);
+export default (HomeList);
