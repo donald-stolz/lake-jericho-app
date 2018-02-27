@@ -40,14 +40,14 @@ class PersonalForm extends Component {
 
     return(
 			<div className={classes.root}>
-			  <AppBar className={classes.container} position="static" color="primary" >
-			    <Toolbar>
-			      <Typography variant="title" color="inherit">
-			        Personal Information
-			      </Typography>
-			    </Toolbar>
-			  </AppBar>
-				<Paper className={classes.container} elevation={2}>
+  			<Paper className={classes.container} elevation={6}>
+          <AppBar className={classes.container} position="static" color="primary" >
+  			    <Toolbar>
+  			      <Typography variant="title" color="inherit">
+  			        Personal Information
+  			      </Typography>
+  			    </Toolbar>
+  			  </AppBar>
 					<LabeledInput label={"Name"} onChange={this.handleChange.bind(this)} />
 					<DatePicker onChange={this.handleChange.bind(this)} />
 					<LabeledInput label={"Address"} onChange={this.handleChange.bind(this)} />
