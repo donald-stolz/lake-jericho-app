@@ -5,12 +5,12 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
+// import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
 import PhoneInput from '../common/PhoneInput'
 import DatePicker from '../common/DatePicker'
-import Grid from 'material-ui/Grid';
+// import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   root: {
@@ -29,12 +29,10 @@ const styles = theme => ({
 class PersonalForm extends Component {
 // TODO: Button Events
 
-	handleChange(event){
-		// TODO: Should pass to parent
-	}
-
   render(){
 		const { classes } = this.props;
+		const inputChange = this.props.handleChange.bind(this)
+
 
     return(
 			<div className={classes.root}>
@@ -46,51 +44,36 @@ class PersonalForm extends Component {
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
-					<LabeledInput label={"Name"} onChange={this.handleChange.bind(this)} />
-					<DatePicker onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"Address"} onChange={this.handleChange.bind(this)} />
-					<PhoneInput onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"Email"} onChange={this.handleChange.bind(this)} />
-          <Grid container className={classes.buttonBar} justify={'space-around'}>
-            <Grid item>
-              <Button size="large" variant="raised" color="secondary" className={classes.button}>
-    						Cancel
-    					</Button>
-            </Grid>
-            <Grid item>
-    					<Button size="large" variant="raised" color="primary" className={classes.button}>
-    			      Next
-    			    </Button>
-             </Grid>
-
-          </Grid>
+					<LabeledInput label={"Name"} onChange={inputChange} />
+					<DatePicker onChange={inputChange} />
+					<LabeledInput label={"Address"} onChange={inputChange} />
+					<PhoneInput onChange={inputChange} />
+					<LabeledInput label={"Email"} onChange={inputChange} />
 				</Paper>
 			</div>
     )
   }
 }
 
-// const { client } = this.props;
-// NOTE: Use in Profile, not here
 PersonalForm.defaultProps = {
 	classes: PropTypes.object.isRequired,
-	// client: PropTypes.shape({
-	// 	name: PropTypes.string,
-	// 	dob: PropTypes.string,
-	// 	address: PropTypes.string,
-	// 	phone: PropTypes.string,
-	// 	email: PropTypes.string,
-	// })
+	handleChange: PropTypes.func.isRequired,
 }
 
+
 PersonalForm.propTypes = {
-  // client: {
-  //   name: ' ',
-  //   dob: '',
-  //   address: '',
-  //   phone: '(  )    -    ',
-  //   email: '',
-	// }
+	handleChange: (event) => {console.log(event.target.value);},
 }
 
 export default withStyles(styles)(PersonalForm)
+
+// // const { client } = this.props;
+// // NOTE: Use in Profile, not here
+// PersonalForm.defaultProps = {
+// 	classes: PropTypes.object.isRequired,
+//
+// }
+//
+// PersonalForm.propTypes = {
+//
+// }

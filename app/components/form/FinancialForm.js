@@ -5,10 +5,11 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
+
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
-import Grid from 'material-ui/Grid';
+// import Grid from 'material-ui/Grid';
+// import Button from 'material-ui/Button';
 
 const styles = theme => ({
   root: {
@@ -27,13 +28,9 @@ const styles = theme => ({
 class FinancialForm extends Component {
 // TODO: Button Events
 
-	handleChange(event){
-		// TODO: Should pass to parent
-	}
-
   render(){
 		const { classes } = this.props;
-		const inputChange = this.handleChange.bind(this)
+		const inputChange = this.props.handleChange.bind(this)
 
     return(
 			<div className={classes.root}>
@@ -60,19 +57,6 @@ class FinancialForm extends Component {
 					<LabeledInput label={"Ability"} id={'riskAbility'} onChange={inputChange} />
 					<LabeledInput label={"Willingness"} id={'riskWillingness'} onChange={inputChange} />
 					<LabeledInput label={"Overall"} id={'riskOverallAbility'} onChange={inputChange} />
-					<Grid container className={classes.buttonBar} justify={'space-around'}>
-            <Grid item>
-              <Button size="large" variant="raised" color="secondary" className={classes.button}>
-    						Cancel
-    					</Button>
-            </Grid>
-            <Grid item>
-    					<Button size="large" variant="raised" color="primary" className={classes.button}>
-    			      Next
-    			    </Button>
-             </Grid>
-
-          </Grid>
 				</Paper>
 			</div>
     )
@@ -81,12 +65,14 @@ class FinancialForm extends Component {
 
 // const { client } = this.props;
 // NOTE: Use in Profile, not here
-PersonalForm.defaultProps = {
+FinancialForm.defaultProps = {
 	classes: PropTypes.object.isRequired,
+	handleChange: PropTypes.func.isRequired,
 }
 
-// PersonalForm.propTypes = {
-//
-// }
+
+FinancialForm.propTypes = {
+	handleChange: (event) => {console.log(event.target.value);},
+}
 
 export default withStyles(styles)(FinancialForm)

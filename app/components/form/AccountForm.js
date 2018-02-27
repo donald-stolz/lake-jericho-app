@@ -11,7 +11,11 @@ import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
 import DatePicker from '../common/DatePicker'
 import SimpleSelect from '../common/SimpleSelect'
-import { TAX_MENU, HORIZON_MENU, BIAS_MENU } from '../../constants/constants'
+import {
+	CLIENT_STRUCT,
+	TAX_MENU,
+	HORIZON_MENU,
+	BIAS_MENU } from '../../constants/constants'
 
 const styles = theme => ({
   root: {
@@ -28,10 +32,18 @@ const styles = theme => ({
 });
 
 class AccountForm extends Component {
-// TODO: Button Events
+
+	constructor(props){
+		super(props);
+		this.state={
+			CLIENT_STRUCT$accounts
+		}
+	}
 
 	handleChange(event){
-		// TODO: Should pass to parent
+		this.setState({
+			[event.target.id]: event.target
+		})
 	}
 
   render(){
@@ -77,7 +89,7 @@ class AccountForm extends Component {
 
 // const { client } = this.props;
 // NOTE: Use in Profile, not here
-PersonalForm.defaultProps = {
+AccountForm.defaultProps = {
 	classes: PropTypes.object.isRequired,
 }
 
