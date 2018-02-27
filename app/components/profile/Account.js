@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddAccount from '../form/AddAccount'
+import AddAccount from '../form/old/AddAccount'
 import AccountNavList from '../list/AccountNavList'
 import PerformanceHistory from './PerformanceHistory'
 import RemoveAccount from './RemoveAccount'

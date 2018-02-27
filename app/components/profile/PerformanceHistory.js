@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddPerformance from '../form/AddPerformance';
+import AddPerformance from '../form/old/AddPerformance';
 import PerformanceDropdownList from '../list/PerformanceDropdownList';
 
 class PerformanceHistory extends Component {

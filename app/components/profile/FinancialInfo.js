@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddFinancialInfo from '../form/AddFinancialInfo'
+import AddFinancialInfo from '../form/old/AddFinancialInfo'
 
 class FinancialInfo extends Component {
   constructor() {

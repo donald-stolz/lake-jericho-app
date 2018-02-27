@@ -6,11 +6,12 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
-import PhoneInput from '../common/PhoneInput'
 import DatePicker from '../common/DatePicker'
-import Grid from 'material-ui/Grid';
+import SimpleSelect from '../common/SimpleSelect'
+import { TAX_MENU, HORIZON_MENU, BIAS_MENU } from '../../constants/constants'
 
 const styles = theme => ({
   root: {
@@ -26,7 +27,7 @@ const styles = theme => ({
   }
 });
 
-class PersonalForm extends Component {
+class AccountForm extends Component {
 // TODO: Button Events
 
 	handleChange(event){
@@ -35,6 +36,7 @@ class PersonalForm extends Component {
 
   render(){
 		const { classes } = this.props;
+		const inputChange = this.handleChange.bind(this)
 
     return(
 			<div className={classes.root}>
@@ -42,16 +44,19 @@ class PersonalForm extends Component {
           <AppBar className={classes.container} position="static" color="primary" >
   			    <Toolbar>
   			      <Typography variant="title" color="inherit">
-  			        Personal Information
+  			        Account Information
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
-					<LabeledInput label={"Name"} onChange={this.handleChange.bind(this)} />
-					<DatePicker onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"Address"} onChange={this.handleChange.bind(this)} />
-					<PhoneInput onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"Email"} onChange={this.handleChange.bind(this)} />
-          <Grid container className={classes.buttonBar} justify={'space-around'}>
+					<LabeledInput label={"Account Name"} id={'accName'} onChange={inputChange} />
+					<DatePicker 	label={"Start Date"} id={'startDate'} onChange={this.handleChange.bind(this)} />
+					<SimpleSelect label={"Tax"} id={'tax'} menu={TAX_MENU}/>
+					<SimpleSelect label={"Horizon"} id={'horizon'} menu={HORIZON_MENU}/>
+					<SimpleSelect label={"Bias"} id={'bias'} menu={BIAS_MENU}/>
+
+					// TODO: PerformanceForm
+
+					<Grid container className={classes.buttonBar} justify={'space-around'}>
             <Grid item>
               <Button size="large" variant="raised" color="secondary" className={classes.button}>
     						Cancel
@@ -74,23 +79,10 @@ class PersonalForm extends Component {
 // NOTE: Use in Profile, not here
 PersonalForm.defaultProps = {
 	classes: PropTypes.object.isRequired,
-	// client: PropTypes.shape({
-	// 	name: PropTypes.string,
-	// 	dob: PropTypes.string,
-	// 	address: PropTypes.string,
-	// 	phone: PropTypes.string,
-	// 	email: PropTypes.string,
-	// })
 }
 
-PersonalForm.propTypes = {
-  // client: {
-  //   name: ' ',
-  //   dob: '',
-  //   address: '',
-  //   phone: '(  )    -    ',
-  //   email: '',
-	// }
-}
+// PersonalForm.propTypes = {
+//
+// }
 
-export default withStyles(styles)(PersonalForm)
+export default withStyles(styles)(AccountForm)

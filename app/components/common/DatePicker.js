@@ -17,17 +17,16 @@ const styles = theme => ({
 class DatePicker extends React.Component {
   constructor(props){
     super(props);
-
     this.state = {
-      date: this.props.value,
+      [this.props.id]: this.props.value,
     };
-
   }
 
   handleChange = event => {
-    // this.setState({
-    //   [name]: event.target.value,
-    // });
+		this.setState({
+			[this.props.id] : event.target.value,
+		});
+		this.props.handleChange(event);
   };
 // TODO: Able to pass value
   render(){
@@ -36,11 +35,11 @@ class DatePicker extends React.Component {
     return (
       <FormControl fullWidth className={classes.container}>
         <TextField
-          id="date"
-          label="Date of Birth"
+          id={this.props.id}
+					label={this.props.label}
           type="date"
-          placeholder="Date of Birth"
           className={classes.textField}
+					onChange={this.handleChange}
           InputLabelProps={{
             shrink: true,
           }}
@@ -51,6 +50,15 @@ class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   classes: PropTypes.object.isRequired,
+	label: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
+	handleChange: PropTypes.func.isRequired
 };
+
+DatePicker.defaultProps = {
+	label: "Date of Birth",
+	id: "date",
+	handleChange: (event) => {console.log(event.target.value);},
+}
 
 export default withStyles(styles)(DatePicker);

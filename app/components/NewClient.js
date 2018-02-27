@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PersonalForm  from './form/PersonalForm'
-import AddFinancialInfo  from './form/AddFinancialInfo'
-import AddAccount     from './form/AddAccount'
-import Continue       from './form/Continue'
+import AddFinancialInfo  from './form/old/AddFinancialInfo'
+import AddAccount     from './form/old/AddAccount'
+import Continue       from './old/form/Continue'
 
 var personal = {}
 var financial = {}
