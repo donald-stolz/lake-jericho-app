@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddPersonalInfo from '../form/AddPersonalInfo'
+import PersonalForm from '../form/PersonalForm'
 
 class PersonalInfo extends Component {
   constructor() {
@@ -24,7 +24,7 @@ class PersonalInfo extends Component {
     if (editing) {
      return (
         <div className="container-fluid">
-          <AddPersonalInfo client={client}
+          <PersonalForm client={client}
               newClient={false}
               save={this.updateInfo.bind(this)}
               cancel={this.cancelUpdate.bind(this)}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddPersonalInfo  from './form/AddPersonalInfo'
+import PersonalForm  from './form/PersonalForm'
 import AddFinancialInfo  from './form/AddFinancialInfo'
 import AddAccount     from './form/AddAccount'
 import Continue       from './form/Continue'
@@ -77,7 +77,7 @@ class NewClient extends Component {
     switch (step) {
       case 0:
         // Step 1: Displays personal fields
-        return < AddPersonalInfo client={this.personal}
+        return < PersonalForm client={this.personal}
                   newClient={true}
                   save={this.savePersonal.bind(this)}/>
       case 1:

@@ -28,10 +28,9 @@ class LabeledInput extends React.Component {
 		const { classes } = this.props;
 
 	  return (
-			<FormControl fullWidth >
-	      <InputLabel className={classes.input}>{this.props.label} </InputLabel>
+      <FormControl fullWidth className={classes.container}>
+	      <InputLabel shrink={"false"} className={classes.input}>{this.props.label} </InputLabel>
 	      <Input
-	        placeholder={this.props.label}
 					value={this.props.value}
 					onChange={this.handleChange}
 	        className={classes.input}

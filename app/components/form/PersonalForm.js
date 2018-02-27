@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import LabeledInput from './LabeledInput';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -8,51 +7,65 @@ import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+import LabeledInput from './LabeledInput';
+import PhoneInput from './PhoneInput'
+import DatePicker from './DatePicker'
+import Grid from 'material-ui/Grid';
+
 
 
 const styles = theme => ({
   root: {
 		flex: 1,
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
   },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
+  buttonBar: {
+    paddingTop: 5,
+    paddingBottom: 10
+  }
 });
 
-class AddPersonalInfo extends Component {
+class PersonalForm extends Component {
 // TODO: Button Events
 
 	handleChange(event){
-		// TODO
+		// TODO: Should pass to parent
 	}
 
   render(){
 		const { classes } = this.props;
 
     return(
-			<div className={classes.container}>
-			  <AppBar position="static" color="default">
+			<div className={classes.root}>
+			  <AppBar className={classes.container} position="static" color="primary" >
 			    <Toolbar>
 			      <Typography variant="title" color="inherit">
 			        Personal Information
 			      </Typography>
 			    </Toolbar>
 			  </AppBar>
-				<Paper elevation={4}>
+				<Paper className={classes.container} elevation={2}>
 					<LabeledInput label={"Name"} onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"ToDo Date"} onChange={this.handleChange.bind(this)} />
+					<DatePicker onChange={this.handleChange.bind(this)} />
 					<LabeledInput label={"Address"} onChange={this.handleChange.bind(this)} />
-					<LabeledInput label={"Phone Number"} onChange={this.handleChange.bind(this)} />
+					<PhoneInput onChange={this.handleChange.bind(this)} />
 					<LabeledInput label={"Email"} onChange={this.handleChange.bind(this)} />
-					<Button variant="raised" color="secondary" className={classes.cancelButton}>
-						Cancel
-					</Button>
-					<Button variant="raised" color="primary" className={classes.nextButton} >
-			      Next
-			    </Button>
+          <Grid container className={classes.buttonBar} justify={'space-around'}>
+            <Grid item>
+              <Button size="large" variant="raised" color="secondary" className={classes.button}>
+    						Cancel
+    					</Button>
+            </Grid>
+            <Grid item>
+    					<Button size="large" variant="raised" color="primary" className={classes.button}>
+    			      Next
+    			    </Button>
+             </Grid>
+
+          </Grid>
 				</Paper>
 			</div>
     )
@@ -62,4 +75,4 @@ class AddPersonalInfo extends Component {
 // <DateInput label={"Date of Birth"} onChange={this.handleChange.bind(this)}/>
 
 
-export default withStyles(styles)(AddPersonalInfo)
+export default withStyles(styles)(PersonalForm)
