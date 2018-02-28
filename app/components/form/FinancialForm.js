@@ -18,6 +18,7 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+		width: 100%
   },
   buttonBar: {
     paddingTop: 5,
@@ -34,7 +35,7 @@ class FinancialForm extends Component {
 
     return(
 			<div className={classes.root}>
-  			<Paper className={classes.container} elevation={6}>
+  			<Paper fullWidth className={classes.container} elevation={6}>
           <AppBar className={classes.container} position="static" color="primary" >
   			    <Toolbar>
   			      <Typography variant="title" color="inherit">

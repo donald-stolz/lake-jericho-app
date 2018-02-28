@@ -24,6 +24,7 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+		width: 100%
   },
   buttonBar: {
     paddingTop: 5,

@@ -41,7 +41,7 @@ class SimpleSelect extends React.Component {
 			});
 
     return (
-        <FormControl fullWidth className={classes.formControl}>
+        <FormControl className={classes.formControl}>
           <InputLabel shrink={"false"} className={classes.label}>{label}</InputLabel>
           <Select
             value={this.state.value}

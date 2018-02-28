@@ -33,7 +33,7 @@ class DatePicker extends React.Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth className={classes.container}>
+      <FormControl className={classes.container}>
         <TextField
           id={this.props.id}
 					label={this.props.label}

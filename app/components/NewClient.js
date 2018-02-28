@@ -111,7 +111,7 @@ class NewClient extends Component {
 								variant="raised"
 								color="primary"
 								className={classes.button}
-								onClick={this.nextStep.bind(this)}>
+								onClicks={this.nextStep.bind(this)}>
 							Next
 						</Button>
 					 </Grid>
