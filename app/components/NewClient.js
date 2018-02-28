@@ -22,7 +22,7 @@ const styles = theme => ({
   buttonBar: {
     paddingTop: 5,
     paddingBottom: 10
-  }
+  },
 });
 
 class NewClient extends Component {

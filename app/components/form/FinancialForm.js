@@ -5,6 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
+import List, { ListItem } from 'material-ui/List';
 
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
@@ -23,6 +24,11 @@ const styles = theme => ({
   buttonBar: {
     paddingTop: 20,
     paddingBottom: 10
+  },
+  list:{
+    paddingLeft: theme.spacing.unit * 2,
+    minWidth: 300,
+    maxWidth: 400
   }
 });
 
@@ -35,7 +41,7 @@ class FinancialForm extends Component {
 
     return(
 			<div className={classes.root}>
-  			<Paper fullWidth className={classes.container} elevation={6}>
+  			<Paper className={classes.container} elevation={6}>
           <AppBar className={classes.container} position="static" color="primary" >
   			    <Toolbar>
   			      <Typography variant="title" color="inherit">
@@ -73,7 +79,7 @@ FinancialForm.defaultProps = {
 
 
 FinancialForm.propTypes = {
-	handleChange: (event) => {console.log(event.target.value);},
+	handleChange: (event) => {console.log(event);},
 }
 
 export default withStyles(styles)(FinancialForm)

@@ -7,9 +7,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
-import DatePicker from '../common/DatePicker'
+import MonthYearPicker from '../common/MonthYearPicker'
 import SimpleSelect from '../common/SimpleSelect'
-import PerformanceForm from './PerformanceForm'
 import {
 	CLIENT_STRUCT,
 	TAX_MENU,
@@ -25,17 +24,13 @@ const styles = theme => ({
     flexWrap: 'wrap',
 		width: '100%'
   },
-  buttonBar: {
-    paddingTop: 5,
-    paddingBottom: 10
-  }
 });
 
-class AccountForm extends Component {
+class PerformanceForm extends Component {
 
 	constructor(props){
 		super(props);
-		this.state={ ...CLIENT_STRUCT.accounts[0]}
+		this.state={...CLIENT_STRUCT.accounts[0].performanceHist}
 	}
 
 	// handleChange(event){
@@ -53,34 +48,31 @@ class AccountForm extends Component {
   			<Paper className={classes.container} elevation={6}>
           <AppBar className={classes.container} position="static" color="primary" >
   			    <Toolbar>
-  			      <Typography variant="title" color="inherit">
-  			        Account Information
+  			      <Typography variant="title" color="default">
+  			        Performance History
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
-					<LabeledInput label={"Account Name"} id={'accName'} onChange={inputChange} />
-					<DatePicker 	label={"Start Date"} id={'startDate'} onChange={inputChange} />
+					<MonthYearPicker 	id={'startDate'} onChange={inputChange} />
 					<SimpleSelect label={"Tax"} id={'tax'} menu={TAX_MENU}/>
-					<SimpleSelect label={"Horizon"} id={'horizon'} menu={HORIZON_MENU} onChange={inputChange}/>
-					<SimpleSelect label={"Bias"} id={'bias'} menu={BIAS_MENU} onChange={inputChange}/>
-
-					<PerformanceForm handleChange={inputChange}/>
-
+					<SimpleSelect label={"Horizon"} id={'horizon'} menu={HORIZON_MENU}/>
+					<SimpleSelect label={"Bias"} id={'bias'} menu={BIAS_MENU}/>
+          <LabeledInput label={"Begin Balance"} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
+          <LabeledInput label={"End Balance"} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
+          <LabeledInput label={"Net Return"} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
 				</Paper>
 			</div>
     )
   }
 }
 
-// const { client } = this.props;
-// NOTE: Use in Profile, not here
-AccountForm.defaultProps = {
+PerformanceForm.defaultProps = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
 }
 
-AccountForm.propTypes = {
+PerformanceForm.propTypes = {
   handleChange: (event) => {console.log(event)},
 }
 
-export default withStyles(styles)(AccountForm)
+export default withStyles(styles)(PerformanceForm)

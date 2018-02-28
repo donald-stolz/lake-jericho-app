@@ -11,6 +11,8 @@ import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
 import PhoneInput from '../common/PhoneInput'
 import DatePicker from '../common/DatePicker'
+
+import MonthYearPicker from '../common/MonthYearPicker'
 // import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
@@ -20,12 +22,13 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-		width: '100%'
+		width: '100%',
+
   },
   list:{
 		paddingLeft: theme.spacing.unit * 2,
-		minWidth: 400,
-		maxWidth: 600
+		minWidth: 300,
+		maxWidth: 400
 	}
 });
 
