@@ -18,12 +18,30 @@ const styles = theme => ({
   },
 });
 
-class SimpleSelect extends React.Component {
+const Months = Array.from(Array(12).keys()).map(value => {
+	value = value++;
+	var month = (value).toString();
+	//Add 0 for months less than 10
+	if (value < 10) {month = "0"+ month}
+	return(<MenuItem key={month} value={month}> {month} </MenuItem> )
+})
+
+const Years = Array.from(Array(30).keys()).map(value => {
+	value = value++;
+	var year = (value).toString();
+	//Add 0 for months less than 10
+	if (value < 10) {year = "0"+ year}
+	return(<MenuItem key={year} value={year}> {year} </MenuItem> )
+})
+
+
+class MonthYearPicker extends React.Component {
 
 	constructor(props){
 		super(props);
 		this.state = {
-			value: this.props.value,
+			month: mon,
+			year:	yr
 		};
 	}
 
@@ -36,53 +54,42 @@ class SimpleSelect extends React.Component {
 	};
 
   render() {
-    const { classes, menu, label, id } = this.props;
-		const Months
-    const Years
+    const { classes } = this.props;
 
     return (
         <FormControl fullWidth className={classes.formControl}>
-          <InputLabel shrink={"false"} className={classes.label}>{label}</InputLabel>
+          <InputLabel shrink={"false"} className={classes.label}>Month</InputLabel>
           <Select
-            value={this.state.value}
+            value={this.state.month}
             onChange={this.handleChange}
-            inputProps={{
-              name: "Month",
-              id: "month",
-            }}
+            inputProps={{name: "Month",id: "month",}}
           >
-            {MenuItems}
+            {Months}
           </Select>
-          <InputLabel shrink={"false"} className={classes.label}>{label}</InputLabel>
+
+          <InputLabel shrink={"false"} className={classes.label}>Year</InputLabel>
           <Select
             value={this.state.year}
             onChange={this.handleChange}
-            inputProps={{
-              name: "Year",
-              id: "year",
-            }}
+            inputProps={{ name: "Year", id: "year",}}
           >
-            { }
+            {Years}
           </Select>
         </FormControl>
 			)
 		}
 }
-SimpleSelect.propTypes = {
+MonthYearPicker.propTypes = {
   classes: PropTypes.object.isRequired,
 	value: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
 	id: PropTypes.string.isRequired,
 	handleChange: PropTypes.func.isRequired,
-	menu: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
-SimpleSelect.defaultProps = {
-	value: '',
-	label: "Select",
-	id: "select",
+MonthYearPicker.defaultProps = {
+	value: '01/01',
+	id: 'myp',
 	handleChange: (event) => {console.log(event.target.value);},
-	menu: ["No Options"]
 }
 
-export default withStyles(styles)(SimpleSelect);
+export default withStyles(styles)(MonthYearPicker);

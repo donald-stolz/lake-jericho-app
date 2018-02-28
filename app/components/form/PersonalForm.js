@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 // import Button from 'material-ui/Button';
+import List from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
 import PhoneInput from '../common/PhoneInput'
@@ -19,20 +20,25 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-		width: 100%
+		width: '100%'
   },
-  buttonBar: {
-    paddingTop: 5,
-    paddingBottom: 10
-  }
+  list:{
+		paddingLeft: theme.spacing.unit * 2,
+		minWidth: 400,
+		maxWidth: 600
+	}
 });
 
 class PersonalForm extends Component {
 // TODO: Button Events
+	handleChange = target => {
+		console.log(target.value);
+		this.props.handleChange(target);
+	};
 
   render(){
 		const { classes } = this.props;
-		const inputChange = this.props.handleChange.bind(this)
+		const inputChange = this.handleChange.bind(this)
 
 
     return(
@@ -45,11 +51,13 @@ class PersonalForm extends Component {
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
-					<LabeledInput label={"Name"} onChange={inputChange} />
-					<DatePicker onChange={inputChange} />
-					<LabeledInput label={"Address"} onChange={inputChange} />
-					<PhoneInput onChange={inputChange} />
-					<LabeledInput label={"Email"} onChange={inputChange} />
+					<List component="nav" className={classes.list}>
+						<LabeledInput label={"Name"} onChange={inputChange} />
+						<DatePicker onChange={inputChange} />
+						<LabeledInput label={"Address"} onChange={inputChange} />
+						<PhoneInput onChange={inputChange} />
+						<LabeledInput label={"Email"} onChange={inputChange} />
+					</List>
 				</Paper>
 			</div>
     )
@@ -63,7 +71,7 @@ PersonalForm.defaultProps = {
 
 
 PersonalForm.propTypes = {
-	handleChange: (event) => {console.log(event.target.value);},
+	handleChange: (event) => {console.log(event);},
 }
 
 export default withStyles(styles)(PersonalForm)

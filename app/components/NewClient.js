@@ -48,9 +48,7 @@ class NewClient extends Component {
   }
 
 	update(event){
-		this.setState({
-			[event.target.id]: event.target
-		})
+		console.log(event);
 	}
 
 	updateAccount(account){
@@ -111,7 +109,7 @@ class NewClient extends Component {
 								variant="raised"
 								color="primary"
 								className={classes.button}
-								onClicks={this.nextStep.bind(this)}>
+								onClick={this.nextStep.bind(this)}>
 							Next
 						</Button>
 					 </Grid>
