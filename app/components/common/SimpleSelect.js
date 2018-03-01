@@ -37,10 +37,11 @@ class SimpleSelect extends React.Component {
 
   render() {
     const { classes, menu, label, id } = this.props;
-		const MenuItems = menu.map(item => {
-				return(<MenuItem key={item} value={item}> {item} </MenuItem> )
+		const MenuItems = menu.map((item, index) => {
+				return(<MenuItem key={index} value={item}> {item} </MenuItem> )
 			});
 
+			console.log(this.state.value);
     return (
         <FormControl className={classes.formControl}>
           <InputLabel shrink={"false"} className={classes.label}>{label}</InputLabel>

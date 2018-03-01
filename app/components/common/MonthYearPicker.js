@@ -48,20 +48,20 @@ class MonthYearPicker extends React.Component {
     const val = this.props.value;
 		var nextMonth = parseInt(val.slice(0,1)) + 1;
 		var year = parseInt(val.slice(3,4));
-		if (month > 12) {
+		if (nextMonth > 12) {
 			nextMonth = "01"
 			year = year + 1;
 		}
 		if (year < 10 ) {
 			year = "0" + year;
 		}
-		if (month < 10 && month > 1) {
-			month = "0" + month;
+		if (nextMonth < 10 && nextMonth > 1) {
+			nextMonth = "0" + nextMonth;
 		}
 
 		this.state = {
       value : val,
-      month : month.toString(),
+      month : nextMonth.toString(),
       year  : year.toString(),
 			newRecord : this.props.newRecord,
     };
@@ -95,11 +95,11 @@ class MonthYearPicker extends React.Component {
     return (
       <Grid className={classes.container} container direction={'row'}>
         <Grid item>
-          <FormControl fullWidth className={classes.formControl} {...this.props}>
+          <FormControl fullWidth className={classes.formControl} >
             <InputLabel shrink={"false"} className={classes.label}>Month</InputLabel>
             <Select
               value={this.state.month}
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(this)}
               inputProps={{name: "Month",id: "month",}}
             >
               {Months}
@@ -107,11 +107,11 @@ class MonthYearPicker extends React.Component {
           </FormControl>
         </Grid>
         <Grid item>
-          <FormControl fullWidth className={classes.formControl} {...this.props}>
+          <FormControl fullWidth className={classes.formControl} >
             <InputLabel shrink={"false"} className={classes.label}>Year</InputLabel>
             <Select
               value={this.state.year}
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(this)}
               inputProps={{ name: "Year", id: "year",}}
             >
               {Years}

@@ -51,19 +51,19 @@ class PerformanceForm extends Component {
   			<Paper className={classes.container} elevation={6}>
           <AppBar className={classes.container} position="static" color="primary" >
   			    <Toolbar>
-  			      <Typography variant="title" color="default">
+  			      <Typography variant="title" color="inherit">
   			        Performance History
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<MonthYearPicker 	id="startDate" value={client.startDate} onChange={inputChange} />
-						<SimpleSelect label="Tax" value={client.tax} id={'tax'} menu={TAX_MENU}/>
-						<SimpleSelect label="Horizon" value={client.horizon} id={'horizon'} menu={HORIZON_MENU}/>
-						<SimpleSelect label="Bias" value={client.bias} id={'bias'} menu={BIAS_MENU}/>
-	          <LabeledInput label="Begin Balance" value={client.beginBal} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="End Balance" value={client.endBal} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="Net Return" value={client.netReturn} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
+						<MonthYearPicker 	id="startDate" value={performance.startDate} onChange={inputChange} />
+						<SimpleSelect label="Tax" value={performance.tax} id={'tax'} menu={TAX_MENU}/>
+						<SimpleSelect label="Horizon" value={performance.horizon} id={'horizon'} menu={HORIZON_MENU}/>
+						<SimpleSelect label="Bias" value={performance.bias} id={'bias'} menu={BIAS_MENU}/>
+	          <LabeledInput label="Begin Balance" value={performance.beginBal} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="End Balance" value={performance.endBal} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="Net Return" value={performance.netReturn} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
 					</List>
 				</Paper>
 			</div>
@@ -87,7 +87,7 @@ PerformanceForm.propTypes = {
 
 PerformanceForm.defaultProps = {
   handleChange: (event) => {console.log(event)},
-	performance : [{
+	performance : {
 		date: ' ',
 		tax: ' ',
 		horizon: ' ',
@@ -95,7 +95,7 @@ PerformanceForm.defaultProps = {
 		beginBal: '0',
 		endBal: '0',
 		netReturn: '0'
-	}]
+	}
 }
 
 export default withStyles(styles)(PerformanceForm)

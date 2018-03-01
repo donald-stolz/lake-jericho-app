@@ -66,7 +66,7 @@ class PersonalForm extends Component {
   }
 }
 
-PersonalForm.defaultProps = {
+PersonalForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 	handleChange: PropTypes.func.isRequired,
 	client: PropTypes.shape({
@@ -79,7 +79,7 @@ PersonalForm.defaultProps = {
 }
 // TODO: Add client
 
-PersonalForm.propTypes = {
+PersonalForm.defaultProps = {
 	handleChange: (event) => {console.log(event);},
 	client: {
 		name: ' ',

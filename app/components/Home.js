@@ -20,10 +20,6 @@ const styles = theme => ({
   flex: {
     flex: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
   container: {
     marginTop: theme.spacing.unit,
     width: '100%',

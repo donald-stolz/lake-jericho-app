@@ -9,15 +9,13 @@ import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import List from 'material-ui/List';
-import LabeledInput from '../common/LabeledInput';
-import PhoneInput from '../common/PhoneInput'
-import DatePicker from '../common/DatePicker'
 import Grid from 'material-ui/Grid';
 import AccountForm from '../form/AccountForm'
 import TextField from 'material-ui/TextField';
 import Input from 'material-ui/Input';
 import AccountInfo from './AccountInfo'
 import AddIcon from 'material-ui-icons/Add';
+import PerformanceInfo from './PerformanceInfo'
 
 
 
@@ -64,6 +62,7 @@ class AccountSection extends Component {
   }
 
 	changeAccount = (event, value) => {
+		console.log(value);
     this.setState({ value });
   };
 
@@ -124,7 +123,7 @@ class AccountSection extends Component {
   render(){
 		const { classes, accounts } = this.props;
 		const { viewing, value } = this.state;
-		const tabs = accounts.map((account) => <Tab label={account.accName} />)
+		const tabs = accounts.map((account, index) => <Tab key={index} label={account.accName} />)
 
 		return(
 			<div className={classes.root}>
@@ -141,18 +140,19 @@ class AccountSection extends Component {
 						</Toolbar>
 					</AppBar>
 					<AppBar position="static" color="default" >
-					<row>
-						<Tabs value={value} onChange={this.changeAccount}>
+						<Toolbar>
+						<Tabs value={value} onChange={this.changeAccount} className={classes.flex}>
 							{tabs}
 						</Tabs>
 						<Button color="primary" variant="fab"
 							onClick={this.addAcc.bind(this)}>
 							<AddIcon size={"small"}/>
 						</Button>
-					</row>
+						</Toolbar>
 					</AppBar>
 					{this.renderViewOrEdit()}
 			</Paper>
+			<PerformanceInfo performance={accounts[value].performanceHist}/>
 		</div>
 	)
 	}
@@ -164,7 +164,7 @@ AccountSection.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
 	accounts : PropTypes.arrayOf(PropTypes.shape({
-		accNum: PropTypes.string,
+		accNum: PropTypes.number,
 		accName: PropTypes.string,
 		startBal: PropTypes.string,
 		startDate: PropTypes.string,
@@ -187,7 +187,7 @@ AccountSection.propTypes = {
 AccountSection.defaultProps = {
 	handleChange: (event) => {console.log(event)},
 	accounts : [{
-		accNum: '0',
+		accNum: 0,
 		accName: ' ',
 		startBal: ' ',
 		startDate: ' ',

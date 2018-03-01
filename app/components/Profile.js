@@ -99,7 +99,7 @@ Profile.propTypes = {
 
 		// Empty Account(s) Information
 		accounts : PropTypes.arrayOf(PropTypes.shape({
-			accNum: PropTypes.string,
+			accNum: PropTypes.number,
 			accName: PropTypes.string,
 			startBal: PropTypes.string,
 			startDate: PropTypes.string,
@@ -151,7 +151,7 @@ Profile.defaultProps = {
 
 		// Empty Account(s) Information
 		accounts : [{
-			accNum: '0',
+			accNum: 0,
 			accName: ' ',
 			startBal: ' ',
 			startDate: ' ',

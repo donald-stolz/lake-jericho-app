@@ -41,8 +41,8 @@ class AccountForm extends Component {
 	}
 
 	renderPerformance(){
-		if (this.state.newAccount) {
-			return (<PerformanceForm handleChange={inputChange}/>);
+		if (this.props.newAccount) {
+			return (<PerformanceForm handleChange={this.props.handleChange.bind(this)}/>);
 		}
 	}
 
@@ -68,9 +68,9 @@ class AccountForm extends Component {
 						<SimpleSelect label={"Tax"} value={account.tax} id={'tax'} menu={TAX_MENU}/>
 						<SimpleSelect label={"Horizon"} value={account.horizon} id={'horizon'} menu={HORIZON_MENU} onChange={inputChange}/>
 						<SimpleSelect label={"Bias"} value={account.bias} id={'bias'} menu={BIAS_MENU} onChange={inputChange}/>
-						{this.renderPerformance.bind(this)}
 					</List>
 				</Paper>
+				{this.renderPerformance()}
 			</div>
     )
   }
@@ -96,7 +96,7 @@ AccountForm.propTypes = {
 AccountForm.defaultProps = {
   handleChange: (event) => {console.log(event)},
 	newAccount: true,
-	accounts : {
+	account : {
 		accNum: '0',
 		accName: ' ',
 		startBal: ' ',

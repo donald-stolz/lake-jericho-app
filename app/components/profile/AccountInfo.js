@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
 import List from 'material-ui/List';
-import PerformanceForm from '../form/PerformanceForm'
 import TextField from 'material-ui/TextField';
-import Input from 'material-ui/Input';
 
 
 const styles = theme => ({
-  root: {
-		flex: 1,
-  },
-	flex: {
-    flex: 1,
-  },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -29,17 +16,13 @@ const styles = theme => ({
   list:{
 		paddingLeft: theme.spacing.unit * 2,
 		minWidth: 300,
-		maxWidth: 400
+		maxWidth: 500
 	},
 	textField: {
 		margin: theme.spacing.unit,
 		paddingBottom: 2,
 		flexWrap: 'wrap',
 		width: '100%',
-	},
-	buttonBar: {
-		paddingTop: 5,
-		paddingBottom: 10
 	},
 });
 
@@ -67,7 +50,7 @@ AccountInfo.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
 	account : PropTypes.shape({
-		accNum: PropTypes.string.isRequired,
+		accNum: PropTypes.number.isRequired,
 		accName: PropTypes.string.isRequired,
 		startBal: PropTypes.string.isRequired,
 		startDate: PropTypes.string.isRequired,
@@ -81,7 +64,7 @@ AccountInfo.propTypes = {
 AccountInfo.defaultProps = {
 	handleChange: (event) => {console.log(event)},
 	account : {
-		accNum: '0',
+		accNum: 0,
 		accName: ' ',
 		startBal: ' ',
 		startDate: ' ',
