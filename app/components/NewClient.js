@@ -14,6 +14,8 @@ import Button from 'material-ui/Button';
 const styles = theme => ({
   root: {
 		flex: 1,
+		maxHeight: 800,
+		overflow: 'auto'
   },
   container: {
     display: 'flex',

@@ -70,21 +70,10 @@ PersonalForm.defaultProps = {
 	classes: PropTypes.object.isRequired,
 	handleChange: PropTypes.func.isRequired,
 }
-
+// TODO: Add client
 
 PersonalForm.propTypes = {
 	handleChange: (event) => {console.log(event);},
 }
 
 export default withStyles(styles)(PersonalForm)
-
-// // const { client } = this.props;
-// // NOTE: Use in Profile, not here
-// PersonalForm.defaultProps = {
-// 	classes: PropTypes.object.isRequired,
-//
-// }
-//
-// PersonalForm.propTypes = {
-//
-// }

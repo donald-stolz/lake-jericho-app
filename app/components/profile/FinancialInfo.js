@@ -138,8 +138,8 @@ class FinancialInfo extends Component {
   render(){
 		return(
 			<div>
-			{this.renderViewOrEdit()}
-	  </div>
+				{this.renderViewOrEdit()}
+		  </div>
 	)
 	}
 }

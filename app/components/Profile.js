@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import PersonalInfo   from './profile/PersonalInfo'
+
 import { LinearProgress } from 'material-ui/Progress';
+import List from 'material-ui/List';
+import PersonalInfo from './profile/PersonalInfo';
+import FinancialInfo  from './profile/FinancialInfo';
 
-import FinancialInfo  from './profile/FinancialInfo'
-// import Account        from './profile/old/Account'
-// import RemoveClient        from './profile/old/RemoveClient'
-
-import PropTypes from 'prop-types'
-
-
-
-// TODO:
-// 	[] Lots of refactoring
 const styles = theme => ({
   root: {
 		flex: 1,
+		maxHeight: 800,
+		overflow: 'auto'
   },
   section: {
     marginBottom: 15
-  }
-}
+  },
+	list:{
+		padding: theme.spacing.unit * 2,
+	}
+})
 
 class Profile extends Component {
   constructor(props) {
@@ -43,7 +42,7 @@ class Profile extends Component {
   // Methods for changing states in order to remove a client
 
   render(){
-    console.log(this.props);
+		const {classes} = this.props;
 		// TODO: Center Spinner
 		if (this.state.loading) {
 			return (
@@ -56,8 +55,10 @@ class Profile extends Component {
 			const {client} = this.props
 			return(
 				<div className={classes.root}>
+				<List component="nav" className={classes.list}>
         	<PersonalInfo client={client.personal} className={classes.section}/>
 					<FinancialInfo client={client.financial} className={classes.section}/>
+				</List>
 				</div>
 		)
 		}
