@@ -5,10 +5,13 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
+import List from 'material-ui/List';
+
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
 import MonthYearPicker from '../common/MonthYearPicker'
 import SimpleSelect from '../common/SimpleSelect'
+
 import {
 	CLIENT_STRUCT,
 	TAX_MENU,
@@ -40,7 +43,7 @@ class PerformanceForm extends Component {
 	// }
 
   render(){
-		const { classes } = this.props;
+		const { classes, performance } = this.props;
 		const inputChange = this.props.handleChange.bind(this)
 
     return(
@@ -53,26 +56,46 @@ class PerformanceForm extends Component {
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
-					<MonthYearPicker 	id={'startDate'} onChange={inputChange} />
-					<SimpleSelect label={"Tax"} id={'tax'} menu={TAX_MENU}/>
-					<SimpleSelect label={"Horizon"} id={'horizon'} menu={HORIZON_MENU}/>
-					<SimpleSelect label={"Bias"} id={'bias'} menu={BIAS_MENU}/>
-          <LabeledInput label={"Begin Balance"} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
-          <LabeledInput label={"End Balance"} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
-          <LabeledInput label={"Net Return"} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
+					<List component="nav" className={classes.list}>
+						<MonthYearPicker 	id={'startDate'} onChange={inputChange} />
+						<SimpleSelect label={"Tax"} value={} id={'tax'} menu={TAX_MENU}/>
+						<SimpleSelect label={"Horizon"} value={} id={'horizon'} menu={HORIZON_MENU}/>
+						<SimpleSelect label={"Bias"} value={} id={'bias'} menu={BIAS_MENU}/>
+	          <LabeledInput label={"Begin Balance"} value={} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label={"End Balance"} value={} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label={"Net Return"} value={} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
+					</List>
 				</Paper>
 			</div>
     )
   }
 }
 
-PerformanceForm.defaultProps = {
+PerformanceForm.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
+	performance: PropTypes.shape({
+		date: PropTypes.string.isRequired,
+		tax: PropTypes.string.isRequired,
+		horizon: PropTypes.string.isRequired,
+		bias: PropTypes.string.isRequired,
+		beginBal: PropTypes.string.isRequired,
+		endBal: PropTypes.string.isRequired,
+		netReturn: PropTypes.string.isRequired
+	}).isRequired
 }
 
-PerformanceForm.propTypes = {
+PerformanceForm.defaultProps = {
   handleChange: (event) => {console.log(event)},
+	performance : [{
+		date: ' ',
+		tax: ' ',
+		horizon: ' ',
+		bias: ' ',
+		beginBal: '0',
+		endBal: '0',
+		netReturn: '0'
+	}]
 }
 
 export default withStyles(styles)(PerformanceForm)

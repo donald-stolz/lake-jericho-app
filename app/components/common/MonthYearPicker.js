@@ -46,10 +46,24 @@ class MonthYearPicker extends React.Component {
 	constructor(props){
 		super(props);
     const val = this.props.value;
+		var nextMonth = parseInt(val.slice(0,1)) + 1;
+		var year = parseInt(val.slice(3,4));
+		if (month > 12) {
+			nextMonth = "01"
+			year = year + 1;
+		}
+		if (year < 10 ) {
+			year = "0" + year;
+		}
+		if (month < 10 && month > 1) {
+			month = "0" + month;
+		}
+
 		this.state = {
       value : val,
-      month : val.slice(0,1),
-      year  : val.slice(3,4)
+      month : month.toString(),
+      year  : year.toString(),
+			newRecord : this.props.newRecord,
     };
 	}
 
@@ -116,7 +130,7 @@ MonthYearPicker.propTypes = {
 };
 
 MonthYearPicker.defaultProps = {
-	value: '01/01',
+	value: '00/00',
 	id: 'myp',
 	handleChange: (event) => {console.log(event.target.value);},
 }

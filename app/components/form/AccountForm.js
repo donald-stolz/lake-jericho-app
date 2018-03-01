@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
+import List from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import LabeledInput from '../common/LabeledInput';
 import DatePicker from '../common/DatePicker'
@@ -35,21 +37,22 @@ class AccountForm extends Component {
 
 	constructor(props){
 		super(props);
-		this.state={ ...CLIENT_STRUCT.accounts[0]}
+		this.state={newAccount : this.props.newAccount}
 	}
 
-	// handleChange(event){
-	// 	this.setState({
-	// 		[event.target.id]: event.target
-	// 	})
-	// }
+	renderPerformance(){
+		if (this.state.newAccount) {
+			return (<PerformanceForm handleChange={inputChange}/>);
+		}
+	}
 
   render(){
-		const { classes } = this.props;
+		const { classes, account } = this.props;
 		const inputChange = this.props.handleChange.bind(this)
 
     return(
 			<div className={classes.root}>
+
   			<Paper className={classes.container} elevation={6}>
           <AppBar className={classes.container} position="static" color="primary" >
   			    <Toolbar>
@@ -58,14 +61,15 @@ class AccountForm extends Component {
   			      </Typography>
   			    </Toolbar>
   			  </AppBar>
-					<LabeledInput label={"Account Name"} id={'accName'} onChange={inputChange} />
-					<DatePicker 	label={"Start Date"} id={'startDate'} onChange={inputChange} />
-					<SimpleSelect label={"Tax"} id={'tax'} menu={TAX_MENU}/>
-					<SimpleSelect label={"Horizon"} id={'horizon'} menu={HORIZON_MENU} onChange={inputChange}/>
-					<SimpleSelect label={"Bias"} id={'bias'} menu={BIAS_MENU} onChange={inputChange}/>
-
-					<PerformanceForm handleChange={inputChange}/>
-
+					<List component="nav" className={classes.list}>
+						<LabeledInput label={"Account Name"} value={client.accName} id={'accName'} onChange={inputChange} />
+						<DatePicker 	label={"Start Date"} value={client.startDate} id={'startDate'} onChange={inputChange} />
+						<LabeledInput label={"Start Balance"} id={'startBal'} onChange={inputChange} startAdornment={"$"} />
+						<SimpleSelect label={"Tax"} value={client.tax} id={'tax'} menu={TAX_MENU}/>
+						<SimpleSelect label={"Horizon"} value={client.horizon} id={'horizon'} menu={HORIZON_MENU} onChange={inputChange}/>
+						<SimpleSelect label={"Bias"} value={client.bias} id={'bias'} menu={BIAS_MENU} onChange={inputChange}/>
+						{this.renderPerformance.bind(this)}
+					</List>
 				</Paper>
 			</div>
     )
@@ -74,13 +78,33 @@ class AccountForm extends Component {
 
 // const { client } = this.props;
 // NOTE: Use in Profile, not here
-AccountForm.defaultProps = {
+AccountForm.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
+	newAccount: PropTypes.bool.isRequired,
+	account : PropTypes.shape({
+		accNum: PropTypes.string.isRequired,
+		accName: PropTypes.string.isRequired,
+		startBal: PropTypes.string.isRequired,
+		startDate: PropTypes.string.isRequired,
+		tax: PropTypes.string.isRequired,
+		horizon: PropTypes.string.isRequired,
+		bias: PropTypes.string.isRequired,
+	}).isRequired
 }
 
-AccountForm.propTypes = {
+AccountForm.defaultProps = {
   handleChange: (event) => {console.log(event)},
+	newAccount: true,
+	accounts : {
+		accNum: '0',
+		accName: ' ',
+		startBal: ' ',
+		startDate: ' ',
+		tax: ' ',
+		horizon: ' ',
+		bias: ' ',
+	},
 }
 
 export default withStyles(styles)(AccountForm)

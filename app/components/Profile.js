@@ -121,19 +121,19 @@ Profile.defaultProps = {
 	client : {
 		// Empty Personal Information
 		personal: {
-			name: 'null',
-			dob: 'null',
-			address: 'null',
-			phone: 'null',
-			email: 'null',
+			name: ' ',
+			dob: ' ',
+			address: ' ',
+			phone: ' ',
+			email: ' ',
 		},
 
 		// Empty Financial Information
 		financial:{
-			annualIncome: 0,
-			totalAssets: 0,
-			liquidAssets: 0,
-			investmentAssets: 0,
+			annualIncome: '0',
+			totalAssets: '0',
+			liquidAssets: '0',
+			investmentAssets: '0',
 			investmentExperience: 'null',
 			investmentObjectives: 'null',
 			timeHorizon: 'null',

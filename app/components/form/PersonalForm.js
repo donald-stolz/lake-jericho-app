@@ -69,11 +69,25 @@ class PersonalForm extends Component {
 PersonalForm.defaultProps = {
 	classes: PropTypes.object.isRequired,
 	handleChange: PropTypes.func.isRequired,
+	client: PropTypes.shape({
+		name: PropTypes.string,
+		dob: PropTypes.string,
+		address: PropTypes.string,
+		phone: PropTypes.string,
+		email: PropTypes.string,
+	}).isRequired
 }
 // TODO: Add client
 
 PersonalForm.propTypes = {
 	handleChange: (event) => {console.log(event);},
+	client: {
+		name: ' ',
+		dob: ' ',
+		address: ' ',
+		phone: ' ',
+		email: ' ',
+	}
 }
 
 export default withStyles(styles)(PersonalForm)
