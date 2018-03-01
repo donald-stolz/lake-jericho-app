@@ -53,6 +53,7 @@ class PhoneInput extends React.Component {
     this.setState({
       textmask : event.target.value,
     });
+		console.log(event.target);
 		this.props.handleChange(event.target);
   };
 
@@ -64,8 +65,9 @@ class PhoneInput extends React.Component {
         <Input
           value={this.state.textmask}
           inputComponent={TextMaskCustom}
-          handleChange={this.handleChange}
+          onChange={this.handleChange.bind(this)}
           className={classes.input}
+					id="phone"
           inputProps={{
             'aria-label': 'Description',
           }}

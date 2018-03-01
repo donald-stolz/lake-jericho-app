@@ -7,6 +7,9 @@ import List from 'material-ui/List';
 import PersonalInfo from './profile/PersonalInfo';
 import FinancialInfo  from './profile/FinancialInfo';
 import AccountSection from './profile/AccountSection'
+import { Link } from 'react-router-dom'
+import Button from 'material-ui/Button';
+import AlertConfirmation from './common/AlertConfirmation'
 
 const styles = theme => ({
   root: {
@@ -55,6 +58,14 @@ class Profile extends Component {
 		this.props.update(clientUpdate)
 	}
 
+	removeClient(confirmation){
+		console.log(confirmation);
+		if (confirmation.value === "true") {
+			// TODO: Navigate home & call remove
+			console.log("Remove");
+		}
+	}
+
   // Methods for changing states in order to remove a client
 
   render(){
@@ -71,6 +82,10 @@ class Profile extends Component {
 			const {client} = this.props
 			return(
 				<div className={classes.root}>
+					<AlertConfirmation handleChange={this.removeClient.bind(this)}/>
+					<Button component={Link} to="/">
+					  Home
+					</Button>
 					<List component="nav" className={classes.list}>
 	        	<PersonalInfo
 							client={client.personal}

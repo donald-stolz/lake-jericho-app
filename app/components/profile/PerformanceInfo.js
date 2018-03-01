@@ -11,6 +11,8 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import SimpleSelect from '../common/SimpleSelect'
 import AddIcon from 'material-ui-icons/Add';
+import PerformanceForm from '../form/PerformanceForm'
+import Grid from 'material-ui/Grid';
 
 
 const styles = theme => ({
@@ -40,7 +42,7 @@ class PerformanceInfo extends Component {
 		super(props)
 
 		this.state = {
-			newRecord : this.props.newRecord,
+			newRecord : false,
 			value : 0
 		}
 	}
@@ -50,7 +52,14 @@ class PerformanceInfo extends Component {
 	}
 
 	newPerformance = () => {
-		console.log("Add new");
+		this.setState({newRecord: true})
+	}
+
+	save(){
+
+	}
+	cancel(){
+		this.setState({newRecord: false})
 	}
 
 	render(){
@@ -58,9 +67,39 @@ class PerformanceInfo extends Component {
 		const {classes, performance} = this.props;
 		const select = this.recordSelect.bind(this)
 		const dates = performance.map((record) => {return record.date})
+		const buttons = (
+			<Grid container className={classes.buttonBar} justify={'space-around'}>
+				<Grid item>
+					<Button
+							onClick={this.cancel.bind(this)}
+							size="large"
+							variant="raised"
+							color="secondary"
+							className={classes.button}>
+						Cancel
+					</Button>
+				</Grid>
+				<Grid item>
+					<Button
+							onClick={this.save.bind(this)}
+							size="large"
+							variant="raised"
+							color="primary"
+							className={classes.button}
+							>
+						Save
+					</Button>
+				 </Grid>
+			</Grid>
+		)
 
 		if (newRecord) {
-			return (<PerformanceForm performance={performance[0]}/>)
+			return (
+				<div>
+				<PerformanceForm pastPerformance={performance[0]}/>
+				{buttons}
+				</div>
+			)
 		} else {
 			return(
 				<div className={classes.root}>
@@ -99,7 +138,6 @@ class PerformanceInfo extends Component {
 PerformanceInfo.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-	newRecord : PropTypes.bool.isRequired,
 	performance: PropTypes.arrayOf(PropTypes.shape({
 		date: PropTypes.string.isRequired,
 		tax: PropTypes.string.isRequired,
@@ -113,7 +151,6 @@ PerformanceInfo.propTypes = {
 
 PerformanceInfo.defaultProps = {
   handleChange: (event) => {console.log(event)},
-	newRecord: false,
 	performance : [{
 		date: ' ',
 		tax: ' ',

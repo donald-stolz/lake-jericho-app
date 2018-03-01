@@ -57,6 +57,7 @@ class FinancialInfo extends Component {
 // TODO: Button Events
 	handleChange = target => {
 		var clientUpdate = {...this.state.client, [target.id]:target.value}
+		console.log(clientUpdate);
 		this.setState({client : clientUpdate})
 	};
 
@@ -65,6 +66,7 @@ class FinancialInfo extends Component {
 	}
 
 	save(){
+		console.log(this.state.client);
 		this.props.handleChange(this.state.client);
 		this.changeEdit();
 	}
@@ -111,7 +113,7 @@ class FinancialInfo extends Component {
 		} else {
 			return (
 				<div>
-					<FinancialForm client={client}/>
+					<FinancialForm client={client} handleChange={inputChange}/>
 					<Grid container className={classes.buttonBar} justify={'space-around'}>
 						<Grid item>
 							<Button

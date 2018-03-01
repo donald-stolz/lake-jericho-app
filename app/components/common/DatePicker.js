@@ -27,6 +27,7 @@ class DatePicker extends React.Component {
 		this.setState({
 			[this.props.id] : event.target.value,
 		});
+		console.log(event.target);
 		this.props.handleChange(event.target);
   };
 // TODO: Able to pass value
@@ -40,7 +41,7 @@ class DatePicker extends React.Component {
 					label={this.props.label}
           type="date"
           className={classes.textField}
-					handleChange={this.handleChange}
+					onChange={this.handleChange}
           InputLabelProps={{
             shrink: true,
           }}

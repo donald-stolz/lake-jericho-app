@@ -45,7 +45,7 @@ class MonthYearPicker extends React.Component {
 
 	constructor(props){
 		super(props);
-    const val = this.props.value;
+    var val = this.props.value;
 		var nextMonth = parseInt(val.slice(0,1)) + 1;
 		var year = parseInt(val.slice(3,4));
 		if (nextMonth > 12) {
@@ -58,22 +58,18 @@ class MonthYearPicker extends React.Component {
 		if (nextMonth < 10 && nextMonth > 1) {
 			nextMonth = "0" + nextMonth;
 		}
-
+		
 		this.state = {
-      value : val,
-      month : nextMonth.toString(),
-      year  : year.toString(),
+      month : nextMonth,
+      year  : year,
 			newRecord : this.props.newRecord,
     };
 	}
 
 	handleChange = event => {
     // Check if month or year and concat string accordingly
-    const target = event.target
-    var newValue = this.state.value
     switch (target.name) {
       case "Month":
-        newValue = target.value + newValue.slice(2,5)
         this.setState({month : target.value})
         break;
       case "Year":
@@ -99,7 +95,7 @@ class MonthYearPicker extends React.Component {
             <InputLabel shrink={"false"} className={classes.label}>Month</InputLabel>
             <Select
               value={this.state.month}
-              handleChange={this.handleChange.bind(this)}
+              onChange={this.handleChange.bind(this)}
               inputProps={{name: "Month",id: "month",}}
             >
               {Months}
@@ -111,7 +107,7 @@ class MonthYearPicker extends React.Component {
             <InputLabel shrink={"false"} className={classes.label}>Year</InputLabel>
             <Select
               value={this.state.year}
-              handleChange={this.handleChange.bind(this)}
+              onChange={this.handleChange.bind(this)}
               inputProps={{ name: "Year", id: "year",}}
             >
               {Years}

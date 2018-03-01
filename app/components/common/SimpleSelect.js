@@ -40,14 +40,12 @@ class SimpleSelect extends React.Component {
 		const MenuItems = menu.map((item, index) => {
 				return(<MenuItem key={index} value={item}> {item} </MenuItem> )
 			});
-
-			console.log(this.state.value);
     return (
         <FormControl className={classes.formControl}>
           <InputLabel shrink={"false"} className={classes.label}>{label}</InputLabel>
           <Select
             value={this.state.value}
-            handleChange={this.handleChange}
+            onChange={this.handleChange}
             inputProps={{
               name: id,
               id: id,

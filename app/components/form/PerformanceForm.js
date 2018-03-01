@@ -43,7 +43,7 @@ class PerformanceForm extends Component {
 	// }
 
   render(){
-		const { classes, performance } = this.props;
+		const { classes, pastPerformance } = this.props;
 		const inputChange = this.props.handleChange.bind(this)
 
     return(
@@ -57,13 +57,13 @@ class PerformanceForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<MonthYearPicker 	id="startDate" value={performance.startDate} handleChange={inputChange} />
-						<SimpleSelect label="Tax" value={performance.tax} id={'tax'} menu={TAX_MENU}/>
-						<SimpleSelect label="Horizon" value={performance.horizon} id={'horizon'} menu={HORIZON_MENU}/>
-						<SimpleSelect label="Bias" value={performance.bias} id={'bias'} menu={BIAS_MENU}/>
-	          <LabeledInput label="Begin Balance" value={performance.beginBal} id={'beginBal'} handleChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="End Balance" value={performance.endBal} id={'endBal'} handleChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="Net Return" value={performance.netReturn} id={'netReturn'} handleChange={inputChange} startAdornment={"%"} />
+						<MonthYearPicker 	id="startDate" value={pastPerformance.date} handleChange={inputChange} />
+						<SimpleSelect label="Tax" value={pastPerformance.tax} id={'tax'} menu={TAX_MENU}/>
+						<SimpleSelect label="Horizon" value={pastPerformance.horizon} id={'horizon'} menu={HORIZON_MENU}/>
+						<SimpleSelect label="Bias" value={pastPerformance.bias} id={'bias'} menu={BIAS_MENU}/>
+	          <LabeledInput label="Begin Balance" value={pastPerformance.endBal} id={'beginBal'} handleChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="End Balance" id={'endBal'} handleChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="Net Return" id={'netReturn'} handleChange={inputChange} startAdornment={"%"} />
 					</List>
 				</Paper>
 			</div>
@@ -79,22 +79,18 @@ PerformanceForm.propTypes = {
 		tax: PropTypes.string.isRequired,
 		horizon: PropTypes.string.isRequired,
 		bias: PropTypes.string.isRequired,
-		beginBal: PropTypes.string.isRequired,
 		endBal: PropTypes.string.isRequired,
-		netReturn: PropTypes.string.isRequired
 	}).isRequired
 }
 
 PerformanceForm.defaultProps = {
   handleChange: (event) => {console.log(event)},
-	performance : {
-		date: ' ',
+	pastPerformance : {
+		date: '00/00',
 		tax: ' ',
 		horizon: ' ',
 		bias: ' ',
-		beginBal: '0',
-		endBal: '0',
-		netReturn: '0'
+		endBal: ' ',
 	}
 }
 

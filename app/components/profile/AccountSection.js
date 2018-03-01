@@ -57,7 +57,7 @@ class AccountSection extends Component {
     super(props)
 
     this.state = {
-			viewing: true,
+			viewState: "view",
 			value: 0}
   }
 
@@ -71,8 +71,12 @@ class AccountSection extends Component {
 		this.props.handleChange(target);
 	};
 
-	changeEdit(){
-		this.setState({viewing : !this.state.viewing})
+	edit(){
+		this.setState({viewState : "edit"});
+	}
+
+	cancel(){
+		this.setState({viewState : "view"});
 	}
 
 	save(){
@@ -80,44 +84,65 @@ class AccountSection extends Component {
 	}
 
 	addAcc(){
-		console.log("add");
+		this.setState({viewState : "add"});
 	}
 
 	renderViewOrEdit(){
-		const { viewing, value } = this.state;
-		const	{classes } = this.props;
+		const { viewState, value } = this.state;
+		const	{classes, accounts } = this.props;
 		const inputChange = this.handleChange.bind(this);
 		const account = this.props.accounts[value]
-		if (viewing) {return (< AccountInfo account={account}/>);}
-		else {
+		const buttons = (
+			<Grid container className={classes.buttonBar} justify={'space-around'}>
+				<Grid item>
+					<Button
+							onClick={this.cancel.bind(this)}
+							size="large"
+							variant="raised"
+							color="secondary"
+							className={classes.button}>
+						Cancel
+					</Button>
+				</Grid>
+				<Grid item>
+					<Button
+							onClick={this.save.bind(this)}
+							size="large"
+							variant="raised"
+							color="primary"
+							className={classes.button}
+							>
+						Save
+					</Button>
+				 </Grid>
+			</Grid>
+		)
+
+		switch (viewState) {
+			case "view":
+				return (
+					<div>
+						< AccountInfo account={account}/>
+						<PerformanceInfo performance={accounts[value].performanceHist}/>
+					</div>
+);
+				break;
+			case "add":
+				return(
+					<div>
+						<AccountForm account={account}/>
+						{buttons}
+					</div>)
+				break;
+			default:
 			return (
 				<div>
-					<AccountForm account={account}/>
-					<Grid container className={classes.buttonBar} justify={'space-around'}>
-						<Grid item>
-							<Button
-									onClick={this.changeEdit.bind(this)}
-									size="large"
-									variant="raised"
-									color="secondary"
-									className={classes.button}>
-								Cancel
-							</Button>
-						</Grid>
-						<Grid item>
-							<Button
-									onClick={this.save.bind(this)}
-									size="small"
-									variant="raised"
-									color="primary"
-									className={classes.button}
-									>
-								Save
-							</Button>
-						 </Grid>
-					</Grid>
+					<AccountForm account={account} newAccount={false} handleChange={inputChange}/>
+					{buttons}
 				</div>
-			);}
+			);
+
+		}
 	}
 
   render(){
@@ -134,14 +159,14 @@ class AccountSection extends Component {
 								Account Information
 							</Typography>
 							<Button color="inherit"
-								onClick={this.changeEdit.bind(this)}>
+								onClick={this.edit.bind(this)}>
 								Edit
 							</Button>
 						</Toolbar>
 					</AppBar>
 					<AppBar position="static" color="default" >
 						<Toolbar>
-						<Tabs value={value} handleChange={this.changeAccount} className={classes.flex}>
+						<Tabs value={value} onChange={this.changeAccount} className={classes.flex}>
 							{tabs}
 						</Tabs>
 						<Button color="primary" variant="fab"
@@ -152,7 +177,7 @@ class AccountSection extends Component {
 					</AppBar>
 					{this.renderViewOrEdit()}
 			</Paper>
-			<PerformanceInfo performance={accounts[value].performanceHist}/>
+
 		</div>
 	)
 	}
