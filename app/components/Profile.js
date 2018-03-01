@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui/styles';
 import PersonalInfo   from './profile/PersonalInfo'
-// import FinancialInfo  from './profile/old/FinancialInfo'
+import { LinearProgress } from 'material-ui/Progress';
+
+import FinancialInfo  from './profile/FinancialInfo'
 // import Account        from './profile/old/Account'
 // import RemoveClient        from './profile/old/RemoveClient'
 
 import PropTypes from 'prop-types'
 
+
+
 // TODO:
 // 	[] Lots of refactoring
-//	[] Spinner
+const styles = theme => ({
+  root: {
+		flex: 1,
+  },
+  section: {
+    marginBottom: 15
+  }
+}
+
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -28,23 +41,23 @@ class Profile extends Component {
 	}
 
   // Methods for changing states in order to remove a client
-  removeClient(){this.setState({remove : true})}
-  cancelRemove(){this.setState({remove : false})}
 
   render(){
     console.log(this.props);
-		// TODO: Add loading spinner
+		// TODO: Center Spinner
 		if (this.state.loading) {
 			return (
 				<div>
-					<h1>Loading...</h1>
+					<LinearProgress size={100} />
 				</div>
 			);
 		}
 		else {
+			const {client} = this.props
 			return(
-				<div>
-        	<PersonalInfo client={this.props.client.personal}/>
+				<div className={classes.root}>
+        	<PersonalInfo client={client.personal} className={classes.section}/>
+					<FinancialInfo client={client.financial} className={classes.section}/>
 				</div>
 		)
 		}
@@ -155,4 +168,4 @@ Profile.defaultProps = {
 	}
 }
 
-export default Profile;
+export default withStyles(styles)(Profile);

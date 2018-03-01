@@ -11,6 +11,7 @@ const styles = theme => ({
   },
   textField: {
     margin: theme.spacing.unit,
+		paddingTop: 6
   },
 });
 

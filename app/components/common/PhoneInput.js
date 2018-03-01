@@ -12,11 +12,12 @@ const styles = theme => ({
   },
   input: {
     margin: theme.spacing.unit,
-    paddingBottom: 2
+    paddingTop: 8
   },
   label: {
     margin: theme.spacing.unit,
-    marginTop: 6
+		marginTop: 2,
+    paddingTop: 8
   },
 });
 

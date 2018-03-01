@@ -9,9 +9,13 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  input: {
+  label: {
     margin: theme.spacing.unit,
-		paddingBottom: 2
+		paddingBottom: 8
+  },
+	input: {
+    margin: theme.spacing.unit,
+		paddingTop: 10
   },
 });
 
@@ -46,8 +50,9 @@ class LabeledInput extends React.Component {
 
 	  return (
       <FormControl className={classes.container}>
-	      <InputLabel shrink={"false"} className={classes.input}>{this.props.label} </InputLabel>
+	      <InputLabel shrink={"false"} className={classes.label}>{this.props.label} </InputLabel>
 	      <Input
+					multiline={'true'}
 					startAdornment={startAdornment}
 					value={this.state.value}
 					onChange={this.handleChange}

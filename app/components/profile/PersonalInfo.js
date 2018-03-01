@@ -64,6 +64,10 @@ class PersonalInfo extends Component {
 		this.setState({viewing : !this.state.viewing})
 	}
 
+	save(){
+		console.log("Save");
+	}
+
 	renderViewOrEdit(){
 		const { classes, client } = this.props;
 		const inputChange = this.handleChange.bind(this);
@@ -96,11 +100,11 @@ class PersonalInfo extends Component {
 		} else {
 			return (
 				<div>
-					<PersonalForm />
+					<PersonalForm client={client}/>
 					<Grid container className={classes.buttonBar} justify={'space-around'}>
 						<Grid item>
 							<Button
-							onClick={this.changeEdit.bind(this)}
+									onClick={this.changeEdit.bind(this)}
 									size="large"
 									variant="raised"
 									color="secondary"
@@ -110,6 +114,7 @@ class PersonalInfo extends Component {
 						</Grid>
 						<Grid item>
 							<Button
+									onClick={this.save.bind(this)}
 									size="large"
 									variant="raised"
 									color="primary"
