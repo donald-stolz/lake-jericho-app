@@ -51,13 +51,16 @@ class PersonalInfo extends Component {
   constructor(props){
     super(props)
 
-    this.state = {viewing: true}
+    this.state = {
+			viewing: true,
+			client: this.props.client
+		}
   }
 
 // TODO: Button Events
 	handleChange = target => {
-		console.log(target.value);
-		this.props.handleChange(target);
+		var clientUpdate = {...this.state.client, [target.id]:target.value}
+		this.setState({client : clientUpdate})
 	};
 
 	changeEdit(){
@@ -65,7 +68,8 @@ class PersonalInfo extends Component {
 	}
 
 	save(){
-		console.log("Save");
+		this.props.handleChange(this.state.client);
+		this.changeEdit();
 	}
 
 	renderViewOrEdit(){
@@ -100,7 +104,7 @@ class PersonalInfo extends Component {
 		} else {
 			return (
 				<div>
-					<PersonalForm client={client}/>
+					<PersonalForm client={client} handleChange={inputChange}/>
 					<Grid container className={classes.buttonBar} justify={'space-around'}>
 						<Grid item>
 							<Button

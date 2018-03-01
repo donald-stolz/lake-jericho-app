@@ -32,7 +32,7 @@ class SimpleSelect extends React.Component {
 		this.setState({
 			value : event.target.value,
 		});
-		this.props.handleChange(event);
+		this.props.handleChange(event.target);
 	};
 
   render() {
@@ -47,7 +47,7 @@ class SimpleSelect extends React.Component {
           <InputLabel shrink={"false"} className={classes.label}>{label}</InputLabel>
           <Select
             value={this.state.value}
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
             inputProps={{
               name: id,
               id: id,

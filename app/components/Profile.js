@@ -40,6 +40,21 @@ class Profile extends Component {
 		}
 	}
 
+	updatePersonal( info ){
+		var clientUpdate = {...this.props.client, personal:info}
+		this.props.update(clientUpdate)
+	}
+
+	updateFinancial( info ){
+		var clientUpdate = {...this.props.client, financial:info}
+		this.props.update(clientUpdate)
+	}
+
+	updateAccount( info ){
+		var clientUpdate = {...this.props.client, account:info}
+		this.props.update(clientUpdate)
+	}
+
   // Methods for changing states in order to remove a client
 
   render(){
@@ -57,9 +72,18 @@ class Profile extends Component {
 			return(
 				<div className={classes.root}>
 					<List component="nav" className={classes.list}>
-	        	<PersonalInfo client={client.personal} className={classes.section}/>
-						<FinancialInfo client={client.financial} className={classes.section}/>
-						<AccountSection accounts={client.accounts} className={classes.section}/>
+	        	<PersonalInfo
+							client={client.personal}
+							handleChange={this.updatePersonal.bind(this)}
+							className={classes.section}/>
+						<FinancialInfo
+							client={client.financial}
+							handleChange={this.updateFinancial.bind(this)}
+							className={classes.section}/>
+						<AccountSection
+							handleChange={this.updateAccount.bind(this)}
+							accounts={client.accounts}
+							className={classes.section}/>
 					</List>
 				</div>
 		)

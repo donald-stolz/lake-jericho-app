@@ -27,7 +27,7 @@ class DatePicker extends React.Component {
 		this.setState({
 			[this.props.id] : event.target.value,
 		});
-		this.props.handleChange(event);
+		this.props.handleChange(event.target);
   };
 // TODO: Able to pass value
   render(){
@@ -40,7 +40,7 @@ class DatePicker extends React.Component {
 					label={this.props.label}
           type="date"
           className={classes.textField}
-					onChange={this.handleChange}
+					handleChange={this.handleChange}
           InputLabelProps={{
             shrink: true,
           }}
@@ -59,7 +59,7 @@ DatePicker.propTypes = {
 DatePicker.defaultProps = {
 	label: "Date of Birth",
 	id: "date",
-	handleChange: (event) => {console.log(event.target.value);},
+	handleChange: (event) => {console.log(event);},
 }
 
 export default withStyles(styles)(DatePicker);

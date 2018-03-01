@@ -33,7 +33,7 @@ class LabeledInput extends React.Component {
 		this.setState({
       value : event.target.value,
     });
-		this.props.onChange(event.target);
+		this.props.handleChange(event.target);
   };
 
 	render(){
@@ -55,7 +55,7 @@ class LabeledInput extends React.Component {
 					multiline={'true'}
 					startAdornment={startAdornment}
 					value={this.state.value}
-					onChange={this.handleChange}
+					handleChange={this.handleChange}
 	        className={classes.input}
 					id={this.props.id}
 	        inputProps={{
@@ -69,12 +69,12 @@ class LabeledInput extends React.Component {
 //Props:
 	// label
 	// value
-	// onChange
+	// handleChange
 
 LabeledInput.propTypes = {
   classes: PropTypes.object.isRequired,
 	id: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
+	handleChange: PropTypes.func.isRequired,
 	value: PropTypes.string.isRequired,
 	startAdornment: PropTypes.string,
 };
@@ -82,7 +82,7 @@ LabeledInput.propTypes = {
 LabeledInput.defaultProps = {
 	id: 'labeledInput',
 	value: '',
-	onChange: (event) => {console.log(event.target.value);},
+	handleChange: (event) => {console.log(event.target.value);},
 }
 
 export default withStyles(styles)(LabeledInput);

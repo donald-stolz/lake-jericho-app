@@ -21,6 +21,7 @@ export const fetchClient = ( clientID ) =>{
 }
 
 export const updateClient = ( client ) =>{
+	console.log(client);
 	return(dispatch) => {
 		dispatch({type: UPDATE_CLIENT, payload: client})
 		clients.update({_id: client._id}, client, {}, function (err, numReplaced) {

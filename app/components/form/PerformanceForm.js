@@ -57,13 +57,13 @@ class PerformanceForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<MonthYearPicker 	id="startDate" value={performance.startDate} onChange={inputChange} />
+						<MonthYearPicker 	id="startDate" value={performance.startDate} handleChange={inputChange} />
 						<SimpleSelect label="Tax" value={performance.tax} id={'tax'} menu={TAX_MENU}/>
 						<SimpleSelect label="Horizon" value={performance.horizon} id={'horizon'} menu={HORIZON_MENU}/>
 						<SimpleSelect label="Bias" value={performance.bias} id={'bias'} menu={BIAS_MENU}/>
-	          <LabeledInput label="Begin Balance" value={performance.beginBal} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="End Balance" value={performance.endBal} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="Net Return" value={performance.netReturn} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
+	          <LabeledInput label="Begin Balance" value={performance.beginBal} id={'beginBal'} handleChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="End Balance" value={performance.endBal} id={'endBal'} handleChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="Net Return" value={performance.netReturn} id={'netReturn'} handleChange={inputChange} startAdornment={"%"} />
 					</List>
 				</Paper>
 			</div>

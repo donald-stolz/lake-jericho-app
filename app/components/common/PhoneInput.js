@@ -53,6 +53,7 @@ class PhoneInput extends React.Component {
     this.setState({
       textmask : event.target.value,
     });
+		this.props.handleChange(event.target);
   };
 
   render() {
@@ -63,7 +64,7 @@ class PhoneInput extends React.Component {
         <Input
           value={this.state.textmask}
           inputComponent={TextMaskCustom}
-          onChange={this.handleChange}
+          handleChange={this.handleChange}
           className={classes.input}
           inputProps={{
             'aria-label': 'Description',
@@ -76,10 +77,12 @@ class PhoneInput extends React.Component {
 PhoneInput.propTypes = {
   classes: PropTypes.object.isRequired,
   value: PropTypes.string.isRequired,
+	handleChange: PropTypes.func.isRequired,
 };
 
 PhoneInput.defaultProps = {
   value: '(  )    -    ',
+	handleChange: (event) => {console.log(event);},
 }
 
 export default withStyles(styles)(PhoneInput);

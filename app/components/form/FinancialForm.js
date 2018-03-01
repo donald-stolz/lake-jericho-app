@@ -49,21 +49,21 @@ class FinancialForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<LabeledInput value={client.annualIncome} label={"Annual Income"} id={'annualIncome'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={client.totalAssets} label={"Total Assets"} id={'totalAssets'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={client.liquidAssets} label={"Liquid Assets"} id={'liquidAssets'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={client.investmentAssets} label={"Investment Assets"} id={'investmentAssets'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={client.investmentExperience} label={"Investment Experience"} id={'investmentExperience'} onChange={inputChange} />
-						<LabeledInput value={client.overallObjectives} label={"Overall Objectives"} id={'overallObjectives'} onChange={inputChange} />
-						<LabeledInput value={client.timeHorizon} label={"Time Horizon"} id={'timeHorizon'} onChange={inputChange} />
-						<LabeledInput value={client.taxConsids} label={"Tax Considerations"} id={'taxConsids'} onChange={inputChange} />
-						<LabeledInput value={client.liquidConsids} label={"Liquid Considerations"} id={'liquidConsids'} onChange={inputChange} />
-						<LabeledInput value={client.regulatoryIssues} label={"Regulatory Issues"} id={'regulatoryIssues'} onChange={inputChange} />
-						<LabeledInput value={client.unique} label={"Unique"} id={'unique'} onChange={inputChange} />
-						<LabeledInput value={client.returnObjectives} label={"Return Objectives"} id={'returnObjectives'} onChange={inputChange} />
-						<LabeledInput value={client.riskAbility} label={"Ability"} id={'riskAbility'} onChange={inputChange} />
-						<LabeledInput value={client.riskWillingness} label={"Willingness"} id={'riskWillingness'} onChange={inputChange} />
-						<LabeledInput value={client.riskOverallAbility} label={"Overall"} id={'riskOverallAbility'} onChange={inputChange} />
+						<LabeledInput value={client.annualIncome} label={"Annual Income"} id={'annualIncome'} handleChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.totalAssets} label={"Total Assets"} id={'totalAssets'} handleChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.liquidAssets} label={"Liquid Assets"} id={'liquidAssets'} handleChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.investmentAssets} label={"Investment Assets"} id={'investmentAssets'} handleChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.investmentExperience} label={"Investment Experience"} id={'investmentExperience'} handleChange={inputChange} />
+						<LabeledInput value={client.overallObjectives} label={"Overall Objectives"} id={'overallObjectives'} handleChange={inputChange} />
+						<LabeledInput value={client.timeHorizon} label={"Time Horizon"} id={'timeHorizon'} handleChange={inputChange} />
+						<LabeledInput value={client.taxConsids} label={"Tax Considerations"} id={'taxConsids'} handleChange={inputChange} />
+						<LabeledInput value={client.liquidConsids} label={"Liquid Considerations"} id={'liquidConsids'} handleChange={inputChange} />
+						<LabeledInput value={client.regulatoryIssues} label={"Regulatory Issues"} id={'regulatoryIssues'} handleChange={inputChange} />
+						<LabeledInput value={client.unique} label={"Unique"} id={'unique'} handleChange={inputChange} />
+						<LabeledInput value={client.returnObjectives} label={"Return Objectives"} id={'returnObjectives'} handleChange={inputChange} />
+						<LabeledInput value={client.riskAbility} label={"Ability"} id={'riskAbility'} handleChange={inputChange} />
+						<LabeledInput value={client.riskWillingness} label={"Willingness"} id={'riskWillingness'} handleChange={inputChange} />
+						<LabeledInput value={client.riskOverallAbility} label={"Overall"} id={'riskOverallAbility'} handleChange={inputChange} />
 					</List>
 				</Paper>
 			</div>
@@ -82,7 +82,7 @@ FinancialForm.propTypes = {
 		liquidAssets: PropTypes.string.isRequired,
 		investmentAssets: PropTypes.string.isRequired,
 		investmentExperience: PropTypes.string.isRequired,
-		investmentObjectives: PropTypes.string.isRequired,
+		overallObjectives: PropTypes.string.isRequired,
 		timeHorizon: PropTypes.string.isRequired,
 		taxConsids: PropTypes.string.isRequired,
 		liquidConsids: PropTypes.string.isRequired,
@@ -104,7 +104,7 @@ FinancialForm.defaultProps = {
 		liquidAssets: ' ',
 		investmentAssets: ' ',
 		investmentExperience: ' ',
-		investmentObjectives: ' ',
+		overallObjectives: ' ',
 		timeHorizon: ' ',
 		taxConsids: ' ',
 		liquidConsids: ' ',

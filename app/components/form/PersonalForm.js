@@ -40,7 +40,7 @@ class PersonalForm extends Component {
 
   render(){
 		const { classes, client } = this.props;
-		const inputChange = this.handleChange.bind(this)
+		const inputChange = this.props.handleChange.bind(this)
 
 
     return(
@@ -54,11 +54,11 @@ class PersonalForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<LabeledInput value={client.name} label={"Name"} onChange={inputChange} />
-						<DatePicker value={client.dob} onChange={inputChange} />
-						<LabeledInput value={client.address} label={"Address"} onChange={inputChange} />
-						<PhoneInput value={client.phone} onChange={inputChange} />
-						<LabeledInput value={client.email} label={"Email"} onChange={inputChange} />
+						<LabeledInput value={client.name} label={"Name"} id={"name"} handleChange={inputChange} />
+						<DatePicker value={client.dob} handleChange={inputChange} id={"dob"} />
+						<LabeledInput value={client.address} label={"Address"} id={"address"} handleChange={inputChange} />
+						<PhoneInput value={client.phone} handleChange={inputChange} id={"phone"} />
+						<LabeledInput value={client.email} label={"Email"} id={"email"} handleChange={inputChange} />
 					</List>
 				</Paper>
 			</div>

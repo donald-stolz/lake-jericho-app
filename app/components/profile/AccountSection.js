@@ -141,7 +141,7 @@ class AccountSection extends Component {
 					</AppBar>
 					<AppBar position="static" color="default" >
 						<Toolbar>
-						<Tabs value={value} onChange={this.changeAccount} className={classes.flex}>
+						<Tabs value={value} handleChange={this.changeAccount} className={classes.flex}>
 							{tabs}
 						</Tabs>
 						<Button color="primary" variant="fab"

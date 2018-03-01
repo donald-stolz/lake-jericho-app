@@ -62,12 +62,12 @@ class AccountForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<LabeledInput label={"Account Name"} value={account.accName} id={'accName'} onChange={inputChange} />
-						<DatePicker 	label={"Start Date"} value={account.startDate} id={'startDate'} onChange={inputChange} />
-						<LabeledInput label={"Start Balance"} value={account.startBal} id={'startBal'} onChange={inputChange} startAdornment={"$"}/>
+						<LabeledInput label={"Account Name"} value={account.accName} id={'accName'} handleChange={inputChange} />
+						<DatePicker 	label={"Start Date"} value={account.startDate} id={'startDate'} handleChange={inputChange} />
+						<LabeledInput label={"Start Balance"} value={account.startBal} id={'startBal'} handleChange={inputChange} startAdornment={"$"}/>
 						<SimpleSelect label={"Tax"} value={account.tax} id={'tax'} menu={TAX_MENU}/>
-						<SimpleSelect label={"Horizon"} value={account.horizon} id={'horizon'} menu={HORIZON_MENU} onChange={inputChange}/>
-						<SimpleSelect label={"Bias"} value={account.bias} id={'bias'} menu={BIAS_MENU} onChange={inputChange}/>
+						<SimpleSelect label={"Horizon"} value={account.horizon} id={'horizon'} menu={HORIZON_MENU} handleChange={inputChange}/>
+						<SimpleSelect label={"Bias"} value={account.bias} id={'bias'} menu={BIAS_MENU} handleChange={inputChange}/>
 					</List>
 				</Paper>
 				{this.renderPerformance()}

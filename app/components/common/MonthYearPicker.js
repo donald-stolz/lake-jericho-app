@@ -99,7 +99,7 @@ class MonthYearPicker extends React.Component {
             <InputLabel shrink={"false"} className={classes.label}>Month</InputLabel>
             <Select
               value={this.state.month}
-              onChange={this.handleChange.bind(this)}
+              handleChange={this.handleChange.bind(this)}
               inputProps={{name: "Month",id: "month",}}
             >
               {Months}
@@ -111,7 +111,7 @@ class MonthYearPicker extends React.Component {
             <InputLabel shrink={"false"} className={classes.label}>Year</InputLabel>
             <Select
               value={this.state.year}
-              onChange={this.handleChange.bind(this)}
+              handleChange={this.handleChange.bind(this)}
               inputProps={{ name: "Year", id: "year",}}
             >
               {Years}
