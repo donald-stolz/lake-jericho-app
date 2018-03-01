@@ -35,7 +35,7 @@ class FinancialForm extends Component {
 // TODO: Button Events
 
   render(){
-		const { classes } = this.props;
+		const { classes, client } = this.props;
 		const inputChange = this.props.handleChange.bind(this)
 
     return(
@@ -49,21 +49,21 @@ class FinancialForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<LabeledInput value={annualIncome} label={"Annual Income"} id={'annualIncome'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={totalAssets} label={"Total Assets"} id={'totalAssets'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={liquidAssets} label={"Liquid Assets"} id={'liquidAssets'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={investmentAssets} label={"Investment Assets"} id={'investmentAssets'} onChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={investmentExperience} label={"Investment Experience"} id={'investmentExperience'} onChange={inputChange} />
-						<LabeledInput value={overallObjectives} label={"Overall Objectives"} id={'overallObjectives'} onChange={inputChange} />
-						<LabeledInput value={timeHorizon} label={"Time Horizon"} id={'timeHorizon'} onChange={inputChange} />
-						<LabeledInput value={taxConsids} label={"Tax Considerations"} id={'taxConsids'} onChange={inputChange} />
-						<LabeledInput value={liquidConsids} label={"Liquid Considerations"} id={'liquidConsids'} onChange={inputChange} />
-						<LabeledInput value={regulatoryIssues} label={"Regulatory Issues"} id={'regulatoryIssues'} onChange={inputChange} />
-						<LabeledInput value={unique} label={"Unique"} id={'unique'} onChange={inputChange} />
-						<LabeledInput value={returnObjectives} label={"Return Objectives"} id={'returnObjectives'} onChange={inputChange} />
-						<LabeledInput value={riskAbility} label={"Ability"} id={'riskAbility'} onChange={inputChange} />
-						<LabeledInput value={riskWillingness} label={"Willingness"} id={'riskWillingness'} onChange={inputChange} />
-						<LabeledInput value={riskOverallAbility} label={"Overall"} id={'riskOverallAbility'} onChange={inputChange} />
+						<LabeledInput value={client.annualIncome} label={"Annual Income"} id={'annualIncome'} onChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.totalAssets} label={"Total Assets"} id={'totalAssets'} onChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.liquidAssets} label={"Liquid Assets"} id={'liquidAssets'} onChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.investmentAssets} label={"Investment Assets"} id={'investmentAssets'} onChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.investmentExperience} label={"Investment Experience"} id={'investmentExperience'} onChange={inputChange} />
+						<LabeledInput value={client.overallObjectives} label={"Overall Objectives"} id={'overallObjectives'} onChange={inputChange} />
+						<LabeledInput value={client.timeHorizon} label={"Time Horizon"} id={'timeHorizon'} onChange={inputChange} />
+						<LabeledInput value={client.taxConsids} label={"Tax Considerations"} id={'taxConsids'} onChange={inputChange} />
+						<LabeledInput value={client.liquidConsids} label={"Liquid Considerations"} id={'liquidConsids'} onChange={inputChange} />
+						<LabeledInput value={client.regulatoryIssues} label={"Regulatory Issues"} id={'regulatoryIssues'} onChange={inputChange} />
+						<LabeledInput value={client.unique} label={"Unique"} id={'unique'} onChange={inputChange} />
+						<LabeledInput value={client.returnObjectives} label={"Return Objectives"} id={'returnObjectives'} onChange={inputChange} />
+						<LabeledInput value={client.riskAbility} label={"Ability"} id={'riskAbility'} onChange={inputChange} />
+						<LabeledInput value={client.riskWillingness} label={"Willingness"} id={'riskWillingness'} onChange={inputChange} />
+						<LabeledInput value={client.riskOverallAbility} label={"Overall"} id={'riskOverallAbility'} onChange={inputChange} />
 					</List>
 				</Paper>
 			</div>
@@ -73,7 +73,7 @@ class FinancialForm extends Component {
 
 // const { client } = this.props;
 // NOTE: Use in Profile, not here
-FinancialForm.defaultProps = {
+FinancialForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 	handleChange: PropTypes.func.isRequired,
 	client: PropTypes.shape({
@@ -96,7 +96,7 @@ FinancialForm.defaultProps = {
 }
 
 
-FinancialForm.propTypes = {
+FinancialForm.defaultProps = {
 	handleChange: (event) => {console.log(event);},
 	client:{
 		annualIncome: ' ',

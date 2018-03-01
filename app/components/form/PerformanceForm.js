@@ -57,13 +57,13 @@ class PerformanceForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<MonthYearPicker 	id={'startDate'} onChange={inputChange} />
-						<SimpleSelect label={"Tax"} value={} id={'tax'} menu={TAX_MENU}/>
-						<SimpleSelect label={"Horizon"} value={} id={'horizon'} menu={HORIZON_MENU}/>
-						<SimpleSelect label={"Bias"} value={} id={'bias'} menu={BIAS_MENU}/>
-	          <LabeledInput label={"Begin Balance"} value={} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label={"End Balance"} value={} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label={"Net Return"} value={} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
+						<MonthYearPicker 	id="startDate" value={client.startDate} onChange={inputChange} />
+						<SimpleSelect label="Tax" value={client.tax} id={'tax'} menu={TAX_MENU}/>
+						<SimpleSelect label="Horizon" value={client.horizon} id={'horizon'} menu={HORIZON_MENU}/>
+						<SimpleSelect label="Bias" value={client.bias} id={'bias'} menu={BIAS_MENU}/>
+	          <LabeledInput label="Begin Balance" value={client.beginBal} id={'beginBal'} onChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="End Balance" value={client.endBal} id={'endBal'} onChange={inputChange} startAdornment={"$"} />
+	          <LabeledInput label="Net Return" value={client.netReturn} id={'netReturn'} onChange={inputChange} startAdornment={"%"} />
 					</List>
 				</Paper>
 			</div>

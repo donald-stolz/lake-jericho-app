@@ -6,11 +6,12 @@ import { LinearProgress } from 'material-ui/Progress';
 import List from 'material-ui/List';
 import PersonalInfo from './profile/PersonalInfo';
 import FinancialInfo  from './profile/FinancialInfo';
+import AccountSection from './profile/AccountSection'
 
 const styles = theme => ({
   root: {
 		flex: 1,
-		maxHeight: 800,
+		maxHeight: 750,
 		overflow: 'auto'
   },
   section: {
@@ -55,10 +56,11 @@ class Profile extends Component {
 			const {client} = this.props
 			return(
 				<div className={classes.root}>
-				<List component="nav" className={classes.list}>
-        	<PersonalInfo client={client.personal} className={classes.section}/>
-					<FinancialInfo client={client.financial} className={classes.section}/>
-				</List>
+					<List component="nav" className={classes.list}>
+	        	<PersonalInfo client={client.personal} className={classes.section}/>
+						<FinancialInfo client={client.financial} className={classes.section}/>
+						<AccountSection accounts={client.accounts} className={classes.section}/>
+					</List>
 				</div>
 		)
 		}
@@ -130,40 +132,40 @@ Profile.defaultProps = {
 
 		// Empty Financial Information
 		financial:{
-			annualIncome: '0',
-			totalAssets: '0',
-			liquidAssets: '0',
-			investmentAssets: '0',
-			investmentExperience: 'null',
-			investmentObjectives: 'null',
-			timeHorizon: 'null',
-			taxConsids: 'null',
-			liquidConsids: 'null',
-			regulatoryIssues: 'null',
-			unique: 'null',
-			returnObjective: 'null',
-			riskAbility: 'null',
-			riskWillingness: 'null',
-			riskOverall: 'null'
+			annualIncome: ' ',
+			totalAssets: ' ',
+			liquidAssets: ' ',
+			investmentAssets: ' ',
+			investmentExperience: ' ',
+			investmentObjectives: ' ',
+			timeHorizon: ' ',
+			taxConsids: ' ',
+			liquidConsids: ' ',
+			regulatoryIssues: ' ',
+			unique: ' ',
+			returnObjective: ' ',
+			riskAbility: ' ',
+			riskWillingness: ' ',
+			riskOverall: ' '
 		},
 
 		// Empty Account(s) Information
 		accounts : [{
-			accNum: 0,
-			accName: 'null',
-			startBal: 'null',
-			startDate: 'null',
-			tax: 'null',
-			horizon: 'null',
-			bias: 'null',
+			accNum: '0',
+			accName: ' ',
+			startBal: ' ',
+			startDate: ' ',
+			tax: ' ',
+			horizon: ' ',
+			bias: ' ',
 			performanceHist : [{
-				date: 'null',
-				tax: 'null',
-				horizon: 'null',
-				bias: 'null',
-				beginBal: 0,
-				endBal: 0,
-				netReturn: 0
+				date: ' ',
+				tax: ' ',
+				horizon: ' ',
+				bias: ' ',
+				beginBal: ' ',
+				endBal: ' ',
+				netReturn: ' '
 			}]
 		}]
 	}

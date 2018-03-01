@@ -14,7 +14,7 @@ import Paper from 'material-ui/Paper';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-		maxHeight: 800,
+		maxHeight: 750,
 		overflow: 'auto'
   },
   flex: {

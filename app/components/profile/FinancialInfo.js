@@ -147,6 +147,7 @@ class FinancialInfo extends Component {
 FinancialInfo.defaultProps = {
 	classes: PropTypes.object.isRequired,
 	handleChange: PropTypes.func.isRequired,
+	client: PropTypes.object.isRequired,
 }
 
 

@@ -62,12 +62,12 @@ class AccountForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<LabeledInput label={"Account Name"} value={client.accName} id={'accName'} onChange={inputChange} />
-						<DatePicker 	label={"Start Date"} value={client.startDate} id={'startDate'} onChange={inputChange} />
-						<LabeledInput label={"Start Balance"} id={'startBal'} onChange={inputChange} startAdornment={"$"} />
-						<SimpleSelect label={"Tax"} value={client.tax} id={'tax'} menu={TAX_MENU}/>
-						<SimpleSelect label={"Horizon"} value={client.horizon} id={'horizon'} menu={HORIZON_MENU} onChange={inputChange}/>
-						<SimpleSelect label={"Bias"} value={client.bias} id={'bias'} menu={BIAS_MENU} onChange={inputChange}/>
+						<LabeledInput label={"Account Name"} value={account.accName} id={'accName'} onChange={inputChange} />
+						<DatePicker 	label={"Start Date"} value={account.startDate} id={'startDate'} onChange={inputChange} />
+						<LabeledInput label={"Start Balance"} value={account.startBal} id={'startBal'} onChange={inputChange} startAdornment={"$"}/>
+						<SimpleSelect label={"Tax"} value={account.tax} id={'tax'} menu={TAX_MENU}/>
+						<SimpleSelect label={"Horizon"} value={account.horizon} id={'horizon'} menu={HORIZON_MENU} onChange={inputChange}/>
+						<SimpleSelect label={"Bias"} value={account.bias} id={'bias'} menu={BIAS_MENU} onChange={inputChange}/>
 						{this.renderPerformance.bind(this)}
 					</List>
 				</Paper>
