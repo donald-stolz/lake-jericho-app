@@ -45,7 +45,7 @@ class LabeledInput extends React.Component {
 		}
 
 	  return (
-      <FormControl {...this.props} className={classes.container}>
+      <FormControl className={classes.container}>
 	      <InputLabel shrink={"false"} className={classes.input}>{this.props.label} </InputLabel>
 	      <Input
 					startAdornment={startAdornment}

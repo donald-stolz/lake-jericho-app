@@ -35,7 +35,6 @@ const styles = theme => ({
 class PersonalForm extends Component {
 // TODO: Button Events
 	handleChange = target => {
-		console.log(target.value);
 		this.props.handleChange(target);
 	};
 

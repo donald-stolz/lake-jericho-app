@@ -57,7 +57,7 @@ class PhoneInput extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <FormControl className={classes.container} {...this.props}>
+      <FormControl className={classes.container} >
         <InputLabel className={classes.label}>Phone Number </InputLabel>
         <Input
           value={this.state.textmask}

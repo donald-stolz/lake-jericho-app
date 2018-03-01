@@ -4,20 +4,25 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Paper from 'material-ui/Paper';
-// import Button from 'material-ui/Button';
-import List from 'material-ui/List';
 import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import Paper from 'material-ui/Paper';
+import List from 'material-ui/List';
 import LabeledInput from '../common/LabeledInput';
 import PhoneInput from '../common/PhoneInput'
 import DatePicker from '../common/DatePicker'
+import Grid from 'material-ui/Grid';
+import PersonalForm from '../form/PersonalForm'
+import TextField from 'material-ui/TextField';
+import Input from 'material-ui/Input';
 
-import MonthYearPicker from '../common/MonthYearPicker'
-// import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   root: {
 		flex: 1,
+  },
+	flex: {
+    flex: 1,
   },
   container: {
     display: 'flex',
@@ -29,14 +34,24 @@ const styles = theme => ({
 		paddingLeft: theme.spacing.unit * 2,
 		minWidth: 300,
 		maxWidth: 400
-	}
+	},
+	textField: {
+		margin: theme.spacing.unit,
+		paddingBottom: 2,
+		flexWrap: 'wrap',
+		width: '100%',
+	},
+	buttonBar: {
+		paddingTop: 5,
+		paddingBottom: 10
+	},
 });
 
 class PersonalInfo extends Component {
   constructor(props){
     super(props)
 
-    this.state = {disable: this.props.disabled}
+    this.state = {viewing: true}
   }
 
 // TODO: Button Events
@@ -45,54 +60,86 @@ class PersonalInfo extends Component {
 		this.props.handleChange(target);
 	};
 
-  render(){
+	changeEdit(){
+		this.setState({viewing : !this.state.viewing})
+	}
+
+	renderViewOrEdit(){
 		const { classes, client } = this.props;
 		const inputChange = this.handleChange.bind(this);
 
-    return(
-			<div className={classes.root}>
-  			<Paper className={classes.container} elevation={6}>
-          <AppBar className={classes.container} position="static" color="primary" >
-  			    <Toolbar>
-  			      <Typography variant="title" color="inherit">
-  			        Personal Information
-  			      </Typography>
-  			    </Toolbar>
-  			  </AppBar>
-					<List component="nav" className={classes.list}>
-						<LabeledInput value={client.name} label={"Name"} onChange={inputChange} disabled/>
-            <LabeledInput value={client.dob} label={"Date of Birth"} onChange={inputChange} disabled/>
-						<LabeledInput value={client.address} label={"Address"} onChange={inputChange} disabled/>
-						<PhoneInput value={client.phone} onChange={inputChange} disabled/>
-						<LabeledInput value={client.email} label={"Email"} onChange={inputChange} disabled/>
-					</List>
-				</Paper>
-			</div>
-    )
-  }
+		if (this.state.viewing) {
+			return(
+				<div className={classes.root}>
+					<Paper className={classes.container} elevation={6}>
+						<AppBar className={classes.container} position="static" color="primary" >
+							<Toolbar>
+								<Typography variant="title" color="inherit" className={classes.flex}>
+									Personal Information
+								</Typography>
+								<Button color="inherit"
+		              onClick={this.changeEdit.bind(this)} to="/NewClient">
+		              Edit
+		            </Button>
+							</Toolbar>
+						</AppBar>
+						<List component="nav" className={classes.list}>
+							<TextField disabled value={client.name} label="Name" disabled className={classes.textField}/>
+							<TextField disabled value={client.dob} label="Date of Birth" disabled className={classes.textField}/>
+							<TextField disabled value={client.address} label="Address" disabled className={classes.textField}/>
+							<TextField disabled value={client.phone} label="Phone Number"disabled className={classes.textField}/>
+							<TextField disabled value={client.email} label="Email" disabled className={classes.textField}/>
+						</List>
+					</Paper>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<PersonalForm />
+					<Grid container className={classes.buttonBar} justify={'space-around'}>
+						<Grid item>
+							<Button
+							onClick={this.changeEdit.bind(this)}
+									size="large"
+									variant="raised"
+									color="secondary"
+									className={classes.button}>
+								Cancel
+							</Button>
+						</Grid>
+						<Grid item>
+							<Button
+									size="large"
+									variant="raised"
+									color="primary"
+									className={classes.button}
+									>
+								Save
+							</Button>
+						 </Grid>
+					</Grid>
+				</div>);
+		}
+	}
+
+  render(){
+		return(
+			<div>
+			{this.renderViewOrEdit()}
+	  </div>
+	)
+	}
 }
 
 PersonalInfo.defaultProps = {
 	classes: PropTypes.object.isRequired,
 	handleChange: PropTypes.func.isRequired,
-  disabled :PropTypes.bool.isRequired
 }
 
 
 PersonalInfo.propTypes = {
 	handleChange: (event) => {console.log(event);},
-  disabled : true
 }
 
 export default withStyles(styles)(PersonalInfo)
-
-// // const { client } = this.props;
-// // NOTE: Use in Profile, not here
-// PersonalForm.defaultProps = {
-// 	classes: PropTypes.object.isRequired,
-//
-// }
-//
-// PersonalForm.propTypes = {
-//
-// }

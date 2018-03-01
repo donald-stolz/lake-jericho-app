@@ -18,11 +18,13 @@ class Profile extends Component {
   }
 
 	componentWillReceiveProps(nextProps){
-		var newState = {
-			client: nextProps.client,
-			loading: false
+		if (this.state.loading) {
+			var newState = {
+				client: nextProps.client,
+				loading: false
+			}
+			this.setState(newState);
 		}
-		this.setState(newState)
 	}
 
   // Methods for changing states in order to remove a client
@@ -42,8 +44,7 @@ class Profile extends Component {
 		else {
 			return(
 				<div>
-        <PersonalInfo client={this.props.client.personal}/>
-       {/*this.renderPageOrRemove()*/}
+        	<PersonalInfo client={this.props.client.personal}/>
 				</div>
 		)
 		}
@@ -63,10 +64,10 @@ Profile.propTypes = {
 
 		// Empty Financial Information
 		financial: PropTypes.shape({
-			annualIncome: PropTypes.number,
-			totalAssets: PropTypes.number,
-			liquidAssets: PropTypes.number,
-			investmentAssets: PropTypes.number,
+			annualIncome: PropTypes.string,
+			totalAssets: PropTypes.string,
+			liquidAssets: PropTypes.string,
+			investmentAssets: PropTypes.string,
 			investmentExperience: PropTypes.string,
 			investmentObjectives: PropTypes.string,
 			timeHorizon: PropTypes.string,
@@ -82,7 +83,7 @@ Profile.propTypes = {
 
 		// Empty Account(s) Information
 		accounts : PropTypes.arrayOf(PropTypes.shape({
-			accNum: PropTypes.number,
+			accNum: PropTypes.string,
 			accName: PropTypes.string,
 			startBal: PropTypes.string,
 			startDate: PropTypes.string,
@@ -94,9 +95,9 @@ Profile.propTypes = {
 				tax: PropTypes.string,
 				horizon: PropTypes.string,
 				bias: PropTypes.string,
-				beginBal: PropTypes.number,
-				endBal: PropTypes.number,
-				netReturn: PropTypes.number
+				beginBal: PropTypes.string,
+				endBal: PropTypes.string,
+				netReturn: PropTypes.string
 			}))
 		}))
 	}).isRequired
