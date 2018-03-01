@@ -35,6 +35,7 @@ class LabeledInput extends React.Component {
 	render(){
 		const { classes } = this.props;
 
+
 		var startAdornment = null;
 		if (this.props.startAdornment) {
 			startAdornment = (
@@ -44,7 +45,7 @@ class LabeledInput extends React.Component {
 		}
 
 	  return (
-      <FormControl className={classes.container}>
+      <FormControl {...this.props} className={classes.container}>
 	      <InputLabel shrink={"false"} className={classes.input}>{this.props.label} </InputLabel>
 	      <Input
 					startAdornment={startAdornment}
@@ -70,7 +71,7 @@ LabeledInput.propTypes = {
 	id: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.string.isRequired,
-	startAdornment: PropTypes.string
+	startAdornment: PropTypes.string,
 };
 
 LabeledInput.defaultProps = {

@@ -81,7 +81,7 @@ class MonthYearPicker extends React.Component {
     return (
       <Grid className={classes.container} container direction={'row'}>
         <Grid item>
-          <FormControl fullWidth className={classes.formControl}>
+          <FormControl fullWidth className={classes.formControl} {...this.props}>
             <InputLabel shrink={"false"} className={classes.label}>Month</InputLabel>
             <Select
               value={this.state.month}
@@ -93,7 +93,7 @@ class MonthYearPicker extends React.Component {
           </FormControl>
         </Grid>
         <Grid item>
-          <FormControl fullWidth className={classes.formControl}>
+          <FormControl fullWidth className={classes.formControl} {...this.props}>
             <InputLabel shrink={"false"} className={classes.label}>Year</InputLabel>
             <Select
               value={this.state.year}

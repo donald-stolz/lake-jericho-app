@@ -1,69 +1,98 @@
 import React, { Component } from 'react';
-import PersonalForm from '../form/PersonalForm'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Paper from 'material-ui/Paper';
+// import Button from 'material-ui/Button';
+import List from 'material-ui/List';
+import Typography from 'material-ui/Typography';
+import LabeledInput from '../common/LabeledInput';
+import PhoneInput from '../common/PhoneInput'
+import DatePicker from '../common/DatePicker'
+
+import MonthYearPicker from '../common/MonthYearPicker'
+// import Grid from 'material-ui/Grid';
+
+const styles = theme => ({
+  root: {
+		flex: 1,
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+		width: '100%',
+
+  },
+  list:{
+		paddingLeft: theme.spacing.unit * 2,
+		minWidth: 300,
+		maxWidth: 400
+	}
+});
 
 class PersonalInfo extends Component {
-  constructor() {
-    super()
-    this.state = {editing : false}
+  constructor(props){
+    super(props)
+
+    this.state = {disable: this.props.disabled}
   }
 
-  // Methods for changing edit state
-  setEditing(){this.setState({editing : true})}
-  cancelUpdate(){this.setState({editing : false})}
-
-  updateInfo(data){
-    // Sends updated info to parent class and changes editing to false
-    this.props.update(data)
-    this.setState({editing : false})
-  }
-
-  renderItemOrEdit(){
-    var editing = this.state.editing
-    var client = this.props.client
-
-    if (editing) {
-     return (
-        <div className="container-fluid">
-          <PersonalForm client={client}
-              newClient={false}
-              save={this.updateInfo.bind(this)}
-              cancel={this.cancelUpdate.bind(this)}
-          />
-        </div>
-      )
-    }
-    else {
-      return (
-        <div className="container-fluid">
-          <div className="panel panel-primary" id="personalInformation">
-            <div className="panel-heading">
-              <h2 className="panel-title">Personal Information</h2>
-            </div>
-            <div className="panel-body">
-              <ul className="list-group" id="listPersonal">
-                <li className="list-group-item"><label>Name:</label> {client.name}
-                  <button type="button" onClick={this.setEditing.bind(this)}
-                    className="btn btn-primary btn-xs pull-right">Edit
-                  </button>
-                </li>
-                <li className="list-group-item"><label>Date of Birth:</label> {client.dob}</li>
-                <li className="list-group-item"><label>Address:</label> {client.address}</li>
-                <li className="list-group-item"><label>Phone Number:</label> {client.phone}</li>
-                <li className="list-group-item"><label>Email:</label> {client.email}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )
-    }
-  }
+// TODO: Button Events
+	handleChange = target => {
+		console.log(target.value);
+		this.props.handleChange(target);
+	};
 
   render(){
+		const { classes, client } = this.props;
+		const inputChange = this.handleChange.bind(this);
+
     return(
-      <div className="row">
-        {this.renderItemOrEdit()}
-      </div>
-    )}
+			<div className={classes.root}>
+  			<Paper className={classes.container} elevation={6}>
+          <AppBar className={classes.container} position="static" color="primary" >
+  			    <Toolbar>
+  			      <Typography variant="title" color="inherit">
+  			        Personal Information
+  			      </Typography>
+  			    </Toolbar>
+  			  </AppBar>
+					<List component="nav" className={classes.list}>
+						<LabeledInput value={client.name} label={"Name"} onChange={inputChange} disabled/>
+            <LabeledInput value={client.dob} label={"Date of Birth"} onChange={inputChange} disabled/>
+						<LabeledInput value={client.address} label={"Address"} onChange={inputChange} disabled/>
+						<PhoneInput value={client.phone} onChange={inputChange} disabled/>
+						<LabeledInput value={client.email} label={"Email"} onChange={inputChange} disabled/>
+					</List>
+				</Paper>
+			</div>
+    )
+  }
 }
 
-export default PersonalInfo
+PersonalInfo.defaultProps = {
+	classes: PropTypes.object.isRequired,
+	handleChange: PropTypes.func.isRequired,
+  disabled :PropTypes.bool.isRequired
+}
+
+
+PersonalInfo.propTypes = {
+	handleChange: (event) => {console.log(event);},
+  disabled : true
+}
+
+export default withStyles(styles)(PersonalInfo)
+
+// // const { client } = this.props;
+// // NOTE: Use in Profile, not here
+// PersonalForm.defaultProps = {
+// 	classes: PropTypes.object.isRequired,
+//
+// }
+//
+// PersonalForm.propTypes = {
+//
+// }

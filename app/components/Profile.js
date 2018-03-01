@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PersonalInfo   from './profile/PersonalInfo'
-import FinancialInfo  from './profile/FinancialInfo'
-import Account        from './profile/Account'
-import RemoveClient        from './profile/RemoveClient'
+// import FinancialInfo  from './profile/old/FinancialInfo'
+// import Account        from './profile/old/Account'
+// import RemoveClient        from './profile/old/RemoveClient'
+
 import PropTypes from 'prop-types'
 
 // TODO:
@@ -16,29 +17,6 @@ class Profile extends Component {
 		this.props.get(this.props.match.params.id)
   }
 
-  updatePersonal(data){
-	// try: var client = {...this.state.client, personal: data}
-    const client = this.state.client
-    client.personal = data
-    this.updateClient(client)
-  }
-
-  updateFinacial(data){
-    const client = this.state.client
-    client.financial = data
-    this.updateClient(client)
-  }
-
-  updateAccount(data){
-    const client = this.state.client
-    client.accounts = data
-    this.updateClient(client)
-  }
-
-	updateClient(client){
-		this.props.update()
-	}
-
 	componentWillReceiveProps(nextProps){
 		var newState = {
 			client: nextProps.client,
@@ -51,38 +29,8 @@ class Profile extends Component {
   removeClient(){this.setState({remove : true})}
   cancelRemove(){this.setState({remove : false})}
 
-  renderPageOrRemove(){
-    const client    = this.props.client
-    const clientID  = client._id
-    const personal  = client.personal
-    const financial = client.financial
-    const accounts  = client.accounts
-    const remove    = this.state.remove
-
-    if (!remove) {
-      return(
-        <div className="container-fluid">
-          <PersonalInfo client={personal} update={this.updatePersonal.bind(this)}/>
-          <FinancialInfo client={financial} update={this.updateFinacial.bind(this)}/>
-          <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
-          <RemoveClient confirm={remove}
-                        cancel={this.cancelRemove.bind(this)}
-                        removeClient={this.removeClient.bind(this)}/>
-        </div>
-      )
-    }
-    else {
-      return(
-        <div className="container-fluid">
-          <RemoveClient confirm={remove}
-                        cancel={this.cancelRemove.bind(this)}
-                        removeClient={this.removeClient.bind(this)}
-                        id={clientID}/>
-        </div>)
-    }
-  }
-
   render(){
+    console.log(this.props);
 		// TODO: Add loading spinner
 		if (this.state.loading) {
 			return (
@@ -94,7 +42,8 @@ class Profile extends Component {
 		else {
 			return(
 				<div>
-					{this.renderPageOrRemove()}
+        <PersonalInfo client={this.props.client.personal}/>
+       {/*this.renderPageOrRemove()*/}
 				</div>
 		)
 		}
