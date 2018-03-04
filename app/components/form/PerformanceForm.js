@@ -22,6 +22,11 @@ const styles = theme => ({
   root: {
 		flex: 1,
   },
+	list:{
+		paddingLeft: theme.spacing.unit * 2,
+		minWidth: 300,
+		maxWidth: 500
+	},
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -61,9 +66,9 @@ class PerformanceForm extends Component {
 						<SimpleSelect label="Tax" value={pastPerformance.tax} id={'tax'} menu={TAX_MENU}/>
 						<SimpleSelect label="Horizon" value={pastPerformance.horizon} id={'horizon'} menu={HORIZON_MENU}/>
 						<SimpleSelect label="Bias" value={pastPerformance.bias} id={'bias'} menu={BIAS_MENU}/>
-	          <LabeledInput label="Begin Balance" value={pastPerformance.endBal} id={'beginBal'} handleChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="End Balance" id={'endBal'} handleChange={inputChange} startAdornment={"$"} />
-	          <LabeledInput label="Net Return" id={'netReturn'} handleChange={inputChange} startAdornment={"%"} />
+	          <LabeledInput label="Begin Balance" value={pastPerformance.endBal} id={'beginBal'} handleChange={inputChange} startadornment={"$"} />
+	          <LabeledInput label="End Balance" id={'endBal'} handleChange={inputChange} startadornment={"$"} />
+	          <LabeledInput label="Net Return" id={'netReturn'} handleChange={inputChange} startadornment={"%"} />
 					</List>
 				</Paper>
 			</div>

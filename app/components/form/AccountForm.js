@@ -27,6 +27,11 @@ const styles = theme => ({
     flexWrap: 'wrap',
 		width: '100%'
   },
+	list:{
+		paddingLeft: theme.spacing.unit * 2,
+		minWidth: 300,
+		maxWidth: 500
+	},
   buttonBar: {
     paddingTop: 5,
     paddingBottom: 10
@@ -64,7 +69,7 @@ class AccountForm extends Component {
 					<List component="nav" className={classes.list}>
 						<LabeledInput label={"Account Name"} value={account.accName} id={'accName'} handleChange={inputChange} />
 						<DatePicker 	label={"Start Date"} value={account.startDate} id={'startDate'} handleChange={inputChange} />
-						<LabeledInput label={"Start Balance"} value={account.startBal} id={'startBal'} handleChange={inputChange} startAdornment={"$"}/>
+						<LabeledInput label={"Start Balance"} value={account.startBal} id={'startBal'} handleChange={inputChange} startadornment={"$"}/>
 						<SimpleSelect label={"Tax"} value={account.tax} id={'tax'} menu={TAX_MENU}/>
 						<SimpleSelect label={"Horizon"} value={account.horizon} id={'horizon'} menu={HORIZON_MENU} handleChange={inputChange}/>
 						<SimpleSelect label={"Bias"} value={account.bias} id={'bias'} menu={BIAS_MENU} handleChange={inputChange}/>

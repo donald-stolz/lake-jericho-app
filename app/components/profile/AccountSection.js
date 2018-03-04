@@ -35,7 +35,7 @@ const styles = theme => ({
   list:{
 		paddingLeft: theme.spacing.unit * 2,
 		minWidth: 300,
-		maxWidth: 400
+		maxWidth: 500
 	},
 	textField: {
 		margin: theme.spacing.unit,

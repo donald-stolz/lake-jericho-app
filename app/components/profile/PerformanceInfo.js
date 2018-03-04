@@ -125,9 +125,9 @@ class PerformanceInfo extends Component {
 						<TextField label="Tax" value={performance[value].tax} id={'tax'} disabled className={classes.textField}/>
 						<TextField label="Horizon" value={performance[value].horizon} id={'horizon'}disabled className={classes.textField}/>
 						<TextField label="Bias" value={performance[value].bias} id={'bias'} disabled className={classes.textField}/>
-	          <TextField label="Begin Balance" value={"$ "+performance[value].beginBal} id={'beginBal'} startAdornment={"$"} disabled className={classes.textField}/>
-	          <TextField label="End Balance" value={"$ "+performance[value].endBal} id={'endBal'} startAdornment={"$"} disabled className={classes.textField}/>
-	          <TextField label="Net Return" value={performance[value].netReturn+" %"} id={'netReturn'} startAdornment={"%"} disabled className={classes.textField}/>
+	          <TextField label="Begin Balance" value={"$ "+performance[value].beginBal} id={'beginBal'} startadornment={"$"} disabled className={classes.textField}/>
+	          <TextField label="End Balance" value={"$ "+performance[value].endBal} id={'endBal'} startadornment={"$"} disabled className={classes.textField}/>
+	          <TextField label="Net Return" value={performance[value].netReturn+" %"} id={'netReturn'} startadornment={"%"} disabled className={classes.textField}/>
 					</List>
 				</Paper>
 			</div>)

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import PersonalForm  from './form/PersonalForm'
 import FinancialForm  from './form/FinancialForm'
 import AccountForm  from './form/AccountForm'
+import Confirmation from './form/Confirmation'
 
 import { CLIENT_STRUCT } from '../constants/constants'
 import Grid from 'material-ui/Grid';
@@ -34,7 +35,7 @@ class NewClient extends Component {
     this.state = {
 			numAccounts : 0,
 			step : 0,
-			CLIENT_STRUCT
+			client : CLIENT_STRUCT
 		}
   }
 
@@ -47,28 +48,21 @@ class NewClient extends Component {
     /* Optional Step: Increments number of accounts
         and sets page to add another account
     */
+		this.setState({step: 2})
   }
-
-	update(event){
-		console.log(event);
+	submitClient(){
+		console.log(this.state.client);
+		// this.props.add(this.state.client)
 	}
 
-	updateAccount(account){
-		// NOTE: assing accNUm
-		var numAcc = this.state.numAccounts++
-		if (this.state.numAccounts === 0) {
-			this.setState({accounts: account, numAccounts: numAcc})
-		}
-		else {
-			var updated = accounts.push(account)
-			this.setState({accounts: updated, numAccounts: numAcc})
-		}
-
+	updatePersonal(event){
+		var newPersonal = {...this.state.client.personal, [event.id] : event.value}
+		this.setState({client.personal : newPersonal})
 	}
 
   formStep(){
   //Steps for dispalying form
-    var step = this.state.step
+    var {step} = this.state
 		const handleChange = this.update.bind(this)
 
     switch (step) {
@@ -84,7 +78,9 @@ class NewClient extends Component {
       case 3:
         // Step 4: Allows user to choose between adding another account or finishing
         // Client will be saved to DB if user cancels on additional account(s)
-        return < Continue addAcc={this.addAccount.bind(this)}/>
+        return < Confirmation
+					handleAccount={this.addAccount.bind(this)}
+					handleSubmit={this.submitClient.bind(this)}/>
       default:
         return null
     }

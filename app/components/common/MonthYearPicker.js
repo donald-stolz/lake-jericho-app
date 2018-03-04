@@ -33,10 +33,8 @@ const Months = Array.from(Array(12).keys()).map(value => {
 })
 
 const Years = Array.from(Array(30).keys()).map(value => {
-	value = value + 1;
+	value = value + 14; //2014 is oldest record year
 	var year = (value).toString();
-	//Add 0 for months less than 10
-	if (value < 10) {year = "0"+ year}
 	return(<MenuItem key={year} value={year}> {year} </MenuItem> )
 })
 
@@ -45,22 +43,24 @@ class MonthYearPicker extends React.Component {
 
 	constructor(props){
 		super(props);
-    var val = this.props.value;
-		var nextMonth = parseInt(val.slice(0,1)) + 1;
-		var year = parseInt(val.slice(3,4));
-		if (nextMonth > 12) {
-			nextMonth = "01"
-			year = year + 1;
+		// NOTE: use slice and then assign arrays
+		var regex = /\s*\/\s*/;
+    var values = this.props.value.split(regex);
+		var year = values[1];
+		console.log(year);
+		var month = parseInt(values[0]);
+		month = month + 1;
+		if (month < 10) {
+			month = "0"+ month.toString();
+		} else if (month > 12) {
+			month = "01";
+			year = (parseInt(year) + 1).toString();
+		}else {
+			month = month.toString();
 		}
-		if (year < 10 ) {
-			year = "0" + year;
-		}
-		if (nextMonth < 10 && nextMonth > 1) {
-			nextMonth = "0" + nextMonth;
-		}
-		
+
 		this.state = {
-      month : nextMonth,
+      month : month,
       year  : year,
 			newRecord : this.props.newRecord,
     };
@@ -79,9 +79,9 @@ class MonthYearPicker extends React.Component {
         break;
       default:
     }
-		this.setState({value : newValue});
+
     var result = {id: this.props.id, value : newValue}
-    console.log(this.state);
+    console.log(result);
 		// this.props.handleChange(result);
 	};
 
@@ -126,7 +126,7 @@ MonthYearPicker.propTypes = {
 };
 
 MonthYearPicker.defaultProps = {
-	value: '00/00',
+	value: '00/14',
 	id: 'myp',
 	handleChange: (event) => {console.log(event.target.value);},
 }

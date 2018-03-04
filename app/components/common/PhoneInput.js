@@ -12,7 +12,8 @@ const styles = theme => ({
   },
   input: {
     margin: theme.spacing.unit,
-    paddingTop: 8
+    paddingTop: 8,
+		width: '100%',
   },
   label: {
     margin: theme.spacing.unit,

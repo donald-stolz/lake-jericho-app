@@ -15,7 +15,8 @@ const styles = theme => ({
   },
 	input: {
     margin: theme.spacing.unit,
-		paddingTop: 10
+		paddingTop: 10,
+		width: '100%',
   },
 });
 
@@ -40,11 +41,11 @@ class LabeledInput extends React.Component {
 		const { classes } = this.props;
 
 
-		var startAdornment = null;
-		if (this.props.startAdornment) {
-			startAdornment = (
+		var startadornment = null;
+		if (this.props.startadornment) {
+			startadornment = (
 				<InputAdornment className={classes.adornment} position="start">
-					{this.props.startAdornment}
+					{this.props.startadornment}
 				</InputAdornment>)
 		}
 
@@ -53,7 +54,7 @@ class LabeledInput extends React.Component {
 	      <InputLabel shrink={"false"} className={classes.label}>{this.props.label} </InputLabel>
 	      <Input
 					multiline={'true'}
-					startAdornment={startAdornment}
+					startadornment={startadornment}
 					value={this.state.value}
 					onChange={this.handleChange}
 	        className={classes.input}
@@ -66,17 +67,13 @@ class LabeledInput extends React.Component {
 	  );
 	}
 }
-//Props:
-	// label
-	// value
-	// handleChange
 
 LabeledInput.propTypes = {
   classes: PropTypes.object.isRequired,
 	id: PropTypes.string.isRequired,
 	handleChange: PropTypes.func.isRequired,
 	value: PropTypes.string.isRequired,
-	startAdornment: PropTypes.string,
+	startadornment: PropTypes.string,
 };
 
 LabeledInput.defaultProps = {

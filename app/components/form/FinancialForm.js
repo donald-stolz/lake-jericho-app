@@ -27,7 +27,7 @@ const styles = theme => ({
   list:{
     paddingLeft: theme.spacing.unit * 2,
     minWidth: 300,
-    maxWidth: 400
+    maxWidth: 500
   }
 });
 
@@ -49,10 +49,10 @@ class FinancialForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<LabeledInput value={client.annualIncome} label={"Annual Income"} id={'annualIncome'} handleChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={client.totalAssets} label={"Total Assets"} id={'totalAssets'} handleChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={client.liquidAssets} label={"Liquid Assets"} id={'liquidAssets'} handleChange={inputChange} startAdornment={"$"} />
-						<LabeledInput value={client.investmentAssets} label={"Investment Assets"} id={'investmentAssets'} handleChange={inputChange} startAdornment={"$"} />
+						<LabeledInput value={client.annualIncome} label={"Annual Income"} id={'annualIncome'} handleChange={inputChange} startadornment={"$"} />
+						<LabeledInput value={client.totalAssets} label={"Total Assets"} id={'totalAssets'} handleChange={inputChange} startadornment={"$"} />
+						<LabeledInput value={client.liquidAssets} label={"Liquid Assets"} id={'liquidAssets'} handleChange={inputChange} startadornment={"$"} />
+						<LabeledInput value={client.investmentAssets} label={"Investment Assets"} id={'investmentAssets'} handleChange={inputChange} startadornment={"$"} />
 						<LabeledInput value={client.investmentExperience} label={"Investment Experience"} id={'investmentExperience'} handleChange={inputChange} />
 						<LabeledInput value={client.overallObjectives} label={"Overall Objectives"} id={'overallObjectives'} handleChange={inputChange} />
 						<LabeledInput value={client.timeHorizon} label={"Time Horizon"} id={'timeHorizon'} handleChange={inputChange} />

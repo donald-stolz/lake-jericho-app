@@ -59,11 +59,7 @@ class Profile extends Component {
 	}
 
 	removeClient(confirmation){
-		console.log(confirmation);
-		if (confirmation.value === "true") {
-			// TODO: Navigate home & call remove
-			console.log("Remove");
-		}
+		console.log("Remove");
 	}
 
   // Methods for changing states in order to remove a client

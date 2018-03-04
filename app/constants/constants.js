@@ -17,10 +17,10 @@ export const CLIENT_STRUCT	= {
   },
 /* Financial Information */
   financial: {
-    annualIncome: 0,
-    totalAssets: 0,
-    liquidAssets: 0,
-    investmentAssets: 0,
+    annualIncome: '',
+    totalAssets: '',
+    liquidAssets: '',
+    investmentAssets: '',
     investmentExperience: '',
     investmentObjectives: '',
     timeHorizon: '',
@@ -47,9 +47,9 @@ export const CLIENT_STRUCT	= {
       tax: '',
       horizon: '',
       bias: '',
-      beginBal: 0,
-      endBal: 0,
-      netReturn: 0
+      beginBal: '',
+      endBal: '',
+      netReturn: ''
     }]
   }]
 }
