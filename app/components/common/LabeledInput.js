@@ -54,7 +54,7 @@ class LabeledInput extends React.Component {
 	      <InputLabel shrink={"false"} className={classes.label}>{this.props.label} </InputLabel>
 	      <Input
 					multiline={'true'}
-					startadornment={startadornment}
+					startAdornment={startadornment}
 					value={this.state.value}
 					onChange={this.handleChange}
 	        className={classes.input}

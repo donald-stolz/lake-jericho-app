@@ -78,6 +78,9 @@ class MonthYearPicker extends React.Component {
 
         break;
       default:
+
+			var value = month +"/" + year;
+			console.log(value);
     }
 
     var result = {id: this.props.id, value : newValue}

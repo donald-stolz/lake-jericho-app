@@ -54,7 +54,6 @@ class PhoneInput extends React.Component {
     this.setState({
       textmask : event.target.value,
     });
-		console.log(event.target);
 		this.props.handleChange(event.target);
   };
 

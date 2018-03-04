@@ -33,7 +33,7 @@ class NewClient extends Component {
     super()
 
     this.state = {
-			numAccounts : 0,
+			numAcc : 0,
 			step : 0,
 			client : CLIENT_STRUCT
 		}
@@ -41,7 +41,7 @@ class NewClient extends Component {
 
 	nextStep(){
 		var nextStep = this.state.step + 1;
-		this.setState({step :nextStep})
+		this.setState({step :nextStep});
 	}
 
   addAccount(){
@@ -56,25 +56,42 @@ class NewClient extends Component {
 	}
 
 	updatePersonal(event){
-		var newPersonal = {...this.state.client.personal, [event.id] : event.value}
-		this.setState({client.personal : newPersonal})
+		var newPersonal = {...this.state.client.personal, [event.id] : event.value};
+		var newClient = {...this.state.client, personal: newPersonal};
+		this.setState({client:newClient});
+	}
+
+	updateFinancial(event){
+		var newFinancial = {...this.state.client.financial, [event.id] : event.value};
+		var newClient = {...this.state.client, financial: newFinancial};
+		this.setState({client:newClient});
+	}
+
+	updateAccount(event){
+		const index = this.state.numAcc;
+		var newAccount = {...this.state.client.accounts[index], [event.id] : event.value};
+		var accounts = this.state.accounts.push(newAccount);
+		var newClient = {...this.state.client, accounts: accounts}
+		this.setState({client:newClient});
 	}
 
   formStep(){
   //Steps for dispalying form
     var {step} = this.state
-		const handleChange = this.update.bind(this)
+		const personalChange = this.updatePersonal.bind(this)
+		const financialChange = this.updateFinancial.bind(this)
+		const accountChange = this.updateAccount.bind(this)
 
     switch (step) {
       case 0:
         // Step 1: Displays personal fields
-        return < PersonalForm handleChange={handleChange}/>
+        return < PersonalForm handleChange={personalChange}/>
       case 1:
         // Step 2: Displays general financial fields
-        return < FinancialForm handleChange={handleChange}/>
+        return < FinancialForm handleChange={financialChange}/>
       case 2:
         // Step 3: Displays the add account fields; Final mandatory step
-        return < AccountForm updateAccount={this.updateAccount.bind(this)}/>
+        return < AccountForm updateAccount={accountChange}/>
       case 3:
         // Step 4: Allows user to choose between adding another account or finishing
         // Client will be saved to DB if user cancels on additional account(s)

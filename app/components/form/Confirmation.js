@@ -10,8 +10,8 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
 	grid:{
-		alignContent: center,
-		alignItems: center
+		alignContent: 'center',
+		alignItems: 'center'
 	},
   button: {
     margin: theme.spacing.unit,
@@ -20,7 +20,7 @@ const styles = theme => ({
 });
 
 function Confirmation(props) {
-  const { classes, handleAccount, handleChange } = props;
+  const { classes, handleAccount, handleSubmit } = props;
   return (
     <div className={classes.container}>
 			<Grid className={classes.grid}>
@@ -51,7 +51,7 @@ Confirmation.propTypes = {
 
 Confirmation.defaultProps = {
   handleAccount: (event) => {console.log(event)},
-	handleChange: (event) => {console.log(event)},
+	handleSubmit: (event) => {console.log(event)},
 }
 
 export default withStyles(styles)(Confirmation);
