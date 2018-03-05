@@ -81,8 +81,6 @@ class AccountForm extends Component {
   }
 }
 
-// const { client } = this.props;
-// NOTE: Use in Profile, not here
 AccountForm.propTypes = {
 	classes: PropTypes.object.isRequired,
   accountChange: PropTypes.func.isRequired,

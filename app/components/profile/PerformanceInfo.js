@@ -44,12 +44,19 @@ class PerformanceInfo extends Component {
 		this.state = {
 			newRecord : false,
 			editRecord: false,
-			index : 0
+			index : 0,
+			record: this.props.performance[0]
 		}
 	}
 
+	handleChange = target => {
+		var performance = {...this.state.performance, [target.id]:target.value}
+		this.setState({record : performance})
+	};
+
 	recordSelect = event => {
 		// TODO: Set index based on record selected
+		// Key from list?
 		console.log(event.target);
 	}
 
@@ -58,9 +65,16 @@ class PerformanceInfo extends Component {
 	newPerformance = () => {this.setState({newRecord: true})}
 
 	save(){
-		// TODO: 
 		// Update account details or add new performance record
-		this.cancel()
+		const {record} = this.state;
+		var {performance} = this.props;
+		if (this.state.newRecord) {
+			performance.push(record);
+		}else {
+			performance[index] = record;
+		}
+		this.props.handleChange(performance);
+		this.cancel();
 	}
 
 	cancel(){
@@ -71,11 +85,11 @@ class PerformanceInfo extends Component {
 	}
 
 	render(){
-		const { newRecord, editRecord, indx } = this.state;
-		const {classes, performance} = this.props;
-		const select = this.recordSelect.bind(this)
-		const edit = this.editPerformnce.bind(this)
-		const dates = performance.map((record) => {return record.date})
+		const { newRecord, editRecord, index } = this.state;
+		const {classes, performance } = this.props;
+		const select = this.recordSelect.bind(this);
+		const edit = this.editPerformnce.bind(this);
+		const dates = performance.map((record) => {return record.date});
 		const buttons = (
 			<Grid container className={classes.buttonBar} justify={'space-around'}>
 				<Grid item>

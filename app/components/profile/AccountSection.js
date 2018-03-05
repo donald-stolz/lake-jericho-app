@@ -30,7 +30,6 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
 		width: '100%',
-
   },
   list:{
 		paddingLeft: theme.spacing.unit * 2,
@@ -58,38 +57,71 @@ class AccountSection extends Component {
 
     this.state = {
 			viewState: "view",
-			value: 0}
+			value: 0,
+			accounts: this.props.accounts
+		}
   }
 
-	changeAccount = (event, value) => {
-		console.log(value);
-    this.setState({ value });
-  };
+	changeAccount = (event, value) => { this.setState({ value });};
 
-// TODO: Button Events
-	handleChange = target => {
-		this.props.handleChange(target);
-	};
+	handleChange(event){
+		// TODO: Handle change for editing account
+		const {value} = this.state;
+		var newAcc = this.state.accounts[value];
+		newAcc = {...newAcc, [event.id] : event.value};
+		var updateAccounts = this.state.accounts;
+		updateAccounts[value] = newAcc;
 
-	edit(){
-		this.setState({viewState : "edit"});
+		this.setState({accounts: updateAccounts})
 	}
 
-	cancel(){
-		this.setState({viewState : "view"});
+	handleNew(event){
+		// TODO: Handle change for new accounts
+		const index = this.state.accounts.length;
+		var newAcc = this.state.accounts[index];
+		newAcc = {...newAcc, [event.id] : event.value};
+		var updateAccounts = this.state.accounts;
+		updateAccounts[index] = newAcc;
+
+		this.setState({accounts: updateAccounts})
 	}
 
-	save(){
-		console.log("Save");
+	newPerformance(event){
+		// TODO: Handle change for new performance
+		const index = this.state.numAcc;
+		var acc = this.state.client.accounts[index]
+		acc.performanceHist[0] = {...acc.performanceHist[0], [event.id] : event.value};
+		var updateAccounts = this.state.client.accounts;
+		updateAccounts[index] = acc;
+		var newClient = { ...this.state.client, accounts: updateAccounts};
+		this.setState({client: newClient})
 	}
 
-	addAcc(){
-		this.setState({viewState : "add"});
+	edit(){ this.setState({viewState : "edit"}); }
+
+	cancel(){ this.setState({viewState : "view"}); }
+
+	save(newData){
+		var {accounts, value} = this.state;
+		if (this.state.view === "add") {
+			//If adding new account
+			accounts.push(newData);
+		} else if (Array.isArray(newData)) {
+			// If adding performanceHist - sends entire performance
+			accounts.performanceHist = newData;
+		} else {
+			// Else updating account details
+			accounts[value] = newData;
+		}
+
+		this.props.handleChange(accounts);
 	}
+
+	addAcc(){ this.setState({viewState : "add"}); }
 
 	renderViewOrEdit(){
-		const { viewState, value } = this.state;
-		const	{classes, accounts } = this.props;
+		const { viewState, value, accounts } = this.state;
+		const	{classes } = this.props;
 		const inputChange = this.handleChange.bind(this);
 		const account = this.props.accounts[value]
 		const buttons = (
@@ -122,22 +154,22 @@ class AccountSection extends Component {
 			case "view":
 				return (
 					<div>
-						< AccountInfo account={account}/>
-						<PerformanceInfo performance={accounts[value].performanceHist}/>
+						<AccountInfo account={account}/>
+						<PerformanceInfo performance={accounts[value].performanceHist} handleChange={this.save.bind(this)}/>
 					</div>
 );
 				break;
 			case "add":
 				return(
 					<div>
-						<AccountForm account={account} />
+						<AccountForm account={account} newAccount={true}/>
 						{buttons}
 					</div>)
 				break;
 			default:
 				return (
 					<div>
-						<AccountForm account={account} newAccount={false} handleChange={inputChange}/>
+						<AccountForm account={account} newAccount={false} accountChange={inputChange}/>
 						{buttons}
 					</div>
 				);
