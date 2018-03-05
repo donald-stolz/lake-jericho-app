@@ -47,13 +47,13 @@ class AccountForm extends Component {
 
 	renderPerformance(){
 		if (this.props.newAccount) {
-			return (<PerformanceForm handleChange={this.props.handleChange.bind(this)}/>);
+			return (<PerformanceForm handleChange={this.props.performanceChange.bind(this)}/>);
 		}
 	}
 
   render(){
 		const { classes, account } = this.props;
-		const inputChange = this.props.handleChange.bind(this)
+		const inputChange = this.props.accountChange.bind(this)
 
     return(
 			<div className={classes.root}>
@@ -70,7 +70,7 @@ class AccountForm extends Component {
 						<LabeledInput label={"Account Name"} value={account.accName} id={'accName'} handleChange={inputChange} />
 						<DatePicker 	label={"Start Date"} value={account.startDate} id={'startDate'} handleChange={inputChange} />
 						<LabeledInput label={"Start Balance"} value={account.startBal} id={'startBal'} handleChange={inputChange} startadornment={"$"}/>
-						<SimpleSelect label={"Tax"} value={account.tax} id={'tax'} menu={TAX_MENU}/>
+						<SimpleSelect label={"Tax"} value={account.tax} id={'tax'} menu={TAX_MENU} handleChange={inputChange}/>
 						<SimpleSelect label={"Horizon"} value={account.horizon} id={'horizon'} menu={HORIZON_MENU} handleChange={inputChange}/>
 						<SimpleSelect label={"Bias"} value={account.bias} id={'bias'} menu={BIAS_MENU} handleChange={inputChange}/>
 					</List>
@@ -85,7 +85,8 @@ class AccountForm extends Component {
 // NOTE: Use in Profile, not here
 AccountForm.propTypes = {
 	classes: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  accountChange: PropTypes.func.isRequired,
+	performanceChange: PropTypes.func.isRequired,
 	newAccount: PropTypes.bool.isRequired,
 	account : PropTypes.shape({
 		accNum: PropTypes.string.isRequired,
@@ -99,7 +100,8 @@ AccountForm.propTypes = {
 }
 
 AccountForm.defaultProps = {
-  handleChange: (event) => {console.log(event)},
+	accountChange: (event) => {console.log(event)},
+	performancChange: (event) => {console.log(event)},
 	newAccount: true,
 	account : {
 		accNum: '0',

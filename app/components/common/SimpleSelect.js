@@ -32,7 +32,10 @@ class SimpleSelect extends React.Component {
 		this.setState({
 			value : event.target.value,
 		});
-		this.props.handleChange(event.target);
+		var result = {
+			id: event.target.name,
+			value: event.target.value}
+		this.props.handleChange(result);
 	};
 
   render() {
@@ -70,7 +73,7 @@ SimpleSelect.defaultProps = {
 	value: '',
 	label: "Select",
 	id: "select",
-	handleChange: (event) => {console.log(event.target.value);},
+	handleChange: (event) => {console.log(event);},
 	menu: ["No Options"]
 }
 

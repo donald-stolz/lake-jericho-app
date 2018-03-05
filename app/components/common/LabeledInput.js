@@ -79,7 +79,7 @@ LabeledInput.propTypes = {
 LabeledInput.defaultProps = {
 	id: 'labeledInput',
 	value: '',
-	handleChange: (event) => {console.log(event.target.value);},
+	handleChange: (event) => {console.log(event.target);},
 }
 
 export default withStyles(styles)(LabeledInput);

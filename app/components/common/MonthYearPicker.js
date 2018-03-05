@@ -47,7 +47,6 @@ class MonthYearPicker extends React.Component {
 		var regex = /\s*\/\s*/;
     var values = this.props.value.split(regex);
 		var year = values[1];
-		console.log(year);
 		var month = parseInt(values[0]);
 		month = month + 1;
 		if (month < 10) {
@@ -85,7 +84,7 @@ class MonthYearPicker extends React.Component {
 
     var result = {id: this.props.id, value : newValue}
     console.log(result);
-		// this.props.handleChange(result);
+		this.props.handleChange(result);
 	};
 
   render() {

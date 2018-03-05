@@ -43,12 +43,17 @@ class PerformanceInfo extends Component {
 
 		this.state = {
 			newRecord : false,
+			edit: false,
 			value : 0
 		}
 	}
 
 	recordSelect = event => {
 		console.log(event.target);
+	}
+
+	editPerformnce = () => {
+		this.setState({edit: true})
 	}
 
 	newPerformance = () => {
@@ -58,14 +63,19 @@ class PerformanceInfo extends Component {
 	save(){
 
 	}
+
 	cancel(){
-		this.setState({newRecord: false})
+		this.setState({
+			newRecord: false,
+			edit: false
+		})
 	}
 
 	render(){
 		const { newRecord, value } = this.state;
 		const {classes, performance} = this.props;
 		const select = this.recordSelect.bind(this)
+		const edit = this.editPerformnce.bind(this)
 		const dates = performance.map((record) => {return record.date})
 		const buttons = (
 			<Grid container className={classes.buttonBar} justify={'space-around'}>
@@ -100,7 +110,13 @@ class PerformanceInfo extends Component {
 				{buttons}
 				</div>
 			)
-		} else {
+		}else if (edit) {
+			<div>
+			<PerformanceForm pastPerformance={performance[this.state.value]}/>
+			{buttons}
+			</div>
+		}
+		else {
 			return(
 				<div className={classes.root}>
   			<Paper className={classes.container} elevation={6}>
@@ -109,6 +125,10 @@ class PerformanceInfo extends Component {
   			      <Typography variant="title" color="inherit" className={classes.flex}>
   			        Performance History
   			      </Typography>
+							<Button color="inherit"
+								onClick={edit}>
+								Edit
+							</Button>
 							<Button color="default" variant="fab"
 								onClick={this.newPerformance.bind(this)}>
 								<AddIcon size={"small"}/>

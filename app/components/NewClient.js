@@ -29,13 +29,13 @@ const styles = theme => ({
 });
 
 class NewClient extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
 			numAcc : 0,
 			step : 0,
-			client : CLIENT_STRUCT
+			client : this.props.client
 		}
   }
 
@@ -48,11 +48,14 @@ class NewClient extends Component {
     /* Optional Step: Increments number of accounts
         and sets page to add another account
     */
-		this.setState({step: 2})
+		this.setState({
+			step: 2,
+			numAcc: (this.state.numAcc + 1)
+		})
   }
 	submitClient(){
 		console.log(this.state.client);
-		// this.props.add(this.state.client)
+		this.props.add(this.state.client)
 	}
 
 	updatePersonal(event){
@@ -69,10 +72,22 @@ class NewClient extends Component {
 
 	updateAccount(event){
 		const index = this.state.numAcc;
-		var newAccount = {...this.state.client.accounts[index], [event.id] : event.value};
-		var accounts = this.state.accounts.push(newAccount);
-		var newClient = {...this.state.client, accounts: accounts}
-		this.setState({client:newClient});
+		var newAcc = this.state.client.accounts[index];
+		newAcc = {...newAcc, [event.id] : event.value};
+		var updateAccounts = this.state.client.accounts;
+		updateAccounts[index] = newAcc;
+		var newClient = { ...this.state.client, accounts: updateAccounts};
+		this.setState({client: newClient})
+	}
+
+	updatePerformance(event){
+		const index = this.state.numAcc;
+		var acc = this.state.client.accounts[index]
+		acc.performanceHist[0] = {...acc.performanceHist[0], [event.id] : event.value};
+		var updateAccounts = this.state.client.accounts;
+		updateAccounts[index] = acc;
+		var newClient = { ...this.state.client, accounts: updateAccounts};
+		this.setState({client: newClient})
 	}
 
   formStep(){
@@ -81,6 +96,7 @@ class NewClient extends Component {
 		const personalChange = this.updatePersonal.bind(this)
 		const financialChange = this.updateFinancial.bind(this)
 		const accountChange = this.updateAccount.bind(this)
+		const performanceChange = this.updatePerformance.bind(this)
 
     switch (step) {
       case 0:
@@ -91,7 +107,7 @@ class NewClient extends Component {
         return < FinancialForm handleChange={financialChange}/>
       case 2:
         // Step 3: Displays the add account fields; Final mandatory step
-        return < AccountForm updateAccount={accountChange}/>
+        return < AccountForm accountChange={accountChange} performanceChange={performanceChange}/>
       case 3:
         // Step 4: Allows user to choose between adding another account or finishing
         // Client will be saved to DB if user cancels on additional account(s)
@@ -146,6 +162,105 @@ class NewClient extends Component {
 
 NewClient.defaultProps = {
 	classes: PropTypes.object.isRequired,
-}
+	client: PropTypes.shape({
+		// Empty Personal Information
+		personal: PropTypes.shape({
+			name: PropTypes.string,
+			dob: PropTypes.string,
+			address: PropTypes.string,
+			phone: PropTypes.string,
+			email: PropTypes.string,
+		}),
 
+		// Empty Financial Information
+		financial: PropTypes.shape({
+			annualIncome: PropTypes.string,
+			totalAssets: PropTypes.string,
+			liquidAssets: PropTypes.string,
+			investmentAssets: PropTypes.string,
+			investmentExperience: PropTypes.string,
+			investmentObjectives: PropTypes.string,
+			timeHorizon: PropTypes.string,
+			taxConsids: PropTypes.string,
+			liquidConsids: PropTypes.string,
+			regulatoryIssues: PropTypes.string,
+			unique: PropTypes.string,
+			returnObjective: PropTypes.string,
+			riskAbility: PropTypes.string,
+			riskWillingness: PropTypes.string,
+			riskOverall: PropTypes.string
+		}),
+
+		// Empty Account(s) Information
+		accounts : PropTypes.arrayOf(PropTypes.shape({
+			accNum: PropTypes.number,
+			accName: PropTypes.string,
+			startBal: PropTypes.string,
+			startDate: PropTypes.string,
+			tax: PropTypes.string,
+			horizon: PropTypes.string,
+			bias: PropTypes.string,
+			performanceHist : PropTypes.arrayOf(PropTypes.shape({
+				date: PropTypes.string,
+				tax: PropTypes.string,
+				horizon: PropTypes.string,
+				bias: PropTypes.string,
+				beginBal: PropTypes.string,
+				endBal: PropTypes.string,
+				netReturn: PropTypes.string
+			}))
+		}))
+	}).isRequired
+}
+NewClient.defaultProps = {
+	client : {
+		// Empty Personal Information
+		personal: {
+			name: ' ',
+			dob: ' ',
+			address: ' ',
+			phone: ' ',
+			email: ' ',
+		},
+
+		// Empty Financial Information
+		financial:{
+			annualIncome: ' ',
+			totalAssets: ' ',
+			liquidAssets: ' ',
+			investmentAssets: ' ',
+			investmentExperience: ' ',
+			investmentObjectives: ' ',
+			timeHorizon: ' ',
+			taxConsids: ' ',
+			liquidConsids: ' ',
+			regulatoryIssues: ' ',
+			unique: ' ',
+			returnObjective: ' ',
+			riskAbility: ' ',
+			riskWillingness: ' ',
+			riskOverall: ' '
+		},
+
+		// Empty Account(s) Information
+		accounts : [{
+			accNum: 0,
+			accName: ' ',
+			startBal: ' ',
+			startDate: ' ',
+			tax: ' ',
+			horizon: ' ',
+			bias: ' ',
+			performanceHist : [{
+				date: ' ',
+				tax: ' ',
+				horizon: ' ',
+				bias: ' ',
+				beginBal: ' ',
+				endBal: ' ',
+				netReturn: ' '
+			}]
+		}]
+	}
+}
 export default withStyles(styles)(NewClient);

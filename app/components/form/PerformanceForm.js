@@ -36,17 +36,6 @@ const styles = theme => ({
 
 class PerformanceForm extends Component {
 
-	constructor(props){
-		super(props);
-		this.state={...CLIENT_STRUCT.accounts[0].performanceHist}
-	}
-
-	// handleChange(event){
-	// 	this.setState({
-	// 		[event.target.id]: event.target
-	// 	})
-	// }
-
   render(){
 		const { classes, pastPerformance } = this.props;
 		const inputChange = this.props.handleChange.bind(this)
@@ -63,9 +52,9 @@ class PerformanceForm extends Component {
   			  </AppBar>
 					<List component="nav" className={classes.list}>
 						<MonthYearPicker 	id="startDate" value={pastPerformance.date} handleChange={inputChange} />
-						<SimpleSelect label="Tax" value={pastPerformance.tax} id={'tax'} menu={TAX_MENU}/>
-						<SimpleSelect label="Horizon" value={pastPerformance.horizon} id={'horizon'} menu={HORIZON_MENU}/>
-						<SimpleSelect label="Bias" value={pastPerformance.bias} id={'bias'} menu={BIAS_MENU}/>
+						<SimpleSelect label="Tax" value={pastPerformance.tax} id={'tax'} menu={TAX_MENU} handleChange={inputChange}/>
+						<SimpleSelect label="Horizon" value={pastPerformance.horizon} id={'horizon'} menu={HORIZON_MENU} handleChange={inputChange}/>
+						<SimpleSelect label="Bias" value={pastPerformance.bias} id={'bias'} menu={BIAS_MENU} handleChange={inputChange}/>
 	          <LabeledInput label="Begin Balance" value={pastPerformance.endBal} id={'beginBal'} handleChange={inputChange} startadornment={"$"} />
 	          <LabeledInput label="End Balance" id={'endBal'} handleChange={inputChange} startadornment={"$"} />
 	          <LabeledInput label="Net Return" id={'netReturn'} handleChange={inputChange} startadornment={"%"} />
@@ -79,7 +68,7 @@ class PerformanceForm extends Component {
 PerformanceForm.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-	performance: PropTypes.shape({
+	pastPerformance: PropTypes.shape({
 		date: PropTypes.string.isRequired,
 		tax: PropTypes.string.isRequired,
 		horizon: PropTypes.string.isRequired,
@@ -91,7 +80,7 @@ PerformanceForm.propTypes = {
 PerformanceForm.defaultProps = {
   handleChange: (event) => {console.log(event)},
 	pastPerformance : {
-		date: '00/00',
+		date: '00/14',
 		tax: ' ',
 		horizon: ' ',
 		bias: ' ',

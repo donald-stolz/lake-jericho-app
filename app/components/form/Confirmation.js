@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 
@@ -9,10 +10,6 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-	grid:{
-		alignContent: 'center',
-		alignItems: 'center'
-	},
   button: {
     margin: theme.spacing.unit,
 		width: '100%',
@@ -22,24 +19,23 @@ const styles = theme => ({
 function Confirmation(props) {
   const { classes, handleAccount, handleSubmit } = props;
   return (
-    <div className={classes.container}>
-			<Grid className={classes.grid}>
-	      <Button
-					variant="raised"
-					color="default"
-					className={classes.button}
-					onClick={handleAccount.bind(this)}>
-	        Add Another Account
-	      </Button>
-	      <Button
-					variant="raised"
-					color="primary"
-					className={classes.button}
-					onClick={handleSubmit.bind(this)}>
-	        Save to Database
-	      </Button>
-			</Grid>
-    </div>
+		<Grid container alignContent={'center'} alignItems={'center'}>
+      <Button
+				variant="raised"
+				color="default"
+				className={classes.button}
+				onClick={handleAccount.bind(this)}>
+        Add Another Account
+      </Button>
+      <Button
+				variant="raised"
+				color="primary"
+				className={classes.button}
+				onClick={handleSubmit.bind(this)}
+				component={Link} to="/">
+        Save to Database
+      </Button>
+		</Grid>
   );
 }
 
