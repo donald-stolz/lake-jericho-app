@@ -43,7 +43,7 @@ class MonthYearPicker extends React.Component {
 
 	constructor(props){
 		super(props);
-		// NOTE: use slice and then assign arrays
+
 		var regex = /\s*\/\s*/;
     var values = this.props.value.split(regex);
 		var year = values[1];
@@ -57,7 +57,6 @@ class MonthYearPicker extends React.Component {
 		}else {
 			month = month.toString();
 		}
-
 		this.state = {
       month : month,
       year  : year,
@@ -67,23 +66,20 @@ class MonthYearPicker extends React.Component {
 
 	handleChange = event => {
     // Check if month or year and concat string accordingly
+		const {target} = event;
+		var {month, year} = this.state
     switch (target.name) {
       case "Month":
         this.setState({month : target.value})
+				month = target.value;
         break;
       case "Year":
-        newValue = newValue.slice(0,3) + target.value
         this.setState({year : target.value})
-
+				year = target.value;
         break;
-      default:
-
-			var value = month +"/" + year;
-			console.log(value);
     }
-
+		var newValue = month +"/" + year;
     var result = {id: this.props.id, value : newValue}
-    console.log(result);
 		this.props.handleChange(result);
 	};
 

@@ -92,7 +92,8 @@ class Profile extends Component {
 							handleChange={this.updateFinancial.bind(this)}
 							className={classes.section}/>
 						<AccountSection
-							handleChange={this.updateAccount.bind(this)}
+							handleAccount={this.updateAccount.bind(this)}
+							handlePerformance={this.updatePerformance.bind(this)}
 							accounts={client.accounts}
 							className={classes.section}/>
 					</List>

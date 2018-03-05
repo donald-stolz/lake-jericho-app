@@ -130,18 +130,17 @@ class AccountSection extends Component {
 			case "add":
 				return(
 					<div>
-						<AccountForm account={account}/>
+						<AccountForm account={account} />
 						{buttons}
 					</div>)
 				break;
 			default:
-			return (
-				<div>
-					<AccountForm account={account} newAccount={false} handleChange={inputChange}/>
-					{buttons}
-				</div>
-			);
-
+				return (
+					<div>
+						<AccountForm account={account} newAccount={false} handleChange={inputChange}/>
+						{buttons}
+					</div>
+				);
 		}
 	}
 

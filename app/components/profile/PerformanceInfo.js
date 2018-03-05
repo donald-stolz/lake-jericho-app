@@ -43,36 +43,35 @@ class PerformanceInfo extends Component {
 
 		this.state = {
 			newRecord : false,
-			edit: false,
-			value : 0
+			editRecord: false,
+			index : 0
 		}
 	}
 
 	recordSelect = event => {
+		// TODO: Set index based on record selected
 		console.log(event.target);
 	}
 
-	editPerformnce = () => {
-		this.setState({edit: true})
-	}
+	editPerformnce = () => {this.setState({editRecord: true})}
 
-	newPerformance = () => {
-		this.setState({newRecord: true})
-	}
+	newPerformance = () => {this.setState({newRecord: true})}
 
 	save(){
-
+		// TODO: 
+		// Update account details or add new performance record
+		this.cancel()
 	}
 
 	cancel(){
 		this.setState({
 			newRecord: false,
-			edit: false
+			editRecord: false
 		})
 	}
 
 	render(){
-		const { newRecord, value } = this.state;
+		const { newRecord, editRecord, indx } = this.state;
 		const {classes, performance} = this.props;
 		const select = this.recordSelect.bind(this)
 		const edit = this.editPerformnce.bind(this)
@@ -110,11 +109,13 @@ class PerformanceInfo extends Component {
 				{buttons}
 				</div>
 			)
-		}else if (edit) {
-			<div>
-			<PerformanceForm pastPerformance={performance[this.state.value]}/>
-			{buttons}
-			</div>
+		}
+		else if (editRecord) {
+			return(
+				<div>
+					<PerformanceForm pastPerformance={performance[this.state.index]}/>
+					{buttons}
+				</div>)
 		}
 		else {
 			return(
@@ -139,15 +140,15 @@ class PerformanceInfo extends Component {
 					<List component="nav" className={classes.list}>
 						<SimpleSelect label="Date"
 							id="startDate"
-							value={performance[value].date}
+							value={performance[index].date}
 							menu={dates}
 							handleChange={select}/>
-						<TextField label="Tax" value={performance[value].tax} id={'tax'} disabled className={classes.textField}/>
-						<TextField label="Horizon" value={performance[value].horizon} id={'horizon'}disabled className={classes.textField}/>
-						<TextField label="Bias" value={performance[value].bias} id={'bias'} disabled className={classes.textField}/>
-	          <TextField label="Begin Balance" value={"$ "+performance[value].beginBal} id={'beginBal'} startadornment={"$"} disabled className={classes.textField}/>
-	          <TextField label="End Balance" value={"$ "+performance[value].endBal} id={'endBal'} startadornment={"$"} disabled className={classes.textField}/>
-	          <TextField label="Net Return" value={performance[value].netReturn+" %"} id={'netReturn'} startadornment={"%"} disabled className={classes.textField}/>
+						<TextField label="Tax" value={performance[index].tax} id={'tax'} disabled className={classes.textField}/>
+						<TextField label="Horizon" value={performance[index].horizon} id={'horizon'}disabled className={classes.textField}/>
+						<TextField label="Bias" value={performance[index].bias} id={'bias'} disabled className={classes.textField}/>
+	          <TextField label="Begin Balance" value={"$ "+performance[index].beginBal} id={'beginBal'} startadornment={"$"} disabled className={classes.textField}/>
+	          <TextField label="End Balance" value={"$ "+performance[index].endBal} id={'endBal'} startadornment={"$"} disabled className={classes.textField}/>
+	          <TextField label="Net Return" value={performance[index].netReturn+" %"} id={'netReturn'} startadornment={"%"} disabled className={classes.textField}/>
 					</List>
 				</Paper>
 			</div>)
