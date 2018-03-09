@@ -87,7 +87,7 @@ AccountForm.propTypes = {
 	performanceChange: PropTypes.func.isRequired,
 	newAccount: PropTypes.bool.isRequired,
 	account : PropTypes.shape({
-		accNum: PropTypes.string.isRequired,
+		accNum: PropTypes.number.isRequired,
 		accName: PropTypes.string.isRequired,
 		startBal: PropTypes.string.isRequired,
 		startDate: PropTypes.string.isRequired,
@@ -99,10 +99,10 @@ AccountForm.propTypes = {
 
 AccountForm.defaultProps = {
 	accountChange: (event) => {console.log(event)},
-	performancChange: (event) => {console.log(event)},
+	performanceChange: (event) => {console.log(event)},
 	newAccount: true,
 	account : {
-		accNum: '0',
+		accNum: 0,
 		accName: ' ',
 		startBal: ' ',
 		startDate: ' ',

@@ -47,20 +47,12 @@ class MonthYearPicker extends React.Component {
 		var regex = /\s*\/\s*/;
     var values = this.props.value.split(regex);
 		var year = values[1];
-		var month = parseInt(values[0]);
-		month = month + 1;
-		if (month < 10) {
-			month = "0"+ month.toString();
-		} else if (month > 12) {
-			month = "01";
-			year = (parseInt(year) + 1).toString();
-		}else {
-			month = month.toString();
-		}
+		var month = values[0];
+
+
 		this.state = {
       month : month,
       year  : year,
-			newRecord : this.props.newRecord,
     };
 	}
 
@@ -124,7 +116,7 @@ MonthYearPicker.propTypes = {
 };
 
 MonthYearPicker.defaultProps = {
-	value: '00/14',
+	value: '01/14',
 	id: 'myp',
 	handleChange: (event) => {console.log(event.target.value);},
 }

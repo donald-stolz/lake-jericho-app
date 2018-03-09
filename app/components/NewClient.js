@@ -54,7 +54,6 @@ class NewClient extends Component {
 		})
   }
 	submitClient(){
-		console.log(this.state.client);
 		this.props.add(this.state.client)
 	}
 

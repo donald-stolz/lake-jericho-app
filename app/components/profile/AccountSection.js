@@ -57,73 +57,71 @@ class AccountSection extends Component {
 
     this.state = {
 			viewState: "view",
-			value: 0,
+			active: 0,
 			accounts: this.props.accounts
 		}
   }
 
-	changeAccount = (event, value) => { this.setState({ value });};
+	changeAccount = (event, active) => { this.setState({ active });};
 
-	handleChange(event){
-		// TODO: Handle change for editing account
-		const {value} = this.state;
-		var newAcc = this.state.accounts[value];
+	handleEditAcc(event){
+		const {active} = this.state;
+		var newAcc = this.state.accounts[active];
 		newAcc = {...newAcc, [event.id] : event.value};
 		var updateAccounts = this.state.accounts;
-		updateAccounts[value] = newAcc;
+		updateAccounts[active] = newAcc;
 
 		this.setState({accounts: updateAccounts})
 	}
 
-	handleNew(event){
-		// TODO: Handle change for new accounts
-		const index = this.state.accounts.length;
+
+
+	handleNewAcc(event){
+		const propLength = this.props.accounts.length;
+		var updateAccounts = this.state.accounts;
+		if (propLength === updateAccounts.length) {
+			var addNew = {accNum: propLength};
+			updateAccounts.push(addNew);
+		}
+		var index = propLength + 1;
 		var newAcc = this.state.accounts[index];
 		newAcc = {...newAcc, [event.id] : event.value};
-		var updateAccounts = this.state.accounts;
 		updateAccounts[index] = newAcc;
 
 		this.setState({accounts: updateAccounts})
 	}
 
-	newPerformance(event){
-		// TODO: Handle change for new performance
-		const index = this.state.numAcc;
-		var acc = this.state.client.accounts[index]
-		acc.performanceHist[0] = {...acc.performanceHist[0], [event.id] : event.value};
-		var updateAccounts = this.state.client.accounts;
-		updateAccounts[index] = acc;
-		var newClient = { ...this.state.client, accounts: updateAccounts};
-		this.setState({client: newClient})
+	handlePerformance(performance){
+		var {active, accounts} = this.state;
+		var newAcc = accounts[active];
+		newAcc = {...newAcc, performanceHist : performance}
+		accounts[active] = newAcc;
+		this.setState({accounts});
+		this.save();
 	}
 
-	edit(){ this.setState({viewState : "edit"}); }
+	setEdit(){ this.setState({viewState : "edit"}); }
+
+	setAdd(){ this.setState({viewState : "add"}); }
 
 	cancel(){ this.setState({viewState : "view"}); }
 
-	save(newData){
-		var {accounts, value} = this.state;
-		if (this.state.view === "add") {
-			//If adding new account
-			accounts.push(newData);
-		} else if (Array.isArray(newData)) {
-			// If adding performanceHist - sends entire performance
-			accounts.performanceHist = newData;
-		} else {
-			// Else updating account details
-			accounts[value] = newData;
-		}
-
-		this.props.handleChange(accounts);
+	save(){
+		this.props.handleChange(this.state.accounts);
+		this.setState({viewState : "view"});
 	}
 
 	addAcc(){ this.setState({viewState : "add"}); }
 
 	renderViewOrEdit(){
-		const { viewState, value, accounts } = this.state;
-		const	{classes } = this.props;
-		const inputChange = this.handleChange.bind(this);
-		const account = this.props.accounts[value]
+		const { viewState, active } = this.state;
+		const	{classes, accounts} = this.props;
+		const handlePerformance = this.handlePerformance.bind(this)
+		const handleNewAcc = this.handleNewAcc.bind(this)
+		const handleEditAcc = this.handleEditAcc.bind(this)
+
+
+		// NOTE: Should export and re-use in form
 		const buttons = (
 			<Grid container className={classes.buttonBar} justify={'space-around'}>
 				<Grid item>
@@ -150,26 +148,35 @@ class AccountSection extends Component {
 			</Grid>
 		)
 
+		// NOTE: Would ife provide better performance
 		switch (viewState) {
 			case "view":
 				return (
 					<div>
-						<AccountInfo account={account}/>
-						<PerformanceInfo performance={accounts[value].performanceHist} handleChange={this.save.bind(this)}/>
+						<AccountInfo account={accounts[active]}/>
+						<PerformanceInfo
+							performance={accounts[active].performanceHist}
+							handleChange={handlePerformance}/>
 					</div>
 );
 				break;
 			case "add":
 				return(
 					<div>
-						<AccountForm account={account} newAccount={true}/>
+						<AccountForm
+							accountChange={handleNewAcc}
+							newAccount={true}
+							performanceChange={handlePerformance}/>
 						{buttons}
 					</div>)
 				break;
 			default:
 				return (
 					<div>
-						<AccountForm account={account} newAccount={false} accountChange={inputChange}/>
+						<AccountForm
+							account={accounts[active]}
+							newAccount={false}
+							accountChange={handleEditAcc}/>
 						{buttons}
 					</div>
 				);
@@ -178,8 +185,11 @@ class AccountSection extends Component {
 
   render(){
 		const { classes, accounts } = this.props;
-		const { viewing, value } = this.state;
+		const { viewing, active } = this.state;
 		const tabs = accounts.map((account, index) => <Tab key={index} label={account.accName} />)
+		const onAddClick = this.setAdd.bind(this);
+		const onEditClick = this.setEdit.bind(this);
+		const onTabClick = this.changeAccount.bind(this);
 
 		return(
 			<div className={classes.root}>
@@ -190,18 +200,18 @@ class AccountSection extends Component {
 								Account Information
 							</Typography>
 							<Button color="inherit"
-								onClick={this.edit.bind(this)}>
+								onClick={onEditClick}>
 								Edit
 							</Button>
 						</Toolbar>
 					</AppBar>
 					<AppBar position="static" color="default" >
 						<Toolbar>
-						<Tabs value={value} onChange={this.changeAccount} className={classes.flex}>
+						<Tabs value={active} onChange={onTabClick} className={classes.flex}>
 							{tabs}
 						</Tabs>
 						<Button color="primary" variant="fab"
-							onClick={this.addAcc.bind(this)}>
+							onClick={onAddClick}>
 							<AddIcon size={"small"}/>
 						</Button>
 						</Toolbar>
@@ -213,8 +223,6 @@ class AccountSection extends Component {
 	)
 	}
 }
-// <PerformanceInfo records={accounts[value].performanceHist}
-
 
 AccountSection.propTypes = {
 	classes: PropTypes.object.isRequired,

@@ -50,29 +50,59 @@ class PerformanceInfo extends Component {
 	}
 
 	handleChange = target => {
-		var performance = {...this.state.performance, [target.id]:target.value}
+		var performance = {...this.state.record, [target.id]:target.value}
 		this.setState({record : performance})
 	};
 
-	recordSelect = event => {
+	recordSelect(selected){
 		// TODO: Set index based on record selected
-		// Key from list?
-		console.log(event.target);
+		const {performance} = this.props
+		var index = -1
+			for (var i=0; i < performance.length; i++) {
+	        if (performance[i].date === selected.value) {
+	            index = i;
+	        }
+	    }
+		this.setState({index});
 	}
 
-	editPerformnce = () => {this.setState({editRecord: true})}
+	editPerformance = () => {this.setState({editRecord: true})}
 
-	newPerformance = () => {this.setState({newRecord: true})}
+	newPerformance(){
+		// TODO: Add day here
+		const lastIndex = this.props.performance.length - 1;
+		const lastPerform = this.props.performance[lastIndex];
+		var regex = /\s*\/\s*/;
+    var values = lastPerform.date.split(regex);
+		var year = values[1];
+		var month = values[0];
+
+		month = parseInt(month) + 1;
+		if (month < 10) {
+			month = "0"+ month.toString();
+		} else if (month > 12) {
+			month = "01";
+			year = (parseInt(year) + 1).toString();
+		}else {
+			month = month.toString();
+		}
+		var nextDate = month + "/" + year
+		var nextPerform = {...lastPerform, date: nextDate}
+		this.setState({
+			record: nextPerform,
+			newRecord: true})
+	}
 
 	save(){
 		// Update account details or add new performance record
-		const {record} = this.state;
+		const {record, index, newRecord} = this.state;
 		var {performance} = this.props;
-		if (this.state.newRecord) {
+		if (newRecord) {
 			performance.push(record);
 		}else {
 			performance[index] = record;
 		}
+		console.log(performance);
 		this.props.handleChange(performance);
 		this.cancel();
 	}
@@ -85,11 +115,13 @@ class PerformanceInfo extends Component {
 	}
 
 	render(){
-		const { newRecord, editRecord, index } = this.state;
+		const { newRecord, editRecord, index, record } = this.state;
 		const {classes, performance } = this.props;
 		const select = this.recordSelect.bind(this);
-		const edit = this.editPerformnce.bind(this);
+		const edit = this.editPerformance.bind(this);
 		const dates = performance.map((record) => {return record.date});
+		const handleChange = this.handleChange.bind(this);
+
 		const buttons = (
 			<Grid container className={classes.buttonBar} justify={'space-around'}>
 				<Grid item>
@@ -119,7 +151,10 @@ class PerformanceInfo extends Component {
 		if (newRecord) {
 			return (
 				<div>
-				<PerformanceForm pastPerformance={performance[0]}/>
+				<PerformanceForm
+					handleChange={handleChange}
+					newRecord={true}
+					pastPerformance={record}/>
 				{buttons}
 				</div>
 			)
@@ -127,7 +162,10 @@ class PerformanceInfo extends Component {
 		else if (editRecord) {
 			return(
 				<div>
-					<PerformanceForm pastPerformance={performance[this.state.index]}/>
+					<PerformanceForm
+						handleChange={handleChange}
+						newRecord={false}
+						pastPerformance={performance[this.state.index]}/>
 					{buttons}
 				</div>)
 		}
@@ -187,7 +225,7 @@ PerformanceInfo.propTypes = {
 PerformanceInfo.defaultProps = {
   handleChange: (event) => {console.log(event)},
 	performance : [{
-		date: ' ',
+		date: '01/14',
 		tax: ' ',
 		horizon: ' ',
 		bias: ' ',

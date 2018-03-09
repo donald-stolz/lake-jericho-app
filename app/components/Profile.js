@@ -54,15 +54,14 @@ class Profile extends Component {
 	}
 
 	updateAccount( info ){
-		var clientUpdate = {...this.props.client, account:info}
+		var clientUpdate = {...this.props.client, accounts:info}
 		this.props.update(clientUpdate)
 	}
 
 	removeClient(confirmation){
+		// TODO
 		console.log("Remove");
 	}
-
-  // Methods for changing states in order to remove a client
 
   render(){
 		const {classes} = this.props;
@@ -76,6 +75,9 @@ class Profile extends Component {
 		}
 		else {
 			const {client} = this.props
+			const handlePersonal = this.updatePersonal.bind(this);
+			const handleFinancial = this.updateFinancial.bind(this);
+			const handleAccount = this.updateAccount.bind(this);
 			return(
 				<div className={classes.root}>
 					<AlertConfirmation handleChange={this.removeClient.bind(this)}/>
@@ -85,15 +87,14 @@ class Profile extends Component {
 					<List component="nav" className={classes.list}>
 	        	<PersonalInfo
 							client={client.personal}
-							handleChange={this.updatePersonal.bind(this)}
+							handleChange={handlePersonal}
 							className={classes.section}/>
 						<FinancialInfo
 							client={client.financial}
-							handleChange={this.updateFinancial.bind(this)}
+							handleChange={handleFinancial}
 							className={classes.section}/>
 						<AccountSection
-							handleAccount={this.updateAccount.bind(this)}
-							handlePerformance={this.updatePerformance.bind(this)}
+							handleChange={handleAccount}
 							accounts={client.accounts}
 							className={classes.section}/>
 					</List>

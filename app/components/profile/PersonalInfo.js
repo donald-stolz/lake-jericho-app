@@ -149,7 +149,7 @@ PersonalInfo.defaultProps = {
 
 
 PersonalInfo.propTypes = {
-	handleChange: (event) => {console.log(event);},
+	handleChange: (event) => {console.log(event)},
 }
 
 export default withStyles(styles)(PersonalInfo)

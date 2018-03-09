@@ -37,8 +37,16 @@ const styles = theme => ({
 class PerformanceForm extends Component {
 
   render(){
-		const { classes, pastPerformance } = this.props;
+		const { classes, newRecord } = this.props;
+		var {pastPerformance} = this.props;
 		const inputChange = this.props.handleChange.bind(this)
+		if (newRecord) {
+			pastPerformance = {
+				...pastPerformance,
+				beginBal: pastPerformance.endBal,
+				endBal: ' ',
+				netReturn: ' '}
+		}
 
     return(
 			<div className={classes.root}>
@@ -51,20 +59,20 @@ class PerformanceForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<MonthYearPicker 	id="startDate" value={pastPerformance.date} handleChange={inputChange} />
+						<MonthYearPicker id="startDate" value={pastPerformance.date} handleChange={inputChange} newRecord={newRecord}/>
 						<SimpleSelect label="Tax" value={pastPerformance.tax} id={'tax'} menu={TAX_MENU} handleChange={inputChange}/>
 						<SimpleSelect label="Horizon" value={pastPerformance.horizon} id={'horizon'} menu={HORIZON_MENU} handleChange={inputChange}/>
 						<SimpleSelect label="Bias" value={pastPerformance.bias} id={'bias'} menu={BIAS_MENU} handleChange={inputChange}/>
-	          <LabeledInput label="Begin Balance" value={pastPerformance.endBal} id={'beginBal'} handleChange={inputChange} startadornment={"$"} />
-	          <LabeledInput label="End Balance" id={'endBal'} handleChange={inputChange} startadornment={"$"} />
-	          <LabeledInput label="Net Return" id={'netReturn'} handleChange={inputChange} startadornment={"%"} />
+	          <LabeledInput label="Begin Balance" value={pastPerformance.beginBal} id={'beginBal'} handleChange={inputChange} startadornment={"$"} />
+	          <LabeledInput label="End Balance" value={pastPerformance.endBal}id={'endBal'} handleChange={inputChange} startadornment={"$"} />
+	          <LabeledInput label="Net Return" value={pastPerformance.netReturn} id={'netReturn'} handleChange={inputChange} startadornment={"%"} />
 					</List>
 				</Paper>
 			</div>
     )
   }
 }
-
+// NOTE: Can get rid of NewRecord
 PerformanceForm.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
@@ -73,19 +81,25 @@ PerformanceForm.propTypes = {
 		tax: PropTypes.string.isRequired,
 		horizon: PropTypes.string.isRequired,
 		bias: PropTypes.string.isRequired,
+		beginBal: PropTypes.string.isRequired,
 		endBal: PropTypes.string.isRequired,
-	}).isRequired
+		netReturn: PropTypes.string.isRequired
+	}).isRequired,
+	newRecord: PropTypes.bool.isRequired
 }
 
 PerformanceForm.defaultProps = {
   handleChange: (event) => {console.log(event)},
 	pastPerformance : {
-		date: '00/14',
+		date: '01/14',
 		tax: ' ',
 		horizon: ' ',
 		bias: ' ',
+		beginBal: ' ',
 		endBal: ' ',
-	}
+		netReturn: ' '
+	},
+	newRecord: true,
 }
 
 export default withStyles(styles)(PerformanceForm)
