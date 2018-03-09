@@ -27,29 +27,63 @@ const styles = theme => ({
 });
 
 class AccountInfo extends Component {
+	constructor(props){
+		super(props);
+		// this.state = {}
+	}
+
+	handleChange(){
+
+	}
+
+	save(){
+		// TODO: Push account/update current
+
+		this.props.handleChange(account)
+	}
 
   render(){
-		const { classes, account } = this.props;
+		const { classes, account, viewState } = this.props;
 
-		return(
-			<div>
-				<List component="nav" className={classes.list}>
-					<TextField disabled value={account.accName} label="Account Name" disabled className={classes.textField}/>
-					<TextField disabled value={account.startDate} label="Start Date" disabled className={classes.textField}/>
-					<TextField disabled value={account.startBal} label="Start Balance" disabled className={classes.textField}/>
-					<TextField disabled value={account.tax} label="Tax"disabled className={classes.textField}/>
-					<TextField disabled value={account.horizon} label="Horizon" disabled className={classes.textField}/>
-					<TextField disabled value={account.bias} label="Bias" disabled className={classes.textField}/>
-				</List>
-		  </div>
-	)
+		if (viewState === 'add') {
+			return(
+				<div>
+					<AccountForm
+						accountChange={handleNewAcc}
+						newAccount={true}
+						performanceChange={updatePerformance}/>
+					{buttons}
+				</div>)
+		} else if (viewState === 'edit') {
+			return(
+				<div>
+					<AccountForm
+						account={accounts[active]}
+						newAccount={false}
+						accountChange={handleEditAcc}/>
+					{buttons}
+				</div>)
+		} else {
+			return(
+				<div>
+					<List component="nav" className={classes.list}>
+						<TextField disabled value={account.accName} label="Account Name" disabled className={classes.textField}/>
+						<TextField disabled value={account.startDate} label="Start Date" disabled className={classes.textField}/>
+						<TextField disabled value={"$" + account.startBal} label="Start Balance" disabled className={classes.textField}/>
+						<TextField disabled value={account.tax} label="Tax"disabled className={classes.textField}/>
+						<TextField disabled value={account.horizon} label="Horizon" disabled className={classes.textField}/>
+						<TextField disabled value={account.bias} label="Bias" disabled className={classes.textField}/>
+					</List>
+				</div>)
+		}
 	}
 }
 
 AccountInfo.propTypes = {
 	classes: PropTypes.object.isRequired,
+	viewState: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-	account : PropTypes.shape({
+	account : propTypes.arrayOf(PropTypes.shape({
 		accNum: PropTypes.number.isRequired,
 		accName: PropTypes.string.isRequired,
 		startBal: PropTypes.string.isRequired,
@@ -57,13 +91,14 @@ AccountInfo.propTypes = {
 		tax: PropTypes.string.isRequired,
 		horizon: PropTypes.string.isRequired,
 		bias: PropTypes.string.isRequired,
-	}).isRequired
+	})).isRequired
 }
 
 
 AccountInfo.defaultProps = {
+	viewState: 'view'
 	handleChange: (event) => {console.log(event)},
-	account : {
+	account : [{
 		accNum: 0,
 		accName: ' ',
 		startBal: ' ',
@@ -71,6 +106,7 @@ AccountInfo.defaultProps = {
 		tax: ' ',
 		horizon: ' ',
 		bias: ' ',
-	},}
+	}],
+}
 
 export default withStyles(styles)(AccountInfo)

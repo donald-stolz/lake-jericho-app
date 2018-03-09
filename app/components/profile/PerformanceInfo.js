@@ -102,7 +102,6 @@ class PerformanceInfo extends Component {
 		}else {
 			performance[index] = record;
 		}
-		console.log(performance);
 		this.props.handleChange(performance);
 		this.cancel();
 	}

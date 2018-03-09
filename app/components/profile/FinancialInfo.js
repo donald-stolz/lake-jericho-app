@@ -91,10 +91,10 @@ class FinancialInfo extends Component {
 							</Toolbar>
 						</AppBar>
 						<List component="nav" className={classes.list}>
-							<TextField disabled value={client.annualIncome} label="Annual Income" disabled className={classes.textField}/>
-							<TextField disabled value={client.totalAssets} label="Total Assets" disabled className={classes.textField}/>
-							<TextField disabled value={client.liquidAssets} label="Liquid Assets" disabled className={classes.textField}/>
-							<TextField disabled value={client.investmentAssets} label="Investment Assets"disabled className={classes.textField}/>
+							<TextField disabled value={"$" + client.annualIncome} label="Annual Income" disabled className={classes.textField}/>
+							<TextField disabled value={"$" + client.totalAssets} label="Total Assets" disabled className={classes.textField}/>
+							<TextField disabled value={"$" + client.liquidAssets} label="Liquid Assets" disabled className={classes.textField}/>
+							<TextField disabled value={"$" + client.investmentAssets} label="Investment Assets"disabled className={classes.textField}/>
 							<TextField disabled value={client.investmentExperience} label="Investment Experience" disabled className={classes.textField}/>
 							<TextField disabled value={client.overallObjectives} label="Overall Objectives"disabled className={classes.textField}/>
 							<TextField disabled value={client.timeHorizon} label="Time Horizon" disabled className={classes.textField}/>
@@ -145,8 +145,7 @@ class FinancialInfo extends Component {
 		return(
 			<div>
 				{this.renderViewOrEdit()}
-		  </div>
-	)
+		  </div>)
 	}
 }
 
