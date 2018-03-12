@@ -162,7 +162,6 @@ class NewClient extends Component {
 NewClient.defaultProps = {
 	classes: PropTypes.object.isRequired,
 	client: PropTypes.shape({
-		// Empty Personal Information
 		personal: PropTypes.shape({
 			name: PropTypes.string,
 			dob: PropTypes.string,
@@ -171,7 +170,6 @@ NewClient.defaultProps = {
 			email: PropTypes.string,
 		}),
 
-		// Empty Financial Information
 		financial: PropTypes.shape({
 			annualIncome: PropTypes.string,
 			totalAssets: PropTypes.string,
@@ -190,7 +188,6 @@ NewClient.defaultProps = {
 			riskOverall: PropTypes.string
 		}),
 
-		// Empty Account(s) Information
 		accounts : PropTypes.arrayOf(PropTypes.shape({
 			accNum: PropTypes.number,
 			accName: PropTypes.string,
@@ -213,7 +210,6 @@ NewClient.defaultProps = {
 }
 NewClient.defaultProps = {
 	client : {
-		// Empty Personal Information
 		personal: {
 			name: ' ',
 			dob: ' ',
@@ -222,7 +218,6 @@ NewClient.defaultProps = {
 			email: ' ',
 		},
 
-		// Empty Financial Information
 		financial:{
 			annualIncome: ' ',
 			totalAssets: ' ',
@@ -241,7 +236,6 @@ NewClient.defaultProps = {
 			riskOverall: ' '
 		},
 
-		// Empty Account(s) Information
 		accounts : [{
 			accNum: 0,
 			accName: ' ',
@@ -251,7 +245,7 @@ NewClient.defaultProps = {
 			horizon: ' ',
 			bias: ' ',
 			performanceHist : [{
-				date: ' ',
+				date: '01/14',
 				tax: ' ',
 				horizon: ' ',
 				bias: ' ',

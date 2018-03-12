@@ -14,6 +14,9 @@ import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 
 let mainWindow = null;
+var Datastore = require('nedb');
+const dataPath = app.getPath('userData') + '/clients.json';
+const clients = new Datastore({filename: dataPath, autoload: true});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -58,6 +61,8 @@ app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
   }
+
+	// TODO: Dispatch DB from here using IPC?
 
   mainWindow = new BrowserWindow({
     show: false,

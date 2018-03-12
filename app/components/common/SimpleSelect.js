@@ -70,7 +70,7 @@ SimpleSelect.propTypes = {
 };
 
 SimpleSelect.defaultProps = {
-	value: '',
+	value: 'No Value',
 	label: "Select",
 	id: "select",
 	handleChange: (event) => {console.log(event);},

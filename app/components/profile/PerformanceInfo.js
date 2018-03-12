@@ -55,14 +55,13 @@ class PerformanceInfo extends Component {
 	};
 
 	recordSelect(selected){
-		// TODO: Set index based on record selected
 		const {performance} = this.props
 		var index = -1
-			for (var i=0; i < performance.length; i++) {
-	        if (performance[i].date === selected.value) {
-	            index = i;
-	        }
-	    }
+		for (var i=0; i < performance.length; i++) {
+        if (performance[i].date === selected.value) {
+            index = i;
+        }
+    }
 		this.setState({index});
 	}
 
@@ -112,6 +111,8 @@ class PerformanceInfo extends Component {
 			editRecord: false
 		})
 	}
+
+	componentWillReceiveProps(nextProps){ this.setState({index: 0})}
 
 	render(){
 		const { newRecord, editRecord, index, record } = this.state;

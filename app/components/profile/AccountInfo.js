@@ -4,6 +4,10 @@ import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import List from 'material-ui/List';
 import TextField from 'material-ui/TextField';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+
+import AccountForm from '../form/AccountForm'
 
 
 const styles = theme => ({
@@ -29,27 +33,65 @@ const styles = theme => ({
 class AccountInfo extends Component {
 	constructor(props){
 		super(props);
-		// this.state = {}
+		const {account} = this.props;
+		this.state = {account}
 	}
 
-	handleChange(){
+	handleChange = target => {
+		var account = {...this.state.account, [target.id]:target.value}
+		this.setState({account})
+	};
 
+	updatePerformance = target =>{
+		var {account} = this.state
+		account.performanceHist[0] = {...account.performanceHist[0], [event.id] : event.value};
+		this.setState({account})
 	}
 
 	save(){
-		// TODO: Push account/update current
-
+		const {account} = this.state;
 		this.props.handleChange(account)
 	}
 
+// NOTE: Needs propTypes
+	cancel(){this.props.cancel()}
+
   render(){
 		const { classes, account, viewState } = this.props;
+		const updatePerformance = this.updatePerformance.bind(this)
+		const handleChange = this.handleChange.bind(this)
+		// NOTE: Should export and re-use in form
+		const buttons = (
+			<Grid container className={classes.buttonBar} justify={'space-around'}>
+				<Grid item>
+					<Button
+							onClick={this.cancel.bind(this)}
+							size="large"
+							variant="raised"
+							color="secondary"
+							className={classes.button}>
+						Cancel
+					</Button>
+				</Grid>
+				<Grid item>
+					<Button
+							onClick={this.save.bind(this)}
+							size="large"
+							variant="raised"
+							color="primary"
+							className={classes.button}
+							>
+						Save
+					</Button>
+				 </Grid>
+			</Grid>
+		)
 
 		if (viewState === 'add') {
 			return(
 				<div>
 					<AccountForm
-						accountChange={handleNewAcc}
+						accountChange={handleChange}
 						newAccount={true}
 						performanceChange={updatePerformance}/>
 					{buttons}
@@ -60,7 +102,7 @@ class AccountInfo extends Component {
 					<AccountForm
 						account={accounts[active]}
 						newAccount={false}
-						accountChange={handleEditAcc}/>
+						accountChange={handleChange}/>
 					{buttons}
 				</div>)
 		} else {
@@ -83,7 +125,7 @@ AccountInfo.propTypes = {
 	classes: PropTypes.object.isRequired,
 	viewState: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-	account : propTypes.arrayOf(PropTypes.shape({
+	account : PropTypes.shape({
 		accNum: PropTypes.number.isRequired,
 		accName: PropTypes.string.isRequired,
 		startBal: PropTypes.string.isRequired,
@@ -91,14 +133,14 @@ AccountInfo.propTypes = {
 		tax: PropTypes.string.isRequired,
 		horizon: PropTypes.string.isRequired,
 		bias: PropTypes.string.isRequired,
-	})).isRequired
+	}).isRequired
 }
 
 
 AccountInfo.defaultProps = {
-	viewState: 'view'
+	viewState: 'view',
 	handleChange: (event) => {console.log(event)},
-	account : [{
+	account : {
 		accNum: 0,
 		accName: ' ',
 		startBal: ' ',
@@ -106,7 +148,7 @@ AccountInfo.defaultProps = {
 		tax: ' ',
 		horizon: ' ',
 		bias: ' ',
-	}],
+	},
 }
 
 export default withStyles(styles)(AccountInfo)

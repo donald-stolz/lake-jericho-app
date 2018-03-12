@@ -10,14 +10,12 @@ import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import List from 'material-ui/List';
 import Grid from 'material-ui/Grid';
-import AccountForm from '../form/AccountForm'
 import TextField from 'material-ui/TextField';
 import Input from 'material-ui/Input';
 import AccountInfo from './AccountInfo'
 import AddIcon from 'material-ui-icons/Add';
 import PerformanceInfo from './PerformanceInfo'
-
-
+import {CLIENT_STRUCT} from '../../constants/constants'
 
 const styles = theme => ({
   root: {
@@ -62,10 +60,16 @@ class AccountSection extends Component {
 		}
   }
 
-	changeAccount = (event, active) => { this.setState({ active });};
+	changeAccount = (event, active) => {
+		this.setState({ active });
+		// this.forceUpdate();
+	};
 
-	updateAccount(event){
-
+	updateAccount(account){
+		var {active, accounts} = this.state;
+		accounts[active] = account;
+		this.setState({accounts})
+		this.save();
 	}
 
 	updatePerformance(performance){
@@ -79,9 +83,28 @@ class AccountSection extends Component {
 
 	setEdit(){ this.setState({viewState : "edit"}); }
 
-	setAdd(){ this.setState({viewState : "add"}); }
+	setAdd(){
+		var {accounts} = this.state
+		var nextNum = accounts.length; // NOTE: Is length -1
+		var newAccount = CLIENT_STRUCT.accounts[0]
+		newAccount.accNum = nextNum;
 
-	cancel(){ this.setState({viewState : "view"}); }
+		accounts.push(newAccount)
+		this.setState({
+			accounts	: accounts,
+			active		: nextNum,
+			viewState : "add"});
+	}
+
+	cancel(){
+		var {accounts, active} = this.state
+		active = active - 1;
+		accounts.pop();
+		this.setState({
+			accounts	: accounts,
+			viewState : "view",
+			active		: active});
+	 }
 
 	save(){
 		this.props.handleChange(this.state.accounts);
@@ -90,15 +113,33 @@ class AccountSection extends Component {
 
 	addAcc(){ this.setState({viewState : "add"}); }
 
+	renderPerformance(){
+		const { classes, accounts } = this.props;
+		const { viewState, active } = this.state;
+		const updatePerformance = this.updatePerformance.bind(this)
+
+		if (viewState === "view") {
+			console.log(active);
+			console.log(accounts[active].performanceHist);
+			return (
+				<PerformanceInfo
+					performance={accounts[active].performanceHist}
+					handleChange={updatePerformance}/>
+			);
+		}
+		return null;
+	}
+
   render(){
 		const { classes, accounts } = this.props;
-		const { viewing, active } = this.state;
+		const { viewState, active } = this.state;
 		const tabs = accounts.map((account, index) => <Tab key={index} label={account.accName} />)
 		const onAddClick = this.setAdd.bind(this);
 		const onEditClick = this.setEdit.bind(this);
 		const onTabClick = this.changeAccount.bind(this);
-		const updatePerformance = this.updatePerformance.bind(this)
 		const updateAccount = this.updateAccount.bind(this)
+		const cancel = this.cancel.bind(this)
+		const updatePerformance = this.updatePerformance.bind(this)
 
 		return(
 			<div className={classes.root}>
@@ -127,11 +168,12 @@ class AccountSection extends Component {
 					</AppBar>
 					<AccountInfo
 						account={accounts[active]}
-						viewState={viewing}
-						handleChange={updateAccount}/>
-					<PerformanceInfo
-						performance={accounts[active].performanceHist}
-						handleChange={updatePerformance}/>
+						viewState={viewState}
+						handleChange={updateAccount}
+						cancel={cancel}
+						/>
+					{this.renderPerformance()}
+
 			</Paper>
 
 		</div>
