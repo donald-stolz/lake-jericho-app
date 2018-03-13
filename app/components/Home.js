@@ -1,65 +1,93 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import HomeListItem from './list/HomeListItem'
-// import PropTypes from 'prop-types'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import List from 'material-ui/List';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import { Link } from 'react-router-dom';
+import HomeList from './list/HomeList'
+import Paper from 'material-ui/Paper';
+import { LinearProgress } from 'material-ui/Progress';
 
-// TODO: Add conditional loading spinner
 
-class Home extends Component {
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+		maxHeight: 750,
+		overflow: 'auto'
+  },
+  flex: {
+    flex: 1,
+  },
+  container: {
+    marginTop: theme.spacing.unit,
+    width: '100%',
+  },
+});
+
+class Home extends Component{
   constructor(props){
-    super(props)
+    super(props);
 
-		this.props.getList()
-    this.state = {clients : this.props.clients}
+    this.state = {
+			clients : [],
+			loading : true
+		};
   }
+	componentWillMount(){
+		this.props.getList()
+	}
 
-  render() {
+	componentWillReceiveProps(nextProps){
+		this.setState({
+			clients: nextProps.clients,
+			loading: false
+		})
+	}
 
-    let HomeList;
-		var plusStyle = {color: '#337ab7', fontSize: '110%'};
-    if (this.state.clients) {
-      HomeList = this.props.clients.map(client => {
-         return(
-           <HomeListItem key={client._id}
-					 name={client.personal.name}
-					 	id={client._id}
-					 />
-          )
-        });
-      }
-    return(
+  render(){
+    const {classes} = this.props;
+		const {loading, clients} = this.state;
 
-        <div className="container-fluid">
-          <div className="panel panel-primary">
-            <div className="panel-heading">
-              <h2 className="panel-title">Name
-              <Link to="/NewClient" className="btn btn-default btn-xs pull-right">
-                <strong style={plusStyle}>+</strong>
-              </Link>
-              </h2>
-            </div>
-              <ul className="list-group">
-                {HomeList}
-              </ul>
-          </div>
-        </div>
+		if(loading){
+			return (
+				<div>
+					<LinearProgress size={100} />
+				</div>
+			);
+		} else {
+			return (
+	      <div className={classes.root}>
+	      <Paper className={classes.container} elevation={6}>
+	        <AppBar position="static">
+	          <Toolbar>
+	            <Typography variant="title" color="inherit" className={classes.flex}>
+	              Client
+	            </Typography>
+	            <Button color="inherit"
+	              component={Link} to="/NewClient">
+	              Add New
+	            </Button>
+	          </Toolbar>
+	        </AppBar>
+	        <HomeList clients={clients}/>
+	        </Paper>
+	      </div>
+	    );
+		}
 
-    )
   }
 }
 
-// Home.propTypes = {
-// 	clients: PropTypes.arrayOf(PropTypes.shape({
-// 		_id: PropTypes.string,
-// 		"personal.name": PropTypes.string
-// 	})).isRequired,
-// }
-//
+Home.propTypes = {
+  classes: PropTypes.object,
+};
+
 // Home.defaultProps = {
-// 	clients: [{
-// 		_id: '0',
-// 		"personal.name": 'No clients'
-// 	}]
+//
 // }
 
-export default Home;
+export default withStyles(styles)(Home);

@@ -36,3 +36,7 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+input:disabled {
+  color: #000000;
+}

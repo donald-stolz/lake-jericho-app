@@ -1,7 +1,7 @@
 {
   "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
-  "version": "0.13.2",
+  "productName": "LakeJericho",
+  "version": "0.0.2",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "scripts": {
     "build": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
@@ -32,7 +32,7 @@
   },
   "browserslist": "electron 1.6",
   "build": {
-    "productName": "ElectronReact",
+    "productName": "LakeJericho",
     "appId": "org.develar.ElectronReact",
     "files": [
       "dist/",
@@ -191,6 +191,8 @@
     "electron-debug": "^1.5.0",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
+    "material-ui": "^1.0.0-beta.34",
+    "material-ui-icons": "^1.0.0-beta.17",
     "nedb": "^1.8.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
@@ -200,6 +202,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
+    "react-text-mask": "^5.1.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "source-map-support": "^0.5.3"

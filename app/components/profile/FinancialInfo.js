@@ -1,80 +1,163 @@
 import React, { Component } from 'react';
-import AddFinancialInfo from '../form/AddFinancialInfo'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import Paper from 'material-ui/Paper';
+import List from 'material-ui/List';
+import Grid from 'material-ui/Grid';
+import FinancialForm from '../form/FinancialForm'
+import TextField from 'material-ui/TextField';
+import Input from 'material-ui/Input';
+
+
+const styles = theme => ({
+  root: {
+		flex: 1,
+  },
+	flex: {
+    flex: 1,
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+		width: '100%',
+
+  },
+  list:{
+		paddingLeft: theme.spacing.unit * 2,
+		minWidth: 300,
+		maxWidth: 400
+	},
+	textField: {
+		margin: theme.spacing.unit,
+		paddingBottom: 2,
+		flexWrap: 'wrap',
+		width: '100%',
+	},
+	buttonBar: {
+		paddingTop: 5,
+		paddingBottom: 10
+	},
+});
 
 class FinancialInfo extends Component {
-  constructor() {
-    super()
-    this.state = {editing : false}
-  }
-  // Methods for changing edit state
-  setEditing(){this.setState({editing : true})}
-  cancelUpdate(){this.setState({editing : false})}
+  constructor(props){
+    super(props)
 
-  // Sends updated info to parent class and changes editing to false
-  updateInfo(data){
-    this.props.update(data)
-    this.setState({editing : false})
+		this.state = {
+			viewing: true,
+			client: this.props.client
+		}
   }
 
-  renderItemOrEdit(){
-    var editing = this.state.editing
-    const client = this.props.client
+// TODO: Button Events
+	handleChange = target => {
+		var clientUpdate = {...this.state.client, [target.id]:target.value}
+		console.log(clientUpdate);
+		this.setState({client : clientUpdate})
+	};
 
-    if (editing) {
-     return(
-       <div className="container-fluid">
-         <AddFinancialInfo client={client}
-            newClient={false}
-            save={this.updateInfo.bind(this)}
-            cancel={this.cancelUpdate.bind(this)}
-          />
-        </div>
-      )
-    } else {
+	changeEdit(){
+		this.setState({viewing : !this.state.viewing})
+	}
 
-      return (
-        <div className="container-fluid">
-          <div className="panel panel-primary">
-            <div className="panel-heading">
-              <h1 className="panel-title">Financial Information</h1>
-            </div>
-            <div className="panel-body">
-              <ul className="list-group" id="listFinancial">
-                <li className="list-group-item"><label>Annual Income:</label> ${client.annualIncome}
-                  <button type="button" onClick={this.setEditing.bind(this)}
-                    className="btn btn-primary btn-xs pull-right">Edit
-                  </button>
-                </li>
-                <li className="list-group-item"><label>Total Assets: $</label> {client.totalAssets}</li>
-                <li className="list-group-item"><label>Liquid Assets: $</label> {client.liquidAssets}</li>
-                <li className="list-group-item"><label>Investment Assets: $</label> {client.investmentAssets}</li>
-                <li className="list-group-item"><label>Investment Experience:</label> {client.investmentExperience}</li>
-                <li className="list-group-item"><label>Overall Objectives:</label> {client.overallObjectives}</li>
-                <li className="list-group-item"><label>Time horizon:</label> {client.timeHorizon}</li>
-                <li className="list-group-item"><label>Tax Considerations:</label> {client.taxConsids}</li>
-                <li className="list-group-item"><label>Liquid Considerations:</label> {client.liquidConsids}</li>
-                <li className="list-group-item"><label>Legal/Regulatry Issues:</label> {client.regulatoryIssues}</li>
-                <li className="list-group-item"><label>Unique Circumstances:</label> {client.unique}</li>
-                <li className="list-group-item"><label>Return Objective:</label> {client.returnObjectives}</li>
-                <li className="list-group-item"><em><h4 className="text-center">Risk Objectives</h4></em></li>
-                <li className="list-group-item"><label> (1) Ability: </label> {client.riskAbility}</li>
-                <li className="list-group-item"><label> (2) Willingness: </label>{client.riskWillingness}</li>
-                <li className="list-group-item"><label> (3) Overall: </label> {client.riskOverallAbility}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )
-    }
-  }
+	save(){
+		console.log(this.state.client);
+		this.props.handleChange(this.state.client);
+		this.changeEdit();
+	}
+
+	renderViewOrEdit(){
+		const { classes, client } = this.props;
+		const inputChange = this.handleChange.bind(this);
+
+		if (this.state.viewing) {
+			return(
+				<div className={classes.root}>
+					<Paper className={classes.container} elevation={6}>
+						<AppBar className={classes.container} position="static" color="primary" >
+							<Toolbar>
+								<Typography variant="title" color="inherit" className={classes.flex}>
+									Financial Information
+								</Typography>
+								<Button color="inherit"
+		              onClick={this.changeEdit.bind(this)} to="/NewClient">
+		              Edit
+		            </Button>
+							</Toolbar>
+						</AppBar>
+						<List component="nav" className={classes.list}>
+							<TextField disabled value={"$" + client.annualIncome} label="Annual Income" disabled className={classes.textField}/>
+							<TextField disabled value={"$" + client.totalAssets} label="Total Assets" disabled className={classes.textField}/>
+							<TextField disabled value={"$" + client.liquidAssets} label="Liquid Assets" disabled className={classes.textField}/>
+							<TextField disabled value={"$" + client.investmentAssets} label="Investment Assets"disabled className={classes.textField}/>
+							<TextField disabled value={client.investmentExperience} label="Investment Experience" disabled className={classes.textField}/>
+							<TextField disabled value={client.overallObjectives} label="Overall Objectives"disabled className={classes.textField}/>
+							<TextField disabled value={client.timeHorizon} label="Time Horizon" disabled className={classes.textField}/>
+							<TextField disabled value={client.taxConsids} label="Tax Considerations" disabled className={classes.textField}/>
+							<TextField disabled value={client.liquidConsids} label="Liquid Considerations" disabled className={classes.textField}/>
+							<TextField disabled value={client.regulatoryIssues} label="Regulatory Issues" disabled className={classes.textField}/>
+							<TextField disabled value={client.unique} label={"Unique"} id='unique' disabled className={classes.textField}/>
+							<TextField disabled value={client.returnObjectives} label="Return Objectives" disabled className={classes.textField}/>
+							<TextField disabled value={client.riskAbility} label="Ability" disabled className={classes.textField}/>
+							<TextField disabled value={client.riskWillingness} label="Willingness" disabled className={classes.textField}/>
+							<TextField disabled value={client.riskOverallAbility} label="Overall" disabled className={classes.textField}/>
+						</List>
+					</Paper>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<FinancialForm client={client} handleChange={inputChange}/>
+					<Grid container className={classes.buttonBar} justify={'space-around'}>
+						<Grid item>
+							<Button
+									onClick={this.changeEdit.bind(this)}
+									size="large"
+									variant="raised"
+									color="secondary"
+									className={classes.button}>
+								Cancel
+							</Button>
+						</Grid>
+						<Grid item>
+							<Button
+									onClick={this.save.bind(this)}
+									size="large"
+									variant="raised"
+									color="primary"
+									className={classes.button}
+									>
+								Save
+							</Button>
+						 </Grid>
+					</Grid>
+				</div>);
+		}
+	}
 
   render(){
-    return(
-      <div className="row">
-      {this.renderItemOrEdit()}
-    </div>
-  )}
+		return(
+			<div>
+				{this.renderViewOrEdit()}
+		  </div>)
+	}
 }
 
-export default FinancialInfo
-//NOTE: Consider using CSS to change font size and styling for Risk Objectives
+FinancialInfo.defaultProps = {
+	classes: PropTypes.object.isRequired,
+	handleChange: PropTypes.func.isRequired,
+	client: PropTypes.object.isRequired,
+}
+
+
+FinancialInfo.propTypes = {
+	handleChange: (event) => {console.log(event);},
+}
+
+export default withStyles(styles)(FinancialInfo)

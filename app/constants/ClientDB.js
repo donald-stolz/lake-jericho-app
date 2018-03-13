@@ -1,2 +1,9 @@
 var Datastore = require('nedb');
-export const clients = new Datastore({ filename: 'clients', autoload: true });
+const {remote} = require('electron');
+
+// const dataPath = path.join(remote.app.getPath('userData'), 'clients.json')
+// NOTE: Not working
+console.log(dataPath);
+export const clients = new Datastore({
+	filename: dataPath,
+	autoload: true });

@@ -1,111 +1,259 @@
 import React, { Component } from 'react';
-import AddPersonalInfo  from './form/AddPersonalInfo'
-import AddFinancialInfo  from './form/AddFinancialInfo'
-import AddAccount     from './form/AddAccount'
-import Continue       from './form/Continue'
+import { withStyles } from 'material-ui/styles';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-var personal = {}
-var financial = {}
-var accounts = []
-var numAccounts
+import PersonalForm  from './form/PersonalForm'
+import FinancialForm  from './form/FinancialForm'
+import AccountForm  from './form/AccountForm'
+import Confirmation from './form/Confirmation'
 
-// TODO:
-// [] Refactor Parent
-// [] Refactor Child Components
+import { CLIENT_STRUCT } from '../constants/constants'
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+
+const styles = theme => ({
+  root: {
+		flex: 1,
+		maxHeight: 750,
+		overflow: 'auto'
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  buttonBar: {
+    paddingTop: 5,
+    paddingBottom: 10
+  },
+});
 
 class NewClient extends Component {
-  constructor() {
-    super()
-    numAccounts = 0
-    this.state = {step : 0,
-                  save : false }
+  constructor(props) {
+    super(props)
+
+    this.state = {
+			numAcc : 0,
+			step : 0,
+			client : this.props.client
+		}
   }
 
-// Steps are for saving form from GUI & adding to DB
-  savePersonal(data){
-    /* Step 1: Saves personal data to local variable
-        and changes page to save financial
-    */
-    personal = data
-
-    this.setState({step : 1})
-  }
-
-  saveFinancial(data){
-    /* Step 2: Saves financial data to local variable
-        and changes page to save an account
-    */
-    financial = data
-
-    this.setState({step : 2})
-  }
-
-  saveAccount(data){
-    /* Step 3: Saves account data to local variable
-        and changes page to option page
-    */
-    data.accNum = numAccounts
-    accounts.push(data)
-
-    this.setState({step : 3, save : true})
-  }
+	nextStep(){
+		var nextStep = this.state.step + 1;
+		this.setState({step :nextStep});
+	}
 
   addAccount(){
     /* Optional Step: Increments number of accounts
         and sets page to add another account
     */
-    numAccounts++
-    this.setState({step : 2})
+		this.setState({
+			step: 2,
+			numAcc: (this.state.numAcc + 1)
+		})
   }
+	submitClient(){
+		this.props.add(this.state.client)
+	}
 
-  componentWillUnmount(){
-    // Final Step: Routes to home; Saves new client to DB on unmount
-    if (this.state.save) {
+	updatePersonal(event){
+		var newPersonal = {...this.state.client.personal, [event.id] : event.value};
+		var newClient = {...this.state.client, personal: newPersonal};
+		this.setState({client:newClient});
+	}
 
-      var client = {
-				personal: personal,
-        financial: financial,
-        accounts: accounts
-      }
-      this.props.add(client)
-    }
-  }
+	updateFinancial(event){
+		var newFinancial = {...this.state.client.financial, [event.id] : event.value};
+		var newClient = {...this.state.client, financial: newFinancial};
+		this.setState({client:newClient});
+	}
+
+	updateAccount(event){
+		const index = this.state.numAcc;
+		var newAcc = this.state.client.accounts[index];
+		newAcc = {...newAcc, [event.id] : event.value};
+		var updateAccounts = this.state.client.accounts;
+		updateAccounts[index] = newAcc;
+		var newClient = { ...this.state.client, accounts: updateAccounts};
+		this.setState({client: newClient})
+	}
+
+	updatePerformance(event){
+		const index = this.state.numAcc;
+		var acc = this.state.client.accounts[index]
+		acc.performanceHist[0] = {...acc.performanceHist[0], [event.id] : event.value};
+		var updateAccounts = this.state.client.accounts;
+		updateAccounts[index] = acc;
+		var newClient = { ...this.state.client, accounts: updateAccounts};
+		this.setState({client: newClient})
+	}
 
   formStep(){
   //Steps for dispalying form
-    var step = this.state.step
+    var {step} = this.state
+		const personalChange = this.updatePersonal.bind(this)
+		const financialChange = this.updateFinancial.bind(this)
+		const accountChange = this.updateAccount.bind(this)
+		const performanceChange = this.updatePerformance.bind(this)
+
     switch (step) {
       case 0:
         // Step 1: Displays personal fields
-        return < AddPersonalInfo client={this.personal}
-                  newClient={true}
-                  save={this.savePersonal.bind(this)}/>
+        return < PersonalForm handleChange={personalChange}/>
       case 1:
         // Step 2: Displays general financial fields
-        return < AddFinancialInfo client={this.financial}
-                  newClient={true}
-                  save={this.saveFinancial.bind(this)}/>
+        return < FinancialForm handleChange={financialChange}/>
       case 2:
         // Step 3: Displays the add account fields; Final mandatory step
-        return < AddAccount submitBtn={'hidden'} account={null}
-                  newClient={true} save={this.saveAccount.bind(this)}
-                  showPerform={'visible'}/>
+        return < AccountForm accountChange={accountChange} performanceChange={performanceChange}/>
       case 3:
         // Step 4: Allows user to choose between adding another account or finishing
         // Client will be saved to DB if user cancels on additional account(s)
-        return < Continue addAcc={this.addAccount.bind(this)}/>
+        return < Confirmation
+					handleAccount={this.addAccount.bind(this)}
+					handleSubmit={this.submitClient.bind(this)}/>
       default:
         return null
     }
   }
 
+	formButtons(){
+		const { classes } = this.props;
+
+		if (this.state.step < 3) {
+			return(
+				<Grid container className={classes.buttonBar} justify={'space-around'}>
+					<Grid item>
+						<Button component={Link} to="/"
+								size="large"
+								variant="raised"
+								color="secondary"
+								className={classes.button}>
+							Cancel
+						</Button>
+					</Grid>
+					<Grid item>
+						<Button
+								size="large"
+								variant="raised"
+								color="primary"
+								className={classes.button}
+								onClick={this.nextStep.bind(this)}>
+							Next
+						</Button>
+					 </Grid>
+				</Grid>)
+		}
+	}
+
   render(){
+		const { classes } = this.props;
+
     return(
-      <div className="container-fluid">
+      <div className={classes.root}>
         {this.formStep()}
+				{this.formButtons()}
       </div>
     )
   }
 }
 
-export default NewClient
+NewClient.defaultProps = {
+	classes: PropTypes.object.isRequired,
+	client: PropTypes.shape({
+		personal: PropTypes.shape({
+			name: PropTypes.string,
+			dob: PropTypes.string,
+			address: PropTypes.string,
+			phone: PropTypes.string,
+			email: PropTypes.string,
+		}),
+
+		financial: PropTypes.shape({
+			annualIncome: PropTypes.string,
+			totalAssets: PropTypes.string,
+			liquidAssets: PropTypes.string,
+			investmentAssets: PropTypes.string,
+			investmentExperience: PropTypes.string,
+			investmentObjectives: PropTypes.string,
+			timeHorizon: PropTypes.string,
+			taxConsids: PropTypes.string,
+			liquidConsids: PropTypes.string,
+			regulatoryIssues: PropTypes.string,
+			unique: PropTypes.string,
+			returnObjective: PropTypes.string,
+			riskAbility: PropTypes.string,
+			riskWillingness: PropTypes.string,
+			riskOverall: PropTypes.string
+		}),
+
+		accounts : PropTypes.arrayOf(PropTypes.shape({
+			accNum: PropTypes.number,
+			accName: PropTypes.string,
+			startBal: PropTypes.string,
+			startDate: PropTypes.string,
+			tax: PropTypes.string,
+			horizon: PropTypes.string,
+			bias: PropTypes.string,
+			performanceHist : PropTypes.arrayOf(PropTypes.shape({
+				date: PropTypes.string,
+				tax: PropTypes.string,
+				horizon: PropTypes.string,
+				bias: PropTypes.string,
+				beginBal: PropTypes.string,
+				endBal: PropTypes.string,
+				netReturn: PropTypes.string
+			}))
+		}))
+	}).isRequired
+}
+NewClient.defaultProps = {
+	client : {
+		personal: {
+			name: ' ',
+			dob: ' ',
+			address: ' ',
+			phone: ' ',
+			email: ' ',
+		},
+
+		financial:{
+			annualIncome: ' ',
+			totalAssets: ' ',
+			liquidAssets: ' ',
+			investmentAssets: ' ',
+			investmentExperience: ' ',
+			investmentObjectives: ' ',
+			timeHorizon: ' ',
+			taxConsids: ' ',
+			liquidConsids: ' ',
+			regulatoryIssues: ' ',
+			unique: ' ',
+			returnObjective: ' ',
+			riskAbility: ' ',
+			riskWillingness: ' ',
+			riskOverall: ' '
+		},
+
+		accounts : [{
+			accNum: 0,
+			accName: ' ',
+			startBal: ' ',
+			startDate: ' ',
+			tax: ' ',
+			horizon: ' ',
+			bias: ' ',
+			performanceHist : [{
+				date: '01/14',
+				tax: ' ',
+				horizon: ' ',
+				bias: ' ',
+				beginBal: ' ',
+				endBal: ' ',
+				netReturn: ' '
+			}]
+		}]
+	}
+}
+export default withStyles(styles)(NewClient);

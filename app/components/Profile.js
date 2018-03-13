@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
-import PersonalInfo   from './profile/PersonalInfo'
-import FinancialInfo  from './profile/FinancialInfo'
-import Account        from './profile/Account'
-import RemoveClient        from './profile/RemoveClient'
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 
-// TODO:
-// 	[] Lots of refactoring
-//	[] Spinner
+import { LinearProgress } from 'material-ui/Progress';
+import List from 'material-ui/List';
+import PersonalInfo from './profile/PersonalInfo';
+import FinancialInfo  from './profile/FinancialInfo';
+import AccountSection from './profile/AccountSection'
+import { Link } from 'react-router-dom'
+import Button from 'material-ui/Button';
+import AlertConfirmation from './common/AlertConfirmation'
+
+const styles = theme => ({
+  root: {
+		flex: 1,
+		maxHeight: 750,
+		overflow: 'auto'
+  },
+  section: {
+    marginBottom: 15
+  },
+	list:{
+		padding: theme.spacing.unit * 2,
+	}
+})
+
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -16,85 +33,71 @@ class Profile extends Component {
 		this.props.get(this.props.match.params.id)
   }
 
-  updatePersonal(data){
-	// try: var client = {...this.state.client, personal: data}
-    const client = this.state.client
-    client.personal = data
-    this.updateClient(client)
-  }
-
-  updateFinacial(data){
-    const client = this.state.client
-    client.financial = data
-    this.updateClient(client)
-  }
-
-  updateAccount(data){
-    const client = this.state.client
-    client.accounts = data
-    this.updateClient(client)
-  }
-
-	updateClient(client){
-		this.props.update()
-	}
-
 	componentWillReceiveProps(nextProps){
-		var newState = {
-			client: nextProps.client,
-			loading: false
+		if (this.state.loading) {
+			var newState = {
+				client: nextProps.client,
+				loading: false
+			}
+			this.setState(newState);
 		}
-		this.setState(newState)
 	}
 
-  // Methods for changing states in order to remove a client
-  removeClient(){this.setState({remove : true})}
-  cancelRemove(){this.setState({remove : false})}
+	updatePersonal( info ){
+		var clientUpdate = {...this.props.client, personal:info}
+		this.props.update(clientUpdate)
+	}
 
-  renderPageOrRemove(){
-    const client    = this.props.client
-    const clientID  = client._id
-    const personal  = client.personal
-    const financial = client.financial
-    const accounts  = client.accounts
-    const remove    = this.state.remove
+	updateFinancial( info ){
+		var clientUpdate = {...this.props.client, financial:info}
+		this.props.update(clientUpdate)
+	}
 
-    if (!remove) {
-      return(
-        <div className="container-fluid">
-          <PersonalInfo client={personal} update={this.updatePersonal.bind(this)}/>
-          <FinancialInfo client={financial} update={this.updateFinacial.bind(this)}/>
-          <Account accounts={accounts} update={this.updateAccount.bind(this)}/>
-          <RemoveClient confirm={remove}
-                        cancel={this.cancelRemove.bind(this)}
-                        removeClient={this.removeClient.bind(this)}/>
-        </div>
-      )
-    }
-    else {
-      return(
-        <div className="container-fluid">
-          <RemoveClient confirm={remove}
-                        cancel={this.cancelRemove.bind(this)}
-                        removeClient={this.removeClient.bind(this)}
-                        id={clientID}/>
-        </div>)
-    }
-  }
+	updateAccount( info ){
+		var clientUpdate = {...this.props.client, accounts:info}
+		this.props.update(clientUpdate)
+	}
+
+	removeClient(confirmation){
+		// TODO
+		console.log("Remove");
+	}
 
   render(){
-		// TODO: Add loading spinner
+		const {classes} = this.props;
+		// TODO: Center Spinner
 		if (this.state.loading) {
 			return (
 				<div>
-					<h1>Loading...</h1>
+					<LinearProgress size={100} />
 				</div>
 			);
 		}
 		else {
+			const {client} = this.props
+			const handlePersonal = this.updatePersonal.bind(this);
+			const handleFinancial = this.updateFinancial.bind(this);
+			const handleAccount = this.updateAccount.bind(this);
 			return(
-				<div>
-					{this.renderPageOrRemove()}
+				<div className={classes.root}>
+					<AlertConfirmation handleChange={this.removeClient.bind(this)}/>
+					<Button component={Link} to="/">
+					  Home
+					</Button>
+					<List component="nav" className={classes.list}>
+	        	<PersonalInfo
+							client={client.personal}
+							handleChange={handlePersonal}
+							className={classes.section}/>
+						<FinancialInfo
+							client={client.financial}
+							handleChange={handleFinancial}
+							className={classes.section}/>
+						<AccountSection
+							handleChange={handleAccount}
+							accounts={client.accounts}
+							className={classes.section}/>
+					</List>
 				</div>
 		)
 		}
@@ -114,10 +117,10 @@ Profile.propTypes = {
 
 		// Empty Financial Information
 		financial: PropTypes.shape({
-			annualIncome: PropTypes.number,
-			totalAssets: PropTypes.number,
-			liquidAssets: PropTypes.number,
-			investmentAssets: PropTypes.number,
+			annualIncome: PropTypes.string,
+			totalAssets: PropTypes.string,
+			liquidAssets: PropTypes.string,
+			investmentAssets: PropTypes.string,
 			investmentExperience: PropTypes.string,
 			investmentObjectives: PropTypes.string,
 			timeHorizon: PropTypes.string,
@@ -145,9 +148,9 @@ Profile.propTypes = {
 				tax: PropTypes.string,
 				horizon: PropTypes.string,
 				bias: PropTypes.string,
-				beginBal: PropTypes.number,
-				endBal: PropTypes.number,
-				netReturn: PropTypes.number
+				beginBal: PropTypes.string,
+				endBal: PropTypes.string,
+				netReturn: PropTypes.string
 			}))
 		}))
 	}).isRequired
@@ -157,52 +160,52 @@ Profile.defaultProps = {
 	client : {
 		// Empty Personal Information
 		personal: {
-			name: 'null',
-			dob: 'null',
-			address: 'null',
-			phone: 'null',
-			email: 'null',
+			name: ' ',
+			dob: ' ',
+			address: ' ',
+			phone: ' ',
+			email: ' ',
 		},
 
 		// Empty Financial Information
 		financial:{
-			annualIncome: 0,
-			totalAssets: 0,
-			liquidAssets: 0,
-			investmentAssets: 0,
-			investmentExperience: 'null',
-			investmentObjectives: 'null',
-			timeHorizon: 'null',
-			taxConsids: 'null',
-			liquidConsids: 'null',
-			regulatoryIssues: 'null',
-			unique: 'null',
-			returnObjective: 'null',
-			riskAbility: 'null',
-			riskWillingness: 'null',
-			riskOverall: 'null'
+			annualIncome: ' ',
+			totalAssets: ' ',
+			liquidAssets: ' ',
+			investmentAssets: ' ',
+			investmentExperience: ' ',
+			investmentObjectives: ' ',
+			timeHorizon: ' ',
+			taxConsids: ' ',
+			liquidConsids: ' ',
+			regulatoryIssues: ' ',
+			unique: ' ',
+			returnObjective: ' ',
+			riskAbility: ' ',
+			riskWillingness: ' ',
+			riskOverall: ' '
 		},
 
 		// Empty Account(s) Information
 		accounts : [{
 			accNum: 0,
-			accName: 'null',
-			startBal: 'null',
-			startDate: 'null',
-			tax: 'null',
-			horizon: 'null',
-			bias: 'null',
+			accName: ' ',
+			startBal: ' ',
+			startDate: ' ',
+			tax: ' ',
+			horizon: ' ',
+			bias: ' ',
 			performanceHist : [{
-				date: 'null',
-				tax: 'null',
-				horizon: 'null',
-				bias: 'null',
-				beginBal: 0,
-				endBal: 0,
-				netReturn: 0
+				date: ' ',
+				tax: ' ',
+				horizon: ' ',
+				bias: ' ',
+				beginBal: ' ',
+				endBal: ' ',
+				netReturn: ' '
 			}]
 		}]
 	}
 }
 
-export default Profile;
+export default withStyles(styles)(Profile);
