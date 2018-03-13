@@ -47,7 +47,7 @@ class PerformanceForm extends Component {
 				endBal: ' ',
 				netReturn: ' '}
 		}
-// TODO: Fix issues with MonthYearPicker & 
+// TODO: Fix issues with MonthYearPicker &
     return(
 			<div className={classes.root}>
   			<Paper className={classes.container} elevation={6}>
@@ -59,7 +59,7 @@ class PerformanceForm extends Component {
   			    </Toolbar>
   			  </AppBar>
 					<List component="nav" className={classes.list}>
-						<MonthYearPicker id="startDate" value={pastPerformance.date} handleChange={inputChange} newRecord={newRecord}/>
+						<MonthYearPicker id="date" value={pastPerformance.date} handleChange={inputChange} newRecord={newRecord}/>
 						<SimpleSelect label="Tax" value={pastPerformance.tax} id={'tax'} menu={TAX_MENU} handleChange={inputChange}/>
 						<SimpleSelect label="Horizon" value={pastPerformance.horizon} id={'horizon'} menu={HORIZON_MENU} handleChange={inputChange}/>
 						<SimpleSelect label="Bias" value={pastPerformance.bias} id={'bias'} menu={BIAS_MENU} handleChange={inputChange}/>

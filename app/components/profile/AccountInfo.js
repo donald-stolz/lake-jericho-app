@@ -38,7 +38,6 @@ class AccountInfo extends Component {
 	}
 
 	handleChange = target => {
-		console.log(target);
 		var account = {...this.state.account, [target.id]:target.value}
 		this.setState({account})
 	};
@@ -113,7 +112,7 @@ class AccountInfo extends Component {
 				<div>
 					<List component="nav" className={classes.list}>
 						<TextField disabled value={account.accName} label="Account Name" disabled className={classes.textField}/>
-						<TextField disabled value={account.startDate} label="Start Date" disabled className={classes.textField}/>
+						<TextField disabled value={account.date} label="Start Date" disabled className={classes.textField}/>
 						<TextField disabled value={"$" + account.startBal} label="Start Balance" disabled className={classes.textField}/>
 						<TextField disabled value={account.tax} label="Tax"disabled className={classes.textField}/>
 						<TextField disabled value={account.horizon} label="Horizon" disabled className={classes.textField}/>
@@ -132,7 +131,7 @@ AccountInfo.propTypes = {
 		accNum: PropTypes.number.isRequired,
 		accName: PropTypes.string.isRequired,
 		startBal: PropTypes.string.isRequired,
-		startDate: PropTypes.string.isRequired,
+		date: PropTypes.string.isRequired,
 		tax: PropTypes.string.isRequired,
 		horizon: PropTypes.string.isRequired,
 		bias: PropTypes.string.isRequired,
@@ -147,7 +146,7 @@ AccountInfo.defaultProps = {
 		accNum: 0,
 		accName: ' ',
 		startBal: ' ',
-		startDate: ' ',
+		date: ' ',
 		tax: ' ',
 		horizon: ' ',
 		bias: ' ',
