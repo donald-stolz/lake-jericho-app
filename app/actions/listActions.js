@@ -8,13 +8,15 @@ import{
 } from '../constants/constants';
 
 export const fetchList = () =>{
+	console.log("getList");
 	return (dispatch) => {
 		dispatch({ type: FETCH_LIST });
 		ipcRenderer.send(FETCH_LIST);
+		console.log("sent to electron");
 		ipcRenderer.on(RETURN_LIST, (event, clients) => {
 			dispatch({ type: RETURN_LIST, payload: clients})
 		})
-
+		console.log("recieved");
 	}
 }
 

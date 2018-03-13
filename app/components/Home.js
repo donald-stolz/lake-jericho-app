@@ -10,6 +10,8 @@ import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-router-dom';
 import HomeList from './list/HomeList'
 import Paper from 'material-ui/Paper';
+import { LinearProgress } from 'material-ui/Progress';
+
 
 const styles = theme => ({
   root: {
@@ -30,36 +32,62 @@ class Home extends Component{
   constructor(props){
     super(props);
 
-    this.props.getList()
-    this.state = {clients : this.props.clients};
+    this.state = {
+			clients : [],
+			loading : true
+		};
   }
+	componentWillMount(){
+		this.props.getList()
+	}
+
+	componentWillReceiveProps(nextProps){
+		this.setState({
+			clients: nextProps.clients,
+			loading: false
+		})
+	}
 
   render(){
-    const { classes, clients } = this.props;
+    const {classes} = this.props;
+		const {loading, clients} = this.state;
 
-    return (
-      <div className={classes.root}>
-      <Paper className={classes.container} elevation={6}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              Client
-            </Typography>
-            <Button color="inherit"
-              component={Link} to="/NewClient">
-              Add New
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <HomeList clients={clients}/>
-        </Paper>
-      </div>
-    );
+		if(loading){
+			return (
+				<div>
+					<LinearProgress size={100} />
+				</div>
+			);
+		} else {
+			return (
+	      <div className={classes.root}>
+	      <Paper className={classes.container} elevation={6}>
+	        <AppBar position="static">
+	          <Toolbar>
+	            <Typography variant="title" color="inherit" className={classes.flex}>
+	              Client
+	            </Typography>
+	            <Button color="inherit"
+	              component={Link} to="/NewClient">
+	              Add New
+	            </Button>
+	          </Toolbar>
+	        </AppBar>
+	        <HomeList clients={clients}/>
+	        </Paper>
+	      </div>
+	    );
+		}
+
   }
 }
 
 Home.propTypes = {
   classes: PropTypes.object,
 };
+
+// Home.defaultProps = {
+//
+// }
 
 export default withStyles(styles)(Home);

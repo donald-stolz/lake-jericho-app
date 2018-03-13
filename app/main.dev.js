@@ -26,6 +26,7 @@ let mainWindow = null;
 var Datastore = require('nedb');
 const dataPath = app.getPath('userData') + '/clients.json';
 const clients = new Datastore({filename: dataPath, autoload: true});
+console.log(dataPath);
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -103,6 +104,7 @@ app.on('ready', async () => {
 
 // NOTE: Should setup background window for performance enhancements
 ipcMain.on(FETCH_LIST, () => {
+	console.log("electron fetchList");
 	clients.find({}, { "personal.name": 1 }, function (err, docs) {
 		console.log("From electron: " + docs);
 		mainWindow.webContents.send(RETURN_LIST, docs);

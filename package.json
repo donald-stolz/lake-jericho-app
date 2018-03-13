@@ -32,7 +32,7 @@
   },
   "browserslist": "electron 1.6",
   "build": {
-    "productName": "ElectronReact",
+    "productName": "LakeJericho",
     "appId": "org.develar.ElectronReact",
     "files": [
       "dist/",

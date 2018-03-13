@@ -5,9 +5,9 @@
 // No Data Used
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-import { addClient } from '../Actions'
+import { addClient } from '../actions'
 
-import NewClient from '../Components/NewClient'
+import NewClient from '../components/NewClient'
 
 const mapStateToProps = (state) => ({
 // NOTE: No Props needed
