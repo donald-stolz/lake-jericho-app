@@ -102,7 +102,7 @@ class AccountInfo extends Component {
 			return(
 				<div>
 					<AccountForm
-						account={accounts[active]}
+						account={account}
 						newAccount={false}
 						accountChange={handleChange}/>
 					{buttons}
