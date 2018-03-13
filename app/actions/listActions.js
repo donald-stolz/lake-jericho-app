@@ -1,42 +1,37 @@
+import { ipcRenderer } from 'electron';
 import{
+	FETCH_LIST,
 	RETURN_LIST,
-	UPDATE_LIST
+	UPDATE_LIST,
+	ADD_CLIENT,
+	REMOVE_CLIENT
 } from '../constants/constants';
-
-import {clients} from '../constants/ClientDB'
 
 export const fetchList = () =>{
 	return (dispatch) => {
-		dispatch({ type: UPDATE_LIST })
-		// 2nd object specifies which field(s) to return
-		// _id is include with every doc unless specified
-		clients.find({}, { "personal.name": 1 }, function (err, docs) {
-	    // console.log(docs);
-	    dispatch({ type: RETURN_LIST, payload: docs})
-	  });
+		dispatch({ type: FETCH_LIST });
+		ipcRenderer.send(FETCH_LIST);
+		ipcRenderer.on(RETURN_LIST, (event, clients) => {
+			dispatch({ type: RETURN_LIST, payload: clients})
+		})
+
 	}
 }
 
 export const addClient = ( client ) =>{
 	return (dispatch) => {
 		// Add client to DB
-		dispatch({ type: UPDATE_LIST })
-		clients.insert(client, function (err, doc) {
-	    // console.log('Inserted', doc.personal.name, 'with ID', doc._id);
-			//Refresh list data
-			dispatch(fetchList());
-	  });
+		dispatch({ type: UPDATE_LIST });
+		ipcRenderer.send(ADD_CLIENT, client);
+		dispatch(fetchList());
 	}
 }
 
 export const removeClient = ( clientID ) =>{
 	// async - like add client
 	return (dispatch) => {
-		dispatch({ type: UPDATE_LIST })
-		clients.remove({ _id: clientID }, {}, function (err, numRemoved) {
-			// console.log("Removed " + numRemoved + " client");
-			//Refresh list data
-			dispatch(fetchList())
-		});
+		dispatch({ type: UPDATE_LIST });
+		ipcRenderer.send(REMOVE_CLIENT, clientID);
+		dispatch(fetchList());
 	}
 }

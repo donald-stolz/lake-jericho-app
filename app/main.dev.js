@@ -10,8 +10,17 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import MenuBuilder from './menu';
+import {
+	FETCH_LIST,
+	RETURN_LIST,
+	FETCH_CLIENT,
+	RETURN_CLIENT,
+	UPDATE_CLIENT,
+	ADD_CLIENT,
+	REMOVE_CLIENT
+} from './constants/constants'
 
 let mainWindow = null;
 var Datastore = require('nedb');
@@ -68,6 +77,8 @@ app.on('ready', async () => {
     show: false,
     width: 600,
     height: 775,
+		resizable: false,
+		webPreferences: {backgroundThrottling: false}
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -89,3 +100,36 @@ app.on('ready', async () => {
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 });
+
+// NOTE: Should setup background window for performance enhancements
+ipcMain.on(FETCH_LIST, () => {
+	clients.find({}, { "personal.name": 1 }, function (err, docs) {
+		console.log("From electron: " + docs);
+		mainWindow.webContents.send(RETURN_LIST, docs);
+	});
+})
+
+ipcMain.on(ADD_CLIENT, (event, client) => {
+	clients.insert(client, function (err, doc) {
+	  // console.log('Inserted', doc.personal.name, 'with ID', doc._id);
+	});
+})
+
+ipcMain.on(REMOVE_CLIENT, (event, clientID) => {
+	clients.remove({ _id: clientID }, {}, function (err, numRemoved) {
+		// console.log("Removed " + numRemoved + " client");
+	});
+})
+
+ipcMain.on(FETCH_CLIENT, (event, clientID) => {
+	clients.findOne({ _id: clientID }, function (err, doc) {
+	  // console.log('Found user:', doc);
+		mainWindow.webContents.send(RETURN_CLIENT, doc);
+	});
+})
+
+ipcMain.on(UPDATE_CLIENT, (event, client) => {
+	clients.update({_id: client._id}, client, {}, function (err, numReplaced) {
+	  // console.log("Updated " + numReplaced + " Client");
+	});
+})

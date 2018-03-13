@@ -35,7 +35,7 @@ class Home extends Component{
   }
 
   render(){
-    const { classes } = this.props;
+    const { classes, clients } = this.props;
 
     return (
       <div className={classes.root}>
@@ -51,7 +51,7 @@ class Home extends Component{
             </Button>
           </Toolbar>
         </AppBar>
-        <HomeList clients={this.props.clients}/>
+        <HomeList clients={clients}/>
         </Paper>
       </div>
     );
