@@ -2,22 +2,20 @@
 
 ## TODOs:
 - [x] Finish Redux implementation
-- [x] Create dummy data for easier testing
-- [x] Verify manual input of monthly return
-- [x] Add Account button on Profile page
-- [ ] Pre-populated values for performance history
-- [ ] [Update styling](https://github.com/mui-org/material-ui)
-- [ ] [Add loading spinner](https://material-ui-next.com/demos/progress/)
+- [x] Pre-populated values for performance history
+- [x] [Update styling](https://github.com/mui-org/material-ui)
 - [ ] Update README.md
   - [ ] Screenshots
-  - [ ] Design pattern & UML
-  - [ ] Build Tools, Libraries, and Frameworks
-  - [ ] Resources & Tutorials
-- [ ] Code refactoring & complete inline comments
+  - [ ] Technologies & Resources Used
+- [ ] Code refactoring & comments
 - [x] New boilerplate with DevTools
 - [ ] Add Travis CI
+- [ ] Remove Client functionality wiring
 
 ## Tools
 - #### [React.js](https://github.com/facebook/react)
 - #### [Electron](https://github.com/electron/electron)
 - #### [NeDB](https://github.com/louischatriot/nedb)
+
+## Boilerplate
+- #### [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
