@@ -62,7 +62,7 @@ class AccountSection extends Component {
 
 	changeAccount = (event, active) => {
 		this.setState({ active });
-		// this.forceUpdate();
+		this.forceUpdate();
 	};
 
 	updateAccount(account){
