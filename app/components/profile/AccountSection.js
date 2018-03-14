@@ -97,9 +97,11 @@ class AccountSection extends Component {
 	}
 
 	cancel(){
-		var {accounts, active} = this.state
-		active = active - 1;
-		accounts.pop();
+		var {accounts, active, viewState} = this.state
+		if (viewState === "new") {
+			active = active - 1;
+			accounts.pop();
+		}
 		this.setState({
 			accounts	: accounts,
 			viewState : "view",
