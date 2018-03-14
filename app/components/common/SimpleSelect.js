@@ -23,11 +23,12 @@ class SimpleSelect extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			value: this.props.value,
+			value: this.props.menu[0],
 		};
 	}
 
 	handleChange = event => {
+		console.log(event.target.value);
 		this.setState({
 			value : event.target.value,
 		});
@@ -37,8 +38,10 @@ class SimpleSelect extends React.Component {
 		this.props.handleChange(result);
 	};
 
-	componentWillReceiveProps(nextProps){
-		this.setState({value: nextProps.menu[0]});
+	componentWillUpdate(nextProps){
+		if (nextProps.menu[0] !== this.props.menu[0]) {
+			this.setState({value: nextProps.menu[0]})
+		}
 	}
 
 
