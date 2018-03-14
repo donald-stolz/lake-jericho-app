@@ -121,8 +121,6 @@ class AccountSection extends Component {
 		const updatePerformance = this.updatePerformance.bind(this)
 
 		if (viewState === "view") {
-			console.log(active);
-			console.log(accounts[active].performanceHist);
 			return (
 				<PerformanceInfo
 					performance={accounts[active].performanceHist}

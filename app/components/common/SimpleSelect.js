@@ -28,7 +28,6 @@ class SimpleSelect extends React.Component {
 	}
 
 	handleChange = event => {
-		console.log(event.target);
 		this.setState({
 			value : event.target.value,
 		});
@@ -38,8 +37,14 @@ class SimpleSelect extends React.Component {
 		this.props.handleChange(result);
 	};
 
+	componentWillReceiveProps(nextProps){
+		this.setState({value: nextProps.menu[0]});
+	}
+
+
   render() {
     const { classes, menu, label, id } = this.props;
+		const {value} = this.state
 		const MenuItems = menu.map((item, index) => {
 				return(<MenuItem key={index} value={item}> {item} </MenuItem> )
 			});
@@ -47,7 +52,7 @@ class SimpleSelect extends React.Component {
         <FormControl className={classes.formControl}>
           <InputLabel shrink={"false"} className={classes.label}>{label}</InputLabel>
           <Select
-            value={this.state.value}
+            value={value}
             onChange={this.handleChange}
             inputProps={{
               name: id,

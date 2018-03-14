@@ -62,7 +62,10 @@ class PerformanceInfo extends Component {
             index = i;
         }
     }
-		this.setState({index});
+		this.setState({
+			index,
+			record: performance[index]
+		});
 	}
 
 	editPerformance = () => {this.setState({editRecord: true})}
@@ -112,7 +115,7 @@ class PerformanceInfo extends Component {
 		})
 	}
 
-	componentWillReceiveProps(nextProps){ this.setState({index: 0})}
+	componentWillReceiveProps(nextProps){ this.setState({index: 0});}
 
 	render(){
 		const { newRecord, editRecord, index, record } = this.state;
@@ -191,8 +194,8 @@ class PerformanceInfo extends Component {
 
 					<List component="nav" className={classes.list}>
 						<SimpleSelect label="Date"
-							id="startDate"
-							value={performance[index].date}
+							id="date"
+							value={record.date}
 							menu={dates}
 							handleChange={select}/>
 						<TextField label="Tax" value={performance[index].tax} id={'tax'} disabled className={classes.textField}/>

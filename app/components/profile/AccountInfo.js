@@ -43,7 +43,6 @@ class AccountInfo extends Component {
 	};
 // TODO: Fix performance updater
 	updatePerformance = target =>{
-		console.log(target);
 		var {account} = this.state
 		account.performanceHist[0] = {...account.performanceHist[0], [target.id] : target.value};
 		this.setState({account})
@@ -51,7 +50,6 @@ class AccountInfo extends Component {
 
 	save(){
 		const {account} = this.state;
-		console.log(account);
 		this.props.handleChange(account)
 	}
 
