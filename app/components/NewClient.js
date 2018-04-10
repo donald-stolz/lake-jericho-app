@@ -118,6 +118,58 @@ class NewClient extends Component {
     }
   }
 
+	// Button is rendered as disabled until all data contains values
+	// TODO Implement proper verification for each input item
+	disableButton(){
+		const { classes } = this.props;
+		const {step, client} = this.state
+		const readyBtn = (
+			<Button
+					size="large"
+					variant="raised"
+					color="primary"
+					className={classes.button}
+					onClick={this.nextStep.bind(this)}>
+				Next
+			</Button>
+		)
+		const disabledBtn = (
+			<Button
+					size="large"
+					variant="raised"
+					color="primary"
+					className={classes.button}
+					disabled>
+				Next
+			</Button>
+		)
+		switch (step) {
+      case 0:
+        // Step 1: Displays personal fields
+				if (Object.values(client.personal).every(x => x!== ' ')) {
+					return readyBtn;
+				} else {
+					return disabledBtn;
+				}
+      case 1:
+        // Step 2: Displays general financial fields
+				if (Object.values(client.financial).every(x => x!== ' ')) {
+					return readyBtn;
+				} else {
+					return disabledBtn;
+				}
+      case 2:
+        // Step 3: Displays the add account fields; Final mandatory step
+				if (Object.values(client.accounts).every(x => x!== ' ')) {
+					return readyBtn;
+				} else {
+					return disabledBtn;
+				}
+			default:
+				return disabledBtn;
+		}
+	}
+
 	formButtons(){
 		const { classes } = this.props;
 
@@ -134,15 +186,8 @@ class NewClient extends Component {
 						</Button>
 					</Grid>
 					<Grid item>
-						<Button
-								size="large"
-								variant="raised"
-								color="primary"
-								className={classes.button}
-								onClick={this.nextStep.bind(this)}>
-							Next
-						</Button>
-					 </Grid>
+						{this.disableButton()}
+					</Grid>
 				</Grid>)
 		}
 	}
