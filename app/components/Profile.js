@@ -14,7 +14,7 @@ import AlertConfirmation from './common/AlertConfirmation'
 const styles = theme => ({
   root: {
 		flex: 1,
-		maxHeight: 750,
+		maxHeight: '100vh',
 		overflow: 'auto'
   },
   section: {

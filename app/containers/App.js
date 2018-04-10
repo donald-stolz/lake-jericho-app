@@ -8,9 +8,10 @@ type Props = {
 export default class App extends React.Component<Props> {
   props: Props;
 
+// TODO: Add border
   render() {
     return (
-      <div>
+      <div className="appContainer">
         {this.props.children}
       </div>
     );
