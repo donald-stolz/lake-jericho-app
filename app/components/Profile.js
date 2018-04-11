@@ -55,12 +55,13 @@ class Profile extends Component {
 
 	updateAccount( info ){
 		var clientUpdate = {...this.props.client, accounts:info}
-		this.props.update(clientUpdate)
+		this.props.update(clientUpdate);
 	}
 
 	removeClient(confirmation){
 		// TODO
-		console.log("Remove");
+		this.props.remove(this.props.client._id);
+		this.props.history.push("/");
 	}
 
   render(){

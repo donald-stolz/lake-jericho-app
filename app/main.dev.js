@@ -77,6 +77,8 @@ app.on('ready', async () => {
     show: false,
     minWidth: 500,
     minHeight: 500,
+		width: 500,
+    height: 700,
 		// resizable: false,
 		webPreferences: {backgroundThrottling: false}
   });
@@ -118,6 +120,7 @@ ipcMain.on(ADD_CLIENT, (event, client) => {
 })
 
 ipcMain.on(REMOVE_CLIENT, (event, clientID) => {
+	console.log("removing " + clientID);
 	clients.remove({ _id: clientID }, {}, function (err, numRemoved) {
 		// console.log("Removed " + numRemoved + " client");
 	});
