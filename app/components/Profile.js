@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-
+import Grid from 'material-ui/Grid';
 import { LinearProgress } from 'material-ui/Progress';
 import List from 'material-ui/List';
 import PersonalInfo from './profile/PersonalInfo';
@@ -17,11 +17,19 @@ const styles = theme => ({
 		maxHeight: '100vh',
 		overflow: 'auto'
   },
+	headerBtns:{
+		flex: 1,
+		flexDirection: 'row',
+		position: 'sticky',
+	},
   section: {
-    marginBottom: 15
+    marginBottom: 15,
   },
 	list:{
 		padding: theme.spacing.unit * 2,
+	},
+	loadBar:{
+		// TODO: Center vertically
 	}
 })
 
@@ -66,10 +74,9 @@ class Profile extends Component {
 
   render(){
 		const {classes} = this.props;
-		// TODO: Center Spinner
 		if (this.state.loading) {
 			return (
-				<div>
+				<div className={classes.loadBar}>
 					<LinearProgress size={100} />
 				</div>
 			);
@@ -81,10 +88,16 @@ class Profile extends Component {
 			const handleAccount = this.updateAccount.bind(this);
 			return(
 				<div className={classes.root}>
-					<AlertConfirmation handleChange={this.removeClient.bind(this)}/>
-					<Button component={Link} to="/">
-					  Home
-					</Button>
+					<Grid container className={classes.headerBtns} justify={'space-around'}>
+						<Grid item>
+							<Button component={Link} to="/">
+								Home
+							</Button>
+						</Grid>
+						<Grid item>
+							<AlertConfirmation handleChange={this.removeClient.bind(this)}/>
+						</Grid>
+					</Grid>
 					<List component="nav" className={classes.list}>
 	        	<PersonalInfo
 							client={client.personal}

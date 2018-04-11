@@ -62,7 +62,7 @@ class Home extends Component{
 			return (
 	      <div className={classes.root}>
 	      <Paper className={classes.container} elevation={6}>
-	        <AppBar position="static">
+	        <AppBar position="sticky">
 	          <Toolbar>
 	            <Typography variant="title" color="inherit" className={classes.flex}>
 	              Client
