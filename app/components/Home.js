@@ -86,8 +86,6 @@ Home.propTypes = {
   classes: PropTypes.object,
 };
 
-// Home.defaultProps = {
-//
-// }
+// Home.defaultProps = {}
 
 export default withStyles(styles)(Home);

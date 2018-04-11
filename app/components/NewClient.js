@@ -46,8 +46,7 @@ class NewClient extends Component {
 
   addAccount(){
     /* Optional Step: Increments number of accounts
-        and sets page to add another account
-    */
+        and sets page to add another account */
 		this.setState({
 			step: 2,
 			numAcc: (this.state.numAcc + 1)
@@ -90,13 +89,13 @@ class NewClient extends Component {
 	}
 
   formStep(){
-  //Steps for dispalying form
     var {step} = this.state
 		const personalChange = this.updatePersonal.bind(this)
 		const financialChange = this.updateFinancial.bind(this)
 		const accountChange = this.updateAccount.bind(this)
 		const performanceChange = this.updatePerformance.bind(this)
 
+		//Steps for dispalying form
     switch (step) {
       case 0:
         // Step 1: Displays personal fields
@@ -143,31 +142,26 @@ class NewClient extends Component {
 				Next
 			</Button>
 		)
+
+		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+
 		switch (step) {
       case 0:
         // Step 1: Displays personal fields
-				if (Object.values(client.personal).every(x => x!== ' ')) {
-					return readyBtn;
-				} else {
-					return disabledBtn;
-				}
+				if (checkFields(client.personal)) { return readyBtn; }
+				break;
       case 1:
         // Step 2: Displays general financial fields
-				if (Object.values(client.financial).every(x => x!== ' ')) {
-					return readyBtn;
-				} else {
-					return disabledBtn;
-				}
+				if (checkFields(client.financial)) { return readyBtn; }
+				break;
       case 2:
         // Step 3: Displays the add account fields; Final mandatory step
-				if (Object.values(client.accounts).every(x => x!== ' ')) {
-					return readyBtn;
-				} else {
-					return disabledBtn;
-				}
+				if (checkFields(client.accounts)) { return readyBtn; }
+				break;
 			default:
 				return disabledBtn;
 		}
+		return disabledBtn;
 	}
 
 	formButtons(){
