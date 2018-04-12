@@ -39,7 +39,7 @@ Client = {
     liquidConsids: '',
     regulatoryIssues: '',
     unique: '',
-    returnObjective: '',
+    returnObjectives: '',
     riskAbility: '',
     riskWillingness: '',
     riskOverall: ''

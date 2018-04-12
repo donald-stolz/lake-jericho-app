@@ -156,7 +156,10 @@ class NewClient extends Component {
 				break;
       case 2:
         // Step 3: Displays the add account fields; Final mandatory step
-				if (checkFields(client.accounts)) { return readyBtn; }
+				console.log(client.accounts);
+				if (checkFields(client.accounts[0])) {
+					if (checkFields(client.accounts[0].performanceHist[0])) {return readyBtn; }
+				}
 				break;
 			default:
 				return disabledBtn;
@@ -221,7 +224,7 @@ NewClient.defaultProps = {
 			liquidConsids: PropTypes.string,
 			regulatoryIssues: PropTypes.string,
 			unique: PropTypes.string,
-			returnObjective: PropTypes.string,
+			returnObjectives: PropTypes.string,
 			riskAbility: PropTypes.string,
 			riskWillingness: PropTypes.string,
 			riskOverall: PropTypes.string
@@ -269,7 +272,7 @@ NewClient.defaultProps = {
 			liquidConsids: ' ',
 			regulatoryIssues: ' ',
 			unique: ' ',
-			returnObjective: ' ',
+			returnObjectives: ' ',
 			riskAbility: ' ',
 			riskWillingness: ' ',
 			riskOverall: ' '

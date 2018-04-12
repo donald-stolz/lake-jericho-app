@@ -96,7 +96,7 @@ class FinancialInfo extends Component {
 							<TextField disabled value={"$" + client.liquidAssets} label="Liquid Assets" disabled className={classes.textField}/>
 							<TextField disabled value={"$" + client.investmentAssets} label="Investment Assets"disabled className={classes.textField}/>
 							<TextField disabled value={client.investmentExperience} label="Investment Experience" disabled className={classes.textField}/>
-							<TextField disabled value={client.overallObjectives} label="Overall Objectives"disabled className={classes.textField}/>
+							<TextField disabled value={client.investmentObjectives} label="Investment Objectives"disabled className={classes.textField}/>
 							<TextField disabled value={client.timeHorizon} label="Time Horizon" disabled className={classes.textField}/>
 							<TextField disabled value={client.taxConsids} label="Tax Considerations" disabled className={classes.textField}/>
 							<TextField disabled value={client.liquidConsids} label="Liquid Considerations" disabled className={classes.textField}/>
@@ -105,7 +105,7 @@ class FinancialInfo extends Component {
 							<TextField disabled value={client.returnObjectives} label="Return Objectives" disabled className={classes.textField}/>
 							<TextField disabled value={client.riskAbility} label="Ability" disabled className={classes.textField}/>
 							<TextField disabled value={client.riskWillingness} label="Willingness" disabled className={classes.textField}/>
-							<TextField disabled value={client.riskOverallAbility} label="Overall" disabled className={classes.textField}/>
+							<TextField disabled value={client.riskOverall} label="Overall" disabled className={classes.textField}/>
 						</List>
 					</Paper>
 				</div>
