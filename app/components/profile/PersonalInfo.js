@@ -72,6 +72,36 @@ class PersonalInfo extends Component {
 		this.changeEdit();
 	}
 
+	renderBtnDisable(){
+		const { classes } = this.props;
+		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+		const readyBtn = (
+			<Button
+					onClick={this.save.bind(this)}
+					size="large"
+					variant="raised"
+					color="primary"
+					className={classes.button}
+					>
+				Save
+			</Button>
+		)
+		const disabledBtn = (
+			<Button
+					size="large"
+					variant="raised"
+					color="primary"
+					className={classes.button}
+					disabled>
+				Save
+			</Button>
+		)
+		if (checkFields(this.state.client)) {
+			return readyBtn;
+		}
+		return disabledBtn;
+	}
+
 	renderViewOrEdit(){
 		const { classes, client } = this.props;
 		const inputChange = this.handleChange.bind(this);
@@ -117,15 +147,7 @@ class PersonalInfo extends Component {
 							</Button>
 						</Grid>
 						<Grid item>
-							<Button
-									onClick={this.save.bind(this)}
-									size="large"
-									variant="raised"
-									color="primary"
-									className={classes.button}
-									>
-								Save
-							</Button>
+							{this.renderBtnDisable()}
 						 </Grid>
 					</Grid>
 				</div>);

@@ -32,7 +32,6 @@ const styles = theme => ({
 });
 
 class FinancialForm extends Component {
-// TODO: Button Events
 
   render(){
 		const { classes, client } = this.props;

@@ -54,7 +54,6 @@ class FinancialInfo extends Component {
 		}
   }
 
-// TODO: Button Events
 	handleChange = target => {
 		var clientUpdate = {...this.state.client, [target.id]:target.value}
 		console.log(clientUpdate);
@@ -69,6 +68,36 @@ class FinancialInfo extends Component {
 		console.log(this.state.client);
 		this.props.handleChange(this.state.client);
 		this.changeEdit();
+	}
+
+	renderBtnDisable(){
+		const { classes } = this.props;
+		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+		const readyBtn = (
+			<Button
+					onClick={this.save.bind(this)}
+					size="large"
+					variant="raised"
+					color="primary"
+					className={classes.button}
+					>
+				Save
+			</Button>
+		)
+		const disabledBtn = (
+			<Button
+					size="large"
+					variant="raised"
+					color="primary"
+					className={classes.button}
+					disabled>
+				Save
+			</Button>
+		)
+		if (checkFields(this.state.client)) {
+			return readyBtn;
+		}
+		return disabledBtn;
 	}
 
 	renderViewOrEdit(){
@@ -126,15 +155,7 @@ class FinancialInfo extends Component {
 							</Button>
 						</Grid>
 						<Grid item>
-							<Button
-									onClick={this.save.bind(this)}
-									size="large"
-									variant="raised"
-									color="primary"
-									className={classes.button}
-									>
-								Save
-							</Button>
+							{this.renderBtnDisable()}
 						 </Grid>
 					</Grid>
 				</div>);
