@@ -120,15 +120,13 @@ class PerformanceInfo extends Component {
 		})
 	}
 
-	// NOTE: Intends to reset scroll index to most recent?
+	// TODO: Update to reset scroll index to most recent
 	componentWillReceiveProps(nextProps){ this.setState({index: 0});}
 
 	renderBtns(){
 		const { index, record } = this.state;
 		const { classes } = this.props;
 		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
-
-		console.log(record);
 
 		if (checkFields(record)) {
 			return <ButtonBar
