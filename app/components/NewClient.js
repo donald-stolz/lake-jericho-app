@@ -7,6 +7,7 @@ import PersonalForm  from './form/PersonalForm'
 import FinancialForm  from './form/FinancialForm'
 import AccountForm  from './form/AccountForm'
 import Confirmation from './form/Confirmation'
+import ButtonBar		from './common/ButtonBar'
 
 import { CLIENT_STRUCT } from '../constants/constants'
 import Grid from 'material-ui/Grid';
@@ -38,6 +39,8 @@ class NewClient extends Component {
 			client : this.props.client
 		}
   }
+
+	cancel(){ this.props.history.push("/"); }
 
 	nextStep(){
 		var nextStep = this.state.step + 1;
@@ -121,7 +124,7 @@ class NewClient extends Component {
 	// TODO Implement proper verification for each input item
 	disableButton(){
 		const { classes } = this.props;
-		const {step, client} = this.state
+
 		const readyBtn = (
 			<Button
 					size="large"
@@ -143,49 +146,39 @@ class NewClient extends Component {
 			</Button>
 		)
 
-		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
 
-		switch (step) {
-      case 0:
-        // Step 1: Displays personal fields
-				if (checkFields(client.personal)) { return readyBtn; }
-				break;
-      case 1:
-        // Step 2: Displays general financial fields
-				if (checkFields(client.financial)) { return readyBtn; }
-				break;
-      case 2:
-        // Step 3: Displays the add account fields; Final mandatory step
-				console.log(client.accounts);
-				if (checkFields(client.accounts[0])) {
-					if (checkFields(client.accounts[0].performanceHist[0])) {return readyBtn; }
-				}
-				break;
-			default:
-				return disabledBtn;
-		}
-		return disabledBtn;
 	}
 
-	formButtons(){
+	renderButtons(){
 		const { classes } = this.props;
+		const {step, client} = this.state
+		var btnDisable = true;
 
-		if (this.state.step < 3) {
-			return(
-				<Grid container className={classes.buttonBar} justify={'space-around'}>
-					<Grid item>
-						<Button component={Link} to="/"
-								size="large"
-								variant="raised"
-								color="secondary"
-								className={classes.button}>
-							Cancel
-						</Button>
-					</Grid>
-					<Grid item>
-						{this.disableButton()}
-					</Grid>
-				</Grid>)
+		if (step < 3) {
+
+			const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+
+			switch (step) {
+	      case 0:
+	        // Step 1: Displays personal fields
+					if (checkFields(client.personal)) { btnDisable = false; }
+	      case 1:
+	        // Step 2: Displays general financial fields
+					if (checkFields(client.financial)) { btnDisable = false; }
+	      case 2:
+	        // Step 3: Displays the add account fields; Final mandatory step
+					if (checkFields(client.accounts[0])) {
+						if (checkFields(client.accounts[0].performanceHist[0])) {	btnDisable = false; }
+					}
+				default:
+					return(
+						<ButtonBar
+							leftOnClick={this.cancel.bind(this)}
+							rightBtnText={"Next"}
+							rightOnClick={this.nextStep.bind(this)}
+							rightDisable={btnDisable}/>
+						)
+			}
 		}
 	}
 
@@ -195,11 +188,12 @@ class NewClient extends Component {
     return(
       <div className={classes.root}>
         {this.formStep()}
-				{this.formButtons()}
+				{this.renderButtons()}
       </div>
     )
   }
 }
+
 
 NewClient.defaultProps = {
 	classes: PropTypes.object.isRequired,

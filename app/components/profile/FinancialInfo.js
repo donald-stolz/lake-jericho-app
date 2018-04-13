@@ -12,6 +12,8 @@ import Grid from 'material-ui/Grid';
 import FinancialForm from '../form/FinancialForm'
 import TextField from 'material-ui/TextField';
 import Input from 'material-ui/Input';
+import ButtonBar from '../common/ButtonBar'
+
 
 
 const styles = theme => ({
@@ -70,34 +72,17 @@ class FinancialInfo extends Component {
 		this.changeEdit();
 	}
 
-	renderBtnDisable(){
+	renderBtns(){
 		const { classes } = this.props;
 		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
-		const readyBtn = (
-			<Button
-					onClick={this.save.bind(this)}
-					size="large"
-					variant="raised"
-					color="primary"
-					className={classes.button}
-					>
-				Save
-			</Button>
-		)
-		const disabledBtn = (
-			<Button
-					size="large"
-					variant="raised"
-					color="primary"
-					className={classes.button}
-					disabled>
-				Save
-			</Button>
-		)
 		if (checkFields(this.state.client)) {
-			return readyBtn;
+			return <ButtonBar
+								leftOnClick={this.changeEdit.bind(this)}
+								rightOnClick={this.save.bind(this)}
+								rightDisable={false}/>;
+		} else {
+			return <ButtonBar leftOnClick={this.changeEdit.bind(this)}/>;
 		}
-		return disabledBtn;
 	}
 
 	renderViewOrEdit(){
@@ -143,21 +128,7 @@ class FinancialInfo extends Component {
 			return (
 				<div>
 					<FinancialForm client={client} handleChange={inputChange}/>
-					<Grid container className={classes.buttonBar} justify={'space-around'}>
-						<Grid item>
-							<Button
-									onClick={this.changeEdit.bind(this)}
-									size="large"
-									variant="raised"
-									color="secondary"
-									className={classes.button}>
-								Cancel
-							</Button>
-						</Grid>
-						<Grid item>
-							{this.renderBtnDisable()}
-						 </Grid>
-					</Grid>
+					{this.renderBtns()}
 				</div>);
 		}
 	}
