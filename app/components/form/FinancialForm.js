@@ -32,7 +32,6 @@ const styles = theme => ({
 });
 
 class FinancialForm extends Component {
-// TODO: Button Events
 
   render(){
 		const { classes, client } = this.props;
@@ -54,16 +53,16 @@ class FinancialForm extends Component {
 						<LabeledInput value={client.liquidAssets} label={"Liquid Assets"} id={'liquidAssets'} handleChange={inputChange} startadornment={"$"} />
 						<LabeledInput value={client.investmentAssets} label={"Investment Assets"} id={'investmentAssets'} handleChange={inputChange} startadornment={"$"} />
 						<LabeledInput value={client.investmentExperience} label={"Investment Experience"} id={'investmentExperience'} handleChange={inputChange} />
-						<LabeledInput value={client.overallObjectives} label={"Overall Objectives"} id={'overallObjectives'} handleChange={inputChange} />
+						<LabeledInput value={client.overallObjectives} label={"Investment Objectives"} id={'investmentObjectives'} handleChange={inputChange} />
 						<LabeledInput value={client.timeHorizon} label={"Time Horizon"} id={'timeHorizon'} handleChange={inputChange} />
 						<LabeledInput value={client.taxConsids} label={"Tax Considerations"} id={'taxConsids'} handleChange={inputChange} />
 						<LabeledInput value={client.liquidConsids} label={"Liquid Considerations"} id={'liquidConsids'} handleChange={inputChange} />
 						<LabeledInput value={client.regulatoryIssues} label={"Regulatory Issues"} id={'regulatoryIssues'} handleChange={inputChange} />
 						<LabeledInput value={client.unique} label={"Unique"} id={'unique'} handleChange={inputChange} />
 						<LabeledInput value={client.returnObjectives} label={"Return Objectives"} id={'returnObjectives'} handleChange={inputChange} />
-						<LabeledInput value={client.riskAbility} label={"Ability"} id={'riskAbility'} handleChange={inputChange} />
-						<LabeledInput value={client.riskWillingness} label={"Willingness"} id={'riskWillingness'} handleChange={inputChange} />
-						<LabeledInput value={client.riskOverallAbility} label={"Overall"} id={'riskOverallAbility'} handleChange={inputChange} />
+						<LabeledInput value={client.riskAbility} label={"Risk Ability"} id={'riskAbility'} handleChange={inputChange} />
+						<LabeledInput value={client.riskWillingness} label={"Risk Willingness"} id={'riskWillingness'} handleChange={inputChange} />
+						<LabeledInput value={client.riskOverall} label={"Overall Risk"} id={'riskOverall'} handleChange={inputChange} />
 					</List>
 				</Paper>
 			</div>
@@ -82,13 +81,13 @@ FinancialForm.propTypes = {
 		liquidAssets: PropTypes.string.isRequired,
 		investmentAssets: PropTypes.string.isRequired,
 		investmentExperience: PropTypes.string.isRequired,
-		overallObjectives: PropTypes.string.isRequired,
+		investmentObjectives: PropTypes.string.isRequired,
 		timeHorizon: PropTypes.string.isRequired,
 		taxConsids: PropTypes.string.isRequired,
 		liquidConsids: PropTypes.string.isRequired,
 		regulatoryIssues: PropTypes.string.isRequired,
 		unique: PropTypes.string.isRequired,
-		returnObjective: PropTypes.string.isRequired,
+		returnObjectives: PropTypes.string.isRequired,
 		riskAbility: PropTypes.string.isRequired,
 		riskWillingness: PropTypes.string.isRequired,
 		riskOverall: PropTypes.string.isRequired
@@ -104,13 +103,13 @@ FinancialForm.defaultProps = {
 		liquidAssets: ' ',
 		investmentAssets: ' ',
 		investmentExperience: ' ',
-		overallObjectives: ' ',
+		investmentObjectives: ' ',
 		timeHorizon: ' ',
 		taxConsids: ' ',
 		liquidConsids: ' ',
 		regulatoryIssues: ' ',
 		unique: ' ',
-		returnObjective: ' ',
+		returnObjectives: ' ',
 		riskAbility: ' ',
 		riskWillingness: ' ',
 		riskOverall: ' '

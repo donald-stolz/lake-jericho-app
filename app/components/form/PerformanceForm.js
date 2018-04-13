@@ -40,13 +40,7 @@ class PerformanceForm extends Component {
 		const { classes, newRecord } = this.props;
 		var {pastPerformance} = this.props;
 		const inputChange = this.props.handleChange.bind(this)
-		if (newRecord) {
-			pastPerformance = {
-				...pastPerformance,
-				beginBal: pastPerformance.endBal,
-				endBal: ' ',
-				netReturn: ' '}
-		}
+
 // TODO: Fix issues with MonthYearPicker &
     return(
 			<div className={classes.root}>
@@ -72,7 +66,6 @@ class PerformanceForm extends Component {
     )
   }
 }
-// NOTE: Can get rid of NewRecord
 PerformanceForm.propTypes = {
 	classes: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
@@ -85,7 +78,6 @@ PerformanceForm.propTypes = {
 		endBal: PropTypes.string.isRequired,
 		netReturn: PropTypes.string.isRequired
 	}).isRequired,
-	newRecord: PropTypes.bool.isRequired
 }
 
 PerformanceForm.defaultProps = {
@@ -99,7 +91,6 @@ PerformanceForm.defaultProps = {
 		endBal: ' ',
 		netReturn: ' '
 	},
-	newRecord: true,
 }
 
 export default withStyles(styles)(PerformanceForm)

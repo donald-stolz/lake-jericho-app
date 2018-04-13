@@ -6,6 +6,8 @@ import List from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import ButtonBar from '../common/ButtonBar'
+
 
 import AccountForm from '../form/AccountForm'
 
@@ -53,39 +55,25 @@ class AccountInfo extends Component {
 		this.props.handleChange(account)
 	}
 
-// NOTE: Needs propTypes
 	cancel(){this.props.cancel()}
+
+	renderBtns(){
+		const { classes } = this.props;
+		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+		if (checkFields(this.state.account)) {
+			return <ButtonBar
+								leftOnClick={this.cancel.bind(this)}
+								rightOnClick={this.save.bind(this)}
+								rightDisable={false}/>;
+		} else {
+			return <ButtonBar leftOnClick={this.cancel.bind(this)}/>;
+		}
+	}
 
   render(){
 		const { classes, account, viewState } = this.props;
 		const updatePerformance = this.updatePerformance.bind(this)
 		const handleChange = this.handleChange.bind(this)
-		// NOTE: Should export and re-use in form
-		const buttons = (
-			<Grid container className={classes.buttonBar} justify={'space-around'}>
-				<Grid item>
-					<Button
-							onClick={this.cancel.bind(this)}
-							size="large"
-							variant="raised"
-							color="secondary"
-							className={classes.button}>
-						Cancel
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-							onClick={this.save.bind(this)}
-							size="large"
-							variant="raised"
-							color="primary"
-							className={classes.button}
-							>
-						Save
-					</Button>
-				 </Grid>
-			</Grid>
-		)
 
 		if (viewState === 'add') {
 			return(
@@ -94,7 +82,7 @@ class AccountInfo extends Component {
 						accountChange={handleChange}
 						newAccount={true}
 						performanceChange={updatePerformance}/>
-					{buttons}
+					{this.renderBtns()}
 				</div>)
 		} else if (viewState === 'edit') {
 			return(
@@ -103,7 +91,7 @@ class AccountInfo extends Component {
 						account={account}
 						newAccount={false}
 						accountChange={handleChange}/>
-					{buttons}
+					{this.renderBtns()}
 				</div>)
 		} else {
 			return(

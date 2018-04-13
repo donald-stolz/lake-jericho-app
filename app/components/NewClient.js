@@ -7,6 +7,7 @@ import PersonalForm  from './form/PersonalForm'
 import FinancialForm  from './form/FinancialForm'
 import AccountForm  from './form/AccountForm'
 import Confirmation from './form/Confirmation'
+import ButtonBar		from './common/ButtonBar'
 
 import { CLIENT_STRUCT } from '../constants/constants'
 import Grid from 'material-ui/Grid';
@@ -39,6 +40,8 @@ class NewClient extends Component {
 		}
   }
 
+	cancel(){ this.props.history.push("/"); }
+
 	nextStep(){
 		var nextStep = this.state.step + 1;
 		this.setState({step :nextStep});
@@ -46,8 +49,7 @@ class NewClient extends Component {
 
   addAccount(){
     /* Optional Step: Increments number of accounts
-        and sets page to add another account
-    */
+        and sets page to add another account */
 		this.setState({
 			step: 2,
 			numAcc: (this.state.numAcc + 1)
@@ -90,13 +92,13 @@ class NewClient extends Component {
 	}
 
   formStep(){
-  //Steps for dispalying form
     var {step} = this.state
 		const personalChange = this.updatePersonal.bind(this)
 		const financialChange = this.updateFinancial.bind(this)
 		const accountChange = this.updateAccount.bind(this)
 		const performanceChange = this.updatePerformance.bind(this)
 
+		//Steps for dispalying form
     switch (step) {
       case 0:
         // Step 1: Displays personal fields
@@ -122,7 +124,7 @@ class NewClient extends Component {
 	// TODO Implement proper verification for each input item
 	disableButton(){
 		const { classes } = this.props;
-		const {step, client} = this.state
+
 		const readyBtn = (
 			<Button
 					size="large"
@@ -143,52 +145,40 @@ class NewClient extends Component {
 				Next
 			</Button>
 		)
-		switch (step) {
-      case 0:
-        // Step 1: Displays personal fields
-				if (Object.values(client.personal).every(x => x!== ' ')) {
-					return readyBtn;
-				} else {
-					return disabledBtn;
-				}
-      case 1:
-        // Step 2: Displays general financial fields
-				if (Object.values(client.financial).every(x => x!== ' ')) {
-					return readyBtn;
-				} else {
-					return disabledBtn;
-				}
-      case 2:
-        // Step 3: Displays the add account fields; Final mandatory step
-				if (Object.values(client.accounts).every(x => x!== ' ')) {
-					return readyBtn;
-				} else {
-					return disabledBtn;
-				}
-			default:
-				return disabledBtn;
-		}
+
+
 	}
 
-	formButtons(){
+	renderButtons(){
 		const { classes } = this.props;
+		const {step, client} = this.state
+		var btnDisable = true;
 
-		if (this.state.step < 3) {
-			return(
-				<Grid container className={classes.buttonBar} justify={'space-around'}>
-					<Grid item>
-						<Button component={Link} to="/"
-								size="large"
-								variant="raised"
-								color="secondary"
-								className={classes.button}>
-							Cancel
-						</Button>
-					</Grid>
-					<Grid item>
-						{this.disableButton()}
-					</Grid>
-				</Grid>)
+		if (step < 3) {
+
+			const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+
+			switch (step) {
+	      case 0:
+	        // Step 1: Displays personal fields
+					if (checkFields(client.personal)) { btnDisable = false; }
+	      case 1:
+	        // Step 2: Displays general financial fields
+					if (checkFields(client.financial)) { btnDisable = false; }
+	      case 2:
+	        // Step 3: Displays the add account fields; Final mandatory step
+					if (checkFields(client.accounts[0])) {
+						if (checkFields(client.accounts[0].performanceHist[0])) {	btnDisable = false; }
+					}
+				default:
+					return(
+						<ButtonBar
+							leftOnClick={this.cancel.bind(this)}
+							rightBtnText={"Next"}
+							rightOnClick={this.nextStep.bind(this)}
+							rightDisable={btnDisable}/>
+						)
+			}
 		}
 	}
 
@@ -198,11 +188,12 @@ class NewClient extends Component {
     return(
       <div className={classes.root}>
         {this.formStep()}
-				{this.formButtons()}
+				{this.renderButtons()}
       </div>
     )
   }
 }
+
 
 NewClient.defaultProps = {
 	classes: PropTypes.object.isRequired,
@@ -227,7 +218,7 @@ NewClient.defaultProps = {
 			liquidConsids: PropTypes.string,
 			regulatoryIssues: PropTypes.string,
 			unique: PropTypes.string,
-			returnObjective: PropTypes.string,
+			returnObjectives: PropTypes.string,
 			riskAbility: PropTypes.string,
 			riskWillingness: PropTypes.string,
 			riskOverall: PropTypes.string
@@ -275,7 +266,7 @@ NewClient.defaultProps = {
 			liquidConsids: ' ',
 			regulatoryIssues: ' ',
 			unique: ' ',
-			returnObjective: ' ',
+			returnObjectives: ' ',
 			riskAbility: ' ',
 			riskWillingness: ' ',
 			riskOverall: ' '

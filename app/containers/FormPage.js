@@ -2,7 +2,7 @@
 // Actions Needed
 // 	- addClient
 //
-// No Data Used
+// No Existing Data Referenced
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import { addClient } from '../actions'

@@ -13,6 +13,7 @@ import SimpleSelect from '../common/SimpleSelect'
 import AddIcon from 'material-ui-icons/Add';
 import PerformanceForm from '../form/PerformanceForm'
 import Grid from 'material-ui/Grid';
+import ButtonBar from '../common/ButtonBar'
 
 
 const styles = theme => ({
@@ -90,6 +91,10 @@ class PerformanceInfo extends Component {
 		}
 		var nextDate = month + "/" + year
 		var nextPerform = {...lastPerform, date: nextDate}
+		nextPerform.beginBal = nextPerform.endBal;
+		nextPerform.netReturn = ' ';
+		nextPerform.endBal = ' ';
+
 		this.setState({
 			record: nextPerform,
 			newRecord: true})
@@ -115,7 +120,23 @@ class PerformanceInfo extends Component {
 		})
 	}
 
+	// TODO: Update to reset scroll index to most recent
 	componentWillReceiveProps(nextProps){ this.setState({index: 0});}
+
+	renderBtns(){
+		const { index, record } = this.state;
+		const { classes } = this.props;
+		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+
+		if (checkFields(record)) {
+			return <ButtonBar
+								leftOnClick={this.cancel.bind(this)}
+								rightOnClick={this.save.bind(this)}
+								rightDisable={false}/>;
+		} else {
+			return <ButtonBar leftOnClick={this.cancel.bind(this)}/>;
+		}
+	}
 
 	render(){
 		const { newRecord, editRecord, index, record } = this.state;
@@ -125,32 +146,6 @@ class PerformanceInfo extends Component {
 		const dates = performance.map((record) => {return record.date});
 		const handleChange = this.handleChange.bind(this);
 
-		const buttons = (
-			<Grid container className={classes.buttonBar} justify={'space-around'}>
-				<Grid item>
-					<Button
-							onClick={this.cancel.bind(this)}
-							size="large"
-							variant="raised"
-							color="secondary"
-							className={classes.button}>
-						Cancel
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-							onClick={this.save.bind(this)}
-							size="large"
-							variant="raised"
-							color="primary"
-							className={classes.button}
-							>
-						Save
-					</Button>
-				 </Grid>
-			</Grid>
-		)
-
 		if (newRecord) {
 			return (
 				<div>
@@ -158,7 +153,7 @@ class PerformanceInfo extends Component {
 					handleChange={handleChange}
 					newRecord={true}
 					pastPerformance={record}/>
-				{buttons}
+				{this.renderBtns()}
 				</div>
 			)
 		}
@@ -169,7 +164,7 @@ class PerformanceInfo extends Component {
 						handleChange={handleChange}
 						newRecord={false}
 						pastPerformance={performance[this.state.index]}/>
-					{buttons}
+					{this.renderBtns()}
 				</div>)
 		}
 		else {

@@ -23,10 +23,11 @@ import {
 } from './constants/constants'
 
 let mainWindow = null;
+
+// Connect to Database
 var Datastore = require('nedb');
 const dataPath = app.getPath('userData') + '/clients.json';
 const clients = new Datastore({filename: dataPath, autoload: true});
-console.log(dataPath);
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -72,12 +73,12 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
-	// TODO: Dispatch DB from here using IPC?
-
   mainWindow = new BrowserWindow({
     show: false,
     minWidth: 500,
     minHeight: 500,
+		width: 500,
+    height: 700,
 		// resizable: false,
 		webPreferences: {backgroundThrottling: false}
   });
@@ -102,6 +103,7 @@ app.on('ready', async () => {
   menuBuilder.buildMenu();
 });
 
+// Database Communication
 // NOTE: Should setup background window for performance enhancements
 ipcMain.on(FETCH_LIST, () => {
 	console.log("electron fetchList");
@@ -118,6 +120,7 @@ ipcMain.on(ADD_CLIENT, (event, client) => {
 })
 
 ipcMain.on(REMOVE_CLIENT, (event, clientID) => {
+	console.log("removing " + clientID);
 	clients.remove({ _id: clientID }, {}, function (err, numRemoved) {
 		// console.log("Removed " + numRemoved + " client");
 	});

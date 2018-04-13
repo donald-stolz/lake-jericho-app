@@ -12,6 +12,8 @@ import Grid from 'material-ui/Grid';
 import FinancialForm from '../form/FinancialForm'
 import TextField from 'material-ui/TextField';
 import Input from 'material-ui/Input';
+import ButtonBar from '../common/ButtonBar'
+
 
 
 const styles = theme => ({
@@ -54,7 +56,6 @@ class FinancialInfo extends Component {
 		}
   }
 
-// TODO: Button Events
 	handleChange = target => {
 		var clientUpdate = {...this.state.client, [target.id]:target.value}
 		console.log(clientUpdate);
@@ -69,6 +70,19 @@ class FinancialInfo extends Component {
 		console.log(this.state.client);
 		this.props.handleChange(this.state.client);
 		this.changeEdit();
+	}
+
+	renderBtns(){
+		const { classes } = this.props;
+		const checkFields = (obj) => Object.values(obj).every(x => x!== ' ');
+		if (checkFields(this.state.client)) {
+			return <ButtonBar
+								leftOnClick={this.changeEdit.bind(this)}
+								rightOnClick={this.save.bind(this)}
+								rightDisable={false}/>;
+		} else {
+			return <ButtonBar leftOnClick={this.changeEdit.bind(this)}/>;
+		}
 	}
 
 	renderViewOrEdit(){
@@ -96,7 +110,7 @@ class FinancialInfo extends Component {
 							<TextField disabled value={"$" + client.liquidAssets} label="Liquid Assets" disabled className={classes.textField}/>
 							<TextField disabled value={"$" + client.investmentAssets} label="Investment Assets"disabled className={classes.textField}/>
 							<TextField disabled value={client.investmentExperience} label="Investment Experience" disabled className={classes.textField}/>
-							<TextField disabled value={client.overallObjectives} label="Overall Objectives"disabled className={classes.textField}/>
+							<TextField disabled value={client.investmentObjectives} label="Investment Objectives"disabled className={classes.textField}/>
 							<TextField disabled value={client.timeHorizon} label="Time Horizon" disabled className={classes.textField}/>
 							<TextField disabled value={client.taxConsids} label="Tax Considerations" disabled className={classes.textField}/>
 							<TextField disabled value={client.liquidConsids} label="Liquid Considerations" disabled className={classes.textField}/>
@@ -105,7 +119,7 @@ class FinancialInfo extends Component {
 							<TextField disabled value={client.returnObjectives} label="Return Objectives" disabled className={classes.textField}/>
 							<TextField disabled value={client.riskAbility} label="Ability" disabled className={classes.textField}/>
 							<TextField disabled value={client.riskWillingness} label="Willingness" disabled className={classes.textField}/>
-							<TextField disabled value={client.riskOverallAbility} label="Overall" disabled className={classes.textField}/>
+							<TextField disabled value={client.riskOverall} label="Overall" disabled className={classes.textField}/>
 						</List>
 					</Paper>
 				</div>
@@ -114,29 +128,7 @@ class FinancialInfo extends Component {
 			return (
 				<div>
 					<FinancialForm client={client} handleChange={inputChange}/>
-					<Grid container className={classes.buttonBar} justify={'space-around'}>
-						<Grid item>
-							<Button
-									onClick={this.changeEdit.bind(this)}
-									size="large"
-									variant="raised"
-									color="secondary"
-									className={classes.button}>
-								Cancel
-							</Button>
-						</Grid>
-						<Grid item>
-							<Button
-									onClick={this.save.bind(this)}
-									size="large"
-									variant="raised"
-									color="primary"
-									className={classes.button}
-									>
-								Save
-							</Button>
-						 </Grid>
-					</Grid>
+					{this.renderBtns()}
 				</div>);
 		}
 	}
