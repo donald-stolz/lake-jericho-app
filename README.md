@@ -14,7 +14,7 @@ Technologies
 
 ### Database
 >#### [NeDB](https://github.com/louischatriot/nedb)
-> NoSQL Database library also used for persistence
+> NoSQL Database library used for persistence
 
 ### State Management
 >#### [Redux](https://github.com/reactjs/redux)
